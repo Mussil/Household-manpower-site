@@ -26,3 +26,15 @@
     background-color: #ddd; /* Grey background color */
     color: black; /* Black text color */
 }
+
+
+.navbar .img-home{
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    position: absolute;
+    left: calc((100% - 400px) / 2);
+    z-index: 100000;
+
+}
