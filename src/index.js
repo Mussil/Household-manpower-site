@@ -5,10 +5,10 @@ const app     = express()
 const path    = require('path')
 
 //set up template engine
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
 //static files
-app.use(express.static('./'));
+app.use(express.static('./'))
 
 
 
