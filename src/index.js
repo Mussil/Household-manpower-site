@@ -3,7 +3,7 @@ const port    = process.env.PORT || 3000
 const app     = express()
 
 var loginController=require('../controllers/loginController')
-//var signupController=require('../controllers/signupController')
+var signupController=require('../controllers/signupController')
 
 var db=[{userName: 'mussi', password:'123456', phoneNumber: '0546785672', email: 'mussi@gmail.com'},
     {userName: 'M', password:'87654', phoneNumber: '0546463672', email: 'mui@gmail.com'}
@@ -18,7 +18,7 @@ app.use(express.static('./views'))
 
 //fire controllers
 loginController(app,db)
-//signupController(app)
+signupController(app,db)
 
 //homepage page
 app.get('/', (req, res) => {
@@ -39,11 +39,11 @@ app.get('/', (req, res) => {
 //     res.render('home')
 // })
 
-//signup page
-app.get('/signup', (req, res) => {
-    res.render('signup')
-
-})
+// //signup page
+// app.get('/signup', (req, res) => {
+//     res.render('signup')
+//
+// })
 
 
 //success page
@@ -61,4 +61,5 @@ app.get('*', (req, res) => {
 //listen to port
 app.listen(port, ()=>{
     console.log(`server is up and running at: http://127.0.0.1:${port}`)
+
 })
