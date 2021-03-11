@@ -35,3 +35,20 @@ body{
     from{box-shadow: inset -3px 0px 0px #888;}
     to{box-shadow: inset -3px 0px 0px transparent;}
 }
+
+
+
+
+/* unvisited link */
+a:link {
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: #050505;
+    text-decoration: none;
+
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
