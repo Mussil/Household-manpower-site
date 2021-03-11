@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "signup.css" />
+    <%- include ("partials/nav.ejs")-%>
+</head>
+
+<body>
+
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="inactive underlineHover"><a href='login'>Log in </a></h2>
+        <h2 class="active">Sign Up </h2>
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="https://www.sce.ac.il/ver/2/tpl/website/img/SamiSH-logo_2.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form>
+            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login" required>
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password" required>
+            <input type="email" id="email" class="fadeIn fourth" name="login" placeholder="Email" required>
+            <input type="tel" id="phone" class="fadeIn five" name="login" placeholder="Phone number" required>
+            <input type="submit" class="fadeIn six" value="Sign up">
+        </form>
+
+
+    </div>
+</div>
+</body>
+
+
+</html>
