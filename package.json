@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "mongodb": "^3.6.4",
-    "mongoose": "^5.11.19"
+    "mongoose": "^5.11.15"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",
