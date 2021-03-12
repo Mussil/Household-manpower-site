@@ -1,7 +1,8 @@
+//const mongoose= require('mongoose')
+const Users=require('../models/users')
 
 
-
-module.exports= function(app,db){
+module.exports= function(app){
     const bodyParser = require('body-parser')
     app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -9,22 +10,28 @@ module.exports= function(app,db){
         res.render('login')
     })
 
-    app.post('/login', (req, res) => {
-        console.log('Username: ' + req.body.userName)
-        console.log('Password: ' + req.body.password)
-        var i
-        for (i = 0; i < db.length; i++) {
-            if(db[i].userName==req.body.userName && db[i].password==req.body.password ){
-                console.log('exists')
-                res.render('success')
-                return
-            }
-        }
-        //למקרה שהיוזר לא קיים צריך להוסיף התראה ולהציע לו להרשם ולא להפעיל את הדף מחדש
-        console.log('user does not exist')
-        res.render('login')
-    })
 
+    app.post('/login', (req, res) => {
+        console.log('Username: ' + req.body.email)
+        console.log('Password: ' + req.body.password)
+
+        Users.findOne({email:req.body.email , password:req.body.password},function(err,result){
+            if(err){//err
+                            console.log(err)
+            }
+            if(result){// Success!
+                            console.log(result)
+                            res.render('success')
+            }
+            else{
+                            console.log('user does not exist')//צריך להציג לו משהו
+                            res.render('login')
+            }
+        })
+
+
+
+        })
 
 }
 

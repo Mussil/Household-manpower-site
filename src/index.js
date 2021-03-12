@@ -2,12 +2,21 @@ const express = require('express')
 const port    = process.env.PORT || 3000
 const app     = express()
 
+//connect to mongodb
+const mongoose= require('mongoose')
+//const Users=require('../models/users')
+
+const dbURI= 'mongodb+srv://user:user@cluster0.p5zoq.mongodb.net/project-db?retryWrites=true&w=majority'
+mongoose.connect(dbURI, {useNewUrlParser: true , useUnifiedTopology: true})
+    .then(()=>//listen to port
+        app.listen(port, ()=>{
+            console.log(`server is up and running at: http://127.0.0.1:${port}`)
+        }))
+    .catch((err)=>console.log(err))
+
+//controllers
 var loginController=require('../controllers/loginController')
 var signupController=require('../controllers/signupController')
-
-var db=[{userName: 'mussi', password:'123456', phoneNumber: '0546785672', email: 'mussi@gmail.com'},
-    {userName: 'M', password:'87654', phoneNumber: '0546463672', email: 'mui@gmail.com'}
-]
 
 
 //set up template engine
@@ -17,8 +26,8 @@ app.set('view engine', 'ejs')
 app.use(express.static('./views'))
 
 //fire controllers
-loginController(app,db)
-signupController(app,db)
+loginController(app)
+signupController(app)
 
 //homepage page
 app.get('/', (req, res) => {
@@ -28,22 +37,6 @@ app.get('/', (req, res) => {
 })
 
 
-// //login page
-// app.get('/login', (req, res) => {
-//     res.render('login')
-// })
-//
-// app.post('/login', (req, res) => {
-//     console.log('Username: ' + req.body.username)
-//     console.log('Password: ' + req.body.password)
-//     res.render('home')
-// })
-
-// //signup page
-// app.get('/signup', (req, res) => {
-//     res.render('signup')
-//
-// })
 
 
 //success page
@@ -51,15 +44,17 @@ app.get('/success', (req, res) => {
     res.render('success')
 })
 
+
+
+
+//for all the false routes
 app.get('*', (req, res) => {
     //res.sendFile(path.join(__dirname + '/404.html'))
     res.render('404')
 })
 
 
-
-//listen to port
-app.listen(port, ()=>{
-    console.log(`server is up and running at: http://127.0.0.1:${port}`)
-
-})
+// //listen to port
+// app.listen(port, ()=>{
+//     console.log(`server is up and running at: http://127.0.0.1:${port}`)
+// })

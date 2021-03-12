@@ -1,6 +1,8 @@
+const bodyParser = require('body-parser')
+//const mongoose= require('mongoose')
+const Users=require('../models/users')
 
-module.exports= function(app,db) {
-    const bodyParser = require('body-parser')
+module.exports= function(app) {
     app.use(bodyParser.urlencoded({extended: true}))
 
 
@@ -9,17 +11,24 @@ module.exports= function(app,db) {
     })
 
     app.post('/signup', (req, res) => {
-        let user={userName: req.body.userName,
-            password:req.body.password,
-            phoneNumber: req.body.phoneNumber,
-            email: req.body.email
-        }
-        db.push(user)
-        console.log('new user has been added')
-        res.render('home')
+        let user1= new Users({
+            email: req.body.email,
+            password: req.body.password,
+            optional1: req.body.userName,
+            optional2: req.body.phoneNumber
 
-        console.log(db)
+        })
+        user1.save()
+            .then(()=>{
+                console.log('new user has been added')
+                res.render('home')
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+
 
     })
 
 }
+
