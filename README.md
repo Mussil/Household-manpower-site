@@ -7,7 +7,7 @@ Our package has a login and registration page for the company, and the customer 
 #### Languages: <br />
   * JavaScript <br />
   * Css <br />
-  * Ejs <br /> 
+  * HTML <br /> 
 #### Workspace: <br /> 
   * WebStorm version: 2020.3.2 <br />
 #### External tools:  <br />
