@@ -2,7 +2,7 @@
 
 # Introduction
 Our package has a login and registration page for the company, and the customer details are kept within the database, which is Mongodb.
-# Technologies 
+# 💻 Technologies 
 Workspace: <br />
    WebStorm version:2020.3.2 <br />
 Languages: <br />
@@ -10,7 +10,9 @@ Languages: <br />
   * Css <br />
   * Ejs <br /> 
 Libraries: <br /> 
-  * 
+  * Node js
+  * Circleci
+  * Lint
 
 # Launch
 ### 🛠️ Installation Steps
@@ -22,9 +24,7 @@ All installations and directories are downloaded automatically <br />
 
 
 
-
-
-# 💻 Authors
+# 📗 Authors
 Bluma Daitz <br />
 Dvora Mizrahi <br />
 Ruth Bracha Cohen <br />
