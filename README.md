@@ -36,7 +36,7 @@ Bluma Daitz <br />
 Dvora Mizrahi <br />
 Ruth Bracha Cohen <br />
 Chaya Levin <br />
-Shaked levi <br />
+Shaked Levi <br />
 Tair Shriki <br />
 
 
