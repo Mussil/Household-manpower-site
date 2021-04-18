@@ -1,17 +1,58 @@
-<link rel = "stylesheet"
-      type = "text/css"
-      href = "nav.css" />
+<!doctype html>
+    <html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="navbar">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link rel = "stylesheet"  type = "text/css"  href = "home.css" />
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <a href="/404">Error - try</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Sign up</a>
 
-    <div class="img-home">
-    <a href="/"><img src="data:image/png;base64,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"></a>
-    </div>
+        <title>Home page</title>
+    </head>
 
-    <a href="#" class="right">Profile-not working yet</a>
-</div>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/"><span>Logo</span> Here</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="loginHR">Human Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<html/>
 
