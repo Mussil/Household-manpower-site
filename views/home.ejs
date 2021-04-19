@@ -16,11 +16,47 @@
         <title>Home page</title>
     </head>
 
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner">
+        <div class="container">
 
 
+            <!-- Brand -->
+            <a class="navbar-brand" href="/"><span>Logo</span> Here</a>
+
+            <!-- Toggler/collapsibe Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="loginHR">Human Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
     <body>
-
-    <%- include('partials/nav'); -%>
 
 
         <div class="banner">
@@ -34,8 +70,8 @@
                         looking for a babysitter / cleaner / gardener ..? Here you will find ..
                         Looking for a job? good luck to you!
                     </div>
-                    <button type="button" class="btn btn-warning text-dark btn-banner">Looking for an employee?</button>
-                    <button type="button" class="btn btn-warning text-dark btn-banner">Looking for a job?</button>
+                    <button type="button"  onclick="document.location='loginEmployer'" class="btn btn-warning text-dark btn-banner">Looking for an employee?</button>
+                    <button type="button" href="/" class="btn btn-warning text-dark btn-banner">Looking for a job?</button>
 
                 </div>
             </div>
@@ -44,7 +80,21 @@
             <div class="container">
                 <div class="text-intro">
                     <h2>About Us</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                    <p>This site, is a site built with fatigue and thirst,
+                        This is a group of female students whose light color tends to white and after multiple studies have come to the conclusion that fluorescent light does not tan.
+                        That is why users of the site, should appreciate its beauty points, the creativity, the exit from the box, because it is something that crosses bodies, not every day are exposed to such a site.
+                        <br>
+                        Instructions for use:
+                        A left mouse button will help you switch between pages, please click on the left and not the right button it is just useless (from experience)
+                        <br>
+                        Thanks to the group members (in alphabetical order of course):
+                        <br>
+                        Bluma,
+                        Devorah
+                        Mussi,
+                        Ruthi,
+                        Shaked,
+                        Tair.</p>
                 </div>
             </div>
         </section>

@@ -7,7 +7,7 @@ const mongoose= require('mongoose')
 //const Users=require('../models/users')
 const authRoutes= require('../routes/auth')
 const cookieParser = require('cookie-parser')
-const { requireHRAuth, checkUser } = require('./middleware/authMiddleware')
+const { requireHRAuth, checkUser } = require('../middleware/authMiddleware')
 
 
 // middleware

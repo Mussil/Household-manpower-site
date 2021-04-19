@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const UsersHR=require('../models/UsersHR')
+const UsersEmployer=require('../models/UsersEmployer')
 
 const requireHRAuth =  (req, res, next) => {
     const token = req.cookies.jwt
@@ -18,6 +19,33 @@ const requireHRAuth =  (req, res, next) => {
                 }
                 else{
                     res.redirect('/loginHR')
+
+                }
+            }
+        })
+    } else {
+        res.redirect('/loginHR')
+    }
+}
+
+
+const requireEmpAuth =  (req, res, next) => {
+    const token = req.cookies.jwt
+
+    // check json web token exists & is verified
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+            if (err) {
+                console.log(err.message)
+                res.redirect('/loginEmployer')
+            } else {
+                console.log(decodedToken)
+                //check that the cookie is for HR
+                if(await UsersEmployer.findById(decodedToken.id)){
+                    next()
+                }
+                else{
+                    res.redirect('/loginEmployer')
 
                 }
             }

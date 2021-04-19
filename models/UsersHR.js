@@ -7,13 +7,16 @@ const userSchema= new mongoos.Schema({
         type: String,
         required : [true,'Please enter an email'],
         unique : true,
+        trim:true,
         lowercase :true,
-        validate: [isEmail,'Please enter a valid email']
+        validate: [isEmail,'Please enter a valid email'],
+
     },
     password: {
         type: String,
         required: [true,'Please enter an password'],
-        minlength :[6,'Minimum password length is 6 characters']
+        trim:true,
+        minlength :[6,'Minimum password length is 6 characters'],
     }
 
 })

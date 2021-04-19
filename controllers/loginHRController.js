@@ -69,6 +69,8 @@ module.exports.loginHRPost= async (req,res)=>{
 
 }
 
+
+
 //create new HR .
 module.exports.createNewHRPost= async (req,res)=>{
     const{email,password}=req.body
@@ -81,7 +83,15 @@ module.exports.createNewHRPost= async (req,res)=>{
         res.status(400).json({ errors })
     }
 
+
+
 }
+
+
+
+
+
+
 
 
 module.exports.logoutGet=(req,res)=>{
