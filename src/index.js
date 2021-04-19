@@ -7,7 +7,7 @@ const mongoose= require('mongoose')
 //const Users=require('../models/users')
 const authRoutes= require('../routes/auth')
 const cookieParser = require('cookie-parser')
-const { requireAuth } = require('../middleware/authMiddleware')
+const { requireHRAuth, checkUser } = require('./middleware/authMiddleware')
 
 
 // middleware
@@ -32,6 +32,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true , useUnifiedTopology: true})
 
 
 //routes
+app.get('*', checkUser)
 
 //homepage page
 app.get('/', (req, res) => {
@@ -60,7 +61,7 @@ app.use(authRoutes)
 
 
 //success page
-app.get('/success',requireAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
     res.render('success')
 })
 
