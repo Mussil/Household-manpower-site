@@ -13,19 +13,32 @@
 
     <body>
 
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Login<br>Human Resources</h2>
+            <p>Connect with the user you received from the company.</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form action="/loginHR">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="email error"></div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="password error"></div>
+                    </div>
+                    <button type="submit" class="btn btn-black">login</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <form action="/loginHR">
-        <h2>Login</h2>
-        <label for="email">Email</label>
-        <input type="text" name="email"  />
-        <div class="email error"></div>
-        <label for="password">Password</label>
-        <input type="password" name="password"  />
-        <div class="password error"></div>
-        <button>login</button>
-    </form>
-
-    <%- include('partials/footer'); -%>
 
     <script>
         const form = document.querySelector('form')
@@ -42,20 +55,23 @@
             // get values
             const email = form.email.value
             const password = form.password.value
+            console.log("ed")
 
             try {
+                console.log("e")
                 const res = await fetch('/loginHR', {
                     method: 'POST',
                     body: JSON.stringify({ email, password }),
                     headers: {'Content-Type': 'application/json'}
                 });
-                const data = await res.json();
-                console.log(data);
-                if (data.error) {
-                    emailError.textContent = data.error.email
-                    passwordError.textContent = data.error.password
+                const data = await res.json()
+                console.log(data)
+                if (data.errors) {
+                    console.log('sdsd')
+                    emailError.textContent = data.errors.email
+                    passwordError.textContent = data.errors.password
                 }
-                if (data.user) {
+                if (data.user) { //successful
                     location.assign('/')
                 }
             }

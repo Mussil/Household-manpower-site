@@ -6,10 +6,15 @@ const app     = express()
 const mongoose= require('mongoose')
 //const Users=require('../models/users')
 const authRoutes= require('../routes/auth')
+const cookieParser = require('cookie-parser')
+const { requireAuth } = require('../middleware/authMiddleware')
 
-//static files
+
+// middleware
 app.use(express.static('./views'))
 app.use(express.json())
+app.use(cookieParser())
+
 
 //set up template engine
 app.set('view engine', 'ejs')
@@ -55,7 +60,7 @@ app.use(authRoutes)
 
 
 //success page
-app.get('/success', (req, res) => {
+app.get('/success',requireAuth, (req, res) => { ///need to change for thr HR home page and his stuff
     res.render('success')
 })
 
