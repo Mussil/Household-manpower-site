@@ -1,23 +1,45 @@
 const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
+const addressSchema=require('./Address')
 
 const userSchema= new mongoose.Schema({
     email: {
         type: String,
         required : [true,'Please enter an email'],
         unique : true,
-        trim:true,
         lowercase :true,
-        validate: [isEmail,'Please enter a valid email'],
-
+        trim:true,
+        validate: [isEmail,'Please enter a valid email']
     },
     password: {
         type: String,
         required: [true,'Please enter an password'],
         trim:true,
-        minlength :[6,'Minimum password length is 6 characters'],
+        minlength :[6,'Minimum password length is 6 characters']
+    },
+    firstName: {
+        type: String,
+        required: [true,'Please enter first name'],
+        trim:true,
+        minlength :[3,'Minimum name length is 4 characters']
+    },
+    lastName: {
+        type: String,
+        required: [true,'Please enter last name'],
+        trim:true,
+        minlength :[3,'Minimum name length is 4 characters']
+    },
+    phoneNumber:{
+        type: Number,
+        min:1000000000,
+        max:9999999999
+
+    },
+    address: {
+        type: addressSchema.schema
     }
+
 
 })
 
@@ -47,5 +69,5 @@ userSchema.statics.login = async function(email, password) {
 }
 
 
-    const User = mongoose.model('userHR', userSchema)
-    module.exports = User
+const User = mongoose.model('userEmployer', userSchema)
+module.exports = User

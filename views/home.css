@@ -20,7 +20,10 @@ h1,h2,h3,h4,h5,h6{color:#323233;text-transform:uppercase;}
     font-weight:700;
     letter-spacing:0.1em;
 }
-
+/*i added it for the background to be black*/
+.navbar{
+    background: #161515;
+}
 .navbar-nav .nav-item .nav-link{
     padding: 1.1em 1em!important;
     font-size: 120%;

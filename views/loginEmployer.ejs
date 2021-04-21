@@ -1,0 +1,94 @@
+
+<html>
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "login.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Login<br>Employer</h2>
+        <p>Log in / register and find the best employees.</p>
+    </div>
+</div>
+
+
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form action="/loginHR">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="email error"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <div class="password error"></div>
+                </div>
+                <button type="submit" class="btn btn-black">login</button>
+                <button type="" class="btn btn-secondary">Do not have an account?</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const form = document.querySelector('form')
+    const emailError = document.querySelector('.email.error')
+    const passwordError = document.querySelector('.password.error')
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        // reset errors
+        emailError.textContent = ''
+        passwordError.textContent = ''
+
+        // get values
+        const email = form.email.value
+        const password = form.password.value
+
+        try {
+            const res = await fetch('/loginEmployer', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json()
+            console.log(data)
+            if (data.errors) {
+                emailError.textContent = data.errors.email
+                passwordError.textContent = data.errors.password
+            }
+            if (data.user) { //successful
+                location.assign('/')
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    });
+</script>
+
+
+
+</body>
+
+
+</html>
+
+
+
+

@@ -1,5 +1,6 @@
 
-const UsersHR=require('../models/UsersHR')
+const UsersEmployer=require('../models/UsersEmployer')
+
 const jwt = require('jsonwebtoken')
 
 // handle errors
@@ -17,18 +18,15 @@ const handleErrors = (err) => {
         errors.password = 'That password is incorrect'
     }
 
-    // // duplicate email error
-    // if (err.code === 11000) {
-    //     errors.email = 'that email is already registered'
-    //     return errors
-    // }
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'that email is already registered'
+        return errors
+    }
 
     // validation errors
     if (err.message.includes('user validation failed')) {
-        // console.log(err);
         Object.values(err.errors).forEach(({ properties }) => {
-            // console.log(val);
-            // console.log(properties);
             errors[properties.path] = properties.message
         })
     }
@@ -46,16 +44,16 @@ const createToken = (id) => {
 
 
 // controller actions
-module.exports.loginHRGet=(req,res)=>{
-    res.render('loginHR')
+module.exports.loginEmployerGet=(req,res)=>{
+    res.render('loginEmployer')
 }
 
 
-module.exports.loginHRPost= async (req,res)=>{
-    const { email, password } = req.body
+module.exports.loginEmployerPost= async (req,res)=>{
+   const { email, password } = req.body
 
     try {
-        const user = await UsersHR.login(email, password)
+        const user = await UsersEmployer.login(email, password)
         const token = createToken(user._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(200).json({ user: user._id })
@@ -66,17 +64,16 @@ module.exports.loginHRPost= async (req,res)=>{
     }
 
 
-
 }
 
 
 
-//create new HR .
-module.exports.createNewHRPost= async (req,res)=>{
-    const{email,password}=req.body
+//create new emp  .
+module.exports.createNewEmpPost= async (req,res)=>{
+    const x=req.body
     try{
-        const usersHR= await UsersHR.create({email,password})
-        res.status(201).json(usersHR)
+        const usersEmployer= await UsersEmployer.create(x)
+        res.status(201).json(usersEmployer)
     }
     catch(err){
         const errors = handleErrors(err)
@@ -90,9 +87,8 @@ module.exports.createNewHRPost= async (req,res)=>{
 
 
 
-
-
-module.exports.logoutGet=(req,res)=>{
-    res.cookie('jwt','',{maxAge:1})
-    res.redirect('/')
-}
+//
+// module.exports.logoutGet=(req,res)=>{
+//     res.cookie('jwt','',{maxAge:1})
+//     res.redirect('/')
+// }
