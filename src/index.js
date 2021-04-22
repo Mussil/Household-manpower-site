@@ -6,8 +6,11 @@ const app     = express()
 const mongoose= require('mongoose')
 //const Users=require('../models/users')
 const authRoutes= require('../routes/auth')
+const employerRoutes= require('../routes/employer')
+
 const cookieParser = require('cookie-parser')
-const { requireHRAuth, checkUser } = require('../middleware/authMiddleware')
+// const { requireHRAuth, checkUser,requireEmpAuth } = require('../middleware/authMiddleware')
+const {  checkUser } = require('../middleware/authMiddleware')
 
 
 // middleware
@@ -40,6 +43,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(authRoutes)
+app.use(employerRoutes)
 
 
 

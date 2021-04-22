@@ -77,4 +77,4 @@ const checkUser = (req, res, next) => {
 }
 
 
-module.exports = { requireHRAuth, checkUser }
+module.exports = { requireHRAuth, checkUser ,requireEmpAuth}

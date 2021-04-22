@@ -29,7 +29,7 @@
     passwordError.textContent = data.errors.password
 }
     if (data.user) { //successful
-    location.assign('/')
+    location.assign('/homepageEmployer')
 }
 }
     catch (err) {
