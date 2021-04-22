@@ -61,9 +61,12 @@ app.use(authRoutes)
 
 
 //success page
-app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+app.get('/success', (req, res) => { ///need to change for thr HR home page and his stuff
     res.render('success')
 })
+// app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+//     res.render('success')
+// })
 
 
 

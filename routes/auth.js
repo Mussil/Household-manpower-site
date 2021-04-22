@@ -15,6 +15,7 @@ router.post('/createNewHR',loginHRController.createNewHRPost)
 router.get('/loginEmployer',loginEmployerController.loginEmployerGet)
 router.post('/loginEmployer',loginEmployerController.loginEmployerPost)
 router.post('/createNewEmp',loginEmployerController.createNewEmpPost)
+router.get('/signupEmployer',loginEmployerController.signupEmployerGet)
 
 //
 // router.get('/loginWC',loginHRController.loginWCGet)

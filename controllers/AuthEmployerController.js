@@ -66,7 +66,9 @@ module.exports.loginEmployerPost= async (req,res)=>{
 
 }
 
-
+module.exports.signupEmployerGet =(req,res)=>{
+    res.render('signupEmployer')
+}
 
 //create new emp  .
 module.exports.createNewEmpPost= async (req,res)=>{
