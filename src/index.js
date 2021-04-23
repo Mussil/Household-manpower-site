@@ -10,11 +10,13 @@ const employerRoutes= require('../routes/employer')
 
 const cookieParser = require('cookie-parser')
 // const { requireHRAuth, checkUser,requireEmpAuth } = require('../middleware/authMiddleware')
-const {  checkUser } = require('../middleware/authMiddleware')
+const {  checkUser ,requireHRAuth} = require('../middleware/authMiddleware')
 
 
 // middleware
-app.use(express.static('./views'))
+//app.use(express.static('./views'))
+app.use(express.static('./public'))
+
 app.use(express.json())
 app.use(cookieParser())
 
@@ -47,30 +49,17 @@ app.use(employerRoutes)
 
 
 
-//controllers
-//var loginHRController=require('../controllers/loginHRController')
-// var loginController=require('../controllers/loginController')
-// var signupController=require('../controllers/signupController')
-
-
-
-//fire controllers
-//loginHRController(app)
-// loginController(app)
-// signupController(app)
-
-
 
 
 
 
 //success page
-app.get('/success', (req, res) => { ///need to change for thr HR home page and his stuff
-    res.render('success')
-})
-// app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+// app.get('/success', (req, res) => { ///need to change for thr HR home page and his stuff
 //     res.render('success')
 // })
+app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+    res.render('success')
+})
 
 
 
