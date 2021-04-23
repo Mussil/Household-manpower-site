@@ -16,7 +16,7 @@ form.addEventListener('submit', async (e) => {
 
     try {
         console.log('e')
-        const res = await fetch('/loginHR', {
+        const res = await fetch('/loginContractor', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {'Content-Type': 'application/json'}
@@ -28,7 +28,7 @@ form.addEventListener('submit', async (e) => {
             passwordError.textContent = data.errors.password
         }
         if (data.user) { //successful
-            location.assign('/homepageHR')
+            location.assign('/homepageContractor')
         }
     }
     catch (err) {

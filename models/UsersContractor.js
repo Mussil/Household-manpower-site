@@ -2,6 +2,21 @@ const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
 const addressSchema=require('./Address')
+const bankSchema=require('./Bank')
+
+const languagesArray = ['hebrew', 'english', 'arabic', 'russian', 'amharic', 'chinese','portuguese', 'french','romanian', 'polish', 'spanish']
+const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
+
+const languagesSchema= new mongoose.Schema(
+    { value : {
+             type : String,
+            enum : languagesArray,
+            lowercase: true,
+
+        }
+    })
+
+
 
 const userSchema= new mongoose.Schema({
     email: {
@@ -38,6 +53,62 @@ const userSchema= new mongoose.Schema({
     },
     address: {
         type: addressSchema.schema
+    } ,
+    bank: {
+        type: bankSchema.schema
+    },
+    gender: {
+        type: String,
+        enum: ['male', 'female']
+    },
+    languages: {
+        type: [languagesSchema],
+    },
+    education: {
+        type: String,
+        lowercase: true,
+        enum:['elementary', 'high school', 'higher']
+    },
+    smoker:{
+        type: String,
+        lowercase: true,
+        enum: ['smoker' / 'non smoker' / 'not at work']
+    },
+    experience:{
+        type: Number
+    },
+    hourlyRate:{
+        type: Number,
+        min:17,
+        max:500
+    },
+    picture:{
+        data: Buffer,
+        contentType: String
+    },
+    form101:{
+        data: Buffer,
+        contentType: String
+    },
+    birthday:{
+        type: Date,
+        //required: true,
+        trim: true,
+    },
+    aboutMe:{
+        type: String
+    },
+    jobTypes:{
+        type: String,
+        lowercase: true,
+        enum: jobsArray
+    },
+    leaveDates: [ Date],
+    rating:{
+        type:Number,
+        min:0,
+        max:5,
+        default:0
     }
 
 
@@ -69,5 +140,5 @@ userSchema.statics.login = async function(email, password) {
 }
 
 
-const User = mongoose.model('userEmployer', userSchema)
+const User = mongoose.model('userContractor', userSchema)
 module.exports = User

@@ -1,28 +1,35 @@
 const { Router }=require('express')
-const loginHRController=require('../controllers/loginHRController')
-const loginEmployerController=require('../controllers/AuthEmployerController')
+const HR=require('../controllers/AuthloginHRController')
+const Employer=require('../controllers/AuthEmployerController')
+const Contractor=require('../controllers/AuthContractorController')
 
 const router=Router()
 
 //HR
-router.get('/loginHR',loginHRController.loginHRGet)
-router.post('/loginHR',loginHRController.loginHRPost)
+router.get('/loginHR',HR.loginHRGet)
+router.post('/loginHR',HR.loginHRPost)
 
-router.post('/createNewHR',loginHRController.createNewHRPost)
+router.post('/createNewHR',HR.createNewHRPost)
 
 
 //employer
-router.get('/loginEmployer',loginEmployerController.loginEmployerGet)
-router.post('/loginEmployer',loginEmployerController.loginEmployerPost)
-router.post('/createNewEmp',loginEmployerController.createNewEmpPost)
-router.get('/signupEmployer',loginEmployerController.signupEmployerGet)
+router.get('/loginEmployer',Employer.loginEmployerGet)
+router.post('/loginEmployer',Employer.loginEmployerPost)
+router.get('/signupEmployer',Employer.signupEmployerGet)
 
-//
-// router.get('/loginWC',loginHRController.loginWCGet)
-// router.post('/loginWC',loginHRController.loginWCPost)
+router.post('/createNewEmp',Employer.createNewEmpPost)
+
+
+//contractors
+router.get('/loginContractor',Contractor.loginContractorGet)
+router.post('/loginContractor',Contractor.loginContractorPost)
+
+router.post('/createNewContractor',Contractor.createNewContractorPost)
+
+
 
 //logout
-router.get('/logout',loginHRController.logoutGet)
+router.get('/logout',HR.logoutGet)
 
 
 module.exports=router

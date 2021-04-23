@@ -1,0 +1,56 @@
+
+<html>
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../css/login.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Login<br>Contractor worker</h2>
+        <p>Log in to get all the information about your transactions.</p>
+    </div>
+</div>
+
+
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form action="/loginContractor">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="email error"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
+                    <div class="password error"></div>
+                </div>
+                <button type="submit" class="btn btn-black">login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/loginContractor.js"></script>
+
+
+
+</body>
+
+
+</html>
+
+
+
+

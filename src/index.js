@@ -5,8 +5,7 @@ const app     = express()
 //connect to mongodb
 const mongoose= require('mongoose')
 //const Users=require('../models/users')
-const authRoutes= require('../routes/auth')
-const employerRoutes= require('../routes/employer')
+
 
 const cookieParser = require('cookie-parser')
 // const { requireHRAuth, checkUser,requireEmpAuth } = require('../middleware/authMiddleware')
@@ -20,6 +19,10 @@ app.use(express.static('./public'))
 app.use(express.json())
 app.use(cookieParser())
 
+////////////////////////////////////
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+/////////////////////////
 
 //set up template engine
 app.set('view engine', 'ejs')
@@ -44,8 +47,16 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+//ROUTES
+const authRoutes= require('../routes/auth')
+const employerRoutes= require('../routes/employer')
+const HRRoutes= require('../routes/HR')
+const ContractorRoutes= require('../routes/contractor')
+
 app.use(authRoutes)
 app.use(employerRoutes)
+app.use(HRRoutes)
+app.use(ContractorRoutes)
 
 
 
