@@ -14,9 +14,15 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
 
+
+
+
+
+
     console.log('here in server')
 
 
+// צריכה להוסיף את הנתונים לבסיס נתונים!!!!!!!!!!!11
     const token = req.cookies.jwt
     if (token) {
         jwt.verify(token, 'sce secret', async (err, decodedToken) => {

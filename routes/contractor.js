@@ -1,3 +1,4 @@
+
 const { requireConAuth } = require('../middleware/authMiddleware')
 
 const { Router }=require('express')
@@ -7,12 +8,19 @@ const router=Router()
 router.route('/homepageContractor')
     .get(requireConAuth, contractorController.homepageContractorGet)
 
+router.route('/workHistoryContractor')
+    .get(requireConAuth, contractorController.workHistoryContractorGet)
+
+
+router.route('/salaryDetailsContractor')
+    .get(requireConAuth, contractorController.salaryDetailsContractorGet)
+
+router.route('/profileContractor')
+    .get(requireConAuth, contractorController.profileContractorGet)
+
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
 
-router.post('/leavePeriodContractor',contractorController.leavePeriodContractorPost)
-
-
-
+router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
 
 module.exports=router
