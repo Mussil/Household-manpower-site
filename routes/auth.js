@@ -19,6 +19,9 @@ router.get('/signupEmployer',Employer.signupEmployerGet)
 
 router.post('/createNewEmp',Employer.createNewEmpPost)
 
+router.get('/forgotEmployer',Employer.forgotEmployerGet)
+router.post('/forgotEmployer',Employer.forgotEmployerPost)
+
 
 //contractors
 router.get('/loginContractor',Contractor.loginContractorGet)
@@ -26,6 +29,8 @@ router.post('/loginContractor',Contractor.loginContractorPost)
 
 router.post('/createNewContractor',Contractor.createNewContractorPost)
 
+router.get('/forgotContractor',Contractor.forgotContractorGet)
+router.post('/forgotContractor',Contractor.forgotContractorPost)
 
 
 //logout

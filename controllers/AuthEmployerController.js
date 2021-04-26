@@ -1,5 +1,6 @@
 
 const UsersEmployer=require('../models/UsersEmployer')
+var nodemailer = require('nodemailer')
 
 const jwt = require('jsonwebtoken')
 
@@ -86,7 +87,67 @@ module.exports.createNewEmpPost= async (req,res)=>{
 
 
 
+module.exports.forgotEmployerGet=(req,res)=>{
+    res.render('forgotEmployer')
+}
 
+module.exports.forgotEmployerPost= async(req,res)=>{
+    const { email } = req.body
+    var randomstring = Math.random().toString(36).slice(-8)
+    try {
+        const user = await UsersEmployer.checkEmail(email)
+
+        await UsersEmployer.findById(user._id)
+            .then(user=>{
+
+                user.password=randomstring
+                user.markModified('password')
+                user.save(err => console.log(err))
+                console.log(user)
+
+            })
+
+
+        console.log(user)
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'hssce2021@gmail.com',
+                pass: 'lamasce?'
+            }
+        })
+
+        var mailOptions = {
+            from: 'hssce2021@gmail.com',
+            to: email,
+            subject: 'password reset',
+            html: '<h1>Oops silly you, did you forgot your password again?</h1>' +
+                '<h3>Come on!! try harder next time!</h3>'+
+                '<h3>Now we will give up for you but dont rely on it </h3>'+
+                '<h2>Here is a temporary password: </h2>' + randomstring +
+                '<h3>Please change it as soon as possible!</h3>'
+        }
+        //     text: 'Oops, what can we do with you memory, urgent course for improvement.\n' +
+        //         'This time we will give up - here is a temporary password, \nplease change it as soon as possible:\n'+randomstring
+        // }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('Email sent: ' + info.response)
+            }
+        })
+
+        res.status(200).json({ user: user._id })
+        //return user
+    }
+    catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+
+}
 
 
 //

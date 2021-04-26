@@ -146,6 +146,14 @@ userSchema.statics.login = async function(email, password) {
     throw Error('incorrect email')
 }
 
+// static method to check email
+userSchema.statics.checkEmail = async function(email) {
+    const user = await this.findOne({email})
+    if (user) {
+            return user
+    }
+    throw Error('incorrect email')
+}
 
 const User = mongoose.model('userContractor', userSchema)
 module.exports = User
