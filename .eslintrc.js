@@ -6,6 +6,8 @@ module.exports =
             'es6':      true,
             'node':     true,
             'jest': true,
+            'jquery': true,
+
 
         },
         'extends':       'eslint:recommended',

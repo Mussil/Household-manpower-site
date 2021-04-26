@@ -31,7 +31,7 @@ const userSchema= new mongoose.Schema({
         type: String,
         required: [true,'Please enter an password'],
         trim:true,
-        minlength :[6,'Minimum password length is 6 characters']
+        minlength :[6,'Minimum password length is 6 characters'],
     },
     firstName: {
         type: String,
@@ -103,7 +103,10 @@ const userSchema= new mongoose.Schema({
         lowercase: true,
         enum: jobsArray
     },
-    leaveDates: [ Date],
+    leaveDates: {
+        type: [ Date],
+        default: []
+    },
     rating:{
         type:Number,
         min:0,
@@ -117,9 +120,13 @@ const userSchema= new mongoose.Schema({
 
 // fire a function before doc saved to db
 userSchema.pre('save', async function (next) {
-    const salt=await bcrypt.genSalt()
-    this.password=await bcrypt.hash(this.password, salt)
-    next()
+    console.log('here')
+    if(this.isModified('password')){
+        console.log('here2')
+        const salt=await bcrypt.genSalt()
+        this.password=await bcrypt.hash(this.password, salt)
+        next()
+    }
 })
 
 

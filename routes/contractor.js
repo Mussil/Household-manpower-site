@@ -7,11 +7,9 @@ const router=Router()
 router.route('/homepageContractor')
     .get(requireConAuth, contractorController.homepageContractorGet)
 
-////////////////////////////////////////
-
-
 router.route('/workHistoryContractor')
     .get(requireConAuth, contractorController.workHistoryContractorGet)
+
 
 router.route('/salaryDetailsContractor')
     .get(requireConAuth, contractorController.salaryDetailsContractorGet)
@@ -21,8 +19,7 @@ router.route('/profileContractor')
 
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
-/////////////////////////////////////////
 
-
+router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
 
 module.exports=router
