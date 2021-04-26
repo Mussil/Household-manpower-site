@@ -7,7 +7,13 @@ const router=Router()
 router.route('/homepageEmployer')
     .get(requireEmpAuth, homepageEmployerController.homepageEmployerGet)
 
+////////////////////////////////////////////////////
+router.route('/workHistoryEmployer')
+    .get(requireEmpAuth, homepageEmployerController.workHistoryEmployerGet)
 
+router.route('/profileEmployer')
+    .get(requireEmpAuth, homepageEmployerController.profileEmployerGet)
+////////////////////////////////////////////////////
 
 //router.get('/homepageEmployer',requireEmpAuth, homepageEmployerController.homepageEmployerGet)
 

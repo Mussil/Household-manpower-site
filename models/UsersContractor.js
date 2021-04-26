@@ -115,8 +115,6 @@ const userSchema= new mongoose.Schema({
 },{timestamp: true})
 
 
-
-
 // fire a function before doc saved to db
 userSchema.pre('save', async function (next) {
     const salt=await bcrypt.genSalt()

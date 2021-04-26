@@ -86,12 +86,6 @@ module.exports.createNewHRPost= async (req,res)=>{
 }
 
 
-
-
-
-
-
-
 module.exports.logoutGet=(req,res)=>{
     res.cookie('jwt','',{maxAge:1})
     res.redirect('/')
