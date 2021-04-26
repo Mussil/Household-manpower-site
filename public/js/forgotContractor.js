@@ -23,7 +23,6 @@ form.addEventListener('submit', async (e) => {
             emailError.textContent = data.errors.email
         }
         if(data.user) { //successful
-            console.log('Fd')
             emailError.textContent = 'email sent successfully'
         }
     }
