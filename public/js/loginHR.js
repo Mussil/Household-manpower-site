@@ -2,8 +2,12 @@ const form = document.querySelector('form')
 const emailError = document.querySelector('.email.error')
 const passwordError = document.querySelector('.password.error')
 
+
+
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
+
 
     // reset errors
     emailError.textContent = ''
@@ -12,10 +16,8 @@ form.addEventListener('submit', async (e) => {
     // get values
     const email = form.email.value
     const password = form.password.value
-    console.log('ed')
 
     try {
-        console.log('e')
         const res = await fetch('/loginHR', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
@@ -34,4 +36,7 @@ form.addEventListener('submit', async (e) => {
     catch (err) {
         console.log(err)
     }
+
+
 })
+
