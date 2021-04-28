@@ -2,18 +2,18 @@
 const { requireEmpAuth } = require('../middleware/authMiddleware')
 
 const { Router }=require('express')
-const homepageEmployerController=require('../controllers/EmployerController')
+const EmployerController=require('../controllers/EmployerController')
 
 const router=Router()
 router.route('/homepageEmployer')
-    .get(requireEmpAuth, homepageEmployerController.homepageEmployerGet)
+    .get(requireEmpAuth, EmployerController.homepageEmployerGet)
 
 ////////////////////////////////////////////////////
 router.route('/workHistoryEmployer')
-    .get(requireEmpAuth, homepageEmployerController.workHistoryEmployerGet)
+    .get(requireEmpAuth, EmployerController.workHistoryEmployerGet)
 
 router.route('/profileEmployer')
-    .get(requireEmpAuth, homepageEmployerController.profileEmployerGet)
+    .get(requireEmpAuth, EmployerController.profileEmployerGet)
 ////////////////////////////////////////////////////
 
 //router.get('/homepageEmployer',requireEmpAuth, homepageEmployerController.homepageEmployerGet)

@@ -24,13 +24,45 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
     res.render('leavePeriodContractor')
 }
 
+
+module.exports.shiftReportContractorPost=(req,res)=> {
+    console.log('here in server')
+
+
+    //צריכה לבדוק תקינות של התאריך של המשמרת
+    //להוסיף לבסיס נתונים
+    //במידה ויש עסקה לתאריך זה
+    //במידה ואין משמרת כבר בתאריך זה
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+            if (err) {
+                res.locals.user = null
+                //next()
+            } else {
+                await UsersContractor.findById(decodedToken.id)
+                    .then(user=>{
+                        console.log(user)
+
+                        const {start}=req.body
+                        console.log(start)
+
+                    })
+                //next()
+            }
+        })
+    }
+
+
+}
+
+
+
 module.exports.leavePeriodContractorPost=(req,res)=>{
 
 
     console.log('here in server')
 
-
-// צריכה להוסיף את הנתונים לבסיס נתונים!!!!!!!!!!!11
     const token = req.cookies.jwt
     if (token) {
         jwt.verify(token, 'sce secret', async (err, decodedToken) => {

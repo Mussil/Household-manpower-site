@@ -3,23 +3,24 @@
 $(function() {
     $('input[name="daterange"]').daterangepicker({
         'alwaysShowCalendars': true,
+        singleDatePicker: true,
+        timePicker:true,
         opens: 'left',
         minYear: 2021,
         maxYear: 2022,
-        'autoUpdateInput': true,
+         'autoUpdateInput': true,
         'autoApply': false,
+        timePickerSeconds:false,
         'locale': {
-            'format': 'MM/DD/YYYY'
+            'format': 'MM/DD/YYYY  hh:mm A'
         }
 
-    }, async function(start, end) {
-        console.log('A new date selection was made: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
-
-
+    }, async function(start) {
+        console.log('A new date selection was made: ' + start.format('DD-MM-YYYY hh:mm A') )
         try {
-            const res = await fetch('/leavePeriodContractor', {
+            const res = await fetch('/shiftReportContractor', {
                 method: 'POST',
-                body: JSON.stringify({start,end}),
+                body: JSON.stringify({start}),
                 headers: {'Content-Type': 'application/json'}
             })
             const data = await res.json()
@@ -29,6 +30,7 @@ $(function() {
         catch (err) {
             console.log(err)
         }
+
 
 
 

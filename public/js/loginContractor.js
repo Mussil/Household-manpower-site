@@ -12,11 +12,9 @@ form.addEventListener('submit', async (e) => {
     // get values
     const email = form.email.value
     const password = form.password.value
-    console.log('ed')
 
     try {
-        console.log('e')
-        const res = await fetch('/loginContractor', {
+       const res = await fetch('/loginContractor', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {'Content-Type': 'application/json'}

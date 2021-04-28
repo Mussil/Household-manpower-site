@@ -9,7 +9,7 @@ const mongoose= require('mongoose')
 
 const cookieParser = require('cookie-parser')
 // const { requireHRAuth, checkUser,requireEmpAuth } = require('../middleware/authMiddleware')
-const {  checkUser ,requireHRAuth} = require('../middleware/authMiddleware')
+const {  checkUser } = require('../middleware/authMiddleware')
 
 
 // middleware
@@ -68,9 +68,9 @@ app.use(ContractorRoutes)
 // app.get('/success', (req, res) => { ///need to change for thr HR home page and his stuff
 //     res.render('success')
 // })
-app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
-    res.render('success')
-})
+// app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+//     res.render('success')
+// })
 
 
 

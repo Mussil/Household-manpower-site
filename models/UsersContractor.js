@@ -16,6 +16,14 @@ const languagesSchema= new mongoose.Schema(
         }
     })
 
+const jobsSchema= new mongoose.Schema(
+    { value : {
+            type : String,
+            enum : jobsArray,
+            lowercase: true,
+
+        }
+    })
 
 
 const userSchema= new mongoose.Schema({
@@ -99,9 +107,7 @@ const userSchema= new mongoose.Schema({
         type: String
     },
     jobTypes:{
-        type: String,
-        lowercase: true,
-        enum: jobsArray
+        type: [jobsSchema],
     },
     leaveDates: {
         type: [ Date],

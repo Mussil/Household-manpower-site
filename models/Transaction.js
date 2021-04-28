@@ -6,17 +6,14 @@ const mongoose=require('mongoose')
 var transactionSchema = new mongoose.Schema({
 
     idContractor:{
-        type: { type: mongoose.Schema.Types.ObjectId,
-            ref: 'userContractor',
-            required: true
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userContractor',
+        required: true
     },
-    idEmployer: {
-        type: { type: mongoose.Schema.Types.ObjectId,
-            ref: 'userEmployer',
-            required: true
-
-        }
+    idEmployer : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userEmployer',
+        required: true
     },
     date:{
         type: Date,
@@ -58,13 +55,11 @@ var transactionSchema = new mongoose.Schema({
         type: Number,
         min:0,
         max:1440 ,//number of minutes in a day,
-        required:true
     },
     endHourShift:{
         type: Number,
         min:0,
         max:1440 ,//number of minutes in a day,
-        required:true,
         validate: [
             function (value) {
                 return this.startHourShift <= value
@@ -84,5 +79,5 @@ var transactionSchema = new mongoose.Schema({
 
 
 },{timestamp: true})
-transactionSchema=mongoose.model('transaction',transactionSchema ,'transaction' )
+transactionSchema=mongoose.model('usersTransaction',transactionSchema  )
 module.exports = transactionSchema

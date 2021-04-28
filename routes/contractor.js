@@ -22,5 +22,6 @@ router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
 
 router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
+router.post('/shiftReportContractor', contractorController.shiftReportContractorPost)
 
 module.exports=router

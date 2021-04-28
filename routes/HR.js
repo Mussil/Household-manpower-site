@@ -19,4 +19,11 @@ router.route('/monitorHiringHR')
     .get(requireHRAuth, homepageHRController.monitorHiringHRGet)
 /////////////////////////////////////////////////////////
 
+
+
+//at the end - need to delete!!!!!!!!!
+router.post('/createTransaction',homepageHRController.transactionPost)
+
+
+
 module.exports=router
