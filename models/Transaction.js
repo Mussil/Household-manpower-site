@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 // const UsersContractor=require('./UsersContractor')
 // const UsersEmployer=require('./UsersEmployer')
+const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 
 var transactionSchema = new mongoose.Schema({
@@ -21,6 +22,11 @@ var transactionSchema = new mongoose.Schema({
         max: '2050-12-30',
         required: true,
         default: Date.now
+    },
+    jobType:{
+        type: String,
+        lowercase: true,
+        enum: jobsArray
     },
     rank:{
         type: 'Number',
@@ -80,5 +86,6 @@ var transactionSchema = new mongoose.Schema({
 
 
 },{timestamp: true})
+
 transactionSchema=mongoose.model('usersTransaction',transactionSchema  )
 module.exports = transactionSchema

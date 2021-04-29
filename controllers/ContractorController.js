@@ -27,7 +27,10 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
 }
 
 
-module.exports.shiftReportContractorPost=(req,res)=> {
+// var moment = require('moment') // require
+// moment().format()
+
+module.exports.shiftReportContractorPost= (req,res)=> {
 
     //צריכה לבדוק תקינות של התאריך של המשמרת
     //להוסיף לבסיס נתונים
@@ -35,26 +38,41 @@ module.exports.shiftReportContractorPost=(req,res)=> {
     //במידה ואין משמרת כבר בתאריך זה
 
 
+    const { start } = req.body
+
+    var start1 = new Date(start)
+    start1.setHours(0,0,0,0)
+
+    var end = new Date(start)
+    end.setHours(23,59,59,999)
 
     const token = req.cookies.jwt
-    if (token) {
+
         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
             if (err) {
-                console.log(err)
-                //next()
+                console.log(err.message)
             } else {
-                const {start}=req.body
-                var d = new Date(start)
+                console.log(decodedToken)
+                //check for transaction in the start date and in the contractor-user id
+                await Transaction.findOne({
+                    idContractor: decodedToken.id ,
+                    date: {
+                        $gte: start1, $lte: end }
+                }).then(result=>{
+                    if(result){
+                        //console.log('found transaction')
+                       // console.log(result)
+                        if(result.isShifted){
+                            res.status(400).json({msgError:'You have already declared a shift for this date'})
 
-                Transaction.find({idContractor: decodedToken.id , date:{
-                        $gte: d,
-                        $lt: d.setDate(d.getDate() + 1)
-                    } },function(err,result){
-                    if (err) {
-                        res.send(err)
-                    } else {
-                        console.log('dkfns')
-                        res.send(result)
+                        }else {
+                            res.status(201).json({result})
+                        }
+                    }else{//error-no transaction for the id and date
+                        //console.log('no transaction')
+                        //console.log(result)
+                        res.status(400).json({msgError:'You can not declare a shift on a date you were not employed!'})
+
                     }
 
                 })
@@ -63,21 +81,55 @@ module.exports.shiftReportContractorPost=(req,res)=> {
 
             }
         })
-    }
+
+    //res.status(400).json({ })
+
+
+
+
+
+
 
 
 }
 
-module.exports.shiftReportHoursContractorPost=(req,res)=> {
+module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים
-    console.log(req)
-    res('h')
+    const {trans, startMin, endMin} = req.body
+
+    await Transaction.findById(trans._id)
+        .then(async result => {
+            if (result.isShifted) {
+                res.status(400).json({msgError: 'You have already entered a shift for this date'})
+            }
+            else{
+
+                await Transaction.updateOne({_id: trans._id},
+                    {
+                        startHourShift: startMin,
+                        endHourShift: endMin,
+                        isShifted: true
+                    },).then(updatedRows => {
+                    console.log(updatedRows)
+                    res.status(201).json({msg: 'The shift was added successfully'})
+                }).catch(err => {
+                    res.status(400).json({msgError: 'an error occurred Try again'})
+                    console.log(err)
+
+                })
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+
+
+
+
 }
 
 
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
-    console.log('here in server')
 
     const token = req.cookies.jwt
     if (token) {
