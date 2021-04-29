@@ -104,7 +104,6 @@ module.exports.forgotContractorPost= async(req,res)=>{
             })
 
 
-        console.log(user)
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -123,9 +122,7 @@ module.exports.forgotContractorPost= async(req,res)=>{
                 '<h2>Here is a temporary password: </h2>' + randomstring +
                 '<h3>Please change it as soon as possible!</h3>'
         }
-        //     text: 'Oops, what can we do with you memory, urgent course for improvement.\n' +
-        //         'This time we will give up - here is a temporary password, \nplease change it as soon as possible:\n'+randomstring
-        // }
+
 
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {

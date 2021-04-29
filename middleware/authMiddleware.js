@@ -92,7 +92,13 @@ const checkUser = (req, res, next) => {
                 res.locals.user = null
                 next()
             } else {
+
                 let user = await UsersHR.findById(decodedToken.id)
+                if (user==null)
+                    user = await UsersContractor.findById(decodedToken.id)
+                if (user==null)
+                    user = await UsersEmployer.findById(decodedToken.id)
+
                 res.locals.user = user
                 next()
             }
@@ -104,4 +110,4 @@ const checkUser = (req, res, next) => {
 }
 
 
-module.exports = { requireHRAuth, checkUser ,requireEmpAuth,requireConAuth}
+module.exports = { checkUser, requireHRAuth,requireEmpAuth,requireConAuth}

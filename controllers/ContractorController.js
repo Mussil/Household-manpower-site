@@ -1,4 +1,6 @@
 const UsersContractor=require('../models/UsersContractor')
+const Transaction=require('../models/Transaction')
+
 const jwt = require('jsonwebtoken')
 
 
@@ -26,29 +28,39 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
 
 
 module.exports.shiftReportContractorPost=(req,res)=> {
-    console.log('here in server')
-
 
     //צריכה לבדוק תקינות של התאריך של המשמרת
     //להוסיף לבסיס נתונים
     //במידה ויש עסקה לתאריך זה
     //במידה ואין משמרת כבר בתאריך זה
+
+
+
     const token = req.cookies.jwt
     if (token) {
         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
             if (err) {
-                res.locals.user = null
+                console.log(err)
                 //next()
             } else {
-                await UsersContractor.findById(decodedToken.id)
-                    .then(user=>{
-                        console.log(user)
+                const {start}=req.body
+                var d = new Date(start)
 
-                        const {start}=req.body
-                        console.log(start)
+                Transaction.find({idContractor: decodedToken.id , date:{
+                        $gte: d,
+                        $lt: d.setDate(d.getDate() + 1)
+                    } },function(err,result){
+                    if (err) {
+                        res.send(err)
+                    } else {
+                        console.log('dkfns')
+                        res.send(result)
+                    }
 
-                    })
-                //next()
+                })
+
+
+
             }
         })
     }
@@ -56,18 +68,23 @@ module.exports.shiftReportContractorPost=(req,res)=> {
 
 }
 
+module.exports.shiftReportHoursContractorPost=(req,res)=> {
+//יכניס את השעות לבסיס נתונים
+    console.log(req)
+    res('h')
+}
+
 
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
-
-
     console.log('here in server')
 
     const token = req.cookies.jwt
     if (token) {
         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
             if (err) {
-                res.locals.user = null
+                console.log(err)
+                res.status(400).json({ err })
                 //next()
             } else {
                 await UsersContractor.findById(decodedToken.id)
@@ -87,7 +104,7 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
                         user.markModified('leaveDates')
                         user.save(err => console.log(err))
                         console.log(user)
-
+                        res.status(200).json({ user: user._id })
                     })
                 //next()
             }

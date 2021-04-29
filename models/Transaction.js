@@ -19,7 +19,8 @@ var transactionSchema = new mongoose.Schema({
         type: Date,
         min: '2000-01-01',
         max: '2050-12-30',
-        required: true
+        required: true,
+        default: Date.now
     },
     rank:{
         type: 'Number',
