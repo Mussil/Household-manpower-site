@@ -3,7 +3,7 @@ $(function() {
     $('input[name="daterange"]').daterangepicker({
         'singleDatePicker': true,
         'showDropdowns': true,
-        'autoUpdateInput': false,
+        'autoUpdateInput': true,
         'alwaysShowCalendars': true,
 
     }, async function(start) {
