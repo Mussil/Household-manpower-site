@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -36,12 +36,28 @@
 
     <hr>
     <h2>Shift report</h2>
-<!--    <input type="text" name="daterange"  />-->
-<!--    <div class="date error"></div>-->
+    <input type="text" name="daterange"  />
+    <div class="date messages error"></div>
+    <hr>
 
+    <form id="hoursForm" >
+        <label>please fill the hours</label>
+        <input type="time" id="startTime" name="startTime"
+               min="00:00" max="23:59" required>
 
+        <input type="time" id="endTime" name="endTime"
+               min="00:00" max="23:59" required>
+        <div class="hour message error"></div>
+        <div class="hour message suc"></div>
 
+        <div>
+            <input type="submit" value="Submit form">
+        </div>
+    </form>
     <hr>
     <h2>here goes the recommendation</h2>
     <%- include ("partials/footer.ejs")-%>
 
+<script>
+    document.getElementById('hoursForm').style.display = 'none'
+</script>
