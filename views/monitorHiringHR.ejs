@@ -1,4 +1,42 @@
-
 <%- include ("partials/navHR.ejs")-%>
-<h1>Monitor Hiring - HR</h1>
+<section>
+
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/monitorHiringHR.css" />
+    <!--for demo wrap-->
+    <h1>Monitor Hiring</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Worker</th>
+                <th>Job type</th>
+                <th>Employer</th>
+                <th>Date</th>
+                <th>Current fee</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <% data.forEach(function(data){ %>
+                <tr>
+                    <td><%= data.Worker%></td>
+                    <td><%= data.jobType %></td>
+                    <td><%= data.Employer %></td>
+                    <td><%= (data.Date).toLocaleDateString() %></td>
+                    <td><%=data.CurrentFee %></td>
+                </tr>
+
+            <% } )%>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- follow me template -->
 <%- include ("partials/footer.ejs")-%>
+
+    <i></i>
+</div>
+
