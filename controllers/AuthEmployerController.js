@@ -1,6 +1,6 @@
 
 const UsersEmployer=require('../models/UsersEmployer')
-var nodemailer = require('nodemailer')
+let nodemailer = require('nodemailer')
 
 const jwt = require('jsonwebtoken')
 
@@ -93,7 +93,7 @@ module.exports.forgotEmployerGet=(req,res)=>{
 
 module.exports.forgotEmployerPost= async(req,res)=>{
     const { email } = req.body
-    var randomstring = Math.random().toString(36).slice(-8)
+    let randomstring = Math.random().toString(36).slice(-8)
     try {
         const user = await UsersEmployer.checkEmail(email)
 
@@ -109,7 +109,7 @@ module.exports.forgotEmployerPost= async(req,res)=>{
 
 
         console.log(user)
-        var transporter = nodemailer.createTransport({
+        let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'hssce2021@gmail.com',
@@ -117,7 +117,7 @@ module.exports.forgotEmployerPost= async(req,res)=>{
             }
         })
 
-        var mailOptions = {
+        let mailOptions = {
             from: 'hssce2021@gmail.com',
             to: email,
             subject: 'password reset',

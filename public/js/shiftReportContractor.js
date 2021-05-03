@@ -61,14 +61,14 @@ function afterHours(trans){
         hourMessageSuc.textContent = ''
 
         // get values
-        var startTime = form.startTime.value
-        var endTime = form.endTime.value
+        let startTime = form.startTime.value
+        let endTime = form.endTime.value
         console.log('start hour chosen:'+startTime)
         console.log('end hour chosen:' +endTime)
         startTime = startTime.split(':')
         endTime = endTime.split(':')
-        var startMin=parseInt(startTime[0])*60+parseInt(startTime[1])
-        var endMin=parseInt(endTime[0])*60+parseInt(endTime[1])
+        let startMin=parseInt(startTime[0])*60+parseInt(startTime[1])
+        let endMin=parseInt(endTime[0])*60+parseInt(endTime[1])
         if(startMin>=endMin){
             hourMessageError.textContent='Final hour should be after the initial hour'
         }else {

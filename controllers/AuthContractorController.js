@@ -1,7 +1,7 @@
 
 const UsersContractor=require('../models/UsersContractor')
 const jwt = require('jsonwebtoken')
-var nodemailer = require('nodemailer')
+let nodemailer = require('nodemailer')
 
 // handle errors
 const handleErrors = (err) => {
@@ -89,7 +89,7 @@ module.exports.forgotContractorGet=(req,res)=>{
 
 module.exports.forgotContractorPost= async(req,res)=>{
     const { email } = req.body
-    var randomstring = Math.random().toString(36).slice(-8)
+    let randomstring = Math.random().toString(36).slice(-8)
     try {
         const user = await UsersContractor.checkEmail(email)
 
@@ -104,7 +104,7 @@ module.exports.forgotContractorPost= async(req,res)=>{
             })
 
 
-        var transporter = nodemailer.createTransport({
+        let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'hssce2021@gmail.com',
@@ -112,7 +112,7 @@ module.exports.forgotContractorPost= async(req,res)=>{
             }
         })
 
-        var mailOptions = {
+        let mailOptions = {
             from: 'hssce2021@gmail.com',
             to: email,
             subject: 'password reset',

@@ -4,7 +4,7 @@ const mongoose=require('mongoose')
 const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 
-var transactionSchema = new mongoose.Schema({
+let transactionSchema = new mongoose.Schema({
 
     idContractor:{
         type: mongoose.Schema.Types.ObjectId,

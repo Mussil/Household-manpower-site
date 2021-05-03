@@ -1,3 +1,41 @@
-<%- include ("partials/navContractor.ejs")-%>
-<h1> salary details contractor</h1>
+<html>
+<head>
+
+    <%- include ("partials/navContractor.ejs")-%>
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/salaryDetailsContractor.css" />
+    <script src="../js/salaryDetailsContractor.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+    <title>Salary details</title>
+
+</head>
+<h1> Salary details contractor</h1>
+
+<body>
+<h3 id="date">For the current month: </h3>
+<h3>The salary so far is: <%=sal%></h3>
+<hr>
+<h3>Choose a range for which you would like to see the salary</h3>
+<input type="text" name="daterange" value="" />
+<div class="salary range"></div>
+<div class="salary range error"></div>
+
+</div>
+</body>
+
 <%- include ("partials/footer.ejs")-%>
+</html>

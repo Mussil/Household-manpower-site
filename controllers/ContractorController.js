@@ -13,10 +13,97 @@ module.exports.workHistoryContractorGet=(req,res)=>{
     res.render('workHistoryContractor')
 }
 
-module.exports.salaryDetailsContractorGet=(req,res)=>{
-    res.render('salaryDetailsContractor')
+module.exports.salaryDetailsContractorGet= async (req,res)=>{
+    //צריכה לחשב שכר לחודש זה .
+    let date = new Date()
+    let firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
+    firstDay.setHours(0,0,0,0)
+    let lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0)
+    lastDay.setHours(23,59,59,999)
+    const token = req.cookies.jwt
+    let sal=0
+
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        } else {
+            console.log(decodedToken)
+            //check for transaction in the start date and in the contractor-user id
+            await Transaction.find({
+                date: {
+                    $gte: firstDay, $lte: lastDay },
+                idContractor: decodedToken.id ,
+            }).then(result=>{
+                for (const i in result){
+                    const x=result[i]
+                    if(x.isShifted) {
+                        sal += x.hourlyRate * (x.endHourShift - x.startHourShift)/60
+                    }
+                }
+                if(sal!=0)
+                    res.render('salaryDetailsContractor',{'sal': Math.round(sal)})
+                else
+                    res.render('salaryDetailsContractor',{'sal':sal})
+
+                // eslint-disable-next-line no-unused-vars
+            }).catch(result=>{
+                res.render('salaryDetailsContractor',{'sal':sal})
+            })
+
+
+
+        }
+    })
+
+    res.render('salaryDetailsContractor',{'sal':sal,err:'There is no record of shifts for this month'})
+
 }
 
+module.exports.salaryDetailsContractorPost=(req,res)=> {
+    const { start,end } = req.body
+
+    let  start1 = new Date(start)
+    start1.setHours(0,0,0,0)
+
+    let end1 = new Date(end)
+    end1.setHours(23,59,59,999)
+    const token = req.cookies.jwt
+    let sal=0
+
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        } else {
+            console.log(decodedToken)
+            //check for transaction in the start date and in the contractor-user id
+            await Transaction.find({
+                date: {
+                    $gte: start1, $lte: end1 },
+                idContractor: decodedToken.id ,
+            }).then(result=>{
+                for (const i in result){
+                    const x=result[i]
+                    if(x.isShifted) {
+                        sal += x.hourlyRate * (x.endHourShift - x.startHourShift)/60
+                    }
+                }
+                if(sal!=0)
+                    res.status(201).json({'sal': Math.round(sal)})
+                else
+                    res.status(400).json({err:'There is no record of shifts for these dates'})
+
+                // eslint-disable-next-line no-unused-vars
+            }).catch(result=>{
+                res.status(400).json({err:'There is no record of shifts for these dates'})
+
+            })
+
+
+
+        }
+    })
+
+}
 module.exports.profileContractorGet=(req,res)=>{
     res.render('profileContractor')
 }
@@ -40,10 +127,10 @@ module.exports.shiftReportContractorPost= (req,res)=> {
 
     const { start } = req.body
 
-    var start1 = new Date(start)
+    let start1 = new Date(start)
     start1.setHours(0,0,0,0)
 
-    var end = new Date(start)
+    let end = new Date(start)
     end.setHours(23,59,59,999)
 
     const token = req.cookies.jwt
@@ -145,7 +232,7 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
 
                         const {start,end}=req.body
 
-                        var end1 = new Date(end)
+                        let end1 = new Date(end)
                         var d = new Date(start)
                         d.setDate(d.getDate() + 1)
                         for (; d <= end1; d.setDate(d.getDate() + 1)) {

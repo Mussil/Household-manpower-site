@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 
 
 // address model
-var bankSchema = new mongoose.Schema({
+let bankSchema = new mongoose.Schema({
     branch: {
         type: Number
     },
