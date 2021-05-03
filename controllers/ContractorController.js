@@ -40,14 +40,14 @@ module.exports.salaryDetailsContractorGet= async (req,res)=>{
                         sal += x.hourlyRate * (x.endHourShift - x.startHourShift)/60
                     }
                 }
-                res.render('salaryDetailsContractor',{'sal': Math.round(sal)})
-
+                if(sal!=0)
+                    res.render('salaryDetailsContractor',{'sal': Math.round(sal)})
+                else
+                    res.render('salaryDetailsContractor',{'sal':sal})
 
                 // eslint-disable-next-line no-unused-vars
             }).catch(result=>{
-               // res.render('salaryDetailsContractor',{'sal':sal})
-                res.render('salaryDetailsContractor',{'sal':sal,err:'There is no record of shifts for this month'})
-
+                res.render('salaryDetailsContractor',{'sal':sal})
             })
 
 
@@ -55,6 +55,7 @@ module.exports.salaryDetailsContractorGet= async (req,res)=>{
         }
     })
 
+    res.render('salaryDetailsContractor',{'sal':sal,err:'There is no record of shifts for this month'})
 
 }
 
