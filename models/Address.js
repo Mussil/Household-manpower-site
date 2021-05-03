@@ -81,7 +81,7 @@ const citiesArray =['eilat',
     'degania']
 
 // address model
-var addressSchema = new mongoose.Schema({
+let addressSchema = new mongoose.Schema({
     city: {
         type: String,
         lowercase: true,

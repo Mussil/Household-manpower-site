@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 ////////////////////////////////////
-var bodyParser = require('body-parser')
+let  bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 /////////////////////////
 

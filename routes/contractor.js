@@ -15,6 +15,9 @@ router.route('/workHistoryContractor')
 router.route('/salaryDetailsContractor')
     .get(requireConAuth, contractorController.salaryDetailsContractorGet)
 
+router.post('/salaryDetailsContractor', contractorController.salaryDetailsContractorPost)
+
+
 router.route('/profileContractor')
     .get(requireConAuth, contractorController.profileContractorGet)
 
