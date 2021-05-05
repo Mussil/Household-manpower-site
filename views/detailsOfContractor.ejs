@@ -70,6 +70,7 @@
     document.getElementById('hoursForm').style.display = 'none'
     var contractorId = <%- JSON.stringify(result._id) %>
         console.log(contractorId)
-
-    getDetails(contractorId)
+    var typeOfJob = <%- JSON.stringify(typeOfJob) %>
+        console.log(typeOfJob)
+    getDetails(contractorId,typeOfJob)
 </script>

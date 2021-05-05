@@ -2,9 +2,9 @@ var contractorId=0
 var typeCon=''
 
 // eslint-disable-next-line no-unused-vars
-function getDetails(myVar,type){
+function getDetails(myVar,typeOfJob){
     contractorId=myVar
-    typeCon=type
+    typeCon=typeOfJob
 }
 
 $(function() {
@@ -41,7 +41,7 @@ $(function() {
                 else {
                     // תקין אפשר להציג את השעות
                     document.getElementById('hoursForm').style.display = 'block'
-                    afterHours(data.contractorId,data.start1,data.employerId,typeCon)
+                    afterHours(data.contractorId,data.start1,data.employerId)
 
                 }
             } catch (err) {
@@ -55,7 +55,7 @@ $(function() {
 
 
 
-function afterHours(contractorId,startDate,employerId,typeCon){
+function afterHours(contractorId,startDate,employerId){
     const form = document.querySelector('form')
     const hourMessageError = document.querySelector('.hour.message.error')
     const hourMessageSuc = document.querySelector('.hour.message.suc')

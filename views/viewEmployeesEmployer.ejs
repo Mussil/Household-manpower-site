@@ -1,17 +1,17 @@
 <html lang="en">
 <link rel = "stylesheet"  type = "text/css"  href = "../css/viewEmployeesEmployer.css" />
 <head>
-    <title>list of <%=type%></title>
+    <title>list of <%=typeOfJob%></title>
 </head>
 <body>
 <%- include ("partials/navEmployer.ejs")-%>
 //s צריך לעצב כולל לשנות את שמות הקלאס לפי הדרישות להראות לכל עובד את השדות שלו
 <div class="contractor content">
-    <h2>contractor who are: <%=type%></h2>
+    <h2>contractor who are: <%=typeOfJob%></h2>
 
     <% if (data.length > 0) { %>
         <% data.forEach(con => { %>
-            <a class="single" href="/detailsOfContractor/<%= con._id %>">
+            <a class="single" href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
                 <h3 class="title"><%= con.email %></h3>
                 <p class="snippet"><%= con.aboutMe %></p>
             </a>

@@ -40,7 +40,7 @@ module.exports.viewEmployeesGet=async (req,res)=>{
         }
 
     }
-    res.render('viewEmployeesEmployer',{data: afterFilter,type:typeOfJob})
+    res.render('viewEmployeesEmployer',{data: afterFilter, typeOfJob})
 
 
 }
@@ -48,13 +48,18 @@ module.exports.viewEmployeesGet=async (req,res)=>{
 
 
 module.exports.detailsOfContractorGet=async (req,res)=>{
+    // const typeCon=req.params.typeOfJob
+    const parm=req.params.id
+    const attr = parm.split('+')
+    // const idCon=req.params.id
+    const typeCon=attr[0]
+    const idCon=attr[1]
 
-    const idCon=req.params.id
-    // const typeCon=req.params.type
-
+    console.log('here')
+    // console.log(typeCon)
     UsersContractor.findById(idCon)
         .then(result => {
-            res.render('detailsOfContractor',  {result: result})
+            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon })
         })
         .catch(err => {
             console.log(err)
@@ -150,7 +155,7 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
                 idContractor: contractorId,
                 idEmployer: employerId,
                 date: startDate,
-                 jobType:typeCon,
+                jobType:typeCon,
                 hourlyRate: sal,
                 startHourRec: startMin,
                 endHourRec: endMin
