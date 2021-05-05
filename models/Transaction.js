@@ -62,6 +62,7 @@ let transactionSchema = new mongoose.Schema({
         type: Number,
         min:0,
         max:1440 ,//number of minutes in a day,
+
     },
     endHourShift:{
         type: Number,

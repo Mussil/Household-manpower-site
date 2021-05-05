@@ -1,6 +1,55 @@
 
 <%- include ("partials/navEmployer.ejs")-%>
-<h1> home page Employer</h1>
+<!doctype html>
+<html lang="en">
+<head>
 
+    <script src="https://kit.fontawesome.com/283d9ebdce.js" crossorigin="anonymous"></script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/homepageEmployer.css" />
+    <title>Home page employer</title>
+</head>
+
+<body>
+
+<h1>home page Employer</h1>
+<hr>
+<h2>What type of employee are you looking for?</h2>
+
+//a להוסיף את כל האפשרויות ושיראה יפה
+<a href="/viewEmployeesContractor/babysitting">
+    <h3 class="title">babysitting</h3>
+</a>
+
+<a href="/viewEmployeesContractor/cooking">
+    <h3 class="title">cooking</h3>
+</a>
+
+
+<!--<button class="btn" type="button" onclick="document.location='/employeesList'">-->
+<!--    <i class="fas fa-baby fa-2x"></i> babysitting</button>-->
+<!--<button class="btn" type="button" onclick="document.location='employeesList'">-->
+<!--    <i class="fas fa-tshirt fa-2x"></i> ironing & washing</button>-->
+<!--<button class="btn" type="button" onclick="document.location='employeesList'">-->
+<!--    <i class="fas fa-broom fa-2x"></i> cleaning</button>-->
+<!--<button class="btn" type="button" onclick="document.location='employeesList'">-->
+<!--    <i class="fas fa-tree fa-2x"></i> gardening</button>-->
+<!--<button class="btn" type="button" onclick="document.location='employeesList'">-->
+<!--    <i class="fas fa-cookie-bite fa-2x"></i> cooking</button>-->
+<!--<button class="btn" type="button" onclick="document.location='employeesList'">-->
+<!--    <i class="fas fa-dog fa-2x"></i> pet care</button>-->
+
+<h2>Employees not yet rated by you:</h2>
+<ul>
+    <li> usre 1</li>
+    <li> usre 2</li>
+</ul>
 
 <%- include ("partials/footer.ejs")-%>
+
+<script src="../js/buttonsEmployer.js"></script>
+</body>
+
+</html>
