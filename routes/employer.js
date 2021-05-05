@@ -17,6 +17,17 @@ router.route('/profileEmployer')
 ////////////////////////////////////////////////////
 
 //router.get('/homepageEmployer',requireEmpAuth, homepageEmployerController.homepageEmployerGet)
+router.route('/viewEmployeesContractor/:typeOfJob')
+    .get(requireEmpAuth, EmployerController.viewEmployeesGet)
+
+router.route('/detailsOfContractor/:id')
+    .get(requireEmpAuth, EmployerController.detailsOfContractorGet)
+
+
+router.post('/detailsOfContractor', EmployerController.detailsOfContractorPost)
+router.post('/detailsOfContractorHours', EmployerController.detailsOfContractorHoursPost)
+
+
 
 
 module.exports=router

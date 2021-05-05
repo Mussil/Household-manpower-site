@@ -5,7 +5,7 @@ const addressSchema=require('./Address')
 const bankSchema=require('./Bank')
 
 const languagesArray = ['hebrew', 'english', 'arabic', 'russian', 'amharic', 'chinese','portuguese', 'french','romanian', 'polish', 'spanish']
-const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
+const jobsArray = ['babysitting','ironing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 const languagesSchema= new mongoose.Schema(
     { value : {
@@ -88,7 +88,8 @@ const userSchema= new mongoose.Schema({
     hourlyRate:{
         type: Number,
         min:17,
-        max:500
+        max:500,
+        default:0
     },
     picture:{
         data: Buffer,
@@ -104,10 +105,12 @@ const userSchema= new mongoose.Schema({
         trim: true,
     },
     aboutMe:{
-        type: String
+        type: String,
+        default: ''
     },
     jobTypes:{
         type: [jobsSchema],
+        default: []
     },
     leaveDates: {
         type: [ Date],

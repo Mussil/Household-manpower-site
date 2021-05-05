@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <%- include ("partials/navEmployer.ejs")-%>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/deatilsOfContractor.css" />
+    <script src="../js/detailsOfContractor.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
+    <title>contractor details</title>
+</head>
+<body>
+
+//
+//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..
+//s בשביל העיצוב צריך לפתוח קובץ סיסס חדש
+<div class="details content">
+    <h2><%= result.email %></h2>
+    <div class="content">
+        <p><%= result.aboutMe %></p>
+    </div>
+    <p><%= result.phoneNumber %></p>
+    <p><%= result.jobTypes %></p>
+
+</div>
+<hr>
+<div class="Recruitment">
+    <h2>Recruitment</h2>
+    <input type="text" name="daterange"  />
+    <div class="date messages error"></div>
+    <hr>
+
+    <form id="hoursForm" >
+        <label>please fill the hours</label>
+        <input type="time" id="startTime" name="startTime"
+               min="00:00" max="23:59" required>
+
+        <input type="time" id="endTime" name="endTime"
+               min="00:00" max="23:59" required>
+        <div class="hour message error"></div>
+        <div class="hour message suc"></div>
+
+        <div>
+            <input type="submit" value="Submit form">
+        </div>
+    </form>
+    <hr>
+
+
+</div>
+<%- include("./partials/footer.ejs") %>
+
+
+</body>
+</html>
+
+<script>
+    document.getElementById('hoursForm').style.display = 'none'
+    var contractorId = <%- JSON.stringify(result._id) %>
+        console.log(contractorId)
+    var typeOfJob = <%- JSON.stringify(typeOfJob) %>
+        console.log(typeOfJob)
+    getDetails(contractorId,typeOfJob)
+</script>
