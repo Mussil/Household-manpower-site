@@ -13,7 +13,7 @@
         <% data.forEach(con => { %>
             <a class="single" href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
                 <h3 class="title"><%= con.email %></h3>
-                <p class="snippet"><%= con.aboutMe %></p>
+                <p class="snippet"><%= con.aboutMe.slice(0, 200) %></p>
             </a>
         <% }) %>
     <% } else { %>
