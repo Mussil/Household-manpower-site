@@ -9,7 +9,7 @@ var bankSchema = new mongoose.Schema({
     accountNumber: {
         type: Number,
         min:100000,
-        max:999999
+        max:9999999
     },
     bankName: {
         type: String

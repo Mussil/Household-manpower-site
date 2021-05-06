@@ -1,5 +1,6 @@
 
 const UsersEmployer=require('../models/UsersEmployer')
+const AddressEmp = require('../models/Address')
 var nodemailer = require('nodemailer')
 
 const jwt = require('jsonwebtoken')
@@ -18,10 +19,13 @@ const handleErrors = (err) => {
     if (err.message === 'incorrect password') {
         errors.password = 'That password is incorrect'
     }
+    if(err.message === 'incorrect city'){
+        errors.city = 'That city is incorrect'
+    }
 
     // duplicate email error
     if (err.code === 11000) {
-        errors.email = 'that email is already registered'
+        errors.email = 'That email is already registered'
         return errors
     }
 
@@ -85,6 +89,59 @@ module.exports.createNewEmpPost= async (req,res)=>{
 
 }
 
+module.exports.signupEmployerPost = async (req,res)=>{
+
+    try {
+        const {email,password, firstName,lastName,phoneNumber,city,street,houseNumber} = req.body
+        try{
+            UsersEmployer.checkExistEmail(email)
+            await UsersEmployer.checkCity(city)
+        }
+        catch (e) {
+            const errors = handleErrors(e)
+            res.status(400).json({errors})
+        }
+        const address = new AddressEmp({city,street,houseNumber})
+        console.log(address)
+        const myData = new UsersEmployer({email,password, firstName,lastName,phoneNumber,address})
+        myData.save()
+        UsersEmployer.findOne({id:email}).then(user=>{
+            res.status(201).json(user)
+        })
+        console.log(myData)
+
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'hssce2021@gmail.com',
+                pass: 'lamasce?'
+            }
+        })
+
+        var mailOptions = {
+            from: 'hssce2021@gmail.com',
+            to: req.body.email,
+            subject: 'registered successfully',
+            html: '<h1>successful signup</h1>' +
+                '<h3>welcome</h3>'+
+                '<h3>Thanks, HouseHold</h3>'
+        }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('Email sent: ' + info.response)
+            }
+        })
+
+    }
+    catch (e) {
+        const errors = handleErrors(e)
+        res.status(400).json({errors})
+    }
+}
 
 
 module.exports.forgotEmployerGet=(req,res)=>{

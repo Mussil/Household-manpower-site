@@ -1,7 +1,9 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
+const addrsCon = require('../models/Address')
 
 const jwt = require('jsonwebtoken')
+
 
 
 // controller actions
@@ -17,15 +19,78 @@ module.exports.salaryDetailsContractorGet=(req,res)=>{
     res.render('salaryDetailsContractor')
 }
 
-module.exports.profileContractorGet=(req,res)=>{
-    res.render('profileContractor')
+module.exports.profileContractorDetailsGet = (req,res)=>{
+    res.render('profileContractorDetails')
 }
-
 
 module.exports.leavePeriodContractorGet=(req,res)=>{
     res.render('leavePeriodContractor')
 }
 
+module.exports.profileContractorGet=(req,res)=>{
+    res.render('profileContractor')
+}
+
+module.exports.profileContractorPost = async (req,res)=> {
+
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+            if (err) {
+                console.log(err)
+            } else {
+                UsersContractor.findOneAndRemove({_id: decodedToken.id}).then(user =>{
+                    if(user)
+                        res.redirect('/logout')
+                })
+            }
+        })
+    }
+
+    //
+    // const {email, password,firstName,lastName,phoneNumber,city,street,houseNumber,
+    //     gender1,language1,education1,smoke1,experience,hourlyRate,picture,form101,aboutMe, jobs
+    // } = req.body
+    // const address = new addrsCon({city, street, houseNumber})
+    //
+    // const token = req.cookies.jwt
+    // if (token) {
+    //     jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+    //         if (err) {
+    //             console.log(err)
+    //         } else {
+    //             UsersContractor.findOneAndUpdate({_id: decodedToken.id},
+    //                 {
+    //                     $set: {
+    //                         email: email,
+    //                         password: password,
+    //                         firstName: firstName,
+    //                         lastName: lastName,
+    //                         phoneNumber: phoneNumber,
+    //                         address: address,
+    //                         gender: gender1,
+    //                         languages: language1,
+    //                         education: education1,
+    //                         smoker:smoke1,
+    //                         experience:experience,
+    //                         hourlyRate: hourlyRate,
+    //                         picture: picture,
+    //                         form101: form101,
+    //                         aboutMe: aboutMe,
+    //                         jobTypes:jobs
+    //                     }
+    //                 })
+    //                 .then(user => {
+    //                     if (user) {
+    //                         res.render('homepageContractor', {user})
+    //                     } else {
+    //                         res.send('we have error..')
+    //                     }
+    //                 })
+    //         }
+    //     })
+    // }
+}
 
 module.exports.shiftReportContractorPost=(req,res)=> {
 

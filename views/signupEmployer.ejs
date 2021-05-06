@@ -1,6 +1,178 @@
 
+<html>
+<head>
+ <title>SignUp Employer</title>
+ <link rel = "stylesheet"
+       type = "text/css"
+       href = "../css/login.css" />
 
- <!DOCTYPE html>
-<html lang="en">
- <h1>sign up page employer</h1>
- </html>
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div class="sidenav">
+ <div class="login-main-text">
+  <h2>Signup Employer</h2>
+  <p>Enter your details</p>
+ </div>
+</div>
+
+
+<div class="main">
+ <div class="col-md-6 col-sm-12">
+  <div class="login-form">
+   <form id="form">
+    <div class="form-group">
+     <label>Email</label>
+     <input type="email" name="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="email error"></div>
+    <div class="form-group">
+     <label>Password</label>
+     <input type="password" name="password" class="form-control" placeholder="Password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
+     <div class="password error"></div>
+    </div>
+    <div class="form-group">
+     <label>Password Again</label>
+     <input type="password" name="configurePassword" class="form-control" placeholder="Configure password" required>
+     <div class="configurePassword error"></div>
+    </div>
+    <div class="form-group">
+     <label>First Name</label>
+     <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-Z]{3,}" required>
+    </div>
+    <div class="fName error"></div>
+    <div class="form-group">
+     <label>Last Name</label>
+     <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-Z]{3,}" required>
+    </div>
+    <div class="lName error"></div>
+    <div class="form-group">
+     <label>Phone Number</label>
+     <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{9,10}"required>
+    </div>
+    <div class="phone error"></div>
+
+    <div class="form-group">
+     <label>City</label>
+     <select id="city">
+     </select>
+    </div>
+    <div class="city error"></div>
+    <div class="form-group">
+     <label>Street</label>
+     <input type="text" name="street" class="form-control" placeholder="Street" pattern="[a-zA-Z]+"  required>
+    </div>
+    <div class="street error"></div>
+    <div class="form-group">
+     <label>House Number</label>
+     <input type="text" name="houseNumber" class="form-control" placeholder="House Number" pattern="[0-9]+" required>
+    </div>
+    <div class="house error"></div>
+    <button type="submit" id="submit" class="btn btn-black">SignUp</button>
+   </form>
+  </div>
+ </div>
+</div>
+
+</body>
+<script src="../js/signupEmp.js"></script>
+
+
+</html>
+
+<%- include ("partials/footer.ejs")-%>
+
+
+
+<script>
+ const citiesArray =['eilat',
+  'jerusalem',
+  'nazareth' ,
+  'haifa',
+  'zikhron ya’akov ',
+  'arad',
+  'netanya',
+  'nahariya',
+  'kfar tavor',
+  'hebron',
+  'kinneret moshava',
+  'holon',
+  'bat shlomo',
+  'bnei brak' ,
+  'the negev desert ',
+  'the lowlands',
+  'abu snan',
+  'julis',
+  'maghar',
+  'samia',
+  'ein al-assad',
+  'isfiya',
+  'keysarya' ,
+  'beer sheva',
+  'sde boker',
+  'yad moredechai',
+  'rosh-pina' ,
+  'kiryat shmona',
+  'kiryat malachi',
+  'ein gedi',
+  'ein-hod' ,
+  ' kfar nakhum',
+  ' hazor haglilit',
+  'metula' ,
+  'harduf',
+  'ashdod',
+  'kfar kama',
+  'abu gosh' ,
+  'jezreel valley',
+  ' the judean desert',
+  'sea of galilee',
+  'beit jann',
+  'sajur',
+  'rameh',
+  'daliyat el-carmel',
+  'the golan heights',
+  'tiberias',
+  'mitspe ramon',
+  'akko',
+  'katzerin',
+  'nahalal',
+  'kfar yasif',
+  'hanita',
+  'maalot tarshiha',
+  'bat yam',
+  'the hula valley' ,
+  'hevel habsor',
+  'the arava',
+  'the galilee',
+  'gush dan',
+  'the nitzana region',
+  'yanuh',
+  'yarka',
+  'kisra',
+  'hurfeish',
+  'shefa-amr',
+  'the dead sea',
+  'tel aviv jaffa',
+  'tsefat' ,
+  'tel-hai ',
+  'ramla',
+  'hertzeliya' ,
+  'gush halav',
+  'ashkelon' ,
+  'beit shean' ,
+  'cana' ,
+  'jatt',
+  'rehaniya',
+  'degania']
+ function selectOne() {
+  var select = document.getElementById('city')
+  for (var i=0; i<citiesArray.length; i++) {
+   select.options[select.options.length] = new Option(citiesArray[i], citiesArray[i])
+  }
+ }
+selectOne()
+</script>
