@@ -1,0 +1,42 @@
+
+
+
+
+
+<%- include ("partials/navEmployer.ejs")-%>
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--    <link rel = "stylesheet"  type = "text/css"  href = "../css/homepageContractor.css" />-->
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <title>Profile Employer Details</title>
+</head>
+
+<body>
+<form action="/profileEmployerDetails">
+<h1>Profile Employer Details</h1>
+<hr>
+<h3>Email: <%=user.email%></h3>
+<h3>First Name: <%=user.firstName%></h3>
+<h3>Last Name: <%=user.lastName%></h3>
+<h3>Phone Number: <%=user.phoneNumber%></h3>
+<h3>Address: <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%></h3>
+    <hr>
+    <input type=button onClick="parent.location='/profileEmployer'" value='Edit your details'>
+</form>
+<%- include ("partials/footer.ejs")-%>
+<script src="../js/profileEmployerDetails.js"></script>
+</body></html>
