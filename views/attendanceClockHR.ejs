@@ -45,20 +45,7 @@
             </tbody>
         </table>
     </div>
-    <form id="hoursForm" >
-        <label>please fill the hours</label>
-        <input type="time" id="startTime" name="startTime"
-               min="00:00" max="23:59" required>
 
-        <input type="time" id="endTime" name="endTime"
-               min="00:00" max="23:59" required>
-        <div class="hour message error"></div>
-        <div class="hour message suc"></div>
-
-        <div>
-            <input type="submit" value="Submit form">
-        </div>
-    </form>
 
 
     <hr />
@@ -66,7 +53,18 @@
 
 </section>
 
+    <form id="hoursForm" >
+        <label>please fill the hours</label>
+        <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
 
+        <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+        <div class="hour message error"></div>
+        <div class="hour message suc"></div>
+
+        <div>
+            <input type="submit" value="Update changes">
+        </div>
+    </form>
 
 
 <%- include ("partials/footer.ejs")-%>
