@@ -1,7 +1,7 @@
 // controller actions
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
-const usersEmp = require('../models/UsersEmployer')
+const UserEmployer = require('../models/UsersEmployer')
 const addressModel = require('../models/Address')
 const jwt = require('jsonwebtoken')
 
@@ -39,13 +39,21 @@ const handleErrors = (err) => {
     return errors
 }
 
+//const UsersHR=require('../models/UsersHR')
+const Transaction=require('../models/Transaction')
+const UserEmployer=require('../models/UsersEmployer')
+const UserContractor=require('../models/UsersContractor')
 
-module.exports.homepageEmployerGet=(req,res)=>{
+module.exports.homepageEmployerGet= (req,res)=>{
     res.render('homepageEmployer')
 }
-///////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-module.exports.workHistoryEmployerGet=(req,res)=>{
-    res.render('workHistoryEmployer')
+///////////////////////////////////
+module.exports.workHistoryEmployerGet=async (req,res)=>{
+    const transcationResult = await Transaction.find({})
+    const userEmployerResult = await UserEmployer.find({})
+    const userContractorResult = await UsersContractor.find({})
+
+    res.render('workHistoryEmployer', {transactionData: transcationResult, employerData: userEmployerResult, contractorData: userContractorResult})
 }
 
 module.exports.profileEmployerDetailsGet=(req,res)=>{
@@ -72,7 +80,7 @@ module.exports.editDelEmpPost = async (req,res)=>{
 
     try {
         const address = await addressModel.create({city, street, houseNumber})
-        const user = await usersEmp.create({email, password, firstName, lastName, phoneNumber, address})
+        const user = await UserEmployer.create({email, password, firstName, lastName, phoneNumber, address})
         console.log(user+ 'user')
     }
     catch (err){
@@ -91,7 +99,7 @@ module.exports.profileEmployerPost = async (req,res)=> {
                 if (err) {
                     console.log(err)
                 } else {
-                    usersEmp.findOneAndRemove({_id: decodedToken.id}).then(user =>{
+                    UserEmployer.findOneAndRemove({_id: decodedToken.id}).then(user =>{
                         if(user)
                             res.send('user?')
                         else res.render('/')

@@ -3,14 +3,71 @@ const Transaction=require('../models/Transaction')
 
 const jwt = require('jsonwebtoken')
 
+const UserEmployer=require('../models/UsersEmployer')
+
+
 
 // controller actions
 module.exports.homepageContractorGet=(req,res)=>{
     res.render('homepageContractor')
 }
 
-module.exports.workHistoryContractorGet=(req,res)=>{
-    res.render('workHistoryContractor')
+module.exports.workHistoryContractorGet=async (req,res)=>{
+    const transcationResult = await Transaction.find({})
+    const userEmployerResult = await UserEmployer.find({})
+    const userContractorResult = await UsersContractor.find({})
+
+    var myObject=[]
+
+    for(var i=0;i<transcationResult.length;i++){
+        var date = transcationResult[i].date
+        for(var j=0;j<userContractorResult.length;j++){
+            if(String(userContractorResult[j]._id)==String(transcationResult[i].idContractor)){
+                var contractor = userContractorResult[j].email
+            }
+        }
+        var startHourShift = convertNumToHour(transcationResult[i].startHourShift)
+        var endHourShift = convertNumToHour(transcationResult[i].endHourShift)
+        var salary = ((transcationResult[i].endHourShift-transcationResult[i].startHourShift)/60)*transcationResult[i].hourlyRate
+
+        if(String(startHourShift) == 'no report'){
+            salary = ''
+        }
+
+        for(var j=0;j<userEmployerResult.length;j++){
+            if(String(userEmployerResult[j]._id)==String(transcationResult[i].idEmployer)){
+                var employer = userEmployerResult[j].email
+            }
+        }
+        var jobType = transcationResult[i].jobType
+        var rank = transcationResult[i].rank
+
+        myObject.push({'date': date, 'contractor': contractor, 'startHourShift': startHourShift, 'endHourShift':endHourShift, 'salary':salary, 'employer': employer, 'jobType': jobType, 'rank':rank})
+    }
+    res.render('workHistoryContractor', {data: myObject})
+}
+
+function convertNumToHour(num){
+
+    var hours = String(Math.floor(num / 60))
+
+    if(hours.length<2){
+        hours = '0' + String(hours)
+    }
+
+    var minutes = String(num % 60)
+
+    if(minutes.length<2){
+        minutes = '0' + String(minutes)
+    }
+
+    var result = hours + ':' + minutes
+
+    if(String(result) == 'NaN:NaN'){
+        result = 'no report'
+    }
+
+    return result
 }
 
 module.exports.salaryDetailsContractorGet= async (req,res)=>{
@@ -267,6 +324,7 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
+
     console.log('here in server')
 
     const token = req.cookies.jwt
@@ -302,4 +360,3 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
     }
 
 }
-
