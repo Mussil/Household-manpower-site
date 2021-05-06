@@ -1,7 +1,9 @@
 // controller actions
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
-
+const usersEmp = require('../models/UsersEmployer')
+const addrEmp = require('../models/Address')
+const jwt = require('jsonwebtoken')
 const jwt = require('jsonwebtoken')
 
 module.exports.homepageEmployerGet=(req,res)=>{
@@ -12,10 +14,33 @@ module.exports.workHistoryEmployerGet=(req,res)=>{
     res.render('workHistoryEmployer')
 }
 
+module.exports.profileEmployerDetailsGet=(req,res)=>{
+    res.render('profileEmployerDetails')
+}
+
 module.exports.profileEmployerGet=(req,res)=>{
     res.render('profileEmployer')
+
 }
-//////////////////////////////////
+
+module.exports.profileEmployerPost = async (req,res)=> {
+
+    // const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    usersEmp.findOneAndRemove({_id: decodedToken.id}).then(user =>{
+                        if(user)
+                            res.send('user?')
+                        else res.render('/')
+                    })
+                }
+        })
+    }
+}
 
 
 

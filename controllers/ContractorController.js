@@ -109,11 +109,72 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
     res.render('leavePeriodContractor')
 }
 
+module.exports.profileContractorGet=(req,res)=>{
+    res.render('profileContractor')
+}
 
-// var moment = require('moment') // require
-// moment().format()
+module.exports.profileContractorPost = async (req,res)=> {
 
-module.exports.shiftReportContractorPost= (req,res)=> {
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+            if (err) {
+                console.log(err)
+            } else {
+                UsersContractor.findOneAndRemove({_id: decodedToken.id}).then(user =>{
+                    if(user)
+                        res.redirect('/logout')
+                })
+            }
+        })
+    }
+
+    //
+    // const {email, password,firstName,lastName,phoneNumber,city,street,houseNumber,
+    //     gender1,language1,education1,smoke1,experience,hourlyRate,picture,form101,aboutMe, jobs
+    // } = req.body
+    // const address = new addrsCon({city, street, houseNumber})
+    //
+    // const token = req.cookies.jwt
+    // if (token) {
+    //     jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+    //         if (err) {
+    //             console.log(err)
+    //         } else {
+    //             UsersContractor.findOneAndUpdate({_id: decodedToken.id},
+    //                 {
+    //                     $set: {
+    //                         email: email,
+    //                         password: password,
+    //                         firstName: firstName,
+    //                         lastName: lastName,
+    //                         phoneNumber: phoneNumber,
+    //                         address: address,
+    //                         gender: gender1,
+    //                         languages: language1,
+    //                         education: education1,
+    //                         smoker:smoke1,
+    //                         experience:experience,
+    //                         hourlyRate: hourlyRate,
+    //                         picture: picture,
+    //                         form101: form101,
+    //                         aboutMe: aboutMe,
+    //                         jobTypes:jobs
+    //                     }
+    //                 })
+    //                 .then(user => {
+    //                     if (user) {
+    //                         res.render('homepageContractor', {user})
+    //                     } else {
+    //                         res.send('we have error..')
+    //                     }
+    //                 })
+    //         }
+    //     })
+    // }
+}
+
+module.exports.shiftReportContractorPost=(req,res)=> {
 
     //צריכה לבדוק תקינות של התאריך של המשמרת
     //להוסיף לבסיס נתונים
@@ -164,14 +225,7 @@ module.exports.shiftReportContractorPost= (req,res)=> {
 
             }
         })
-
-    //res.status(400).json({ })
-
-
-
-
-
-
+    }
 
 
 }
@@ -213,6 +267,7 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
+    console.log('here in server')
 
     const token = req.cookies.jwt
     if (token) {

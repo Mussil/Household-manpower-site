@@ -1,4 +1,197 @@
-
 <%- include ("partials/navHR.ejs")-%>
-<h1>Add a contractor worker - HR</h1>
+
+<html>
+<head>
+
+    <!--    <h1>Add a contractor worker - HR</h1>-->
+
+    <title>Add Contractor</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../css/login.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<!--<div class="sidenav">-->
+<!--    <div class="login-main-text">-->
+<!--        <h2>signup Employer</h2>-->
+<!--        <p>enter your details</p>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+            <form  id="form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="email error"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
+                    <!--                    <div class="password error"></div>-->
+                </div>
+
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-z]+" required>
+                </div>
+                <!--                <div class="fName error"></div>-->
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-z]+" required>
+                </div>
+                <!--                <div class="lName error"></div>-->
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]+"required>
+                </div>
+
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" class="form-control" placeholder="City" pattern="[A-Za-z]+" required>
+                </div>
+                <div class="city error"></div>
+                <div class="form-group">
+                    <label>Street</label>
+                    <input type="text" name="street" class="form-control" placeholder="Street"  pattern="[A-Za-z]+" required>
+                </div>
+
+                <div class="form-group">
+                    <label>House Number</label>
+                    <input type="text" name="houseNumber" class="form-control" placeholder="House Number" pattern="[0-9]+" required>
+                </div>
+                <div class="house error"></div>
+                <!--////////////////////////////////////////////////////////////////////////////-->
+                <div class="form-group">
+                    <label>Hourly rate</label>
+                    <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="{17,500}" required>
+                </div>
+                <div class="Hourly rate error"></div>
+
+                <div class="form-group">
+                    <label>Years of experience</label>
+                    <input type="number" name="experience" class="form-control" placeholder="Years of experience" pattern="[0-9]+"  required>
+                </div>
+
+                <div>
+                    <lable for:="gender"> gender</lable>
+                    <select class="form-group" name="gender" id="gender">
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                    </select>
+                </div>
+
+                    <div>
+                        <label>Language proficiency:</label>
+                        <div id = "languages" name="languages">
+                            <label><input type="checkbox" id ="hebrew" name="test" value="hebrew"> hebrew</label>
+                            <label><input type="checkbox" id="english" name="english" value="english"> english</label>
+                            <label><input type="checkbox" id="arabic" name="arabic" value="arabic"> arabic</label>
+                            <label><input type="checkbox" id="russian" name="russian" value="russian"> russian</label>
+                            <label><input type="checkbox" id="amharic" name="amharic" value="amharic"> amharic</label>
+                            <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> chinese</label>
+                            <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> portuguese</label>
+                            <label><input type="checkbox" id="french" name="french" value="french"> french</label>
+                            <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> romanian</label>
+                            <label><input type="checkbox" id="polish" name="polish" value="polish"> polish</label>
+                            <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> spanish</label>
+                        </div>
+                    </div>
+
+                <div>
+                    <lable for:="smoker"> Smoke</lable>
+                    <select class="form-group" name="smoker" id="smoker">
+                        <option value="smoker">smoker</option>
+                        <option value="non smoker">non smoker</option>
+                        <option value="not at work">not at work</option>
+                    </select>
+                </div>
+
+                <div>
+                    <lable for:="education"> Education</lable>
+                    <select class="form-group" name="education" id="education">
+                        <option value="elementary">Elementary</option>
+                        <option value="high school">high school</option>
+                        <option value="higher">higher</option>
+                    </select>
+                </div>
+
+
+
+                <!--101 form-->
+                <div class="mb-3">
+                    <label> 101 Form:</label>
+                    <input type="file" name="form101" class="form-control" aria-label="file example" required>
+                    <div class="invalid-feedback">Example invalid form file feedback</div>
+                </div>
+                <!--jobsArray-->
+
+                <div>
+                    <label> Jobs:</label>
+                    <div id = "jobTypes" name="jobTypes">
+                        <label><input type="checkbox" id ="babysitting" name="test" value="babysitting">babysitting</label>
+                        <label><input type="checkbox" id="ironing" name="ironing" value="ironing">ironing</label>
+                        <label><input type="checkbox" id="cleaning" name="cleaning" value="cleaning"> cleaning</label>
+                        <label><input type="checkbox" id="gardening" name="gardening" value="gardening"> gardening</label>
+                        <label><input type="checkbox" id="cooking" name="cooking" value="cooking"> cooking</label>
+                        <label><input type="checkbox" id="pet care" name="pet care" value="pet care"> pet care</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+
+                    <label for="picture">Select image:</label>
+                    <input type="file" id="picture" name="picture" accept="image/*">
+
+                </div>
+
+                <label for="start">Birthday:</label>
+
+                <input type="date" id="birthday" name="birthday"
+                       value="2000-07-22"
+                       min="1970-01-01" max="2010-12-31">
+                <!-- Bank-->
+                <div class="form-group">
+                    <label>Bank Name</label>
+                    <input type="text" name="bankName" class="form-control" placeholder="Name of bank" pattern="[a-zA-z]+" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Bank account Number</label>
+                    <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" pattern="[0-9]+" required>
+                </div>
+                <div class="form-group">
+                    <label>Bank Branch</label>
+                    <input type="text" name="branch" class="form-control" placeholder="Branch bank tax" pattern="[0-9]+" required>
+                </div>
+                <!-- About me-->
+                <div class="form-group">
+                        <label>About Me:</label>
+                    <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself" pattern="[a-zA-z]+" required>
+                </div>
+                <br><br>
+                <button type="submit"id="submit" class="btn btn-black">Add Contractor</button>
+            </form>
+    </div>
+</div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<script src="../js/addAContractorHR.js"></script>
+
+
 <%- include ("partials/footer.ejs")-%>
+</body>
+
+
+</html>

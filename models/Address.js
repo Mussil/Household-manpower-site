@@ -85,7 +85,8 @@ let addressSchema = new mongoose.Schema({
     city: {
         type: String,
         lowercase: true,
-        enum: citiesArray
+        enum: citiesArray,
+
     },
     street: {
         type: String
@@ -94,5 +95,9 @@ let addressSchema = new mongoose.Schema({
         type: String
     }
 })
+
+
 addressSchema=mongoose.model('address',addressSchema ,'address' )
 module.exports = addressSchema
+
+
