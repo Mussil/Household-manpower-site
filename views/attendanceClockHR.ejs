@@ -4,17 +4,8 @@
 <%- include ("partials/navHR.ejs")-%>
 <section>
     <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
-    <script src="../public/js/attendanceClockHR.js"></script>
+    <script src="../js/attendanceClockHR.js"></script>
 
-<!--    <hr>-->
-
-
-<!--    <div class="list">-->
-
-<!--    </div>-->
-
-
-<!--    <hr>-->
 
 
     <!--for demo wrap-->
@@ -39,40 +30,42 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <% for(var i=0;i<data.length;i++){ %>
-                <tr>
+                <tr id=<%=i%>>
                     <td><%= data[i].contractor%></td>
                     <td><%= data[i].date.toLocaleDateString() %></td>
                     <td><%= data[i].startHourRec %></td>
                     <td><%= data[i].endHourRec %></td>
-                    <td><%= data[i].startHourShift %></td>
-                    <td><%= data[i].endHourShift %></td>
+
+                    <td class="hour-shift"><%= data[i].startHourShift %></td>
+                    <td class="hour-shift"><%= data[i].endHourShift %></td>
 <!--                    <td><p id="demo" >edit</p></td>-->
-                    <td><input type="button" value="edit" onclick="myFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
+                    <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
                 </tr>
             <% }%>
             </tbody>
         </table>
     </div>
-    <p id="demo" ></p>
+    <form id="hoursForm" >
+        <label>please fill the hours</label>
+        <input type="time" id="startTime" name="startTime"
+               min="00:00" max="23:59" required>
 
-    <script>
-    // document.getElementById("demo").addEventListener("click", myFunction);
+        <input type="time" id="endTime" name="endTime"
+               min="00:00" max="23:59" required>
+        <div class="hour message error"></div>
+        <div class="hour message suc"></div>
 
-    function myFunction(g) {
+        <div>
+            <input type="submit" value="Submit form">
+        </div>
+    </form>
 
-    document.getElementById("demo").innerHTML = String(g);
 
-    }
-
-
-    </script>
     <hr />
 
 
 </section>
-<!--        <input type="button" value="edit" onclick="ShowHideDiv(this)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="ShowHideDiv(this)" class="btn btn-outline-primary"/>-->
 
-<!--<p id="demo"></p>-->
 
 
 
@@ -80,6 +73,19 @@
 </div>
 </head>
 </html>
+
+
+<script>
+    var dataHere = <%- JSON.stringify(data) %>
+        // console.log(dataHere)
+    getDetails(dataHere)
+    document.getElementById('hoursForm').style.display = 'none'
+</script>
+
+
+
+
+
 
 
 

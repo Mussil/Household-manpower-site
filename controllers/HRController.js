@@ -24,17 +24,63 @@ module.exports.attendanceclockHRGet=async (req,res)=>{
                 var contractor = userContractorResult[j].email
             }
         }
+        var transactionId = transcationResult[i]._id
         var date = transcationResult[i].date
         var startHourShift = convertNumToHour(transcationResult[i].startHourShift)
         var endHourShift =  convertNumToHour(transcationResult[i].endHourShift)
         var startHourRec =  convertNumToHour(transcationResult[i].startHourRec)
         var endHourRec = convertNumToHour(transcationResult[i].endHourRec)
-        myObject.push({'contractor': contractor, 'date': date, 'startHourShift': startHourShift, 'endHourShift': endHourShift, 'startHourRec': startHourRec, 'endHourRec': endHourRec})
+        myObject.push({'transactionId': transactionId, 'contractor': contractor, 'date': date, 'startHourShift': startHourShift, 'endHourShift': endHourShift, 'startHourRec': startHourRec, 'endHourRec': endHourRec})
     }
 
     // console.log(myObject)
 
     res.render('attendanceClockHR', {data: myObject})
+}
+
+module.exports.attendanceclockHRPost= async (req,res)=>{
+    const {id, startMin, endMin} = req.body
+    console.log(startMin)
+    console.log(endMin)
+    console.log(id)
+    await Transaction.findById(id)
+        .then(async result => {
+                await Transaction.updateOne({_id: id},
+                    {
+                        startHourShift: startMin,
+                        endHourShift: endMin,
+                        isShifted: true
+                    },).then(updatedRows => {
+                    console.log(updatedRows)
+                   // res.redirect('/attendanceClockHR')
+                     res.status(201).json({msg: 'The shift was changed successfully'})
+
+                }).catch(err => {
+                    res.status(400).json({msgError: 'an error occurred Try again'})
+                    console.log(err)
+
+                })
+
+        }).catch(err => {
+            console.log(err)
+        })
+
+
+}
+
+
+module.exports.attendanceclockHRDelete= (req,res)=>{
+    const id =req.params.id
+    console.log('here in HRController')
+    console.log(id)
+    Transaction.findByIdAndDelete(id)
+        .then(result => {
+
+            res.json({ redirect: '/attendanceClockHR' })
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 function convertNumToHour(num){
@@ -62,6 +108,8 @@ function convertNumToHour(num){
 module.exports.addAContractorHRGet=(req,res)=>{
     res.render('addAContractorHR')
 }
+
+
 
 ///////////////\\\\\\\\\\\\\\\\\\\\\\
 module.exports.monitorHiringHRGet=async (req, res) =>{

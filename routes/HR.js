@@ -20,12 +20,8 @@ router.route('/addAContractorHR')
 router.route('/monitorHiringHR')
     .get(requireHRAuth, homepageHRController.monitorHiringHRGet)
 
-/////////////////////////////////////////////////
-router.route('/edit/')
-    .get(requireHRAuth, homepageHRController.monitorHiringHRGet)
-/////////////////////////////////////////////////
-
-module.exports=router
+router.delete('/attendanceClockHR/:id',homepageHRController.attendanceclockHRDelete)
+router.post('/attendanceClockHR',homepageHRController.attendanceclockHRPost)
 
 //at the end - need to delete!!!!!!!!!
 router.post('/createTransaction',homepageHRController.transactionPost)
@@ -37,7 +33,7 @@ router.post('/createTransaction',homepageHRController.transactionPost)
 //     res.send('test')
 // })
 
-
+module.exports=router
 
 
 
