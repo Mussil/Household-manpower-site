@@ -172,8 +172,8 @@
  function selectOne() {
   var select = document.getElementById('city')
   for (var i=citiesArray.length-1; i>=0; i--) {
-   select.options[select.options.length] = new Option(citiesArray[i], citiesArray[i])
-  }
+   var x= citiesArray[i].charAt(0).toUpperCase() + citiesArray[i].slice(1);
+   select.options[select.options.length] = new Option(x, citiesArray[i])  }
  }
 selectOne()
 </script>

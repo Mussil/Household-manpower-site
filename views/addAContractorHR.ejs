@@ -1,7 +1,7 @@
-<%- include ("partials/navHR.ejs")-%>
 
 <html>
 <head>
+
 
     <!--    <h1>Add a contractor worker - HR</h1>-->
 
@@ -10,12 +10,13 @@
           type = "text/css"
           href = "../css/login.css" />
 
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 </head>
 
 <body>
+<%- include ("partials/navHR.ejs")-%>
 
 <div class="main">
     <div class="col-md-6 col-sm-12">
@@ -76,26 +77,28 @@
                 <div>
                     <lable for:="gender"> gender</lable>
                     <select class="form-group" name="gender" id="gender">
-                        <option value="male">male</option>
-                        <option value="female">female</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </div>
 
                     <div>
                         <label>Language proficiency:</label>
                         <div id = "languages" name="languages">
-                            <label><input type="checkbox" id ="hebrew" name="test" value="hebrew"> hebrew</label>
-                            <label><input type="checkbox" id="english" name="english" value="english"> english</label>
-                            <label><input type="checkbox" id="arabic" name="arabic" value="arabic"> arabic</label>
-                            <label><input type="checkbox" id="russian" name="russian" value="russian"> russian</label>
-                            <label><input type="checkbox" id="amharic" name="amharic" value="amharic"> amharic</label>
-                            <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> chinese</label>
-                            <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> portuguese</label>
-                            <label><input type="checkbox" id="french" name="french" value="french"> french</label>
-                            <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> romanian</label>
-                            <label><input type="checkbox" id="polish" name="polish" value="polish"> polish</label>
-                            <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> spanish</label>
+                            <label><input type="checkbox" id ="hebrew" name="test" value="hebrew"> Hebrew</label>
+                            <label><input type="checkbox" id="english" name="english" value="english"> English</label>
+                            <label><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
+                            <label><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
+                            <label><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
+                            <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
+                            <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
+                            <label><input type="checkbox" id="french" name="french" value="french"> French</label>
+                            <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
+                            <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
+                            <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
                         </div>
+                        <div class="noLanguages error"></div>
+
                     </div>
 
                 <div>
@@ -110,9 +113,9 @@
                 <div>
                     <lable for:="education"> Education</lable>
                     <select class="form-group" name="education" id="education">
-                        <option value="elementary">Elementary</option>
-                        <option value="high school">high school</option>
-                        <option value="higher">higher</option>
+                        <option value="Elementary">Elementary</option>
+                        <option value="High school">high school</option>
+                        <option value="Higher">higher</option>
                     </select>
                 </div>
 
@@ -136,6 +139,9 @@
                         <label><input type="checkbox" id="cooking" name="cooking" value="cooking"> cooking</label>
                         <label><input type="checkbox" id="pet care" name="pet care" value="pet care"> pet care</label>
                     </div>
+                    <div class="noJobTypes error"></div>
+
+
                 </div>
                 <div class="mb-3">
 
@@ -166,11 +172,13 @@
                 <!-- About me-->
                 <div class="form-group">
                         <label>About Me:</label>
-                    <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself" pattern="[a-zA-Z]+" required>
+                    <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself"  required>
                 </div>
                 <br><br>
                 <button type="submit" id="submit" class="btn btn-black">Add Contractor</button>
             </form>
+        <div class="suc new"></div>
+
     </div>
 </div>
 
@@ -265,8 +273,9 @@
         'degania']
     function selectOne() {
         var select = document.getElementById('city')
-        for (var i=0; i<citiesArray.length; i++) {
-            select.options[select.options.length] = new Option(citiesArray[i], citiesArray[i])
+        for (var i=citiesArray.length-1; i>=0; i--) {
+            var x= citiesArray[i].charAt(0).toUpperCase() + citiesArray[i].slice(1);
+            select.options[select.options.length] = new Option(x, citiesArray[i])
         }
     }
     selectOne()

@@ -68,20 +68,10 @@ module.exports.loginContractorPost= async (req,res)=>{
 }
 
 
- const jobsModel=require('../models/jobs')
 
 //create new contractor .
 module.exports.createNewContractorPost= async (req,res)=>{
     const x=req.body
-    var w=await  jobsModel.create({value:'babysitting'})
-    var w1=await  jobsModel.create({value:'gardening'})
-
-    console.log(w)
-    console.log(w1)
-    var arr=[]
-    arr.push(w)
-    arr.push(w1)
-    console.log(arr)
 
 
     try{

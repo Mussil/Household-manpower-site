@@ -25,7 +25,10 @@ const handleErrors = (err) => {
     if(err.message === 'incorrect firstName'){
         errors.firstName = 'That first is incorrect'
     }
-
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'that email is already registered'
+        return errors}
 
     // validation errors
     if (err.message.includes('user validation failed')) {
@@ -101,7 +104,6 @@ module.exports.transactionPost= async (req,res)=>{
 
 module.exports.addAContractorHRPost =async (req,res)=> {
 
-
     try {
         const {
             email,
@@ -138,24 +140,32 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             languages.push(await Languages.create({value: arrLang[i]}))
         }
 
-        console.log(jobTypes + ' arr')
-        console.log(languages + ' lan')
 
         const address = new addressModel({city, street, houseNumber})
         const bank = new Bank({branch, accountNumber, bankName})
-        var myData = new UsersContractor({
-            email, password, firstName, lastName, phoneNumber, address, bank,
-            gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
-        })
-       await myData.save(function (err,doc){
-           if(err)
-               console.log(err.message)
-            else{
-                res.status(200).json({doc})
-           }
-        })
+        // var myData = new UsersContractor({
+        //     email, password, firstName, lastName, phoneNumber, address, bank,
+        //     gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
+        // })
+        var myData=
+            {
+                     email, password, firstName, lastName, phoneNumber, address, bank,
+                    gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
+                }
 
-        console.log(myData + 'mydata')
+
+        const user = await UsersContractor.create(myData)
+        res.status(201).json({user })
+
+        // await myData.save(function (err,doc){
+       //     if(err)
+       //         console.log(err.message)
+       //      else{
+       //          res.status(200).json({doc})
+       //     }
+       //  })
+
+        // console.log(myData + 'mydata')
         //הדפסה לעובד קבלן שעובד טוב
 
 

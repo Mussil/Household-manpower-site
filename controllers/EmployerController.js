@@ -2,8 +2,43 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const usersEmp = require('../models/UsersEmployer')
-//const addressModel = require('../models/Address')
+const addressModel = require('../models/Address')
 const jwt = require('jsonwebtoken')
+
+
+const handleErrors = (err) => {
+    console.log(err.message)
+    let errors = { email: '', password: '' ,firstName: '', lastName: '',phoneNumber: '',city:''}
+
+    // incorrect email
+    if (err.message === 'incorrect email') {
+        errors.email = 'That email is not incorrect'
+    }
+
+    // incorrect password
+    if (err.message === 'incorrect password') {
+        errors.password = 'That password is incorrect'
+    }
+
+    if(err.message === 'incorrect firstName'){
+        errors.firstName = 'That first is incorrect'
+    }
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'that email is already registered'
+        return errors
+    }
+
+    // validation errors
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message
+        })
+    }
+
+    return errors
+}
+
 
 module.exports.homepageEmployerGet=(req,res)=>{
     res.render('homepageEmployer')
@@ -36,7 +71,7 @@ module.exports.editDelEmpPost = async (req,res)=>{
     const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
 
     try {
-        const address = await addrEmp.create({city, street, houseNumber})
+        const address = await addressModel.create({city, street, houseNumber})
         const user = await usersEmp.create({email, password, firstName, lastName, phoneNumber, address})
         console.log(user+ 'user')
     }
