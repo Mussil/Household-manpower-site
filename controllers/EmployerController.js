@@ -39,10 +39,7 @@ const handleErrors = (err) => {
     return errors
 }
 
-//const UsersHR=require('../models/UsersHR')
-const Transaction=require('../models/Transaction')
-const UserEmployer=require('../models/UsersEmployer')
-const UserContractor=require('../models/UsersContractor')
+
 
 module.exports.homepageEmployerGet= (req,res)=>{
     res.render('homepageEmployer')

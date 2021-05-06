@@ -50,7 +50,7 @@ module.exports.homepageHRGet=(req,res)=>{
 
 module.exports.attendanceclockHRGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
-    const userContractorResult = await UserContractor.find({})
+    const userContractorResult = await UsersContractor.find({})
 
     const myObject = []
 
@@ -80,6 +80,7 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
     console.log(endMin)
     console.log(id)
     await Transaction.findById(id)
+        // eslint-disable-next-line no-unused-vars
         .then(async result => {
                 await Transaction.updateOne({_id: id},
                     {
@@ -110,6 +111,7 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
     console.log('here in HRController')
     console.log(id)
     Transaction.findByIdAndDelete(id)
+        // eslint-disable-next-line no-unused-vars
         .then(result => {
 
             res.json({ redirect: '/attendanceClockHR' })
@@ -150,13 +152,12 @@ module.exports.addAContractorHRGet=(req,res)=>{
 ///////////////\\\\\\\\\\\\\\\\\\\\\\
 module.exports.monitorHiringHRGet=async (req, res) =>{
     const transcationResult = await Transaction.find({})
-    const userEmployerResult = await UserEmployer.find({})
-    const userContractorResult = await UserContractor.find({})
+    const userEmployerResult = await UsersEmployer.find({})
+    const userContractorResult = await UsersContractor.find({})
 
     const myObject = []
 
     for(var i=0;i<transcationResult.length;i++){
-
         for(var j = 0; j<userContractorResult.length;j++){
             if(String(transcationResult[i].idContractor)==String(userContractorResult[j]._id)){
                 var worker = userContractorResult[j].email
@@ -216,7 +217,7 @@ module.exports.transactionPost= async (req,res)=>{
 
     //const x=req.body
     try{
-        const transaction= await TransactionDB.create(x)
+        const transaction= await Transaction.create(x)
         res.status(201).json(transaction)
     }
     catch(err){
@@ -263,7 +264,7 @@ module.exports.transactionPost= async (req,res)=>{
 
     //const x=req.body
     try{
-        const transaction= await TransactionDB.create(x)
+        const transaction= await Transaction.create(x)
         res.status(201).json(transaction)
     }
     catch(err){

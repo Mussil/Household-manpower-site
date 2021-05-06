@@ -34,7 +34,7 @@ module.exports.workHistoryContractorGet=async (req,res)=>{
             salary = ''
         }
 
-        for(var j=0;j<userEmployerResult.length;j++){
+        for( j=0;j<userEmployerResult.length;j++){
             if(String(userEmployerResult[j]._id)==String(transcationResult[i].idEmployer)){
                 var employer = userEmployerResult[j].email
             }

@@ -20,17 +20,12 @@
                         <li><a href="/workHistoryEmployer"><span class="glyphicon glyphicon-list-alt"></span>   Work history</a></li>
                         <li><a href="/profileEmployer"><span class="glyphicon glyphicon-user"></span>  Profile</a></li>
 
-                        <li><a href="/profileEmployerDetails"><span class="glyphicon glyphicon-user"></span>  Profile</a></li>
-                        <% if (user){ %>
-                            <li><%= user.email %> </li>
-                        <%} else {%>
 
-                           <% } %>
 
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>welcome, <%=user.email %></li>
+                        <li><a href='#' ><span class="#"></span> welcome, <%=user.email %><span ></span></a>
                         <li><a href='/logout' ><span class="glyphicon glyphicon-log-in"></span> Logout <span ></span></a>
 
                         </li>
