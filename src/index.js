@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+
 //ROUTES
 const authRoutes= require('../routes/auth')
 const employerRoutes= require('../routes/employer')
@@ -60,17 +61,13 @@ app.use(ContractorRoutes)
 
 
 
-
-
-
-
 //success page
 // app.get('/success', (req, res) => { ///need to change for thr HR home page and his stuff
 //     res.render('success')
 // })
-app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
-    res.render('success')
-})
+// app.get('/success',requireHRAuth, (req, res) => { ///need to change for thr HR home page and his stuff
+//     res.render('success')
+// })
 
 
 

@@ -1,28 +1,32 @@
 const mongoose=require('mongoose')
 // const UsersContractor=require('./UsersContractor')
 // const UsersEmployer=require('./UsersEmployer')
+const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 
 var transactionSchema = new mongoose.Schema({
 
     idContractor:{
-        type: { type: mongoose.Schema.Types.ObjectId,
-            ref: 'userContractor',
-            required: true
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userContractor',
+        required: true
     },
-    idEmployer: {
-        type: { type: mongoose.Schema.Types.ObjectId,
-            ref: 'userEmployer',
-            required: true
-
-        }
+    idEmployer : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'userEmployer',
+        required: true
     },
     date:{
         type: Date,
         min: '2000-01-01',
         max: '2050-12-30',
-        required: true
+        required: true,
+        default: Date.now
+    },
+    jobType:{
+        type: String,
+        lowercase: true,
+        enum: jobsArray
     },
     rank:{
         type: 'Number',
@@ -58,13 +62,11 @@ var transactionSchema = new mongoose.Schema({
         type: Number,
         min:0,
         max:1440 ,//number of minutes in a day,
-        required:true
     },
     endHourShift:{
         type: Number,
         min:0,
         max:1440 ,//number of minutes in a day,
-        required:true,
         validate: [
             function (value) {
                 return this.startHourShift <= value
@@ -84,5 +86,6 @@ var transactionSchema = new mongoose.Schema({
 
 
 },{timestamp: true})
-transactionSchema=mongoose.model('transaction',transactionSchema ,'transaction' )
+
+transactionSchema=mongoose.model('usersTransaction',transactionSchema  )
 module.exports = transactionSchema
