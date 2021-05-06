@@ -2,6 +2,7 @@
 <html>
 <head>
 <%- include ("partials/navHR.ejs")-%>
+
 <section>
     <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
     <script src="../js/attendanceClockHR.js"></script>
@@ -50,29 +51,30 @@
 
     <hr />
 
-
 </section>
 
-    <form id="hoursForm" >
-        <label>please fill the hours</label>
-        <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
+        <form id="hoursForm" class="container">
+            <h2>Updating Hours</h2><br>
 
-        <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
-        <div class="hour message error"></div>
-        <div class="hour message suc"></div>
+            <label>Start report time</label><br>
+            <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
 
-        <div>
-            <input type="submit" value="Update changes">
-        </div>
-    </form>
+            <label>End report time</label><br>
+            <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+            <div class="hour message error"></div>
+            <div class="hour message suc"></div>
+
+            <div>
+                <input type="submit" value="Update changes">
+            </div>
+        </form>
 
 
-<%- include ("partials/footer.ejs")-%>
-</div>
+
 </head>
 </html>
 
-
+<%- include ("partials/footer.ejs")-%>
 <script>
     var dataHere = <%- JSON.stringify(data) %>
         // console.log(dataHere)
