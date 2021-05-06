@@ -164,7 +164,9 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
 
                 // var jobType = 'remind myself to change it'
             }
+
         }
+
         var jobType = String(transcationResult[i].jobType)
 
         for(var k = 0; k<userEmployerResult.length; k++){
@@ -172,12 +174,14 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
                 var employer = userEmployerResult[k].email
             }
         }
-        var dateTransaction = transcationResult[i].date
-        var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
-        if(String(currentFee) == 'NaN'){
-            currentFee = 'shift was not reported yet'
+        if(String(employer)!=String(undefined)){
+            var dateTransaction = transcationResult[i].date
+            var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
+            if(String(currentFee) == 'NaN'){
+                currentFee = 'shift was not reported yet'
+             }
+            myObject.push({'worker':worker, 'jobType': jobType, 'employer' :employer, 'date': dateTransaction , 'currentFee':currentFee})
         }
-        myObject.push({'worker':worker, 'jobType': jobType, 'employer' :employer, 'date': dateTransaction , 'currentFee':currentFee})
     }
 
     // console.log(myObject)
@@ -233,47 +237,6 @@ module.exports.transactionPost= async (req,res)=>{
 
 
 
-//at the end- delete!!!!!!!!
-
-module.exports.transactionPost= async (req,res)=>{
-
-    let emp
-    let con
-
-    await UsersContractor.findById('6086f2955bd8042aa0a21160')
-        .then(user=>{
-            //console.log(user)
-            con=user
-        })
-    await UsersEmployer.findById('607fd32da1a5c01f3cbb028c')
-        .then(user=>{
-            //console.log(user)
-            emp=user
-        })
-
-    const x= {
-        idContractor: con._id,
-        idEmployer:emp._id,
-        date: new Date(),
-        hourlyRate: 100,
-        startHourRec:100,
-        endHourRec:1220
-
-    }
-
-
-    //const x=req.body
-    try{
-        const transaction= await Transaction.create(x)
-        res.status(201).json(transaction)
-    }
-    catch(err){
-        console.log(err)
-        // const errors = handleErrors(err)
-        res.status(400).json({ err })
-    }
-
-}
 
 module.exports.addAContractorHRPost =async (req,res)=> {
 

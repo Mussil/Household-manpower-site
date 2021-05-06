@@ -2,42 +2,42 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const UserEmployer = require('../models/UsersEmployer')
-const addressModel = require('../models/Address')
+// const addressModel = require('../models/Address')
 const jwt = require('jsonwebtoken')
 
-
-const handleErrors = (err) => {
-    console.log(err.message)
-    let errors = { email: '', password: '' ,firstName: '', lastName: '',phoneNumber: '',city:''}
-
-    // incorrect email
-    if (err.message === 'incorrect email') {
-        errors.email = 'That email is not incorrect'
-    }
-
-    // incorrect password
-    if (err.message === 'incorrect password') {
-        errors.password = 'That password is incorrect'
-    }
-
-    if(err.message === 'incorrect firstName'){
-        errors.firstName = 'That first is incorrect'
-    }
-    // duplicate email error
-    if (err.code === 11000) {
-        errors.email = 'that email is already registered'
-        return errors
-    }
-
-    // validation errors
-    if (err.message.includes('user validation failed')) {
-        Object.values(err.errors).forEach(({ properties }) => {
-            errors[properties.path] = properties.message
-        })
-    }
-
-    return errors
-}
+//
+// const handleErrors = (err) => {
+//     console.log(err.message)
+//     let errors = { email: '', password: '' ,firstName: '', lastName: '',phoneNumber: '',city:''}
+//
+//     // incorrect email
+//     if (err.message === 'incorrect email') {
+//         errors.email = 'That email is not incorrect'
+//     }
+//
+//     // incorrect password
+//     if (err.message === 'incorrect password') {
+//         errors.password = 'That password is incorrect'
+//     }
+//
+//     if(err.message === 'incorrect firstName'){
+//         errors.firstName = 'That first is incorrect'
+//     }
+//     // duplicate email error
+//     if (err.code === 11000) {
+//         errors.email = 'that email is already registered'
+//         return errors
+//     }
+//
+//     // validation errors
+//     if (err.message.includes('user validation failed')) {
+//         Object.values(err.errors).forEach(({ properties }) => {
+//             errors[properties.path] = properties.message
+//         })
+//     }
+//
+//     return errors
+// }
 
 
 
@@ -53,58 +53,100 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
     res.render('workHistoryEmployer', {transactionData: transcationResult, employerData: userEmployerResult, contractorData: userContractorResult})
 }
 
-module.exports.profileEmployerDetailsGet=(req,res)=>{
-    res.render('profileEmployerDetails')
-}
+// module.exports.profileEmployerDetailsGet=(req,res)=>{
+//     res.render('profileEmployerDetails')
+// }
 
 module.exports.profileEmployerGet=(req,res)=>{
     res.render('profileEmployer')
-
 }
 
-module.exports.profileEmpGet=(req,res)=>{
-    res.render('profileEmp')
-
+module.exports.profileEmployerEditGet=(req,res)=>{
+    res.render('profileEmployerEdit')
 }
 
-module.exports.editDelEmpGet = (req,res)=>{
-    res.render('editDelEmp')
-}
 
-module.exports.editDelEmpPost = async (req,res)=>{
-
-    const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
-
-    try {
-        const address = await addressModel.create({city, street, houseNumber})
-        const user = await UserEmployer.create({email, password, firstName, lastName, phoneNumber, address})
-        console.log(user+ 'user')
-    }
-    catch (err){
-        const errors = handleErrors(err)
-        res.status(400).json({ errors })
-    }
-
-}
-
-module.exports.profileEmployerPost = async (req,res)=> {
-
-    // const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
-    const token = req.cookies.jwt
-    if (token) {
-        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+module.exports.profileEmployerDelete=(req,res)=>{
+        console.log('here in server delete')
+        const token = req.cookies.jwt
+        if (token) {
+            jwt.verify(token, 'sce secret', async (err, decodedToken) => {
                 if (err) {
                     console.log(err)
                 } else {
-                    UserEmployer.findOneAndRemove({_id: decodedToken.id}).then(user =>{
-                        if(user)
-                            res.send('user?')
-                        else res.render('/')
-                    })
+
+                    Transaction.deleteMany({idContracotr:decodedToken.id})
+                        .then(result => {
+                            console.log(`Deleted ${result.deletedCount} transaction(s).`)
+                            UserEmployer.findByIdAndDelete(decodedToken.id)
+                                // eslint-disable-next-line no-unused-vars
+                                .then(result => {
+                                    console.log('found')
+                                    res.json({ redirect: '/logout' })
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                })
+
+                        })
+                        .catch(err => console.error(`Delete failed with error: ${err}`))
+
+
                 }
-        })
-    }
+            })
+        }
+
+
+
+
+
 }
+
+
+//
+// module.exports.profileEmpGet=(req,res)=>{
+//     res.render('profileEmp')
+//
+// }
+
+// module.exports.editDelEmpGet = (req,res)=>{
+//     res.render('editDelEmp')
+// }
+
+// module.exports.editDelEmpPost = async (req,res)=>{
+//
+//     const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
+//
+//     try {
+//         const address = await addressModel.create({city, street, houseNumber})
+//         const user = await UserEmployer.create({email, password, firstName, lastName, phoneNumber, address})
+//         console.log(user+ 'user')
+//     }
+//     catch (err){
+//         const errors = handleErrors(err)
+//         res.status(400).json({ errors })
+//     }
+//
+// }
+//
+// module.exports.profileEmployerDelete= async (req,res)=> {
+//
+//     // const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
+//     const token = req.cookies.jwt
+//     if (token) {
+//         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+//                 if (err) {
+//                     console.log(err)
+//                 } else {
+//                     UserEmployer.findOneAndRemove({_id: decodedToken.id}).then(user =>{
+//                         if(user)
+//                             res.send('user?')
+//                         else res.render('/')
+//                     })
+//                 }
+//         })
+//     }
+// }
 
 
 

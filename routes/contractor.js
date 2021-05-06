@@ -18,6 +18,9 @@ router.route('/salaryDetailsContractor')
 router.route('/profileContractor')
     .get(requireConAuth, contractorController.profileContractorGet)
 
+
+
+
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
 
