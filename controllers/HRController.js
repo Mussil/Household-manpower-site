@@ -116,7 +116,7 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             accountNumber,
             bankName,
             gender,
-            arrLanguages,
+            arrLang,
             education,
             smoker,
             experience,
@@ -134,12 +134,9 @@ module.exports.addAContractorHRPost =async (req,res)=> {
         }
 
         var languages = []
-        for (i = 0; i < arrLanguages.length; ++i) {
-            languages.push(await Languages.create({value: arrLanguages[i]}))
+        for (i = 0; i < arrLang.length; ++i) {
+            languages.push(await Languages.create({value: arrLang[i]}))
         }
-
-        console.log(jobTypes + ' arr')
-        console.log(languages + ' lan')
 
         const address = new Address({city, street, houseNumber})
         const bank = new Bank({branch, accountNumber, bankName})
@@ -147,20 +144,19 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             email, password, firstName, lastName, phoneNumber, address, bank,
             gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
         })
-        myData.save()
-        // UsersContractor.findOne({email: email}).then(user =>{
-        //     if(user) {
-        //         console.log('save?')
-        //         user.picture.data = fs.readFileSync(picture, picture.data)
-        //         user.picture.contentType = 'image/*'
-        //         user.save(function (err) {
-        //             if(err)
-        //                 console.log(err)
-        //         })
-        //     }
-        // })
+       await myData.save(function (err,doc){
+           if(err)
+               console.log(err.message)
+            else{
+                res.status(200).json({doc})
+           }
+        })
+
         console.log(myData + 'mydata')
         //הדפסה לעובד קבלן שעובד טוב
+
+
+
         var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -190,5 +186,5 @@ module.exports.addAContractorHRPost =async (req,res)=> {
         const errors = handleErrors(e)
         res.status(400).json({errors})
     }
-
 }
+

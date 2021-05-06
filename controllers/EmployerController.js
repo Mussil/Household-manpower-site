@@ -50,6 +50,31 @@ module.exports.profileEmployerGet=(req,res)=>{
 
 }
 
+module.exports.profileEmpGet=(req,res)=>{
+    res.render('profileEmp')
+
+}
+
+module.exports.editDelEmpGet = (req,res)=>{
+    res.render('editDelEmp')
+}
+
+module.exports.editDelEmpPost = async (req,res)=>{
+
+    const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
+
+    try {
+        const address = await addrEmp.create({city, street, houseNumber})
+        const user = await usersEmp.create({email, password, firstName, lastName, phoneNumber, address})
+        console.log(user+ 'user')
+    }
+    catch (err){
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
+    }
+
+}
+
 module.exports.profileEmployerPost = async (req,res)=> {
 
     // const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body

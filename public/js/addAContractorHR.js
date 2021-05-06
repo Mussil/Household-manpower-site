@@ -1,18 +1,13 @@
 
     const form = document.querySelector('form')
-    // const emailError = document.querySelector('.email.error')
-    // const passwordError = document.querySelector('.password.error')
+    const emailError = document.querySelector('.email.error')
 
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
 
-        console.log('i here?')
-        // reset errors
-        // emailError.textContent = ''
-        // passwordError.textContent = ''
+        emailError.textContent = ''
 
-        // get values
 
         // get values
         const email = form.email.value
@@ -111,18 +106,9 @@
         if(polish.checked == true){
             arrLang.push('polish')
         }
-        if (russian.checked == true){
-            arrLang.push('russian')
-        }
-        if (amharic.checked == true){
-            arrLang.push('amharic')
-        }
         if(spanish.checked == true){
             arrLang.push('spanish')
         }
-
-        console.log(arrLang)
-        console.log(arrTypeJob)
 
         try {
             const res = await fetch('/addAContractorHR', {
@@ -133,13 +119,13 @@
             })
             const data = await res.json()
             console.log(data)
-            // if (data.errors) {
-            //     emailError.textContent = data.errors.email
-            //     passwordError.textContent = data.errors.password
-            // }
-            // if (data.user) { //successful
-            //     location.assign('/homepageContractor')
-            // }
+            if (data.errors) {
+                emailError.textContent = data.errors.email
+            }
+            if(data.user){
+                res.send('<h3>YOU ARE ADD A NEW EMPLOYER TO THE SYSTEM</h3>')
+            }
+
         }
         catch (err) {
             console.log(err)
