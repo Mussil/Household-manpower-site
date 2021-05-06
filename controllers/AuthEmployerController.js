@@ -1,6 +1,7 @@
 
 const UsersEmployer=require('../models/UsersEmployer')
-let nodemailer = require('nodemailer')
+var nodemailer = require('nodemailer')
+const addressModel = require('../models/Address')
 
 const jwt = require('jsonwebtoken')
 
@@ -13,15 +14,22 @@ const handleErrors = (err) => {
     if (err.message === 'incorrect email') {
         errors.email = 'That email is not registered'
     }
-
+    if (err.message === 'This email already exist') {
+        errors.email = 'This email already exist'
+    }
     // incorrect password
     if (err.message === 'incorrect password') {
         errors.password = 'That password is incorrect'
     }
 
+
+    // if(err.message === 'incorrect city'){
+    //     errors.city = 'That city is incorrect'
+    // }
+
     // duplicate email error
     if (err.code === 11000) {
-        errors.email = 'that email is already registered'
+        errors.email = 'That email is already registered'
         return errors
     }
 
@@ -83,6 +91,73 @@ module.exports.createNewEmpPost= async (req,res)=>{
         res.status(400).json({ errors })
     }
 
+}
+
+module.exports.signupEmployerPost = async (req,res)=>{
+
+    try {
+        const {email,password, firstName,lastName,phoneNumber,city,street,houseNumber} = req.body
+        // try{
+        //     console.log('before')
+        //     //UsersEmployer.checkExistEmail(email)
+        //     console.log('after')
+        //
+        // }
+        // catch (e) {
+        //     const errors = handleErrors(e)
+        //     res.status(400).json({errors})
+        // }
+
+        const address = new addressModel({city,street,houseNumber})
+        console.log(address)
+        const user = await UsersEmployer.create({email,password, firstName,lastName,phoneNumber,address})
+        // const myData = new UsersEmployer({email,password, firstName,lastName,phoneNumber,address})
+        // myData.save(function(err){
+        //   if(err){
+        //       return handleErrors(err)
+        //   }
+        //   else{
+               res.status(201).json({user})
+        //       console.log(myData)
+        //
+        //   }
+        // })
+
+        // UsersEmployer.findOne({id:email}).then(user=>{
+        //     res.status(201).json(user)
+        // })
+
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'hssce2021@gmail.com',
+                pass: 'lamasce?'
+            }
+        })
+
+        var mailOptions = {
+            from: 'hssce2021@gmail.com',
+            to: req.body.email,
+            subject: 'registered successfully',
+            html: '<h1>successful signup</h1>' +
+                '<h3>welcome</h3>'+
+                '<h3>Thanks, HouseHold</h3>'
+        }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                console.log(error)
+            } else {
+                console.log('Email sent: ' + info.response)
+            }
+        })
+
+    }
+    catch (e) {
+        const errors = handleErrors(e)
+        res.status(400).json({errors})
+    }
 }
 
 

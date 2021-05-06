@@ -1,4 +1,87 @@
 
-<%- include ("partials/navEmployer.ejs")-%>
-<h1> profile Employer </h1>
-<%- include ("partials/footer.ejs")-%>
+<html>
+<head>
+    <title>Profile Employer</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../css/login.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+        <h2>Profile Employer</h2>
+        <p>Edit your details</p>
+
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form action="/profileEmployer" method="post">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="email error"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <div class="password error"></div>
+                </div>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name" required>
+                </div>
+                <div class="fName error"></div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" required>
+                </div>
+                <div class="lName error"></div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" required>
+                </div>
+                <div class="phone error"></div>
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" class="form-control" placeholder="City" required>
+                </div>
+                <div class="city error"></div>
+                <div class="form-group">
+                    <label>Street</label>
+                    <input type="text" name="street" class="form-control" placeholder="Street" required>
+                </div>
+                <div class="street error"></div>
+                <div class="form-group">
+                    <label>House Number</label>
+                    <input type="number" name="house" class="form-control" placeholder="House Number" required>
+                </div>
+                <div class="house error"></div>
+                <form>
+<!--                    <button type="submit" id="submit" class="btn btn-black">Save</button>-->
+                    <button type="submit" id="submit" class="btn btn-black">Delete my account</button>
+                </form>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/profileEmployer.js"></script>
+
+
+
+</body>
+
+
+</html>
+
+
+
+

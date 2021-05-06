@@ -1,0 +1,19 @@
+body {
+    /*background-color: #6c6c6f;*/
+    background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);
+
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+h2 {
+    color: black;
+    /*font-family: verdana;*/
+    font-size: 15px;
+    text-align: center;
+    font-style: normal;
+}
+

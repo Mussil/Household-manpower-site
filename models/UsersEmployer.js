@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
-const addressSchema=require('./Address')
+const addressModel=require('./Address')
 
 const userSchema= new mongoose.Schema({
     email: {
@@ -22,32 +22,32 @@ const userSchema= new mongoose.Schema({
         type: String,
         required: [true,'Please enter first name'],
         trim:true,
-        minlength :[3,'Minimum name length is 4 characters']
+        minlength :[3,'Minimum name length is 3 characters']
     },
     lastName: {
         type: String,
         required: [true,'Please enter last name'],
         trim:true,
-        minlength :[3,'Minimum name length is 4 characters']
+        minlength :[3,'Minimum name length is 3 characters']
     },
     phoneNumber:{
         type: Number,
-        min:1000000000,
+        min:100000000, //05X 1234567 אפס לא נחשב אז
         max:9999999999
+
 
     },
     address: {
-        type: addressSchema.schema
+        type: addressModel.schema
     }
 
 
 },{timestamp: true})
 
 
-
-
 // fire a function before doc saved to db
 userSchema.pre('save', async function (next) {
+    console.log('here11')
     if(this.isModified('password')){
         const salt=await bcrypt.genSalt()
         this.password=await bcrypt.hash(this.password, salt)
@@ -70,7 +70,6 @@ userSchema.statics.login = async function(email, password) {
     throw Error('incorrect email')
 }
 
-
 // static method to check email
 userSchema.statics.checkEmail = async function(email) {
     const user = await this.findOne({email})
@@ -80,5 +79,17 @@ userSchema.statics.checkEmail = async function(email) {
     throw Error('incorrect email')
 }
 
+//for signup check if he register
+// userSchema.statics.checkExistEmail = async function(email) {
+//
+//     if (await this.findOne({email})) {
+//         throw Error('This email already exist')
+//     }
+//     else return ''
+// }
+
+
+
 const User = mongoose.model('userEmployer', userSchema)
 module.exports = User
+

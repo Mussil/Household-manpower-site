@@ -49,7 +49,8 @@ nav{-webkit-transition: padding-top .3s,padding-bottom .3s;
     background-color: #212529;
 }
 .banner{
-    background-image:url('https://files.geektime.co.il/wp-content/uploads/2020/04/star-wars-backgrounds-14-1587223450.jpg');
+    /*background-image:url('https://files.geektime.co.il/wp-content/uploads/2020/04/star-wars-backgrounds-14-1587223450.jpg');*/
+    background-image:url('https://image.freepik.com/free-photo/manpower-human-resource-planning_101984-10.jpg');
     text-align: center;
     color: #fff;
 

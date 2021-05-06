@@ -1,21 +1,45 @@
-<html>
-<head>
 <%- include ("partials/navContractor.ejs")-%>
-    <link rel = "stylesheet"  type = "text/css"  href = "../css/workHistoryContractor.css" />
+<section>
 
-    <title>Work history</title>
-</head>
-<h1> work history contractor</h1>
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryContractor.css" />
+    <!--for demo wrap-->
+    <h1>Working history contractor</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Shift start time</th>
+                <th>Shift end time</th>
+                <th>Salary</th>
+                <th>Employer</th>
+                <th>JobType</th>
+                <th>Rating</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <% data.forEach(function(data){ %>
+                <tr>
+                    <%if(String(data.contractor) == String(user.email)) { %>
+                        <td><%= data.date.toLocaleDateString() %></td>
+                        <td><%= data.startHourShift %></td>
+                        <td><%= data.endHourShift %></td>
+                        <td><%= data.salary %></td>
+                        <td><%= data.employer%></td>
+                        <td><%= data.jobType%></td>
+                        <td><%= data.rank%></td>
+                    <% } %>
 
-<body>
+                </tr>
+            <% } )%>
+            </tbody>
+        </table>
 
-
-
-
-
-</body>
+    </div>
+</section>
 
 <%- include ("partials/footer.ejs")-%>
-</html>
-
-<script src="../js/workHistoryContractor.js"></script>
