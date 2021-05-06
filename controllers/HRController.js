@@ -1,8 +1,8 @@
 const TransactionDB=require('../models/Transaction')
-var nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 const UsersEmployer=require('../models/UsersEmployer')
 const UsersContractor=require('../models/UsersContractor')
-const Address = require('../models/Address')
+const addressModel = require('../models/Address')
 const Bank = require('../models/Bank')
 const Languages = require('../models/languageUser')
 const JobsType = require('../models/JobType')
@@ -141,7 +141,7 @@ module.exports.addAContractorHRPost =async (req,res)=> {
         console.log(jobTypes + ' arr')
         console.log(languages + ' lan')
 
-        const address = new Address({city, street, houseNumber})
+        const address = new addressModel({city, street, houseNumber})
         const bank = new Bank({branch, accountNumber, bankName})
         var myData = new UsersContractor({
             email, password, firstName, lastName, phoneNumber, address, bank,

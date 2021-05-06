@@ -220,15 +220,15 @@ module.exports.shiftReportContractorPost=(req,res)=> {
                     }
 
                 })
-
+}
 
 
             }
-        })
-    }
 
-
+        )
 }
+
+
 
 module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים

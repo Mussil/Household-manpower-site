@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
-const addressSchema=require('./Address')
+const addressModel=require('./Address')
 const bankSchema=require('./Bank')
 const languagesSchema = require('./languageUser')
 const jobsSchema = require('./JobType')
@@ -62,7 +62,7 @@ const userSchema= new mongoose.Schema({
 
     },
     address: {
-        type: addressSchema.schema
+        type: addressModel.schema
     } ,
     bank: {
         type: bankSchema.schema
@@ -111,7 +111,7 @@ const userSchema= new mongoose.Schema({
         default: ''
     },
     jobTypes:{
-        type: [jobsSchema],
+        type: [jobsSchema.schema],
     },
     leaveDates: {
         type: [Date],

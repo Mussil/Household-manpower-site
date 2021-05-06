@@ -39,7 +39,7 @@
 
         console.log(city +'city?')
         if(password !== conPass){
-            passwordError.textContent = 'Passwords Dont Match'
+            passwordError.textContent = 'Passwords Does not Match'
         }
 
         try {

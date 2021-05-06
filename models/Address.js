@@ -97,7 +97,7 @@ let addressSchema = new mongoose.Schema({
 })
 
 
-addressSchema=mongoose.model('address',addressSchema ,'address' )
-module.exports = addressSchema
+const addressModel=mongoose.model('address',addressSchema ,'address' )
+module.exports = addressModel
 
 

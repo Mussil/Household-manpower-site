@@ -2,8 +2,7 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const usersEmp = require('../models/UsersEmployer')
-const addrEmp = require('../models/Address')
-const jwt = require('jsonwebtoken')
+//const addressModel = require('../models/Address')
 const jwt = require('jsonwebtoken')
 
 module.exports.homepageEmployerGet=(req,res)=>{

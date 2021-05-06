@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
-const addressSchema=require('./Address')
+const addressModel=require('./Address')
 
 const userSchema= new mongoose.Schema({
     email: {
@@ -38,7 +38,7 @@ const userSchema= new mongoose.Schema({
 
     },
     address: {
-        type: addressSchema.schema
+        type: addressModel.schema
     }
 
 
@@ -80,12 +80,13 @@ userSchema.statics.checkEmail = async function(email) {
 }
 
 //for signup check if he register
-userSchema.statics.checkExistEmail = async function(email) {
-    if (await this.findOne({email})) {
-        throw Error('This email already exist')
-    }
-    else return ''
-}
+// userSchema.statics.checkExistEmail = async function(email) {
+//
+//     if (await this.findOne({email})) {
+//         throw Error('This email already exist')
+//     }
+//     else return ''
+// }
 
 
 
