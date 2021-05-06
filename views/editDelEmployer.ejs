@@ -1,0 +1,55 @@
+<%- include ("partials/navEmployer.ejs")-%>
+
+<!--New-->
+
+<html>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<body>
+<div class="container">
+    <form id="form">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h3>
+                            <%=user.firstName%>  <%=user.lastName%> </h3>
+                        <p>
+                            <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>
+                            <br />
+                            <br />
+                            <i class="glyphicon glyphicon-envelope"></i>  <%=user.email%>
+                            <br />
+                            <br />
+                            <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>
+                            <br />
+                            <br />
+
+                        </p>
+
+                        <div class="btn-group">
+
+
+                            <button type="submit" id="submit" onClick="parent.location='/editDelEmp'" class="glyphicon glyphicon-pencil">Edit</button>
+                            <!--                            <a href="/deleteContractor"  class="btn btn-secondary">Delete</a>-->
+                            <!--                            <button type="submit" id="submit" class="glyphicon glyphicon-trash"   onClick="parent.location='/deleteContractor'"    >Delete</button>-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+</body>
+
+<script src="../js/editDelEmp.js"></script>
+</html>
+<%- include ("partials/footer.ejs")-%>

@@ -17,14 +17,6 @@
 
 <body>
 
-<!--<div class="sidenav">-->
-<!--    <div class="login-main-text">-->
-<!--        <h2>signup Employer</h2>-->
-<!--        <p>enter your details</p>-->
-<!--    </div>-->
-<!--</div>-->
-
-
 <div class="main">
     <div class="col-md-6 col-sm-12">
             <form  id="form">
@@ -41,22 +33,22 @@
 
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-z]+" required>
+                    <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-z]{3,}" required>
                 </div>
                 <!--                <div class="fName error"></div>-->
                 <div class="form-group">
                     <label>Last Name</label>
-                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-z]+" required>
+                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-z]{3,}" required>
                 </div>
                 <!--                <div class="lName error"></div>-->
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]+"required>
+                    <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{9,10}"required>
                 </div>
 
                 <div class="form-group">
                     <label>City</label>
-                    <input type="text" name="city" class="form-control" placeholder="City" pattern="[A-Za-z]+" required>
+                    <select id="city"></select>
                 </div>
                 <div class="city error"></div>
                 <div class="form-group">
@@ -129,7 +121,7 @@
                 <!--101 form-->
                 <div class="mb-3">
                     <label> 101 Form:</label>
-                    <input type="file" name="form101" class="form-control" aria-label="file example" required>
+                    <input type="file" name="form101" class="form-control" aria-label="file example">
                     <div class="invalid-feedback">Example invalid form file feedback</div>
                 </div>
                 <!--jobsArray-->
@@ -165,7 +157,7 @@
 
                 <div class="form-group">
                     <label>Bank account Number</label>
-                    <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" pattern="[0-9]+" required>
+                    <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" pattern="[0-9]{6,7}" required>
                 </div>
                 <div class="form-group">
                     <label>Bank Branch</label>
@@ -174,18 +166,13 @@
                 <!-- About me-->
                 <div class="form-group">
                         <label>About Me:</label>
-                    <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself" pattern="[a-zA-z]+" required>
+                    <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself" pattern="[a-zA-Z]+" required>
                 </div>
                 <br><br>
-                <button type="submit"id="submit" class="btn btn-black">Add Contractor</button>
+                <button type="submit" id="submit" class="btn btn-black">Add Contractor</button>
             </form>
     </div>
 </div>
-    </div>
-</div>
-    </div>
-</div>
-
 
 <script src="../js/addAContractorHR.js"></script>
 
@@ -195,3 +182,92 @@
 
 
 </html>
+
+<script>
+    const citiesArray =['eilat',
+        'jerusalem',
+        'nazareth' ,
+        'haifa',
+        'zikhron ya’akov ',
+        'arad',
+        'netanya',
+        'nahariya',
+        'kfar tavor',
+        'hebron',
+        'kinneret moshava',
+        'holon',
+        'bat shlomo',
+        'bnei brak' ,
+        'the negev desert ',
+        'the lowlands',
+        'abu snan',
+        'julis',
+        'maghar',
+        'samia',
+        'ein al-assad',
+        'isfiya',
+        'keysarya' ,
+        'beer sheva',
+        'sde boker',
+        'yad moredechai',
+        'rosh-pina' ,
+        'kiryat shmona',
+        'kiryat malachi',
+        'ein gedi',
+        'ein-hod' ,
+        ' kfar nakhum',
+        ' hazor haglilit',
+        'metula' ,
+        'harduf',
+        'ashdod',
+        'kfar kama',
+        'abu gosh' ,
+        'jezreel valley',
+        ' the judean desert',
+        'sea of galilee',
+        'beit jann',
+        'sajur',
+        'rameh',
+        'daliyat el-carmel',
+        'the golan heights',
+        'tiberias',
+        'mitspe ramon',
+        'akko',
+        'katzerin',
+        'nahalal',
+        'kfar yasif',
+        'hanita',
+        'maalot tarshiha',
+        'bat yam',
+        'the hula valley' ,
+        'hevel habsor',
+        'the arava',
+        'the galilee',
+        'gush dan',
+        'the nitzana region',
+        'yanuh',
+        'yarka',
+        'kisra',
+        'hurfeish',
+        'shefa-amr',
+        'the dead sea',
+        'tel aviv jaffa',
+        'tsefat' ,
+        'tel-hai ',
+        'ramla',
+        'hertzeliya' ,
+        'gush halav',
+        'ashkelon' ,
+        'beit shean' ,
+        'cana' ,
+        'jatt',
+        'rehaniya',
+        'degania']
+    function selectOne() {
+        var select = document.getElementById('city')
+        for (var i=0; i<citiesArray.length; i++) {
+            select.options[select.options.length] = new Option(citiesArray[i], citiesArray[i])
+        }
+    }
+    selectOne()
+</script>

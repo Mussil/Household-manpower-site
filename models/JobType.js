@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const jobsArray = ['babysitting',' ironing', 'cleaning', 'gardening', 'cooking', 'pet care']
+const jobsArray = ['babysitting','ironing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 
 const jobsSchema= new mongoose.Schema(
