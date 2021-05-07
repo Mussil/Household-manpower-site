@@ -1,8 +1,3 @@
-
-
-
-
-
 <%- include ("partials/navContractor.ejs")-%>
 <!doctype html>
 <html lang="en">
@@ -19,45 +14,49 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <title>Home page contractor</title>
 </head>
 
-<body>
+<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
 
-    <h1>Home page contractor</h1>
+<h1> Home page contractor</h1>
+
+<form class="container">
     <hr>
-    <h2>here goes the stars</h2>
-    <h1> number of stars:<%=user.rating %></h1>
-
-
+    <h2><span class="glyphicon glyphicon-star-empty"></span>    Stars number : <%=user.rating %></h2>
 
     <hr>
     <h2>Shift report</h2>
     <input type="text" name="daterange"  />
     <div class="date messages error"></div>
     <hr>
+</form>
 
-    <form id="hoursForm" >
-        <label>please fill the hours</label>
-        <input type="time" id="startTime" name="startTime"
-               min="00:00" max="23:59" required>
+<form id="hoursForm" class="container">
+    <label>please fill the hours</label>
+    <input type="time" id="startTime" name="startTime"
+           min="00:00" max="23:59" required>
 
-        <input type="time" id="endTime" name="endTime"
-               min="00:00" max="23:59" required>
-        <div class="hour message error"></div>
-        <div class="hour message suc"></div>
+    <input type="time" id="endTime" name="endTime"
+           min="00:00" max="23:59" required>
+    <div class="hour message error"></div>
+    <div class="hour message suc"></div>
 
-        <div>
-            <input type="submit" value="Submit form">
-        </div>
-    </form>
-    <hr>
-    <h2>here goes the recommendation</h2>
-    <%- include ("partials/footer.ejs")-%>
+    <div>
+        <input type="submit" value="Submit form">
+    </div>
+</form>
+
+<hr>
+<form class="container">
+    <h2><span class="glyphicon glyphicon-star-check"></span>here goes the recommendation</h2>
+</form>
+
+<%- include ("partials/footer.ejs")-%>
 
 <script>
     document.getElementById('hoursForm').style.display = 'none'

@@ -1,5 +1,8 @@
-<%- include ("partials/navContractor.ejs")-%>
-<section>
+<html>
+<head>
+    <%- include ("partials/navContractor.ejs")-%>
+<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
+<section class="container">
 
     <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryContractor.css" />
     <!--for demo wrap-->
@@ -23,23 +26,26 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <% data.forEach(function(data){ %>
-                <tr>
-                    <%if(String(data.contractor) == String(user.email)) { %>
-                        <td><%= data.date.toLocaleDateString() %></td>
-                        <td><%= data.startHourShift %></td>
-                        <td><%= data.endHourShift %></td>
-                        <td><%= data.salary %></td>
-                        <td><%= data.employer%></td>
-                        <td><%= data.jobType%></td>
-                        <td><%= data.rank%></td>
-                    <% } %>
+            <tr>
+                <%if(String(data.contractor) == String(user.email)) { %>
+                    <td><%= data.date.toLocaleDateString() %></td>
+                    <td><%= data.startHourShift %></td>
+                    <td><%= data.endHourShift %></td>
+                    <td><%= data.salary %></td>
+                    <td><%= data.employer%></td>
+                    <td><%= data.jobType%></td>
+                    <td><%= data.rank%></td>
+                <% } %>
 
-                </tr>
+            </tr>
             <% } )%>
             </tbody>
         </table>
 
     </div>
 </section>
+</body>
 
 <%- include ("partials/footer.ejs")-%>
+</head>
+</html>

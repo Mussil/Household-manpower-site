@@ -14,6 +14,7 @@ table{
     background-color: black;
 }
 .tbl-content{
+    background-color: white;
     height:300px;
     overflow-x:auto;
     margin-top: 0px;

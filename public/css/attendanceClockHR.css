@@ -3,7 +3,7 @@ head{
 }
 h1{
     font-size: 30px;
-    color: black;
+    color: white;
     text-transform: uppercase;
     font-weight: 300;
     text-align: center;
@@ -14,15 +14,21 @@ table{
     width:100%;
     table-layout: fixed;
 }
+
+/*///////*/
 .tbl-header{
     background-color: black;
 }
+/*///////*/
+
 .tbl-content{
+    background-color: white;
     height:300px;
     overflow-x:auto;
     margin-top: 0px;
     border: #F50057;
 }
+/*///////*/
 th{
     padding: 20px 15px;
     text-align: left;
@@ -41,7 +47,7 @@ td{
     color: black;
     border: 1px solid black;
 }
-
+/*///////*/
 
 /* demo styles */
 
@@ -128,4 +134,5 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+.btn-outline-primary{color: black;border-color: black}
 

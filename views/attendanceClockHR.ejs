@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%- include ("partials/navHR.ejs")-%>
-
+    <%- include ("partials/navHR.ejs")-%>
+<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
 <section>
     <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
     <script src="../js/attendanceClockHR.js"></script>
@@ -31,17 +31,17 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
             <% for(var i=0;i<data.length;i++){ %>
-                <tr id=<%=i%>>
-                    <td><%= data[i].contractor%></td>
-                    <td><%= data[i].date.toLocaleDateString() %></td>
-                    <td><%= data[i].startHourRec %></td>
-                    <td><%= data[i].endHourRec %></td>
+            <tr id=<%=i%>>
+                <td><%= data[i].contractor%></td>
+                <td><%= data[i].date.toLocaleDateString() %></td>
+                <td><%= data[i].startHourRec %></td>
+                <td><%= data[i].endHourRec %></td>
 
-                    <td class="hour-shift"><%= data[i].startHourShift %></td>
-                    <td class="hour-shift"><%= data[i].endHourShift %></td>
-<!--                    <td><p id="demo" >edit</p></td>-->
-                    <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
-                </tr>
+                <td class="hour-shift"><%= data[i].startHourShift %></td>
+                <td class="hour-shift"><%= data[i].endHourShift %></td>
+                <!--                    <td><p id="demo" >edit</p></td>-->
+                <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
+            </tr>
             <% }%>
             </tbody>
         </table>
@@ -53,24 +53,24 @@
 
 </section>
 
-        <form id="hoursForm" class="container">
-            <h2>Updating Hours</h2><br>
+<form id="hoursForm" class="container">
+    <h2>Updating Hours</h2><br>
 
-            <label>Start report time</label><br>
-            <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
+    <label>Start report time</label><br>
+    <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
 
-            <label>End report time</label><br>
-            <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
-            <div class="hour message error"></div>
-            <div class="hour message suc"></div>
+    <label>End report time</label><br>
+    <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+    <div class="hour message error"></div>
+    <div class="hour message suc"></div>
 
-            <div>
-                <input type="submit" value="Update changes">
-            </div>
-        </form>
+    <div>
+        <input type="submit" value="Update changes">
+    </div>
+</form>
 
 
-
+</body>
 </head>
 </html>
 
@@ -78,7 +78,7 @@
 <script>
     var dataHere = <%- JSON.stringify(data) %>
         // console.log(dataHere)
-    getDetails(dataHere)
+        getDetails(dataHere)
     document.getElementById('hoursForm').style.display = 'none'
 </script>
 
