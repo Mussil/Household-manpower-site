@@ -1,7 +1,10 @@
+.contractor h2{
+    padding-left: 50px;
+}
 .contractor a{
     display: block;
     margin: 40px 0;
-    padding-left: 30px;
+    padding-left: 40px;
     border-left: 6px solid crimson;
 }
 .contractor a:hover h3{
