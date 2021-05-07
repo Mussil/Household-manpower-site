@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken')
 //     console.log(err.message)
 //     let errors = { email: '', password: '' ,firstName: '', lastName: '',phoneNumber: '',city:''}
 //
+//
 //     // incorrect email
 //     if (err.message === 'incorrect email') {
 //         errors.email = 'That email is not incorrect'
@@ -155,6 +156,9 @@ module.exports.detailsOfContractorPost= (req,res)=> {
 
     let end = new Date(start)
     end.setHours(23,59,59,999)
+
+    console.log(start1)
+    console.log(end)
 
     const token = req.cookies.jwt
 

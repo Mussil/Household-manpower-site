@@ -31,16 +31,28 @@ module.exports.workHistoryContractorGet=async (req,res)=>{
             salary = ''
         }
 
-        for( j=0;j<userEmployerResult.length;j++){
-            if(String(userEmployerResult[j]._id)==String(transcationResult[i].idEmployer)){
+        for( j=0;j<userEmployerResult.length;j++) {
+            if (String(userEmployerResult[j]._id) == String(transcationResult[i].idEmployer)) {
                 var employer = userEmployerResult[j].email
             }
         }
-        var jobType = transcationResult[i].jobType
-        var rank = transcationResult[i].rank
+        if(String(employer)!=String(undefined)) {
+            var jobType = transcationResult[i].jobType
+            var rank = transcationResult[i].rank
 
-        myObject.push({'date': date, 'contractor': contractor, 'startHourShift': startHourShift, 'endHourShift':endHourShift, 'salary':salary, 'employer': employer, 'jobType': jobType, 'rank':rank})
-    }
+
+            myObject.push({
+                'date': date,
+                'contractor': contractor,
+                'startHourShift': startHourShift,
+                'endHourShift': endHourShift,
+                'salary': salary,
+                'employer': employer,
+                'jobType': jobType,
+                'rank': rank
+            })
+        }
+        }
     res.render('workHistoryContractor', {data: myObject})
 }
 
@@ -212,8 +224,19 @@ module.exports.shiftReportContractorPost=(req,res)=> {
     end.setHours(23,59,59,999)
 
     const token = req.cookies.jwt
+    let start2 = new Date(start)
+    console.log(start2)
+    start2.setDate(start2.getDate() + 1)
+    console.log(start2)
 
-        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+
+    console.log(start1)
+    console.log(end)
+    start1.setDate(start1.getDate() + 1)
+    console.log(start1)
+
+
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
             } else {
@@ -221,12 +244,13 @@ module.exports.shiftReportContractorPost=(req,res)=> {
                 //check for transaction in the start date and in the contractor-user id
                 await Transaction.findOne({
                     idContractor: decodedToken.id ,
-                    date: {
-                        $gte: start1, $lte: end }
+                    date:start2
+                    // date: {
+                    //     $gte: start1, $lte: end }
                 }).then(result=>{
                     if(result){
-                        //console.log('found transaction')
-                       // console.log(result)
+                        console.log('found transaction')
+                       console.log(result)
                         if(result.isShifted){
                             res.status(400).json({msgError:'You have already declared a shift for this date'})
 
@@ -246,8 +270,7 @@ module.exports.shiftReportContractorPost=(req,res)=> {
 
             }
 
-        )
-}
+        )}
 
 module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים
