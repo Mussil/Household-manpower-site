@@ -29,6 +29,6 @@ router.route('/leavePeriodContractor')
 
 router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
 router.post('/shiftReportContractor', contractorController.shiftReportContractorPost)
-router.post('/shiftReportContractor', contractorController.shiftReportHoursContractorPost)
+router.post('/shiftReportHoursContractor', contractorController.shiftReportHoursContractorPost)
 
 module.exports=router
