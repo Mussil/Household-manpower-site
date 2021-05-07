@@ -8,18 +8,15 @@ const router=Router()
 router.route('/homepageEmployer')
     .get(requireEmpAuth, EmployerController.homepageEmployerGet)
 
-
-
 ////////////////////////////////////////////////////
 router.route('/workHistoryEmployer')
     .get(requireEmpAuth, EmployerController.workHistoryEmployerGet)
-
-
 
 router.route('/profileEmployer')
    .get(requireEmpAuth,EmployerController.profileEmployerGet)
 
 router.delete('/profileEmployer', EmployerController.profileEmployerDelete)
+
 router.route('/profileEmployerEdit')
     .get(requireEmpAuth, EmployerController.profileEmployerEditGet)
 

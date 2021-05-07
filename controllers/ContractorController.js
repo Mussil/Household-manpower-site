@@ -1,10 +1,7 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
-
 const jwt = require('jsonwebtoken')
-
 const UserEmployer=require('../models/UsersEmployer')
-
 
 
 // controller actions
@@ -150,27 +147,16 @@ module.exports.salaryDetailsContractorPost=(req,res)=> {
                 res.status(400).json({err:'There is no record of shifts for these dates'})
 
             })
-
-
-
         }
     })
-
-}
-module.exports.profileContractorGet=(req,res)=>{
-    res.render('profileContractor')
-}
-
-
-module.exports.leavePeriodContractorGet=(req,res)=>{
-    res.render('leavePeriodContractor')
 }
 
 module.exports.profileContractorGet=(req,res)=>{
     res.render('profileContractor')
+
 }
 
-module.exports.profileContractorPost = async (req,res)=> {
+module.exports.profileContractorDelete = (req,res)=>{
 
     const token = req.cookies.jwt
     if (token) {
@@ -178,57 +164,35 @@ module.exports.profileContractorPost = async (req,res)=> {
             if (err) {
                 console.log(err)
             } else {
-                UsersContractor.findOneAndRemove({_id: decodedToken.id}).then(user =>{
-                    if(user)
-                        res.redirect('/logout')
-                })
+
+                Transaction.deleteMany({idEmployer:decodedToken.id})
+                    .then(result => {
+                        console.log(`Deleted ${result.deletedCount} transaction(s).`)
+                        UsersContractor.findByIdAndDelete(decodedToken.id)
+                            // eslint-disable-next-line no-unused-vars
+                            .then(result => {
+                                console.log('found')
+                                res.json({ redirect: '/logout' })
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+
+                    })
+                    .catch(err => console.error(`Delete failed with error: ${err}`))
+
+
             }
         })
     }
+}
 
-    //
-    // const {email, password,firstName,lastName,phoneNumber,city,street,houseNumber,
-    //     gender1,language1,education1,smoke1,experience,hourlyRate,picture,form101,aboutMe, jobs
-    // } = req.body
-    // const address = new addrsCon({city, street, houseNumber})
-    //
-    // const token = req.cookies.jwt
-    // if (token) {
-    //     jwt.verify(token, 'sce secret', async (err, decodedToken) => {
-    //         if (err) {
-    //             console.log(err)
-    //         } else {
-    //             UsersContractor.findOneAndUpdate({_id: decodedToken.id},
-    //                 {
-    //                     $set: {
-    //                         email: email,
-    //                         password: password,
-    //                         firstName: firstName,
-    //                         lastName: lastName,
-    //                         phoneNumber: phoneNumber,
-    //                         address: address,
-    //                         gender: gender1,
-    //                         languages: language1,
-    //                         education: education1,
-    //                         smoker:smoke1,
-    //                         experience:experience,
-    //                         hourlyRate: hourlyRate,
-    //                         picture: picture,
-    //                         form101: form101,
-    //                         aboutMe: aboutMe,
-    //                         jobTypes:jobs
-    //                     }
-    //                 })
-    //                 .then(user => {
-    //                     if (user) {
-    //                         res.render('homepageContractor', {user})
-    //                     } else {
-    //                         res.send('we have error..')
-    //                     }
-    //                 })
-    //         }
-    //     })
-    // }
+module.exports.profileContractorEditGet=(req,res)=>{
+    res.render('profileContractorEdit')
+}
+
+module.exports.leavePeriodContractorGet=(req,res)=>{
+    res.render('leavePeriodContractor')
 }
 
 module.exports.shiftReportContractorPost=(req,res)=> {
@@ -285,8 +249,6 @@ module.exports.shiftReportContractorPost=(req,res)=> {
         )
 }
 
-
-
 module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים
     const {trans, startMin, endMin} = req.body
@@ -320,8 +282,6 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 
 
 }
-
-
 
 module.exports.leavePeriodContractorPost=(req,res)=>{
 

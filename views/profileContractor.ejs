@@ -1,163 +1,89 @@
+<%- include ("partials/navContractor.ejs")-%>
+
 
 <html>
-<head>
-    <title>Profile Contractor</title>
-    <link rel = "stylesheet"
-          type = "text/css"
-          href = "../css/login.css" />
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-
+<!------ Include the above in your HEAD tag ---------->
 <body>
+<div class="container">
+    <form id="form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h3>
+                                <%=user.firstName%>  <%=user.lastName%> </h3>
+                            <p>
+                                <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-envelope"></i>  <%=user.email%>
+                                <br />
+                                <br />
+                                <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-gift"></i> <%= user.birthday %>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-education"></i> <%=user.education%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-check"></i> <%=user.experience%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-euro"></i> <%=user.hourlyRate%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-lock"></i> <%=user.jobs%>
+                                <% for(var i=0;i<user.jobTypes.length;++i){%>
 
-<div class="sidenav">
-    <div class="login-main-text">
-        <h2>Profile Contractor</h2>
-        <p>Edit your details</p>
-    </div>
-</div>
+                                     <%=user.jobTypes[i].value %>
+                                <% } %>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-user"></i> <%=user.gender%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-font"></i>
+
+                                <% for(var i=0;i<user.languages.length;++i){%>
+
+                                    <%=user.languages[i].value %>
+                               <% } %>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-fire"></i> <%=user.smoker%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-folder-close"></i>    <%=user.bank.bankName%> , <%=user.bank.branch%>, <%=user.bank.accountNumber%>
+                                <br />
+                                <br />
+                                <i class="glyphicon glyphicon-thumbs-up"></i> <%=user.aboutMe%>
+                                <br />
+                                <br />
+
+                            </p>
+
+                            <div class="btn-group">
+
+                                <button type="button" name="Edit" id="Edit" onclick="" class="glyphicon glyphicon-pencil">Edit</button>
+                                <button type="button" onclick="myDeleteFunction()" class="glyphicon glyphicon-trash">Remove Account</button>
 
 
-<div class="main">
-    <div class="col-md-6 col-sm-12">
-        <div class="login-form">
-            <form action="/profileContractor" method="post">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email" required>
-                </div>
-                <div class="email error"></div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Password" pattern="[0-9a-zA-Z]+{6-10}" required>
-                    <div class="password error"></div>
-                </div>
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-Z]{3}+" required="">
-                </div>
-                <div class="fName error"></div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-Z]{3}+" required>
-                </div>
-                <div class="lName error"></div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{9}" required>
-                </div>
-                <div class="phone error"></div>
-                <div class="form-group">
-                    <label>City</label>
-                    <input type="text" name="city" class="form-control" placeholder="City" pattern="[a-zA-Z]+" required>
-                </div>
-                <div class="city error"></div>
-                <div class="form-group">
-                    <label>Street</label>
-                    <input type="text" name="street" class="form-control" placeholder="Street" pattern="[a-zA-Z]+" required>
-                </div>
-                <div class="street error"></div>
-                <div class="form-group">
-                    <label>House Number</label>
-                    <input type="number" name="house" class="form-control" placeholder="House Number" pattern="[1-9]+" required>
-                </div>
-                <div class="house error"></div>
-                <div class="form-group">
-                    <label>Hourly rate</label>
-                    <input type="number" name="hourly rate" class="form-control" placeholder="hourly rate"  pattern="{17,500}" required>
-                </div>
-                <div class="Hourly rate error"></div>
-
-                <div class="form-group">
-                    <label>Years of experience</label>
-                    <input type="number" name="Years of experience" class="form-control" placeholder="Years of experience" pattern="[0-9]+"  required>
-                </div>
-                <div>
-                    <lable for:="gender">gender</lable>
-                    <select class="form-group" name="gender" id="gender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Language proficiency:</label>
-                    <div id = "language">
-                        <label><input type="checkbox" name="test" value="hebrew"> hebrew</label>
-                        <label><input type="checkbox" name="test" value="english" >english</label>
-                        <label><input type="checkbox" name="test" value="arabic"> arabic</label>
-                        <label><input type="checkbox" name="test" value="russian"> russian</label>
-                        <label><input type="checkbox" name="test" value="amharic" > amharic</label>
-                        <label><input type="checkbox" name="test" value="chinese">chinese</label>
-                        <label><input type="checkbox" name="test" value="portuguese">portuguese</label>
-                        <label><input type="checkbox" name="test" value="french">french</label>
-                        <label><input type="checkbox" name="test" value="romanian">romanian</label>
-                        <label><input type="checkbox" name="test" value="polish">polish</label>
-                        <label><input type="checkbox" name="test" value="spanish">spanish</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <lable for:="smoke">Smoke</lable>
-                    <select class="form-group" name="smoke" id="smoke">
-                        <option value="smoke">smoker</option>
-                        <option value="smoke">non smoker</option>
-                        <option value="smoke">not at work</option>
-                    </select>
-                </div>
-                <div>
-                    <lable for:="education">Education</lable>
-                    <select class="form-group" name="education" id="education">
-                        <option value="lementary">Legendary</option>
-                        <option value="high school">High School</option>
-                        <option value="higher">Higher</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label>101 Form:</label>
-                    <input type="file" class="form-control" aria-label="file example" required>
-                    <div class="invalid-feedback">Example invalid form file feedback</div>
-                </div>
-                <div>
-                    <label> Jobs:</label>
-                    <div id = "jobTypes" name="jobTypes">
-                        <label><input type="checkbox" id ="babysitting" name="test" value="babysitting">babysitting</label>
-                        <label><input type="checkbox" id="ironing" name="ironing" value="ironing">ironing</label>
-                        <label><input type="checkbox" id="cleaning" name="cleaning" value="cleaning"> cleaning</label>
-                        <label><input type="checkbox" id="gardening" name="gardening" value="gardening"> gardening</label>
-                        <label><input type="checkbox" id="cooking" name="cooking" value="cooking"> cooking</label>
-                        <label><input type="checkbox" id="pet care" name="pet care" value="pet care"> pet care</label>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="img">Select Image:</label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label>About:</label>
-                    <input type="text" name="about" class="form-control" placeholder="Tell about yourself" pattern="[a-zA-z]+" required>
-                </div>
-
-                <form>
-<!--                    <button type="submit" id="submit" class="btn btn-black">Save</button>-->
-                    <button type="submit" id="submit" class="btn btn-black">Delete my account</button>
-                </form>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
-
-
-<script src="../public/js/profileContractor.js"></script>
-
-
 
 </body>
-
+<script src="../js/profileContractor.js"></script>
 
 </html>
-
-
-
-
+<%- include ("partials/footer.ejs")-%>
