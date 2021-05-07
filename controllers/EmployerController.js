@@ -135,7 +135,6 @@ module.exports.viewEmployeesGet=async (req,res)=>{
 }
 
 
-
 module.exports.detailsOfContractorGet=async (req,res)=>{
     // const typeCon=req.params.typeOfJob
     const parm=req.params.id
@@ -160,11 +159,9 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
 
 
 
-
-
 module.exports.detailsOfContractorPost= (req,res)=> {
 
-    //mצריכה לוודא שהתאריך אינו באילוצים של העובד
+    //צריכה לוודא שהתאריך אינו באילוצים של העובד
     // ולוודא שהעובד לא מועסק עבור תאריך זה
 
 
