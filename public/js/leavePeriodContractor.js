@@ -16,7 +16,10 @@ $(function() {
         console.log('A new date selection was made: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
 
         const datesAdded = document.querySelector('.dates.added')
-
+        if(start<new Date()){
+            datesAdded.textContent='The date has already passed.'
+        }
+        else {
         try {
             const res = await fetch('/leavePeriodContractor', {
                 method: 'POST',
@@ -39,7 +42,7 @@ $(function() {
         }
 
 
-
+}
 
     })
 })
