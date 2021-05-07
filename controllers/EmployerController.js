@@ -40,11 +40,10 @@ const jwt = require('jsonwebtoken')
 // }
 
 
-
 module.exports.homepageEmployerGet= (req,res)=>{
     res.render('homepageEmployer')
 }
-///////////////////////////////////
+
 module.exports.workHistoryEmployerGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
     const userEmployerResult = await UserEmployer.find({})
@@ -53,10 +52,6 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
     res.render('workHistoryEmployer', {transactionData: transcationResult, employerData: userEmployerResult, contractorData: userContractorResult})
 }
 
-// module.exports.profileEmployerDetailsGet=(req,res)=>{
-//     res.render('profileEmployerDetails')
-// }
-
 module.exports.profileEmployerGet=(req,res)=>{
     res.render('profileEmployer')
 }
@@ -64,7 +59,6 @@ module.exports.profileEmployerGet=(req,res)=>{
 module.exports.profileEmployerEditGet=(req,res)=>{
     res.render('profileEmployerEdit')
 }
-
 
 module.exports.profileEmployerDelete=(req,res)=>{
         console.log('here in server delete')
@@ -95,60 +89,7 @@ module.exports.profileEmployerDelete=(req,res)=>{
                 }
             })
         }
-
-
-
-
-
 }
-
-
-//
-// module.exports.profileEmpGet=(req,res)=>{
-//     res.render('profileEmp')
-//
-// }
-
-// module.exports.editDelEmpGet = (req,res)=>{
-//     res.render('editDelEmp')
-// }
-
-// module.exports.editDelEmpPost = async (req,res)=>{
-//
-//     const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
-//
-//     try {
-//         const address = await addressModel.create({city, street, houseNumber})
-//         const user = await UserEmployer.create({email, password, firstName, lastName, phoneNumber, address})
-//         console.log(user+ 'user')
-//     }
-//     catch (err){
-//         const errors = handleErrors(err)
-//         res.status(400).json({ errors })
-//     }
-//
-// }
-//
-// module.exports.profileEmployerDelete= async (req,res)=> {
-//
-//     // const {email, password, firstName, lastName, phoneNumber, city, street, houseNumber} = req.body
-//     const token = req.cookies.jwt
-//     if (token) {
-//         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
-//                 if (err) {
-//                     console.log(err)
-//                 } else {
-//                     UserEmployer.findOneAndRemove({_id: decodedToken.id}).then(user =>{
-//                         if(user)
-//                             res.send('user?')
-//                         else res.render('/')
-//                     })
-//                 }
-//         })
-//     }
-// }
-
-
 
 module.exports.viewEmployeesGet=async (req,res)=>{
 
@@ -172,8 +113,6 @@ module.exports.viewEmployeesGet=async (req,res)=>{
 
     }
     res.render('viewEmployeesEmployer',{data: afterFilter, typeOfJob})
-
-
 }
 
 
@@ -197,8 +136,6 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
         })
 
 }
-
-
 
 
 module.exports.detailsOfContractorPost= (req,res)=> {
@@ -265,9 +202,6 @@ module.exports.detailsOfContractorPost= (req,res)=> {
         }
     })
 }
-
-
-
 
 module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
 //יכניס את השעות לבסיס נתונים
