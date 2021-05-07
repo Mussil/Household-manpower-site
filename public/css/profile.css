@@ -1,0 +1,9 @@
+body{padding-top:30px;}
+
+.glyphicon {  margin-bottom: 70px;margin-right: 70px;}
+
+big{
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}

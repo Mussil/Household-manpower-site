@@ -1,29 +1,31 @@
 const mongoose=require('mongoose')
 const {isEmail}=require('validator')
 const bcrypt=require('bcrypt')
-const addressSchema=require('./Address')
+const addressModel=require('./Address')
 const bankSchema=require('./Bank')
+const languagesSchema = require('./languageUser')
+const jobsSchema = require('./JobType')
 
-const languagesArray = ['hebrew', 'english', 'arabic', 'russian', 'amharic', 'chinese','portuguese', 'french','romanian', 'polish', 'spanish']
-const jobsArray = ['babysitting','ironing', 'cleaning', 'gardening', 'cooking', 'pet care']
-
-const languagesSchema= new mongoose.Schema(
-    { value : {
-             type : String,
-            enum : languagesArray,
-            lowercase: true,
-
-        }
-    })
-
-const jobsSchema= new mongoose.Schema(
-    { value : {
-            type : String,
-            enum : jobsArray,
-            lowercase: true,
-
-        }
-    })
+// const languagesArray = ['hebrew', 'english', 'arabic', 'russian', 'amharic', 'chinese','portuguese', 'french','romanian', 'polish', 'spanish']
+// const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
+//
+// const languagesSchema= new mongoose.Schema(
+//     { value : {
+//              type : String,
+//             enum : languagesArray,
+//             lowercase: true,
+//
+//         }
+//     })
+//
+// const jobsSchema= new mongoose.Schema(
+//     { value : {
+//             type : String,
+//             enum : jobsArray,
+//             lowercase: true,
+//
+//         }
+//     })
 
 
 const userSchema= new mongoose.Schema({
@@ -45,22 +47,22 @@ const userSchema= new mongoose.Schema({
         type: String,
         required: [true,'Please enter first name'],
         trim:true,
-        minlength :[3,'Minimum name length is 4 characters']
+        minlength :[3,'Minimum name length is 3 characters']
     },
     lastName: {
         type: String,
         required: [true,'Please enter last name'],
         trim:true,
-        minlength :[3,'Minimum name length is 4 characters']
+        minlength :[3,'Minimum name length is 3 characters']
     },
     phoneNumber:{
         type: Number,
-        min:1000000000,
+        min:100000000, //05X 1234567 אפס לא נחשב אז
         max:9999999999
 
     },
     address: {
-        type: addressSchema.schema
+        type: addressModel.schema
     } ,
     bank: {
         type: bankSchema.schema
@@ -70,7 +72,7 @@ const userSchema= new mongoose.Schema({
         enum: ['male', 'female']
     },
     languages: {
-        type: [languagesSchema],
+        type: [languagesSchema.schema]
     },
     education: {
         type: String,
@@ -80,7 +82,7 @@ const userSchema= new mongoose.Schema({
     smoker:{
         type: String,
         lowercase: true,
-        enum: ['smoker' / 'non smoker' / 'not at work']
+        enum: ['smoker' , 'non smoker' , 'not at work']
     },
     experience:{
         type: Number
@@ -109,11 +111,10 @@ const userSchema= new mongoose.Schema({
         default: ''
     },
     jobTypes:{
-        type: [jobsSchema],
-        default: []
+        type: [jobsSchema.schema],
     },
     leaveDates: {
-        type: [ Date],
+        type: [Date],
         default: []
     },
     rating:{

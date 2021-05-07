@@ -1,0 +1,17 @@
+.details h2{
+    padding-left: 10px;
+    color:#66afe9;
+}
+.details.content{
+    display: block;
+    margin: 40px 0px;
+    padding-left: 40px;
+}
+.Recruitment{
+    display: block;
+    margin: 40px 0px;
+    padding-left: 40px;
+}
+.Recruitment.error{
+    color: #de4427;
+}

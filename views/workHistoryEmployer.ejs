@@ -1,4 +1,72 @@
-
 <%- include ("partials/navEmployer.ejs")-%>
-<h1> work history Employer </h1>
-<%- include ("partials/footer.ejs")-%>
+<section>
+<!--        finding id employer-->
+    <% var myObject = []%>
+
+    <%var idEmployer = 'null', flag = 0%>
+    <% for(var i=0;i<employerData.length && flag == 0;i++) {%>
+        <% if(user.email == employerData[i].email){ %>
+            <% idEmployer = employerData[i]._id%>
+            <% flag = 1%>
+        <% } %>
+    <% } %>
+    <% for(var i=0; i<transactionData.length;i++) { %>
+        <% if(String(transactionData[i].idEmployer) == String(idEmployer)) { %>
+            <% for(var j=0; j<contractorData.length; j++) { %>
+                <% if(String(transactionData[i].idContractor) == String(contractorData[j]._id)) { %>
+                    <% var contractor = contractorData[j].email%>
+
+                    <% var jobType = transactionData[i].jobType%>
+
+                    <% var dateTransaction = (transactionData[i].date).toLocaleDateString()%>
+
+                    <% var rank = transactionData[i].rank%>
+
+                    <% var currentFee = ((transactionData[i].endHourShift - transactionData[i].startHourShift)/60) * transactionData[i].hourlyRate%>
+
+                    <%if(String(currentFee) == 'NaN') { %>
+                        <% currentFee = 'shift was not reported yet'%>
+                    <% } %>
+
+                    <% myObject.push({'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee})%>
+                <% } %>
+            <% } %>
+        <% } %>
+    <% } %>
+
+     <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryEmployer.css" />
+     <!--for demo wrap-->
+     <h1>Working History</h1>
+     <div class="tbl-header">
+         <table cellpadding="0" cellspacing="0" border="0">
+             <thead>
+             <tr>
+                 <th>Contractor</th>
+                 <th>Job type</th>
+                 <th>Date</th>
+                 <th>Rank</th>
+                 <th>Current fee</th>
+             </tr>
+             </thead>
+         </table>
+     </div>
+     <div class="tbl-content">
+         <table cellpadding="0" cellspacing="0" border="0">
+             <tbody>
+                 <% myObject.forEach(function(data){ %>
+                     <tr>
+                         <td><%= data.Worker%></td>
+                         <td><%= data.jobType %></td>
+                         <td><%= data.Date %></td>
+                         <td><%= data.Rank %></td>
+                         <td><%= data.CurrentFee %></td>
+                     </tr>
+                 <% } )%>
+             </tbody>
+         </table>
+     </div>
+</section>
+ <%- include ("partials/footer.ejs")-%>
+ </div>
+
+

@@ -72,6 +72,8 @@ module.exports.loginContractorPost= async (req,res)=>{
 //create new contractor .
 module.exports.createNewContractorPost= async (req,res)=>{
     const x=req.body
+
+
     try{
         const usersContractor= await UsersContractor.create(x)
         res.status(201).json(usersContractor)

@@ -1,4 +1,93 @@
-
+<!DOCTYPE html>
+<html>
+<head>
 <%- include ("partials/navHR.ejs")-%>
-<h1>Attendance clock - HR</h1>
+
+<section>
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
+    <script src="../js/attendanceClockHR.js"></script>
+
+
+
+    <!--for demo wrap-->
+
+    <h1>Attendance clock</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Contractor</th>
+                <th>Date</th>
+                <th>Recruitment start time</th>
+                <th>Recruitment end time</th>
+                <th>Shift start time</th>
+                <th>Shift end time</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <% for(var i=0;i<data.length;i++){ %>
+                <tr id=<%=i%>>
+                    <td><%= data[i].contractor%></td>
+                    <td><%= data[i].date.toLocaleDateString() %></td>
+                    <td><%= data[i].startHourRec %></td>
+                    <td><%= data[i].endHourRec %></td>
+
+                    <td class="hour-shift"><%= data[i].startHourShift %></td>
+                    <td class="hour-shift"><%= data[i].endHourShift %></td>
+<!--                    <td><p id="demo" >edit</p></td>-->
+                    <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
+                </tr>
+            <% }%>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <hr />
+
+</section>
+
+        <form id="hoursForm" class="container">
+            <h2>Updating Hours</h2><br>
+
+            <label>Start report time</label><br>
+            <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
+
+            <label>End report time</label><br>
+            <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+            <div class="hour message error"></div>
+            <div class="hour message suc"></div>
+
+            <div>
+                <input type="submit" value="Update changes">
+            </div>
+        </form>
+
+
+
+</head>
+</html>
+
 <%- include ("partials/footer.ejs")-%>
+<script>
+    var dataHere = <%- JSON.stringify(data) %>
+        // console.log(dataHere)
+    getDetails(dataHere)
+    document.getElementById('hoursForm').style.display = 'none'
+</script>
+
+
+
+
+
+
+
+
+
+

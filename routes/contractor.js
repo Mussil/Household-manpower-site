@@ -15,17 +15,17 @@ router.route('/workHistoryContractor')
 router.route('/salaryDetailsContractor')
     .get(requireConAuth, contractorController.salaryDetailsContractorGet)
 
-router.post('/salaryDetailsContractor', contractorController.salaryDetailsContractorPost)
-
-
 router.route('/profileContractor')
     .get(requireConAuth, contractorController.profileContractorGet)
+
+
+
 
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
 
 router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
 router.post('/shiftReportContractor', contractorController.shiftReportContractorPost)
-router.post('/shiftReportHoursContractor', contractorController.shiftReportHoursContractorPost)
+router.post('/shiftReportContractor', contractorController.shiftReportHoursContractorPost)
 
 module.exports=router

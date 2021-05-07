@@ -47,6 +47,7 @@ app.get('/', (req, res) => {
     res.render('home')
 })
 
+
 //ROUTES
 const authRoutes= require('../routes/auth')
 const employerRoutes= require('../routes/employer')
@@ -57,10 +58,6 @@ app.use(authRoutes)
 app.use(employerRoutes)
 app.use(HRRoutes)
 app.use(ContractorRoutes)
-
-
-
-
 
 
 

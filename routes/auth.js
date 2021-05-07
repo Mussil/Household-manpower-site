@@ -16,9 +16,8 @@ router.post('/createNewHR',HR.createNewHRPost)
 router.get('/loginEmployer',Employer.loginEmployerGet)
 router.post('/loginEmployer',Employer.loginEmployerPost)
 router.get('/signupEmployer',Employer.signupEmployerGet)
-
+router.post('/signupEmployer',Employer.signupEmployerPost)
 router.post('/createNewEmp',Employer.createNewEmpPost)
-
 router.get('/forgotEmployer',Employer.forgotEmployerGet)
 router.post('/forgotEmployer',Employer.forgotEmployerPost)
 

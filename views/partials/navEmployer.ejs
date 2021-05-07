@@ -6,23 +6,26 @@
 <!--?-->
                 <div class="navbar-header">
                     <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a class="navbar-brand" href="/homepageEmployer" >Logo here</a>
+<!--                    <a class="navbar-brand" href="/homepageEmployer" >Logo here</a>-->
+
+                    <link rel = "stylesheet"  type = "text/css"  href = "../css/home.css" />
+
+
+
+                    <a class="navbar-brand" href="/homepageEmployer"><span>HouseHold</span> manpower</a>
                 </div>
 
                 <div class="navbar-collapse collapse" id="mobile_menu">
                     <ul class="nav navbar-nav">
                         <li><a href="/workHistoryEmployer"><span class="glyphicon glyphicon-list-alt"></span>   Work history</a></li>
                         <li><a href="/profileEmployer"><span class="glyphicon glyphicon-user"></span>  Profile</a></li>
-                        <% if (user){ %>
-                            <li><%= user.email %> </li>
-                        <%} else {%>
 
-                           <% } %>
+
 
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>welcome, <%=user.email %></li>
+                        <li><a href='#' ><span class="#"></span> welcome, <%=user.email %><span ></span></a>
                         <li><a href='/logout' ><span class="glyphicon glyphicon-log-in"></span> Logout <span ></span></a>
 
                         </li>

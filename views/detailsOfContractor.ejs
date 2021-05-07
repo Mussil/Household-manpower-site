@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link rel = "stylesheet"  type = "text/css"  href = "../css/deatilsOfContractor.css" />
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/detailsOfContractor.css" />
     <script src="../js/detailsOfContractor.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -23,16 +23,31 @@
 </head>
 <body>
 
-//
-//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..
-//s בשביל העיצוב צריך לפתוח קובץ סיסס חדש
+
+<!--//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..
+//s בשביל העיצוב צריך לפתוח קובץ סיסס חדש-->
+
 <div class="details content">
-    <h2><%= result.email %></h2>
+    <h2><%= result.firstName %> <%=result.lastName %></h2>
     <div class="content">
         <p><%= result.aboutMe %></p>
+    <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
+    <p><%= result.gender %></p>
+    <p>Hourly rate: <%= result.hourlyRate %></p>
+
+    <% for(var i=0; i<result.languages.length;i++){%>
+        <%= result.languages[i].value %>
+    <% } %>
+
+    <p>education: <%= result.education %></p>
+    <p><%= result.smoker %></p>
+    <p><%= result.experience%></p>
+    <p>phone number <%= result.phoneNumber %></p>
+
+    <% for(var i=0; i<result.jobTypes.length;i++){%>
+            • <%= result.jobTypes[i].value %>
+    <% } %>
     </div>
-    <p><%= result.phoneNumber %></p>
-    <p><%= result.jobTypes %></p>
 
 </div>
 <hr>
