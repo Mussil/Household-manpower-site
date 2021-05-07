@@ -6,27 +6,6 @@ const bankSchema=require('./Bank')
 const languagesSchema = require('./languageUser')
 const jobsSchema = require('./JobType')
 
-// const languagesArray = ['hebrew', 'english', 'arabic', 'russian', 'amharic', 'chinese','portuguese', 'french','romanian', 'polish', 'spanish']
-// const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
-//
-// const languagesSchema= new mongoose.Schema(
-//     { value : {
-//              type : String,
-//             enum : languagesArray,
-//             lowercase: true,
-//
-//         }
-//     })
-//
-// const jobsSchema= new mongoose.Schema(
-//     { value : {
-//             type : String,
-//             enum : jobsArray,
-//             lowercase: true,
-//
-//         }
-//     })
-
 
 const userSchema= new mongoose.Schema({
     email: {
