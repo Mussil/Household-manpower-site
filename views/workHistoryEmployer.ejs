@@ -1,6 +1,7 @@
 <%- include ("partials/navEmployer.ejs")-%>
+<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
 <section>
-<!--        finding id employer-->
+    <!--        finding id employer-->
     <% var myObject = []%>
 
     <%var idEmployer = 'null', flag = 0%>
@@ -34,39 +35,40 @@
         <% } %>
     <% } %>
 
-     <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryEmployer.css" />
-     <!--for demo wrap-->
-     <h1>Working History</h1>
-     <div class="tbl-header">
-         <table cellpadding="0" cellspacing="0" border="0">
-             <thead>
-             <tr>
-                 <th>Contractor</th>
-                 <th>Job type</th>
-                 <th>Date</th>
-                 <th>Rank</th>
-                 <th>Current fee</th>
-             </tr>
-             </thead>
-         </table>
-     </div>
-     <div class="tbl-content">
-         <table cellpadding="0" cellspacing="0" border="0">
-             <tbody>
-                 <% myObject.forEach(function(data){ %>
-                     <tr>
-                         <td><%= data.Worker%></td>
-                         <td><%= data.jobType %></td>
-                         <td><%= data.Date %></td>
-                         <td><%= data.Rank %></td>
-                         <td><%= data.CurrentFee %></td>
-                     </tr>
-                 <% } )%>
-             </tbody>
-         </table>
-     </div>
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryEmployer.css" />
+    <!--for demo wrap-->
+    <h1>Working History</h1>
+    <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Contractor</th>
+                <th>Job type</th>
+                <th>Date</th>
+                <th>Rank</th>
+                <th>Current fee</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <% myObject.forEach(function(data){ %>
+                <tr>
+                    <td><%= data.Worker%></td>
+                    <td><%= data.JobType %></td>
+                    <td><%= data.Date %></td>
+                    <td><%= data.Rank %></td>
+                    <td><%= data.CurrentFee %></td>
+                </tr>
+            <% } )%>
+            </tbody>
+        </table>
+    </div>
 </section>
- <%- include ("partials/footer.ejs")-%>
- </div>
+</body>
+<%- include ("partials/footer.ejs")-%>
+</div>
 
 

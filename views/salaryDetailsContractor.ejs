@@ -26,15 +26,18 @@
 <h1> Salary details contractor</h1>
 
 <body>
-<h3 id="date">For the current month: </h3>
-<h3>The salary so far is: <%=sal%></h3>
-<hr>
-<h3>Choose a range for which you would like to see the salary</h3>
-<input type="text" name="daterange" value="" />
-<div class="salary range"></div>
-<div class="salary range error"></div>
+<form class="container">
+    <h2 id="date"><span class="glyphicon glyphicon-tags "></span>              For the current month: </h2>
+    <h2>The salary so far is: <%=sal%></h2>
+    <hr>
+    <h2>Choose a range for which you would like to see the salary</h2>
+    <input type="text" name="daterange" value="" />
+    <div class="salary range"></div>
+    <div class="salary range error"></div>
 
-</div>
+    </div>
+</form>
+
 </body>
 
 <%- include ("partials/footer.ejs")-%>
