@@ -128,10 +128,6 @@
             arrTypeJob.push('ironing')
             flag=1
         }
-        if (cleaning.checked == true){
-            arrTypeJob.push('cleaning')
-            flag=1
-        }
         if (gardening.checked == true){
             arrTypeJob.push('gardening')
             flag=1
