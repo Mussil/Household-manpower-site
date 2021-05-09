@@ -30,6 +30,7 @@ $(function() {
                 salaryRangeError.textContent = (data.err)
             }
             if(data.sal) { //successful
+                console.log('suc')
                 salaryRange.textContent = data.sal
             }
         }

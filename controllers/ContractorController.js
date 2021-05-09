@@ -123,7 +123,7 @@ module.exports.salaryDetailsContractorGet= async (req,res)=>{
 
 module.exports.salaryDetailsContractorPost=(req,res)=> {
     const { start,end } = req.body
-
+    console.log('heredsdsd')
     let  start1 = new Date(start)
     start1.setHours(0,0,0,0)
 
@@ -149,11 +149,14 @@ module.exports.salaryDetailsContractorPost=(req,res)=> {
                         sal += x.hourlyRate * (x.endHourShift - x.startHourShift)/60
                     }
                 }
-                if(sal!=0)
+                if(sal!=0) {
                     res.status(201).json({'sal': Math.round(sal)})
-                else
-                    res.status(400).json({err:'There is no record of shifts for these dates'})
-
+                    console.log(sal)
+                }
+                else {
+                    res.status(400).json({err: 'There is no record of shifts for these dates'})
+                    console.log('ds')
+                }
                 // eslint-disable-next-line no-unused-vars
             }).catch(result=>{
                 res.status(400).json({err:'There is no record of shifts for these dates'})
@@ -224,29 +227,22 @@ module.exports.shiftReportContractorPost=(req,res)=> {
     end.setHours(23,59,59,999)
 
     const token = req.cookies.jwt
-    let start2 = new Date(start)
-    console.log(start2)
-    start2.setDate(start2.getDate() + 1)
-    console.log(start2)
+    // let start2 = new Date(start)
 
-
-    console.log(start1)
-    console.log(end)
-    start1.setDate(start1.getDate() + 1)
-    console.log(start1)
 
 
     jwt.verify(token, 'sce secret', async (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
             } else {
-                console.log(decodedToken)
+                // console.log(decodedToken)
+                console.log('try')
                 //check for transaction in the start date and in the contractor-user id
                 await Transaction.findOne({
                     idContractor: decodedToken.id ,
-                    date:start2
-                    // date: {
-                    //     $gte: start1, $lte: end }
+                   // date:start2
+                    date: {
+                        $gte: start1, $lte: end }
                 }).then(result=>{
                     if(result){
                         console.log('found transaction')
