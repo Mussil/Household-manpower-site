@@ -1,14 +1,10 @@
 
 <html>
 <head>
-
+<title>Add a contractor</title>
 
     <!--    <h1>Add a contractor worker - HR</h1>-->
 
-    <title>Add Contractor</title>
-    <link rel = "stylesheet"
-          type = "text/css"
-          href = "../css/login.css" />
 
     <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
     <!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
@@ -25,11 +21,12 @@
                 <label >Email</label>
                 <input type="email" name="email" class="form-control" placeholder="Email" required>
             </div>
-            <div class="email error"></div>
+            <div class="email error "></div>
             <div class="form-group">
                 <label >Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
+                <input type="password" name="password" class="form-control" placeholder="Password"  title="Must include uppercase capital letters, numbers and characters" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
                 <!--                    <div class="password error"></div>-->
+
             </div>
 
             <div class="form-group">
@@ -65,9 +62,9 @@
             <!--////////////////////////////////////////////////////////////////////////////-->
             <div class="form-group">
                 <label >Hourly rate</label>
-                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="{17,500}" required>
+                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="[0-9]{17,500}" required>
             </div>
-            <div class="Hourly rate error"></div>
+            <div class="Hourly rate error "></div>
 
             <div class="form-group">
                 <label >Years of experience</label>
@@ -177,7 +174,8 @@
             <br><br>
             <button type="submit" id="submit" class="btn btn-black">Add Contractor</button>
         </form>
-        <div class="suc new"></div>
+        <div>  <h2 class= "suc new" > </h2> </div>
+
 
     </div>
 </div>

@@ -20,7 +20,6 @@ $(function() {
 
         const dateMessage = document.querySelector('.date.messages.error')
         dateMessage.textContent=''
-
         if(start<new Date()){
             dateMessage.textContent='The date has already passed.'
         }
