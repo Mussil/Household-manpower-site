@@ -33,6 +33,7 @@ $(function() {
                 if (data.result) {
                     // תקין אפשר להציג את השעות
                     document.getElementById('hoursForm').style.display = 'block'
+
                     afterHours(data.result)
 
                 }
@@ -40,7 +41,7 @@ $(function() {
                 console.log(err)
             }
 
-        }
+         }
     })
 })
 
@@ -51,10 +52,9 @@ function afterHours(trans){
     const form = document.querySelector('form')
     const hourMessageError = document.querySelector('.hour.message.error')
     const hourMessageSuc = document.querySelector('.hour.message.suc')
-
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
+        console.log('listen to submit')
 
         // reset errors
         hourMessageError.textContent = ''
@@ -72,7 +72,6 @@ function afterHours(trans){
         if(startMin>=endMin){
             hourMessageError.textContent='Final hour should be after the initial hour'
         }else {
-
 
             try {
                 const res = await fetch('/shiftReportHoursContractor', {

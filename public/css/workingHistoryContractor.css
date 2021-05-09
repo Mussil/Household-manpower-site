@@ -15,6 +15,7 @@ table{
     background-color: black;
 }
 .tbl-content{
+    background-color: white;
     height:300px;
     overflow-x:auto;
     margin-top: 0px;
@@ -35,8 +36,8 @@ td{
     vertical-align:middle;
     font-weight: 300;
     font-size: 12px;
-    color: white;
-    border: 1px solid white;
+    color: black;
+    border: 1px solid black;
 }
 
 /* demo styles */
