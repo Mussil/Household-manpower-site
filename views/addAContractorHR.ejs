@@ -11,68 +11,68 @@
     <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 </head>
 
-<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
 <%- include ("partials/navHR.ejs")-%>
-<link rel = "stylesheet"  type = "text/css"  href = "../css/addAContractorHR.css" />
+<!--<link rel = "stylesheet"  type = "text/css"  href = "../css/addAContractorHR.css" />-->
 
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <form  id="form">
             <div class="form-group">
-                <label class="label">Email</label>
+                <label >Email</label>
                 <input type="email" name="email" class="form-control" placeholder="Email" required>
             </div>
             <div class="email error "></div>
             <div class="form-group">
-                <label class="label">Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
-                <div class="password error "></div>
+                <label >Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Password"  title="Must include uppercase capital letters, numbers and characters" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' required>
+                <!--                    <div class="password error"></div>-->
+
             </div>
 
             <div class="form-group">
-                <label class="label">First Name</label>
+                <label >First Name</label>
                 <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-z]{3,}" required>
             </div>
             <!--                <div class="fName error"></div>-->
             <div class="form-group">
-                <label class="label">Last Name</label>
+                <label >Last Name</label>
                 <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-z]{3,}" required>
             </div>
             <!--                <div class="lName error"></div>-->
             <div class="form-group">
-                <label class="label">Phone Number</label>
+                <label >Phone Number</label>
                 <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{9,10}"required>
             </div>
 
             <div class="form-group">
-                <label class="label">City</label>
+                <label >City</label>
                 <select id="city"></select>
             </div>
             <div class="city error"></div>
             <div class="form-group">
-                <label class="label">Street</label>
+                <label >Street</label>
                 <input type="text" name="street" class="form-control" placeholder="Street"  pattern="[A-Za-z]+" required>
             </div>
 
             <div class="form-group">
-                <label class="label">House Number</label>
+                <label >House Number</label>
                 <input type="text" name="houseNumber" class="form-control" placeholder="House Number" pattern="[0-9]+" required>
             </div>
             <div class="house error"></div>
             <!--////////////////////////////////////////////////////////////////////////////-->
             <div class="form-group">
-                <label class="label">Hourly rate</label>
-                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="{17,500}" required>
+                <label >Hourly rate</label>
+                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="[0-9]{17,500}" required>
             </div>
             <div class="Hourly rate error "></div>
 
             <div class="form-group">
-                <label class="label">Years of experience</label>
+                <label >Years of experience</label>
                 <input type="number" name="experience" class="form-control" placeholder="Years of experience" pattern="[0-9]+"  required>
             </div>
 
             <div>
-                <lable for:="gender" class="label"> gender</lable>
+                <lable for:="gender" > gender</lable>
                 <select class="form-group" name="gender" id="gender">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -80,26 +80,26 @@
             </div>
 
             <div>
-                <label class="label">Language proficiency:</label>
+                <label >Language proficiency:</label>
                 <div id = "languages" name="languages">
-                    <label class="label"><input type="checkbox" id ="hebrew" name="test" value="hebrew"> Hebrew</label>
-                    <label class="label"><input type="checkbox" id="english" name="english" value="english"> English</label>
-                    <label class="label"><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
-                    <label class="label"><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
-                    <label class="label"><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
-                    <label class="label"><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
-                    <label class="label"><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
-                    <label class="label"><input type="checkbox" id="french" name="french" value="french"> French</label>
-                    <label class="label"><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
-                    <label class="label"><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
-                    <label class="label"><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
+                    <label ><input type="checkbox" id ="hebrew" name="test" value="hebrew"> Hebrew</label>
+                    <label ><input type="checkbox" id="english" name="english" value="english"> English</label>
+                    <label ><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
+                    <label ><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
+                    <label ><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
+                    <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
+                    <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
+                    <label><input type="checkbox" id="french" name="french" value="french"> French</label>
+                    <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
+                    <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
+                    <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
                 </div>
                 <div class="noLanguages error"></div>
 
             </div>
 
             <div>
-                <lable for:="smoker" class="label"> Smoke</lable>
+                <lable for:="smoker" > Smoke</lable>
                 <select class="form-group" name="smoker" id="smoker">
                     <option value="smoker">smoker</option>
                     <option value="non smoker">non smoker</option>
@@ -108,7 +108,7 @@
             </div>
 
             <div>
-                <lable for:="education" class="label"> Education</lable>
+                <lable for:="education" > Education</lable>
                 <select class="form-group" name="education" id="education">
                     <option value="Elementary">Elementary</option>
                     <option value="High school">high school</option>
@@ -120,21 +120,21 @@
 
             <!--101 form-->
             <div class="mb-3">
-                <label class="label"> 101 Form:</label>
+                <label > 101 Form:</label>
                 <input type="file" name="form101" class="form-control" aria-label="file example">
-<!--                <div class="invalid-feedback">Example invalid form file feedback</div>-->
+                <div class="invalid-feedback label">Example invalid form file feedback</div>
             </div>
             <!--jobsArray-->
 
             <div>
-                <label class="label"> Jobs:</label>
+                <label > Jobs:</label>
                 <div id = "jobTypes" name="jobTypes">
-                    <label class="label"><input type="checkbox" id ="babysitting" name="test" value="babysitting">babysitting</label>
-                    <label class="label"><input type="checkbox" id="ironing" name="ironing" value="ironing">ironing</label>
-                    <label class="label"><input type="checkbox" id="cleaning" name="cleaning" value="cleaning"> cleaning</label>
-                    <label class="label"><input type="checkbox" id="gardening" name="gardening" value="gardening"> gardening</label>
-                    <label class="label"><input type="checkbox" id="cooking" name="cooking" value="cooking"> cooking</label>
-                    <label class="label"><input type="checkbox" id="pet care" name="pet care" value="pet care"> pet care</label>
+                    <label ><input type="checkbox" id ="babysitting" name="test" value="babysitting">babysitting</label>
+                    <label ><input type="checkbox" id="ironing" name="ironing" value="ironing">ironing</label>
+                    <label ><input type="checkbox" id="cleaning" name="cleaning" value="cleaning"> cleaning</label>
+                    <label ><input type="checkbox" id="gardening" name="gardening" value="gardening"> gardening</label>
+                    <label ><input type="checkbox" id="cooking" name="cooking" value="cooking"> cooking</label>
+                    <label ><input type="checkbox" id="pet care" name="pet care" value="pet care"> pet care</label>
                 </div>
                 <div class="noJobTypes error"></div>
 
@@ -142,39 +142,41 @@
             </div>
             <div class="mb-3">
 
-                <label for="picture" class="label">Select image:</label>
-                <input type="file" id="picture" name="picture" accept="image/*">
+                <label for="picture" >Select image:</label>
+                <input type="file" id="picture" name="picture" accept="image/*" >
 
             </div>
 
-            <label for="start" class="label">Birthday:</label>
+            <label for="start" >Birthday:</label>
+
 
             <input type="date" id="birthday" name="birthday"
                    value="2000-07-22"
                    min="1970-01-01" max="2010-12-31">
             <!-- Bank-->
             <div class="form-group">
-                <label class="label">Bank Name</label>
+                <label >Bank Name</label>
                 <input type="text" name="bankName" class="form-control" placeholder="Name of bank" pattern="[a-zA-z]+" required>
             </div>
 
             <div class="form-group">
-                <label class="label">Bank account Number</label>
+                <label >Bank account Number</label>
                 <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" pattern="[0-9]{6,7}" required>
             </div>
             <div class="form-group">
-                <label class="label">Bank Branch</label>
+                <label >Bank Branch</label>
                 <input type="text" name="branch" class="form-control" placeholder="Branch bank tax" pattern="[0-9]+" required>
             </div>
             <!-- About me-->
             <div class="form-group">
-                <label class="label">About Me:</label>
+                <label >About Me:</label>
                 <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself"  required>
             </div>
             <br><br>
             <button type="submit" id="submit" class="btn btn-black">Add Contractor</button>
         </form>
-        <div class="suc new label"><h1></h1></div>
+        <div>  <h2 class= "suc new" > </h2> </div>
+
 
     </div>
 </div>
@@ -183,9 +185,6 @@
 
 
 <%- include ("partials/footer.ejs")-%>
-</body>
-
-
 </html>
 
 <script>
