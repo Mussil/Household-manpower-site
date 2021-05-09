@@ -2,3 +2,24 @@
     padding-left: 50px;
 }
 
+h1{
+    color: black;
+    text-align: center;
+    text-transform:none;
+    font-size: 50px;
+}
+
+h2{
+    color: black;
+    text-align: center;
+    text-transform:none;
+    font-size: 20px;
+}
+
+h3{
+    color: black;
+    text-align: left;
+    text-transform:none;
+    font-size: 20px;
+}
+
