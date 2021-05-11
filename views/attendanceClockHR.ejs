@@ -2,7 +2,7 @@
 <html>
 <head>
     <%- include ("partials/navHR.ejs")-%>
-<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
+
 <section>
     <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
     <script src="../js/attendanceClockHR.js"></script>
@@ -12,6 +12,25 @@
     <!--for demo wrap-->
 
     <h1>Attendance clock</h1>
+
+    <label for="myBrowser">Filter by : </label>
+
+    <input list="browsers" id="myBrowser" name="myBrowser" /><br><br>
+    <datalist id="browsers" onchange="run()">
+        <% for(var i=0;i<data.length;i++) { %>
+            <% var flag =0%>
+            <% for(var j=0;j<i && !flag;j++) { %>
+                <% if(String(data[i].contractor) == String(data[j].contractor)) { %>
+                    <% flag = 1%>
+                <% } %>
+            <% } %>
+            <% if(String(flag)==0) { %>
+        <option value=<%= data[i].contractor%> >
+            <% } %>
+            <% } %>
+    </datalist>
+    <span id="spanresult"></span>
+
     <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
@@ -70,7 +89,6 @@
 </form>
 
 
-</body>
 </head>
 </html>
 
@@ -80,7 +98,32 @@
         // console.log(dataHere)
         getDetails(dataHere)
     document.getElementById('hoursForm').style.display = 'none'
+
+    var getvalue=document.getElementsByName('myBrowser')[0]
+    getvalue.addEventListener('input', function ()
+        {
+            console.log(this.value)
+            var specificData=[]
+
+            for(var k=0;k<data.length;k++){
+                if(String(data[k].contractor)==String(this.value)){
+                    var transactionId=data[k].transactionId
+                    var contractor=data[k].contractor
+                    var date=data[k].date
+                    var startHourShift=data[k].startHourShift
+                    var endHourShift=data[k].endHourShift
+                    var startHourRec=data[k].startHourRec
+                    var endHourRec=data[k].endHourRec
+                    specificData.push({'transactionId': transactionId, 'contractor': contractor, 'date': date, 'startHourShift': startHourShift, 'endHourShift': endHourShift, 'startHourRec': startHourRec, 'endHourRec': endHourRec})
+                }
+            }
+            console.log(specificData)
+        }
+    )
+
 </script>
+
+
 
 
 

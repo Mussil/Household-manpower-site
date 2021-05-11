@@ -74,6 +74,10 @@ module.exports.attendanceclockHRGet=async (req,res)=>{
     res.render('attendanceClockHR', {data: myObject})
 }
 
+module.exports.attendanceclockHRFilterByCont(req, res){
+    
+}
+
 module.exports.attendanceclockHRPost= async (req,res)=>{
     const {id, startMin, endMin} = req.body
     console.log(startMin)
