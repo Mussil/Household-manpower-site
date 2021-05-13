@@ -49,6 +49,7 @@ module.exports.homepageHRGet=(req,res)=>{
 
 
 module.exports.attendanceclockHRGet=async (req,res)=>{
+
     const transcationResult = await Transaction.find({})
     const userContractorResult = await UsersContractor.find({})
 
@@ -72,10 +73,6 @@ module.exports.attendanceclockHRGet=async (req,res)=>{
     // console.log(myObject)
 
     res.render('attendanceClockHR', {data: myObject})
-}
-
-module.exports.attendanceclockHRFilterByCont(req, res){
-    
 }
 
 module.exports.attendanceclockHRPost= async (req,res)=>{
@@ -109,7 +106,6 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
 
 }
 
-
 module.exports.attendanceclockHRDelete= (req,res)=>{
     const id =req.params.id
     console.log('here in HRController')
@@ -124,6 +120,8 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
             console.log(err)
         })
 }
+
+
 
 function convertNumToHour(num){
     var hours = String(Math.floor(num / 60))

@@ -2,135 +2,134 @@
 <html>
 <head>
     <%- include ("partials/navHR.ejs")-%>
-
 <section>
-    <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
-    <script src="../js/attendanceClockHR.js"></script>
+    <div class="wrapper">
+        <div class="header">
+            <div class="title">
+                Attendance Clock
+            </div>
 
+            <script src="../js/attendanceClockHR.js"></script>
+            <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
 
+            <div class="search_box">
+                <input type="text" id="search_input" placeholder="Press here to fliter table using contractor mail..." >
+            </div>
+        </div>
 
-    <!--for demo wrap-->
+        <div class="table_wrap">
+            <div class="table_header">
+                <ul>
+                    <li>
+                        <div class="item">
+                            <div class="name">
+                                <span>Contractor</span>
+                            </div>
+                            <div class="date">
+                                <span>Date</span>
+                            </div>
+                            <div class="shift">
+                                <span>Recruitment start time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Recruitment end time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Shift start time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Shift end time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Options</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="table_body">
+                <ul>
+                    <% for(var i=0;i<data.length;i++){ %>
 
-    <h1>Attendance clock</h1>
+                            <li>
+                                <div class="item" id = <%=i%>>
+                                    <div class="name">
+                                        <td><%= data[i].contractor%></td>
+                                    </div>
+                                    <div class="date">
+                                        <td><%= data[i].date.toLocaleDateString()%></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><%= data[i].startHourRec %></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><%= data[i].endHourRec %></td>
+                                    </div>
+                                    <div class="shift hour-shift">
+                                        <td><%= data[i].startHourShift %></td>
+                                    </div>
+                                    <div class="shift hour-shift" >
+                                        <td><%= data[i].endHourShift %></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete"  onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
+                                    </div>
+                                </div>
+                            </li>
 
-    <label for="myBrowser">Filter by : </label>
+                    <% }%>
 
-    <input list="browsers" id="myBrowser" name="myBrowser" /><br><br>
-    <datalist id="browsers" onchange="run()">
-        <% for(var i=0;i<data.length;i++) { %>
-            <% var flag =0%>
-            <% for(var j=0;j<i && !flag;j++) { %>
-                <% if(String(data[i].contractor) == String(data[j].contractor)) { %>
-                    <% flag = 1%>
-                <% } %>
-            <% } %>
-            <% if(String(flag)==0) { %>
-        <option value=<%= data[i].contractor%> >
-            <% } %>
-            <% } %>
-    </datalist>
-    <span id="spanresult"></span>
+                </ul>
+            </div>
+            <div class="table_footer"></div>
+        </div>
 
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-                <th>Contractor</th>
-                <th>Date</th>
-                <th>Recruitment start time</th>
-                <th>Recruitment end time</th>
-                <th>Shift start time</th>
-                <th>Shift end time</th>
-                <th>Options</th>
-            </tr>
-            </thead>
-        </table>
     </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-            <% for(var i=0;i<data.length;i++){ %>
-            <tr id=<%=i%>>
-                <td><%= data[i].contractor%></td>
-                <td><%= data[i].date.toLocaleDateString() %></td>
-                <td><%= data[i].startHourRec %></td>
-                <td><%= data[i].endHourRec %></td>
-
-                <td class="hour-shift"><%= data[i].startHourShift %></td>
-                <td class="hour-shift"><%= data[i].endHourShift %></td>
-                <!--                    <td><p id="demo" >edit</p></td>-->
-                <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
-            </tr>
-            <% }%>
-            </tbody>
-        </table>
-    </div>
-
-
-
-    <hr />
-
 </section>
 
-<form id="hoursForm" class="container">
-    <h2>Updating Hours</h2><br>
-
-    <label>Start report time</label><br>
-    <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
-
-    <label>End report time</label><br>
-    <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
-    <div class="hour message error"></div>
-    <div class="hour message suc"></div>
-
-    <div>
-        <input type="submit" value="Update changes">
-    </div>
-</form>
-
-
 </head>
-</html>
+
+        <form id="hoursForm" class="container">
+            <h2>Updating Hours</h2><br>
+
+            <label>Start report time</label><br>
+            <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
+
+            <label>End report time</label><br>
+            <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+            <div class="hour message error"></div>
+            <div class="hour message suc"></div>
+
+            <div>
+                <input type="submit" value="Update changes">
+            </div>
+        </form>
 
 <%- include ("partials/footer.ejs")-%>
+</html>
+
 <script>
+
     var dataHere = <%- JSON.stringify(data) %>
         // console.log(dataHere)
         getDetails(dataHere)
     document.getElementById('hoursForm').style.display = 'none'
 
-    var getvalue=document.getElementsByName('myBrowser')[0]
-    getvalue.addEventListener('input', function ()
-        {
-            console.log(this.value)
-            var specificData=[]
 
-            for(var k=0;k<data.length;k++){
-                if(String(data[k].contractor)==String(this.value)){
-                    var transactionId=data[k].transactionId
-                    var contractor=data[k].contractor
-                    var date=data[k].date
-                    var startHourShift=data[k].startHourShift
-                    var endHourShift=data[k].endHourShift
-                    var startHourRec=data[k].startHourRec
-                    var endHourRec=data[k].endHourRec
-                    specificData.push({'transactionId': transactionId, 'contractor': contractor, 'date': date, 'startHourShift': startHourShift, 'endHourShift': endHourShift, 'startHourRec': startHourRec, 'endHourRec': endHourRec})
-                }
+    var search_input = document.querySelector("#search_input")
+
+    search_input.addEventListener("keyup", function(e){
+        var span_items = document.querySelectorAll(".table_body ul li .name")
+        var search_item = e.target.value.toLowerCase()
+
+        span_items.forEach(function(item){
+            if(item.textContent.toLowerCase().indexOf(search_item) != -1){
+                item.closest("li").style.display = "block"
             }
-            console.log(specificData)
-        }
-    )
+            else{
+                item.closest("li").style.display = "none"
+            }
+        })
 
+    })
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
