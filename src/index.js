@@ -37,6 +37,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true , useUnifiedTopology: true})
         }))
     .catch((err)=>console.log(err))
 
+mongoose.set('useFindAndModify', false)
 
 
 //routes

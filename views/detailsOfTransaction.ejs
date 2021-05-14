@@ -1,0 +1,33 @@
+<html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail of transaction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="../js/detailsOfTransaction.js"></script>
+
+
+</head>
+<body>
+<%- include ("partials/navContractor.ejs")-%>
+
+<%const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"]%>
+<p><%=firstName%> <%=lastName%> wants to hire you</p>
+<p>on <%= date.getDate()  %> of <%= monthNames[date.getMonth()]  %> <%= date.getFullYear()  %></p>
+<p>at <%=startHour%> till <%=endHour%> </p>
+<p>on job of <%=jobType%></p>
+<p>for more information the employer's email is <%=email%></p>
+
+<input type="button"  id="acceptButton" value="accept" onclick="myAccept()" class="btn btn-outline-primary"/>
+<input type="button"  id="declineButton" value="decline" onclick="myDecline()" class="btn btn-outline-primary"/>
+<div class="msg"></div>
+
+<%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>
+

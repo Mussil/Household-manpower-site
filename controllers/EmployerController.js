@@ -230,7 +230,7 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
             try {
                 const tran = await Transaction.create(newTrans)
                 console.log(tran)
-                res.status(201).json({data: tran, msg: 'Recruitment was performed'})
+                res.status(201).json({data: tran, msg: 'Recruitment was performed,\n wait till the contractor worker will approve it'})
             } catch (err) {
                 res.status(400).json({msgError: 'An error occurred'})
             }
