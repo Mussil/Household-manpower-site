@@ -1,0 +1,12 @@
+.transaction h2{
+    padding-left: 50px;
+}
+.transaction a{
+    display: block;
+    margin: 40px 0;
+    padding-left: 40px;
+    border-left: 6px solid #43272c;
+}
+.transaction a:hover h3{
+    color: #5393b0;
+}

@@ -40,6 +40,7 @@
     "node-mandrill": "^1.0.1",
     "nodemailer": "^6.5.0",
     "password-validator": "^5.1.1",
+    "sweetalert2": "^10.16.7",
     "validator": "^13.5.2"
   },
   "devDependencies": {

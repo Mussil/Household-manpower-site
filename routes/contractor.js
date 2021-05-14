@@ -32,4 +32,15 @@ router.post('/leavePeriodContractor', contractorController.leavePeriodContractor
 router.post('/shiftReportContractor', contractorController.shiftReportContractorPost)
 router.post('/shiftReportHoursContractor', contractorController.shiftReportHoursContractorPost)
 
+
+
+router.route('/workOrdersContractor')
+    .get(requireConAuth, contractorController.workOrdersContractorGet)
+router.route('/detailsOfTransaction/:id')
+    .get(requireConAuth, contractorController.detailsOfTransactionGet)
+router.post('/detailsOfTransaction', contractorController.detailsOfTransactionPost)
+
+
+
+
 module.exports=router

@@ -81,6 +81,15 @@ let transactionSchema = new mongoose.Schema({
     isShifted:{
         type:Boolean,
         default:false
+    },
+    approval:{
+      type: Number,
+        //0 before approval
+        //1= approve
+        //2= cancel
+        min:0,
+        max:2,
+        default:0
     }
 
 

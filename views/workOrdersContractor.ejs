@@ -1,0 +1,34 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Work orders</title>
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/workOrdersContractor.css" />
+
+</head>
+<body>
+<%- include ("partials/navContractor.ejs")-%>
+<!--s צריך לעצב כולל לשנות את שמות הקלאס לפי הדרישות להראות לכל עובד את השדות שלו-->
+
+<%const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"]%>
+<div class="transaction content">
+    <h2>Transaction that has not been approved yet</h2>
+
+    <% if (data.length > 0) { %>
+        <% data.forEach(tran => { %>
+        <a class="single" href="/detailsOfTransaction/<%= tran._id %>">
+            <h3 class="title">type of job:<%= tran.jobType %> </h3>
+            <p class="snippet"><%= tran.date.getDate()  %> of <%= monthNames[tran.date.getMonth()]  %> <%= tran.date.getFullYear()  %> </p>
+        </a>
+        <% }) %>
+    <% } else { %>
+        <p>There are no transaction to display...</p>
+    <% } %>
+
+</div>
+
+<%- include("./partials/footer.ejs") %>
+</body>
+</html>
+
