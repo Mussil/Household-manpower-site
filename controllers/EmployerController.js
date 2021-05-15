@@ -47,10 +47,38 @@ module.exports.homepageEmployerGet= (req,res)=>{
 
 module.exports.workHistoryEmployerGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
-    const userEmployerResult = await UserEmployer.find({})
+    // const userEmployerResult = await UserEmployer.find({})
     const userContractorResult = await UsersContractor.find({})
 
-    res.render('workHistoryEmployer', {transactionData: transcationResult, employerData: userEmployerResult, contractorData: userContractorResult})
+    var myObject = []
+
+    for(var i=0; i<transcationResult.length;i++) {
+            for(var j=0; j<userContractorResult.length; j++) {
+                if(String(transcationResult[i].idContractor) == String(userContractorResult[j]._id)) {
+                    var contractor = userContractorResult[j].email
+
+                    var jobType = transcationResult[i].jobType
+
+                    var dateTransaction = (transcationResult[i].date).toLocaleDateString()
+
+                    var rank = transcationResult[i].rank
+
+                    var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
+
+                    var idEmployer = transcationResult[i].idEmployer
+
+                    if(String(currentFee) == 'NaN') {
+                        currentFee = 'shift was not reported yet'
+                    }
+
+                    myObject.push({'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
+                }
+
+            }
+    }
+
+    console.log(myObject)
+    res.render('workHistoryEmployer', {data: myObject})
 }
 
 module.exports.profileEmployerGet=(req,res)=>{

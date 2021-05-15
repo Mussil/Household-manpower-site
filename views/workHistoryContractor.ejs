@@ -1,51 +1,81 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" >
 <head>
     <%- include ("partials/navContractor.ejs")-%>
-<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
-<section class="container">
-
+    <meta charset="UTF-8">
+    <title>Bootstrap Datatable | Webdevtrick.com</title>
     <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryContractor.css" />
-    <!--for demo wrap-->
-    <h1>Working history contractor</h1>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<div class="row">
+    <div class="container">
+
+        <div class="wrapper">
+            <div class="header">
+                <div class="title">
+                    Work History
+                </div>
+            </div>
+        </div>
+        
+        <table class="table responsive" id="sort">
             <thead>
             <tr>
-                <th>Date</th>
-                <th>Shift start time</th>
-                <th>Shift end time</th>
-                <th>Salary</th>
-                <th>Employer</th>
-                <th>JobType</th>
-                <th>Rating</th>
+                <th scope="col">Date</th>
+                <th scope="col">Shift start time</th>
+                <th scope="col">Shift end time</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Employer</th>
+                <th scope="col">JobType</th>
+                <th scope="col">Rating</th>
             </tr>
             </thead>
-        </table>
-    </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-            <% data.forEach(function(data){ %>
-            <tr>
-                <%if(String(data.contractor) == String(user.email)) { %>
-                    <td><%= data.date.toLocaleDateString() %></td>
-                    <td><%= data.startHourShift %></td>
-                    <td><%= data.endHourShift %></td>
-                    <td><%= data.salary %></td>
-                    <td><%= data.employer%></td>
-                    <td><%= data.jobType%></td>
-                    <td><%= data.rank%></td>
-                <% } %>
 
-            </tr>
+            <% data.forEach(function(data){ %>
+                <%if(String(data.contractor) == String(user.email)) { %>
+                    <tr>
+                            <td data-table-header="Date"><%= data.date.toLocaleDateString() %></td>
+                            <td data-table-header="Shift start time"><%= data.startHourShift %></td>
+                            <td data-table-header="Shift end time"><%= data.startHourShift %></td>
+                            <td data-table-header="Salary"><%= data.salary %></td>
+                            <td data-table-header="Employer"><%= data.employer%></td>
+                            <td data-table-header="JobType"><%= data.jobType%></td>
+                            <td data-table-header="rank"><%= data.rank%></td>
+                    </tr>
+                <%}%>
             <% } )%>
+
             </tbody>
         </table>
-
     </div>
-</section>
-</body>
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js'></script>
+<script  src="function.js"></script>
+
+</body>
 <%- include ("partials/footer.ejs")-%>
-</head>
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#sort").DataTable({
+            columnDefs : [
+                { type : 'date', targets : [3] }
+            ],
+        });
+    });
+</script>
