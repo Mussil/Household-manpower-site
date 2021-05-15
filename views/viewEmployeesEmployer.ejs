@@ -25,18 +25,21 @@
         <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
         <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
         <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
-        <button type="submit"> filter</button>
+        <button type="submit"> filter by language</button>
     </div>
 </form>
 <p class="budget">What is your maximum budget per hour?</p>
 <label for="range">
     <input type="range" name="range" id="range" min="17" max="500" step="1" value="30"/>
 </label>
-
-
 <button type="button" onclick="filterBudget()" class=""><output id="budget"for="range" class="output" value=""></output>select buget</button>
 
-
+<form class="city">
+    <label >Cities filter:</label>
+    <select id="city"></select>
+    <button type="submit"> filter by city</button>
+    </div>
+</form>
 
 
 
