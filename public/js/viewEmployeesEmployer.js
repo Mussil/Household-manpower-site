@@ -1,18 +1,5 @@
 
-const searchForm = document.querySelector('.search')
 
-
-searchForm.addEventListener('submit',(e)=>{
-    e.preventDefault()
-    const query=searchForm.term.value.trim()
-    console.log(query)
-
-})
-
-
-// function sendData(data){
-//     console.log(data)
-// }
 
 var data
 // eslint-disable-next-line no-unused-vars
@@ -20,31 +7,12 @@ function getDetails(dataHere){
     data = dataHere
 }
 
-function clearLanguage(){
-    $('input[type=checkbox]').each(function()
-    {
-        this.checked = false
-    })
-}
-
-// eslint-disable-next-line no-unused-vars
-function myClear(){
-    data.forEach(con=>{
-         var element= document.getElementById(con._id)
-            element.style.display='block'
-    })
-    clearLanguage()
-
-        $('.output').val('')
-    .trigger('change')
-
-}
-
-const languageForm = document.querySelector('.language')
-languageForm.addEventListener('submit',(e)=>{
+const filterForm = document.querySelector('.filter')
+filterForm.addEventListener('submit',(e)=>{
+    console.log(filterForm)
     e.preventDefault()
-    console.log(data)
 
+    //langauge
     var hebrew = document.getElementById('hebrew')
     var english = document.getElementById('english')
     var arabic = document.getElementById('arabic')
@@ -100,19 +68,68 @@ languageForm.addEventListener('submit',(e)=>{
             // myLan.push(lan)
             if(arrLang.includes(lan)){
                 console.log(con._id)
-                var element= document.getElementById(con._id)
-                element.style.display='block'
-
+                //var element= document.getElementById(con._id)
+                //element.style.display='block'
                 flag=1
             }
         })
         if(flag==0){
-                var element= document.getElementById(con._id)
-                 element.style.display='none'
+            var element= document.getElementById(con._id)
+            element.style.display='none'
         }
-    
+
     })
+    //end language
+
+
+    filterBudget()
+
+
+
+    //city
+    const city = filterForm.city.value
+    console.log(city)
+    data.forEach(con=>{
+        var element
+
+        if (con.address.city!=city && city!='default'){
+            element= document.getElementById(con._id)
+            element.style.display='none'
+
+        }
+
+    })
+
+    document.getElementById('submit_form').disabled = true
+
+
 })
+
+
+
+function clearLanguage(){
+    $('input[type=checkbox]').each(function()
+    {
+        this.checked = true
+    })
+}
+
+// eslint-disable-next-line no-unused-vars
+function myClear(){
+    data.forEach(con=>{
+         var element= document.getElementById(con._id)
+            element.style.display='block'
+    })
+    clearLanguage()
+
+        $('.output').val('')
+    .trigger('change')
+
+   document.getElementById('city').value = 'default'
+
+    document.getElementById('submit_form').disabled = false
+
+}
 
 
 $('#range').on('input', function() {
@@ -124,16 +141,20 @@ $('#range').on('input', function() {
 // eslint-disable-next-line no-unused-vars
 function filterBudget(){
     var value=document.getElementById('budget').value
-    console.log(value.substring(0, value.length - 1))
+    value.substring(0, value.length - 1)
+    console.log(value)
+    if(!value){
+        value=500
+    }
+    console.log(value)
 
     data.forEach(con=>{
         var element
-        console.log(con.hourlyRate)
-        console.log(parseInt(value, 10))
+        // console.log(con.hourlyRate)
+        // console.log(parseInt(value, 10))
         if (con.hourlyRate<=parseInt(value, 10)){
-            console.log('fd')
              element= document.getElementById(con._id)
-            element.style.display='block'
+             // element.style.display='block'
 
         }
         else{
@@ -222,7 +243,8 @@ const citiesArray =['eilat',
     'cana' ,
     'jatt',
     'rehaniya',
-    'degania']
+    'degania',
+'default']
 function selectOne() {
     var select = document.getElementById('city')
     for (var i=citiesArray.length-1; i>=0; i--) {
@@ -233,24 +255,20 @@ function selectOne() {
 selectOne()
 
 
-const citiesForm = document.querySelector('.city')
-citiesForm.addEventListener('submit',(e)=>{
+const searchForm = document.querySelector('.search')
+searchForm.addEventListener('submit',(e)=>{
     e.preventDefault()
-    const city = citiesForm.city.value
-    console.log(city)
-    data.forEach(con=>{
+    const name = searchForm.site_search.value
+    data.forEach(con=> {
         var element
 
-        if (con.address.city==city){
-            console.log('fd')
-            element= document.getElementById(con._id)
-            element.style.display='block'
+        if (con.firstName.includes(name) || con.lastName.includes(name) || con.email.includes(name)) {
+            element = document.getElementById(con._id)
+            element.style.display = 'block'
 
-        }
-        else{
-            element= document.getElementById(con._id)
-            element.style.display='none'
+        } else {
+            element = document.getElementById(con._id)
+            element.style.display = 'none'
         }
     })
-
 })
