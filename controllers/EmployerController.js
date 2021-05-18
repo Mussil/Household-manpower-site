@@ -53,6 +53,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
     var myObject = []
 
     for(var i=0; i<transcationResult.length;i++) {
+        if(transcationResult[i].isShifted){
             for(var j=0; j<userContractorResult.length; j++) {
                 if(String(transcationResult[i].idContractor) == String(userContractorResult[j]._id)) {
                     var contractor = userContractorResult[j].email
@@ -75,6 +76,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
                 }
 
             }
+        }
     }
 
     console.log(myObject)

@@ -90,3 +90,7 @@ span {
     font-size: 32px;
     color: black;
 }
+
+body {
+    background: #eaeaea;
+}

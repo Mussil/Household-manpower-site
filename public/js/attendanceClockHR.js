@@ -74,6 +74,16 @@ function myEditFunction(g) {
                         second.textContent=endTime
 
                         document.getElementById('hoursForm').style.display = 'none'
+
+                        // swal("Awesome!, Changes updated successfully!\n Updating mail was sent to the contractor")
+                        swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Updating mail was sent to the contractor',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
                     }
 
                 } catch (err) {
