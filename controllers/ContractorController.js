@@ -483,3 +483,5 @@ function sendEmail(email,msg){
         }
     })
 }
+
+module.exports = {sendEmail}
