@@ -14,6 +14,7 @@ router.route('/homepageHR')
 router.route('/attendanceClockHR')
     .get(requireHRAuth, HRController.attendanceclockHRGet)
 
+
 router.route('/addAContractorHR')
     .get(requireHRAuth, HRController.addAContractorHRGet)
 
@@ -41,12 +42,12 @@ router.post('/createTransaction',HRController.transactionPost)
 //     res.send('test')
 // })
 
-
-
 //at the end - need to delete!!!!!!!!!
 router.post('/createTransaction',HRController.transactionPost)
 
+/////////////////
 
+///////////////////
 
 module.exports=router
 

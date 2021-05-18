@@ -17,43 +17,45 @@ module.exports.workHistoryContractorGet=async (req,res)=>{
 
     var myObject=[]
 
-    for(var i=0;i<transcationResult.length;i++){
-        var date = transcationResult[i].date
-        for(var j=0;j<userContractorResult.length;j++){
-            if(String(userContractorResult[j]._id)==String(transcationResult[i].idContractor)){
-                var contractor = userContractorResult[j].email
+    for(var i=0;i<transcationResult.length;i++) {
+        if (transcationResult[i].isShifted) {
+            var date = transcationResult[i].date
+            for (var j = 0; j < userContractorResult.length; j++) {
+                if (String(userContractorResult[j]._id) == String(transcationResult[i].idContractor)) {
+                    var contractor = userContractorResult[j].email
+                }
+            }
+            var startHourShift = convertNumToHour(transcationResult[i].startHourShift)
+            var endHourShift = convertNumToHour(transcationResult[i].endHourShift)
+            var salary = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate
+
+            // if (String(startHourShift) == 'no report') {
+            //     salary = 0
+            // }
+
+            for (j = 0; j < userEmployerResult.length; j++) {
+                if (String(userEmployerResult[j]._id) == String(transcationResult[i].idEmployer)) {
+                    var employer = userEmployerResult[j].email
+                }
+            }
+            if (String(employer) != String(undefined)) {
+                var jobType = transcationResult[i].jobType
+                var rank = transcationResult[i].rank
+
+
+                myObject.push({
+                    'date': date,
+                    'contractor': contractor,
+                    'startHourShift': startHourShift,
+                    'endHourShift': endHourShift,
+                    'salary': salary,
+                    'employer': employer,
+                    'jobType': jobType,
+                    'rank': rank
+                })
             }
         }
-        var startHourShift = convertNumToHour(transcationResult[i].startHourShift)
-        var endHourShift = convertNumToHour(transcationResult[i].endHourShift)
-        var salary = ((transcationResult[i].endHourShift-transcationResult[i].startHourShift)/60)*transcationResult[i].hourlyRate
-
-        if(String(startHourShift) == 'no report'){
-            salary = 0
-        }
-
-        for( j=0;j<userEmployerResult.length;j++) {
-            if (String(userEmployerResult[j]._id) == String(transcationResult[i].idEmployer)) {
-                var employer = userEmployerResult[j].email
-            }
-        }
-        if(String(employer)!=String(undefined)) {
-            var jobType = transcationResult[i].jobType
-            var rank = transcationResult[i].rank
-
-
-            myObject.push({
-                'date': date,
-                'contractor': contractor,
-                'startHourShift': startHourShift,
-                'endHourShift': endHourShift,
-                'salary': salary,
-                'employer': employer,
-                'jobType': jobType,
-                'rank': rank
-            })
-        }
-        }
+    }
     res.render('workHistoryContractor', {data: myObject})
 }
 

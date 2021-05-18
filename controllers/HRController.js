@@ -49,6 +49,7 @@ module.exports.homepageHRGet=(req,res)=>{
 
 
 module.exports.attendanceclockHRGet=async (req,res)=>{
+
     const transcationResult = await Transaction.find({})
     const userContractorResult = await UsersContractor.find({})
 
@@ -87,9 +88,14 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
                         startHourShift: startMin,
                         endHourShift: endMin,
                         isShifted: true
-                    },).then(updatedRows => {
+                    },).then(async updatedRows => {
                     console.log(updatedRows)
                    // res.redirect('/attendanceClockHR')
+                    console.log(result.idContractor)
+                    await UsersContractor.findById(result.idContractor).then(con=>{
+                        console.log(con.email)
+                    })
+
                      res.status(201).json({msg: 'The shift was changed successfully'})
 
                 }).catch(err => {
@@ -97,6 +103,8 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
                     console.log(err)
 
                 })
+            // console.log('aaa')
+
 
         }).catch(err => {
             console.log(err)
@@ -104,7 +112,6 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
 
 
 }
-
 
 module.exports.attendanceclockHRDelete= (req,res)=>{
     const id =req.params.id
@@ -120,6 +127,8 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
             console.log(err)
         })
 }
+
+
 
 function convertNumToHour(num){
     var hours = String(Math.floor(num / 60))
@@ -158,30 +167,39 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
     const myObject = []
 
     for(var i=0;i<transcationResult.length;i++){
-        for(var j = 0; j<userContractorResult.length;j++){
-            if(String(transcationResult[i].idContractor)==String(userContractorResult[j]._id)){
-                var worker = userContractorResult[j].email
+        if (transcationResult[i].isShifted) {
+            for (var j = 0; j < userContractorResult.length; j++) {
+                if (String(transcationResult[i].idContractor) == String(userContractorResult[j]._id)) {
+                    var worker = userContractorResult[j].email
 
-                // var jobType = 'remind myself to change it'
+                    // var jobType = 'remind myself to change it'
+                }
+
             }
 
-        }
+            var jobType = String(transcationResult[i].jobType)
 
-        var jobType = String(transcationResult[i].jobType)
-
-        for(var k = 0; k<userEmployerResult.length; k++){
-            if(String(transcationResult[i].idEmployer)==String(userEmployerResult[k]._id)){
-                var employer = userEmployerResult[k].email
+            for (var k = 0; k < userEmployerResult.length; k++) {
+                if (String(transcationResult[i].idEmployer) == String(userEmployerResult[k]._id)) {
+                    var employer = userEmployerResult[k].email
+                }
+            }
+            if (String(employer) != String(undefined)) {
+                var dateTransaction = transcationResult[i].date
+                var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate
+                if (String(currentFee) == 'NaN') {
+                    currentFee = 'shift was not reported yet'
+                }
+                myObject.push({
+                    'worker': worker,
+                    'jobType': jobType,
+                    'employer': employer,
+                    'date': dateTransaction,
+                    'currentFee': currentFee
+                })
             }
         }
-        if(String(employer)!=String(undefined)){
-            var dateTransaction = transcationResult[i].date
-            var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
-            if(String(currentFee) == 'NaN'){
-                currentFee = 'shift was not reported yet'
-             }
-            myObject.push({'worker':worker, 'jobType': jobType, 'employer' :employer, 'date': dateTransaction , 'currentFee':currentFee})
-        }
+
     }
 
     // console.log(myObject)

@@ -9,8 +9,10 @@ function getDetails(dataHere){
 function myEditFunction(g) {
 
     console.log('edit')
+    console.log('trying to edit ', g)
     // console.log(data[g].transactionId)
-     const id = data[g].transactionId
+    const id = data[g].transactionId
+    console.log('id :', id)
     //
     // for (var i=0;i<data.length;i++){
     //     var first = document.getElementById(g).getElementsByClassName('hour-shift')[0]
@@ -19,9 +21,10 @@ function myEditFunction(g) {
     //     second.style.background = "white"
     // }
 
-    var first = document.getElementById(g).getElementsByClassName('hour-shift')[0]
+    console.log(document.getElementById(g))
+    var first = document.getElementById(g).getElementsByClassName('shift hour-shift')[0]
     first.style.background = '#f3f3f3 url(\'img_tree.png\') no-repeat right top'
-    var second = document.getElementById(g).getElementsByClassName('hour-shift')[1]
+    var second = document.getElementById(g).getElementsByClassName('shift hour-shift')[1]
     second.style.background = '#f3f3f3 url(\'img_tree.png\') no-repeat right top'
 
     document.getElementById('hoursForm').style.display = 'block'
@@ -71,6 +74,16 @@ function myEditFunction(g) {
                         second.textContent=endTime
 
                         document.getElementById('hoursForm').style.display = 'none'
+
+                        // swal("Awesome!, Changes updated successfully!\n Updating mail was sent to the contractor")
+                        swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Updating mail was sent to the contractor',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+
                     }
 
                 } catch (err) {
@@ -108,8 +121,6 @@ function myDeleteFunction(g) {
         .then(response => response.json())
         .then(data => window.location.href = data.redirect)
         .catch(err => console.log(err))
-
-
 }
 
 
