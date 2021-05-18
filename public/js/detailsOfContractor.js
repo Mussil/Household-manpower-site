@@ -95,6 +95,8 @@ function afterHours(contractorId,startDate,employerId){
                 if (data.msg) {
                     hourMessageSuc.textContent = data.msg
                 }
+                document.getElementById('hoursForm').style.display = 'none'
+
 
             } catch (err) {
                 console.log(err)

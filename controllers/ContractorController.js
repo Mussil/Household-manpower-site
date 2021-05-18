@@ -2,6 +2,7 @@ const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const jwt = require('jsonwebtoken')
 const UserEmployer=require('../models/UsersEmployer')
+let nodemailer = require('nodemailer')
 
 
 // controller actions
@@ -125,7 +126,6 @@ module.exports.salaryDetailsContractorGet= async (req,res)=>{
 
 module.exports.salaryDetailsContractorPost=(req,res)=> {
     const { start,end } = req.body
-    console.log('heredsdsd')
     let  start1 = new Date(start)
     start1.setHours(0,0,0,0)
 
@@ -157,7 +157,6 @@ module.exports.salaryDetailsContractorPost=(req,res)=> {
                 }
                 else {
                     res.status(400).json({err: 'There is no record of shifts for these dates'})
-                    console.log('ds')
                 }
                 // eslint-disable-next-line no-unused-vars
             }).catch(result=>{
@@ -237,8 +236,7 @@ module.exports.shiftReportContractorPost=(req,res)=> {
             if (err) {
                 console.log(err.message)
             } else {
-                // console.log(decodedToken)
-                console.log('try')
+
                 //check for transaction in the start date and in the contractor-user id
                 await Transaction.findOne({
                     idContractor: decodedToken.id ,
@@ -278,6 +276,9 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
         .then(async result => {
             if (result.isShifted) {
                 res.status(400).json({msgError: 'You have already entered a shift for this date'})
+            }
+            else if (result.approval!=0) {
+                res.status(400).json({msgError: 'You have not confirmed the transaction for this date'})
             }
             else{
 
@@ -341,3 +342,148 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
     }
 
 }
+
+
+
+
+module.exports.workOrdersContractorGet= async (req,res)=>{
+
+    const transaction = await Transaction.find({})
+    const afterFilter =[]
+    for(var i=0;i< transaction.length;++i){
+        if(!transaction[i].$isEmpty('approval')){
+            // console.log(transaction[i])
+            // console.log(transaction[i].idEmployer)
+            const employer= await UserEmployer.findById(transaction[i].idEmployer)
+                    // console.log(employer)
+                    if(employer){
+                        // console.log(transaction[i])
+                        if( transaction[i].approval==0) { //before approval
+                            afterFilter.push(transaction[i])
+                        }
+                    }
+
+
+
+
+        }
+
+    }
+
+
+    res.render('workOrdersContractor',{data:afterFilter})
+}
+
+module.exports.detailsOfTransactionGet =  async (req,res)=>{
+    const idTransaction=req.params.id
+
+
+   await Transaction.findById(idTransaction)
+        .then(async transcationResult=>{
+            await UserEmployer.findById(transcationResult.idEmployer)
+                .then(userEmployerResult=>{
+
+                    var jobType = String(transcationResult.jobType)
+
+                    var email = userEmployerResult.email
+                    var firstName=userEmployerResult.firstName
+                    var lastName=userEmployerResult.lastName
+                    var date = transcationResult.date
+                    var startHour = convertNumToHour(transcationResult.startHourRec)
+                    var endHour = convertNumToHour(transcationResult.endHourRec)
+                    // var idEmployer=transcationResult._id
+                    var myObject={ jobType,firstName,lastName, email, date ,startHour,endHour,idTransaction}
+                    // console.log(myObject)
+                    res.render('detailsOfTransaction',myObject)
+
+                })
+    })
+
+}
+
+
+module.exports.detailsOfTransactionPost= async (req,res)=>{
+    var isAccepted=req.body.isAccepted
+    var idTransaction=req.body.idTransaction
+
+    var email
+    var date
+    var jobType
+    var firstName
+    var lastName
+    await Transaction.findById(idTransaction).then(async trans=>{{
+        date=trans.date
+        jobType=trans.jobType
+        await UserEmployer.findById(trans.idEmployer).then(async emp=>{
+            console.log(emp)
+            email=emp.email
+        })
+        await UsersContractor.findById(trans.idContractor).then(cont=>{
+            console.log(cont)
+            firstName=cont.firstName
+            lastName=cont.lastName
+        })
+    }})
+    var str
+    var isapprove
+
+    if(isAccepted==1){
+        str='The transaction is approved'
+        isapprove='approved'
+    }
+    else if (isAccepted==2){
+        str='The transaction is denied'
+        isapprove='denied'
+    }
+
+    var info='The transaction on: '+date.getDate()+' '+date.getMonth()+' '+date.getFullYear()+'of '+jobType+
+        '\n'+isapprove+'\n'+
+        'by '+firstName+' '+lastName
+    console.log(info)
+    console.log(email)
+
+    Transaction.findByIdAndUpdate(idTransaction, { approval: isAccepted },
+        // eslint-disable-next-line no-unused-vars
+        function (err, docs) {
+            if (err) {
+                res.status(400).json({msg: 'an error occurred Try again'})
+            } else {
+                res.status(200).json({ msg: str })
+                sendEmail(email,info)
+
+
+            }
+        })
+
+
+}
+
+
+
+function sendEmail(email,msg){
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'hssce2021@gmail.com',
+            pass: 'lamasce?'
+        }
+    })
+
+    let mailOptions = {
+        from: 'hssce2021@gmail.com',
+        to: email,
+        subject: 'password reset',
+        text: msg
+    }
+
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
+}
+
+module.exports = {sendEmail}
