@@ -275,6 +275,9 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
             if (result.isShifted) {
                 res.status(400).json({msgError: 'You have already entered a shift for this date'})
             }
+            else if (result.approval!=0) {
+                res.status(400).json({msgError: 'You have not confirmed the transaction for this date'})
+            }
             else{
 
                 await Transaction.updateOne({_id: trans._id},
@@ -480,3 +483,5 @@ function sendEmail(email,msg){
         }
     })
 }
+
+module.exports = {sendEmail}

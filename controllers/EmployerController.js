@@ -149,7 +149,7 @@ module.exports.detailsOfContractorPost= (req,res)=> {
     console.log('cont')
     console.log(contractorId)
 
-
+    console.log(start)
     var start1 = new Date(start)
     start1.setHours(0, 0, 0, 0)
     start1.setDate(start1.getDate() + 1)
@@ -157,8 +157,11 @@ module.exports.detailsOfContractorPost= (req,res)=> {
     let end = new Date(start)
     end.setHours(23,59,59,999)
 
-    console.log(start1)
-    console.log(end)
+    // console.log(start1)
+    // console.log(end)
+
+
+
 
     const token = req.cookies.jwt
 
@@ -186,10 +189,13 @@ module.exports.detailsOfContractorPost= (req,res)=> {
                         }
                     } // the contractor worker could be hired
                         //need to check if he already has a job for this date
+
+                        console.log('fd')
                         Transaction.findOne({
                             idContractor: contractorId,
-                            date: {
-                                $gte: start1, $lte: end }
+                            date: start1
+                                // {
+                                // $gte: start1, $lte: end }
                         }).then(result => {
                             console.log(result)
                             if (result) { //already hired
@@ -226,7 +232,7 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
                 startHourRec: startMin,
                 endHourRec: endMin
             }
-            console.log(newTrans)
+            // console.log(newTrans)
             try {
                 const tran = await Transaction.create(newTrans)
                 console.log(tran)

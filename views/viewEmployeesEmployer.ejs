@@ -5,16 +5,68 @@
 </head>
 <body>
 <%- include ("partials/navEmployer.ejs")-%>
-<!--s צריך לעצב כולל לשנות את שמות הקלאס לפי הדרישות להראות לכל עובד את השדות שלו-->
+
+
+
+<form class="filter">
+    <label >Language filter:</label>
+    <div id = "languages" name="languages">
+        <label ><input type="checkbox" id ="hebrew" name="hebrew" value="hebrew"> Hebrew</label>
+        <label ><input type="checkbox" id="english" name="english" value="english"> English</label>
+        <label ><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
+        <label ><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
+        <label ><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
+        <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
+        <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
+        <label><input type="checkbox" id="french" name="french" value="french"> French</label>
+        <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
+        <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
+        <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
+<!--        <button type="submit"> filter by language</button>-->
+    </div>
+<!--</form>-->
+<p class="budget">What is your maximum budget per hour?</p>
+<label for="range">
+    <input type="range" name="range" id="range" min="17" max="500" step="1" value="30"/>
+</label>
+<!--<button type="button" onclick="filterBudget()" class=""><output id="budget"for="range" class="output" value=""></output>select budget</button>-->
+<output id="budget"for="range" class="output" value=""></output>
+<!--<form class="city">-->
+    <label >Cities filter:</label>
+    <select id="city"></select>
+<!--    <button type="submit"> filter by city</button>-->
+    </div>
+    <div>
+    <button type="submit" id="submit_form" class="glyphicon glyphicon-filter" >Filter all</button>
+    <button type="button" onclick="myClear()" class="glyphicon glyphicon-remove-sign">Clear</button>
+    </div>
+    <!--onclick="myFilter()"-->
+</form>
+
+
+<form class="search">
+    <label for="site-search">Search by name:</label>
+    <input type="search" id="site_search" name="con_name"
+           aria-label="Search through site content">
+
+    <button type="submit">Search</button>
+</form>
+
+
+
+
+
+
 <div class="contractor content">
     <h2>contractor who are: <%=typeOfJob%></h2>
 
     <% if (data.length > 0) { %>
         <% data.forEach(con => { %>
-            <a class="single" href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
+            <div id=<%= con._id %>>
+            <a class="single"  href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
                 <h3 class="title"><%= con.firstName %> <%=con.lastName %></h3>
                 <p class="snippet"><%= con.aboutMe.slice(0, 200) %></p>
-            </a>
+            </a></div>
         <% }) %>
     <% } else { %>
         <p>There are no contractors workers to display...</p>
@@ -26,3 +78,14 @@
 </body>
 </html>
 
+
+
+<script src="../js/viewEmployeesEmployer.js"></script>
+<script>
+    var dataHere = <%- JSON.stringify(data) %>
+        getDetails(dataHere)
+    myClear()
+
+
+
+</script>
