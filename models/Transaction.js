@@ -1,7 +1,7 @@
 const mongoose=require('mongoose')
 // const UsersContractor=require('./UsersContractor')
 // const UsersEmployer=require('./UsersEmployer')
-const jobsArray = ['babysitting',' ironing and washing', 'cleaning', 'gardening', 'cooking', 'pet care']
+const jobsArray = ['babysitting','ironing', 'cleaning', 'gardening', 'cooking', 'pet care']
 
 
 let transactionSchema = new mongoose.Schema({
@@ -75,8 +75,8 @@ let transactionSchema = new mongoose.Schema({
         ]
     },
     recommendation: {
-        type: [String],
-        default: []
+        type: String,
+        default: ''
     },
     isShifted:{
         type:Boolean,

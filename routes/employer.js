@@ -25,7 +25,7 @@ router.route('/profileEmployerEdit')
 ////////////////////////////////////////////////////
 
 //router.get('/homepageEmployer',requireEmpAuth, homepageEmployerController.homepageEmployerGet)
-router.route('/viewEmployeesContractor/:typeOfJob')
+router.route('/viewEmployeesEmployer/:typeOfJob')
     .get(requireEmpAuth, EmployerController.viewEmployeesGet)
 
 router.route('/detailsOfContractor/:id')
