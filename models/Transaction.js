@@ -75,8 +75,8 @@ let transactionSchema = new mongoose.Schema({
         ]
     },
     recommendation: {
-        type: [String],
-        default: []
+        type: String,
+        default: ''
     },
     isShifted:{
         type:Boolean,
