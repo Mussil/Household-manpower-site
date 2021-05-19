@@ -2,6 +2,11 @@
 <link rel = "stylesheet"  type = "text/css"  href = "../css/viewEmployeesEmployer.css" />
 <head>
     <title>list of <%=typeOfJob%></title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
 </head>
 <body>
 <%- include ("partials/navEmployer.ejs")-%>
@@ -53,6 +58,23 @@
 </form>
 
 
+<div class="dropdown pull-right">
+    <a class="dropdown-toggle text-muted" data-toggle="dropdown" href="#" id="dropdown-sortmode" title="Sort">
+        <small><span class="glyphicon glyphicon-sort"></span>&nbsp;Sort</small>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-sortmode">
+      </li>
+        <li role="menuitem"><a onclick="sortbyFirstName('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> First name (A-Z)</a></li>
+        <li role="menuitem"><a onclick="sortbyFirstName('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> First name (Z-A)</a></li>
+        <li role="menuitem"><a onclick="sortbyEmail('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> Email (A-Z) </a></li>
+        <li role="menuitem"><a onclick="sortbyEmail('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Email (Z-A) </a></li>
+        <li role="menuitem"><a onclick="sortbyHourlyRate('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Hourly rate (17-500) </a></li>
+        <li role="menuitem"><a onclick="sortbyHourlyRate('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Hourly rate (500-17) </a></li>
+        <li role="menuitem"><a onclick="sortbyRank('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Rank (1-5) </a></li>
+        <li role="menuitem"><a onclick="sortbyRank('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Rank (5-1) </a></li>
+
+    </ul>
+</div>
 
 
 
@@ -62,7 +84,7 @@
 
     <% if (data.length > 0) { %>
         <% data.forEach(con => { %>
-            <div id=<%= con._id %>>
+            <div class="specific" id=<%= con._id %> >
             <a class="single"  href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
                 <h3 class="title"><%= con.firstName %> <%=con.lastName %></h3>
                 <p class="snippet"><%= con.aboutMe.slice(0, 200) %></p>
@@ -76,6 +98,8 @@
 
 <%- include("./partials/footer.ejs") %>
 </body>
+
+
 </html>
 
 
@@ -85,7 +109,5 @@
     var dataHere = <%- JSON.stringify(data) %>
         getDetails(dataHere)
     myClear()
-
-
 
 </script>

@@ -457,7 +457,6 @@ module.exports.detailsOfTransactionPost= async (req,res)=>{
 }
 
 
-
 function sendEmail(email,msg){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -484,4 +483,3 @@ function sendEmail(email,msg){
     })
 }
 
-module.exports = {sendEmail}

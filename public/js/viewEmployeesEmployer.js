@@ -5,11 +5,11 @@ var data
 // eslint-disable-next-line no-unused-vars
 function getDetails(dataHere){
     data = dataHere
+
 }
 
 const filterForm = document.querySelector('.filter')
 filterForm.addEventListener('submit',(e)=>{
-    console.log(filterForm)
     e.preventDefault()
 
     //langauge
@@ -75,6 +75,8 @@ filterForm.addEventListener('submit',(e)=>{
         })
         if(flag==0){
             var element= document.getElementById(con._id)
+            console.log(element)
+
             element.style.display='none'
         }
 
@@ -142,7 +144,6 @@ $('#range').on('input', function() {
 function filterBudget(){
     var value=document.getElementById('budget').value
     value.substring(0, value.length - 1)
-    console.log(value)
     if(!value){
         value=500
     }
@@ -271,4 +272,216 @@ searchForm.addEventListener('submit',(e)=>{
             element.style.display = 'none'
         }
     })
+
 })
+
+
+
+// eslint-disable-next-line no-unused-vars
+function sortbyFirstName(dir) {
+    console.log(dir)
+    var  i, switching, b, shouldSwitch
+    // list = document.getElementsByClassName('contractor')
+    switching = true
+    // Set the sorting direction to ascending:
+    // dir = 'asc'
+    // Make a loop that will continue until no switching has been done:
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false
+        b = document.getElementsByClassName('specific')
+        // Loop through all list-items:
+        for (i = 0; i < (b.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false
+            /* Check if the next item should switch place with the current item,
+            based on the sorting direction (asc or desc): */
+            if (dir == 'asc') {
+                if (getIdReturnName(b[i].id).toLowerCase() > getIdReturnName(b[i+1].id).toLowerCase()) {
+                    /* If next item is alphabetically lower than current item,
+                    mark as a switch and break the loop: */
+                     shouldSwitch = true
+                    break
+                }
+            } else if (dir == 'desc') {
+                if (getIdReturnName(b[i].id).toLowerCase() < getIdReturnName(b[i+1].id).toLowerCase()) {
+                    /* If next item is alphabetically higher than current item,
+                    mark as a switch and break the loop: */
+                     shouldSwitch= true
+                    break
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            b[i].parentNode.insertBefore(b[i + 1], b[i])
+            switching = true
+
+        }
+    }
+}
+
+
+function getIdReturnName(exId){
+    var el=data.find(el => el._id ==exId)
+    return el.firstName
+}
+
+
+// eslint-disable-next-line no-unused-vars
+function sortbyEmail(dir) {
+    console.log(dir)
+    var  i, switching, b, shouldSwitch
+    // list = document.getElementsByClassName('contractor')
+    switching = true
+    // Set the sorting direction to ascending:
+    // dir = 'asc'
+    // Make a loop that will continue until no switching has been done:
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false
+        b = document.getElementsByClassName('specific')
+        // Loop through all list-items:
+        for (i = 0; i < (b.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false
+            /* Check if the next item should switch place with the current item,
+            based on the sorting direction (asc or desc): */
+            if (dir == 'asc') {
+                if (getIdReturnEmail(b[i].id).toLowerCase() > getIdReturnEmail(b[i+1].id).toLowerCase()) {
+                    /* If next item is alphabetically lower than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch = true
+                    break
+                }
+            } else if (dir == 'desc') {
+                if (getIdReturnEmail(b[i].id).toLowerCase() < getIdReturnEmail(b[i+1].id).toLowerCase()) {
+                    /* If next item is alphabetically higher than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch= true
+                    break
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            b[i].parentNode.insertBefore(b[i + 1], b[i])
+            switching = true
+
+        }
+    }
+}
+
+
+function getIdReturnEmail(exId){
+    var el=data.find(el => el._id ==exId)
+    return el.email
+}
+
+
+
+// eslint-disable-next-line no-unused-vars
+function sortbyHourlyRate(dir) {
+    console.log(dir)
+    var  i, switching, b, shouldSwitch
+    // list = document.getElementsByClassName('contractor')
+    switching = true
+    // Set the sorting direction to ascending:
+    // dir = 'asc'
+    // Make a loop that will continue until no switching has been done:
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false
+        b = document.getElementsByClassName('specific')
+        // Loop through all list-items:
+        for (i = 0; i < (b.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false
+            /* Check if the next item should switch place with the current item,
+            based on the sorting direction (asc or desc): */
+            if (dir == 'asc') {
+                if (getIdReturnHourlyRate(b[i].id) > getIdReturnHourlyRate(b[i+1].id)) {
+                    /* If next item is alphabetically lower than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch = true
+                    break
+                }
+            } else if (dir == 'desc') {
+                if (getIdReturnHourlyRate(b[i].id) < getIdReturnHourlyRate(b[i+1].id)) {
+                    /* If next item is alphabetically higher than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch= true
+                    break
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            b[i].parentNode.insertBefore(b[i + 1], b[i])
+            switching = true
+
+        }
+    }
+}
+
+
+function getIdReturnHourlyRate(exId){
+    var el=data.find(el => el._id ==exId)
+    return el.hourlyRate
+}
+
+
+
+// eslint-disable-next-line no-unused-vars
+function sortbyRank(dir) {
+    console.log(dir)
+    var  i, switching, b, shouldSwitch
+    // list = document.getElementsByClassName('contractor')
+    switching = true
+    // Set the sorting direction to ascending:
+    // dir = 'asc'
+    // Make a loop that will continue until no switching has been done:
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false
+        b = document.getElementsByClassName('specific')
+        // Loop through all list-items:
+        for (i = 0; i < (b.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false
+            /* Check if the next item should switch place with the current item,
+            based on the sorting direction (asc or desc): */
+            if (dir == 'asc') {
+                if (getIdReturnRating(b[i].id) > getIdReturnRating(b[i+1].id)) {
+                    /* If next item is alphabetically lower than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch = true
+                    break
+                }
+            } else if (dir == 'desc') {
+                if (getIdReturnRating(b[i].id) < getIdReturnRating(b[i+1].id)) {
+                    /* If next item is alphabetically higher than current item,
+                    mark as a switch and break the loop: */
+                    shouldSwitch= true
+                    break
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            b[i].parentNode.insertBefore(b[i + 1], b[i])
+            switching = true
+
+        }
+    }
+}
+
+
+function getIdReturnRating(exId){
+    var el=data.find(el => el._id ==exId)
+    return el.rating
+}

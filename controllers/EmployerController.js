@@ -99,12 +99,13 @@ module.exports.viewEmployeesGet=async (req,res)=>{
 
     const usersContractorResult = await UsersContractor.find({})
     const afterFilter =[]
+
     for(var i=0;i< usersContractorResult.length;++i){
         if(!usersContractorResult[i].$isEmpty('jobTypes')){
             const arrJobTypes=usersContractorResult[i].jobTypes
             for ( var j=0 ; j<arrJobTypes.length;j++){
 
-                if (arrJobTypes[j]['value']==typeOfJob){
+                 if (arrJobTypes[j]['value']==typeOfJob){
                     afterFilter.push(usersContractorResult[i])
 
                 }
