@@ -36,6 +36,7 @@ router.post('/detailsOfContractor', EmployerController.detailsOfContractorPost)
 router.post('/detailsOfContractorHours', EmployerController.detailsOfContractorHoursPost)
 
 
+router.post('/rateContractor', EmployerController.rateContractorPost)
 
 
 

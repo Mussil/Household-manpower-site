@@ -56,6 +56,8 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
         if(transcationResult[i].isShifted){
             for(var j=0; j<userContractorResult.length; j++) {
                 if(String(transcationResult[i].idContractor) == String(userContractorResult[j]._id)) {
+                    var id = transcationResult[i]._id
+
                     var contractor = userContractorResult[j].email
 
                     var jobType = transcationResult[i].jobType
@@ -72,7 +74,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
                         currentFee = 'shift was not reported yet'
                     }
 
-                    myObject.push({'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
+                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
                 }
 
             }
@@ -282,8 +284,26 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
     })
 
 
+}
 
 
+module.exports.rateContractorPost= async (req,res)=>{
+
+    const {id,recommendation} = req.body
+    console.log(recommendation)
+
+    await Transaction.updateOne({_id: id},
+        {
+            recommendation: recommendation
+        },).then(updatedRows => {
+        console.log(updatedRows)
+        res.status(201).json({updatedRows})
+    }).catch(err => {
+        res.status(400).json({msgError: 'an error occurred Try again'})
+        console.log(err)
+
+    })
 
 
 }
+
