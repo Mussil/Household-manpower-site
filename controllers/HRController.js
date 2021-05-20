@@ -94,6 +94,7 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
                     console.log(result.idContractor)
                     await UsersContractor.findById(result.idContractor).then(con=>{
                         console.log(con.email)
+                        sendEmail(con.email, 'Hi there!'+con.email+'\nWe updated your shift to '+convertNumToHour(startMin)+' to '+convertNumToHour(endMin)+'in date: '+result.date.toLocaleDateString())
                     })
 
                      res.status(201).json({msg: 'The shift was changed successfully'})
@@ -106,11 +107,38 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
             // console.log('aaa')
 
 
+
         }).catch(err => {
             console.log(err)
         })
 
 
+}
+
+function sendEmail(email,msg){
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'hssce2021@gmail.com',
+            pass: 'lamasce?'
+        }
+    })
+
+    let mailOptions = {
+        from: 'hssce2021@gmail.com',
+        to: email,
+        subject: 'password reset',
+        text: msg
+    }
+
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
 }
 
 module.exports.attendanceclockHRDelete= (req,res)=>{

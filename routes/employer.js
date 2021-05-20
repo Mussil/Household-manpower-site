@@ -20,8 +20,8 @@ router.delete('/profileEmployer', EmployerController.profileEmployerDelete)
 router.route('/profileEmployerEdit')
     .get(requireEmpAuth, EmployerController.profileEmployerEditGet)
 
-
-
+router.route('/rateContractorInEmployer/:idTran')
+    .get(requireEmpAuth, EmployerController.rateContractorInEmployerGet)
 ////////////////////////////////////////////////////
 
 //router.get('/homepageEmployer',requireEmpAuth, homepageEmployerController.homepageEmployerGet)
@@ -36,6 +36,7 @@ router.post('/detailsOfContractor', EmployerController.detailsOfContractorPost)
 router.post('/detailsOfContractorHours', EmployerController.detailsOfContractorHoursPost)
 
 
+router.post('/rateContractor', EmployerController.rateContractorPost)
 
 
 

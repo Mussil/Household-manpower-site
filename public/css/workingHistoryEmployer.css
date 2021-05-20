@@ -90,3 +90,17 @@ span {
     font-size: 32px;
     color: black;
 }
+
+.wrapper .title2 {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 300;
+    font-size: 16px;
+    color: black;
+}
+
+/*///////////*/
+.feel {
+    margin: 0px 10px;
+    background-color: white;
+}

@@ -21,13 +21,13 @@ router.route('/addAContractorHR')
 router.route('/monitorHiringHR')
     .get(requireHRAuth, HRController.monitorHiringHRGet)
 
-router.route('/addAContractorHR')
-    .get(requireHRAuth,HRController.addAContractorHRGet)
+// router.route('/addAContractorHR')
+//     .get(requireHRAuth,HRController.addAContractorHRGet)
 
 router.route('/addAContractorHR')
     .post(requireHRAuth,HRController.addAContractorHRPost)
 /////////////////////////////////////////////////////////
-    .get(requireHRAuth, HRController.monitorHiringHRGet)
+//     .get(requireHRAuth, HRController.monitorHiringHRGet)
 
 router.delete('/attendanceClockHR/:id',HRController.attendanceclockHRDelete)
 router.post('/attendanceClockHR',HRController.attendanceclockHRPost)

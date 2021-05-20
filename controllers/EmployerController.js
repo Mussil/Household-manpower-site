@@ -45,6 +45,11 @@ module.exports.homepageEmployerGet= (req,res)=>{
     res.render('homepageEmployer')
 }
 
+module.exports.rateContractorInEmployerGet= (req,res)=>{
+    res.render('rateContractorInEmployer')
+}
+
+
 module.exports.workHistoryEmployerGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
     // const userEmployerResult = await UserEmployer.find({})
@@ -56,6 +61,8 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
         if(transcationResult[i].isShifted){
             for(var j=0; j<userContractorResult.length; j++) {
                 if(String(transcationResult[i].idContractor) == String(userContractorResult[j]._id)) {
+                    var id = transcationResult[i]._id
+
                     var contractor = userContractorResult[j].email
 
                     var jobType = transcationResult[i].jobType
@@ -72,14 +79,14 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
                         currentFee = 'shift was not reported yet'
                     }
 
-                    myObject.push({'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
+                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
                 }
 
             }
         }
     }
 
-    console.log(myObject)
+    // console.log(myObject)
     res.render('workHistoryEmployer', {data: myObject})
 }
 
@@ -283,8 +290,33 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
     })
 
 
+}
 
+
+module.exports.rateContractorPost= async (req,res)=>{
+
+    const {idTransaction, rate,recommend} = req.body
+    console.log(idTransaction)
+    console.log(rate)
+
+    await Transaction.updateOne({_id: idTransaction},
+        {
+            recommendation: recommend,
+            rank: rate
+        },).then(updatedRows => {
+        console.log(updatedRows)
+        res.status(201).json({updatedRows})
+    }).catch(err => {
+        res.status(400).json({msgError: 'an error occurred Try again'})
+        console.log(err)
+
+    })
+    const cont=await Transaction.findById(idTransaction)
+    console.log("cont")
+    console.log(cont)
+    UsersContractor.calcAvg(cont.idContractor)
 
 
 
 }
+
