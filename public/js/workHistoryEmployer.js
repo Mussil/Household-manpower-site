@@ -90,3 +90,6 @@ function ask() {
 function reply(feel){
     swal.setActionValue(feel);
 }
+
+
+

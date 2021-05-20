@@ -154,6 +154,11 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
         .catch(err => {
             console.log(err)
         })
+
+    const cont= Transaction.findById(id)
+    console.log("cont")
+    console.log(cont)
+    UsersContractor.calcAvg(cont.idContractor)
 }
 
 
@@ -214,7 +219,7 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
             }
             if (String(employer) != String(undefined)) {
                 var dateTransaction = transcationResult[i].date
-                var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate
+                var currentFee = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate)
                 if (String(currentFee) == 'NaN') {
                     currentFee = 'shift was not reported yet'
                 }

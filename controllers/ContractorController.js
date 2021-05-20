@@ -27,7 +27,7 @@ module.exports.workHistoryContractorGet=async (req,res)=>{
             }
             var startHourShift = convertNumToHour(transcationResult[i].startHourShift)
             var endHourShift = convertNumToHour(transcationResult[i].endHourShift)
-            var salary = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate
+            var salary = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate)
 
             // if (String(startHourShift) == 'no report') {
             //     salary = 0

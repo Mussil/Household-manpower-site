@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
     }
     if(selectedValue!=1 && selectedValue!=2 && selectedValue!=3 && selectedValue!=4 && selectedValue!=5){
         console.log('error')
-        rateError.textContent = 'Please enter rate'
+        rateError.textContent = 'Please choose rate'
         return;
     }
     var str = window.location.href
@@ -35,7 +35,18 @@ form.addEventListener('submit', async (e) => {
                 })
                 const data = await res.json()
                 if (data) {
-                    swal("Nice! success");
+                    if(selectedValue==1) {
+                        swal("Sorry to hear that..terrible ha..");
+                    } else if(selectedValue==2) {
+                        swal("Oh boy, was it so bad ?!? ");
+                    }else if(selectedValue==3) {
+                        swal("Ok :) Fair enough ");
+                    }else if(selectedValue==4) {
+                        swal("Wonderfull, that's great to hear");
+                    }else if(selectedValue==5) {
+                        swal("Wow!!! thanks, great!!!");
+                    }
+
                     window.opener = self;
                     // window.close();
                     setTimeout("window.close()",5000)

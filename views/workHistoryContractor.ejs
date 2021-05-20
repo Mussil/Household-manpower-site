@@ -49,7 +49,19 @@
                             <td data-table-header="Salary"><%= data.salary %></td>
                             <td data-table-header="Employer"><%= data.employer%></td>
                             <td data-table-header="JobType"><%= data.jobType%></td>
-                            <td data-table-header="rank"><%= data.rank%></td>
+                        <%if(data.rank==0) { %>
+                             <td>Not rated yet</td>
+                        <%} else if(data.rank==1){ %>
+                            <td id="1"><font color="#ffd700">★</font></td>
+                        <% } else if(data.rank==2) { %>
+                            <td id="2"><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.rank==3) { %>
+                            <td id="3"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.rank==4) { %>
+                            <td id="4"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.rank==5) { %>
+                            <td id="5"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } %>
                     </tr>
                 <%}%>
             <% } )%>
@@ -72,9 +84,10 @@
 <script>
     $(document).ready(function() {
         $("#sort").DataTable({
-            columnDefs : [
-                { type : 'date', targets : [3] }
-            ],
+            // columnDefs : [
+            //     { type : 'date', targets : [3] }
+            // ],
+            'columnDefs': [{ 'orderable': false, 'targets': 6 }], // hide sort icon on header of first column
         });
     });
 </script>

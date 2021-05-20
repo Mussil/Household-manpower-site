@@ -55,9 +55,18 @@
                                    onclick="window.open('/rateContractorInEmployer/'+String(<%= JSON.stringify(data.id)%>),'Rate','width=500,height=500,left=500,top=700');return false;">Rank me!</a>
                             </td>
 
-                        <%} else { %>
-                            <td data-table-header="rank"><%= data.Rank %></td>
+                        <%} else if(data.Rank==1){ %>
+                            <td id="1"><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==2) { %>
+                            <td id="2"><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==3) { %>
+                            <td id="3"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==4) { %>
+                            <td id="4"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==5) { %>
+                            <td id="5"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
                         <% } %>
+
                         <td data-table-header="current fee"><%= data.CurrentFee%></td>
                     </tr>
                 <%}%>
@@ -92,9 +101,12 @@
 <script>
     $(document).ready(function() {
         $("#sort").DataTable({
-            columnDefs : [
-                { type : 'date', targets : [3] }
-            ],
+            // columnDefs : [
+            //     { type : 'date', targets : [3] }
+            // ],
+            'columnDefs': [{ 'orderable': false, 'targets': 3 }], // hide sort icon on header of first column
+            // 'aaSorting': [[0, 'asc']] // start to sort data in second column
         });
     });
+
 </script>

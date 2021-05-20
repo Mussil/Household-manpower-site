@@ -71,7 +71,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
 
                     var rank = transcationResult[i].rank
 
-                    var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
+                    var currentFee = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate)
 
                     var idEmployer = transcationResult[i].idEmployer
 
