@@ -49,7 +49,12 @@
                         <td data-table-header="date"><%= data.Date %></td>
 
                         <%if(data.Rank==0){%>
-                            <td><button onclick="rankFunc(<%= JSON.stringify(data.id)%>)" type='button' class='btn btn-primary'>Rate Me!</button></td>
+
+<!--                            <td><a href="/homepageEmployer" target="_blank">link text</a></td>-->
+                            <td><a
+                                   onclick="window.open('/rateContractorInEmployer/'+String(<%= JSON.stringify(data.id)%>),'Rate','width=500,height=500,left=500,top=700');return false;">Rank me!</a>
+                            </td>
+
                         <%} else { %>
                             <td data-table-header="rank"><%= data.Rank %></td>
                         <% } %>
@@ -63,6 +68,14 @@
     </div>
 </div>
 
+
+<div class="wrapper">
+    <div class="header">
+        <div class="title2">
+            For watching all non rated contractores please search 'Rank me!' in the search box      <span class="	glyphicon glyphicon-search"></span>
+        </div>
+    </div>
+</div>
 <script src="../js/workHistoryEmployer.js"></script>
 
 

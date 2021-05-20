@@ -45,6 +45,11 @@ module.exports.homepageEmployerGet= (req,res)=>{
     res.render('homepageEmployer')
 }
 
+module.exports.rateContractorInEmployerGet= (req,res)=>{
+    res.render('rateContractorInEmployer')
+}
+
+
 module.exports.workHistoryEmployerGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
     // const userEmployerResult = await UserEmployer.find({})
@@ -81,7 +86,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
         }
     }
 
-    console.log(myObject)
+    // console.log(myObject)
     res.render('workHistoryEmployer', {data: myObject})
 }
 
@@ -289,12 +294,14 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
 
 module.exports.rateContractorPost= async (req,res)=>{
 
-    const {id,recommendation} = req.body
-    console.log(recommendation)
+    const {idTransaction, rate,recommend} = req.body
+    console.log(idTransaction)
+    console.log(rate)
 
-    await Transaction.updateOne({_id: id},
+    await Transaction.updateOne({_id: idTransaction},
         {
-            recommendation: recommendation
+            recommendation: recommend,
+            rank: rate
         },).then(updatedRows => {
         console.log(updatedRows)
         res.status(201).json({updatedRows})
@@ -303,6 +310,11 @@ module.exports.rateContractorPost= async (req,res)=>{
         console.log(err)
 
     })
+    const cont=await Transaction.findById(idTransaction)
+    console.log("cont")
+    console.log(cont)
+    UsersContractor.calcAvg(cont.idContractor)
+
 
 
 }
