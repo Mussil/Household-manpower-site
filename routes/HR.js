@@ -14,19 +14,20 @@ router.route('/homepageHR')
 router.route('/attendanceClockHR')
     .get(requireHRAuth, HRController.attendanceclockHRGet)
 
+
 router.route('/addAContractorHR')
     .get(requireHRAuth, HRController.addAContractorHRGet)
 
 router.route('/monitorHiringHR')
     .get(requireHRAuth, HRController.monitorHiringHRGet)
 
-router.route('/addAContractorHR')
-    .get(requireHRAuth,HRController.addAContractorHRGet)
+// router.route('/addAContractorHR')
+//     .get(requireHRAuth,HRController.addAContractorHRGet)
 
 router.route('/addAContractorHR')
     .post(requireHRAuth,HRController.addAContractorHRPost)
 /////////////////////////////////////////////////////////
-    .get(requireHRAuth, HRController.monitorHiringHRGet)
+//     .get(requireHRAuth, HRController.monitorHiringHRGet)
 
 router.delete('/attendanceClockHR/:id',HRController.attendanceclockHRDelete)
 router.post('/attendanceClockHR',HRController.attendanceclockHRPost)
@@ -41,12 +42,12 @@ router.post('/createTransaction',HRController.transactionPost)
 //     res.send('test')
 // })
 
-
-
 //at the end - need to delete!!!!!!!!!
 router.post('/createTransaction',HRController.transactionPost)
 
+/////////////////
 
+///////////////////
 
 module.exports=router
 

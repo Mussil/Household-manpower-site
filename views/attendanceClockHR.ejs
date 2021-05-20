@@ -2,92 +2,143 @@
 <html>
 <head>
     <%- include ("partials/navHR.ejs")-%>
-<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
+</head>
+
+<body>
 <section>
-    <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
-    <script src="../js/attendanceClockHR.js"></script>
+    <div class="wrapper">
+        <div class="header">
+            <div class="title">
+                Attendance Clock
+            </div>
 
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+            <script src="../js/attendanceClockHR.js"></script>
+            <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
 
+            <div class="search_box">
+                <input type="text" id="search_input" placeholder="Press here to fliter table using contractor mail..." >
+            </div>
+        </div>
 
-    <!--for demo wrap-->
+        <div class="table_wrap">
+            <div class="table_header">
+                <ul>
+                    <li>
+                        <div class="item">
+                            <div class="name">
+                                <span>Contractor</span>
+                            </div>
+                            <div class="date">
+                                <span>Date</span>
+                            </div>
+                            <div class="shift">
+                                <span>Recruitment start time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Recruitment end time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Shift start time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Shift end time</span>
+                            </div>
+                            <div class="shift">
+                                <span>Options</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="table_body">
+                <ul>
+                    <% for(var i=0;i<data.length;i++){ %>
 
-    <h1>Attendance clock</h1>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-                <th>Contractor</th>
-                <th>Date</th>
-                <th>Recruitment start time</th>
-                <th>Recruitment end time</th>
-                <th>Shift start time</th>
-                <th>Shift end time</th>
-                <th>Options</th>
-            </tr>
-            </thead>
-        </table>
+                            <li>
+                                <div class="item" id = <%=i%>>
+                                    <div class="name">
+                                        <td><%= data[i].contractor%></td>
+                                    </div>
+                                    <div class="date">
+                                        <td><%= data[i].date.toLocaleDateString()%></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><%= data[i].startHourRec %></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><%= data[i].endHourRec %></td>
+                                    </div>
+                                    <div class="shift hour-shift">
+                                        <td><%= data[i].startHourShift %></td>
+                                    </div>
+                                    <div class="shift hour-shift" >
+                                        <td><%= data[i].endHourShift %></td>
+                                    </div>
+                                    <div class="shift">
+                                        <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete"  onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
+                                    </div>
+                                </div>
+                            </li>
+
+                    <% }%>
+
+                </ul>
+            </div>
+            <div class="table_footer"></div>
+        </div>
+
     </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-            <% for(var i=0;i<data.length;i++){ %>
-            <tr id=<%=i%>>
-                <td><%= data[i].contractor%></td>
-                <td><%= data[i].date.toLocaleDateString() %></td>
-                <td><%= data[i].startHourRec %></td>
-                <td><%= data[i].endHourRec %></td>
-
-                <td class="hour-shift"><%= data[i].startHourShift %></td>
-                <td class="hour-shift"><%= data[i].endHourShift %></td>
-                <!--                    <td><p id="demo" >edit</p></td>-->
-                <td><input type="button" value="edit" onclick="myEditFunction(<%= i%>)" class="btn btn-outline-primary"/>  <input type="button" value="delete" onclick="myDeleteFunction(<%= i%>)" class="btn btn-outline-primary"/></td>
-            </tr>
-            <% }%>
-            </tbody>
-        </table>
-    </div>
-
-
-
-    <hr />
-
 </section>
 
-<form id="hoursForm" class="container">
-    <h2>Updating Hours</h2><br>
+        <br>
+        <form id="hoursForm" class="container">
+            <h2>Updating Hours</h2><br>
 
-    <label>Start report time</label><br>
-    <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
+            <label>Start report time</label><br>
+            <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
 
-    <label>End report time</label><br>
-    <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
-    <div class="hour message error"></div>
-    <div class="hour message suc"></div>
+            <label>End report time</label><br>
+            <input type="time" id="endTime" name="endTime" min="00:00" max="23:59" required>
+            <div class="hour message error"></div>
+            <div class="hour message suc"></div>
 
-    <div>
-        <input type="submit" value="Update changes">
-    </div>
-</form>
+            <div>
+                <input type="submit" value="Update changes">
+            </div>
+        </form>
 
-
+<!--        <form class="container">-->
+<!--            -->
+<!--        </form>-->
 </body>
-</head>
+<%- include ("partials/footer.ejs")-%>
 </html>
 
-<%- include ("partials/footer.ejs")-%>
 <script>
+
     var dataHere = <%- JSON.stringify(data) %>
         // console.log(dataHere)
         getDetails(dataHere)
     document.getElementById('hoursForm').style.display = 'none'
+
+
+    var search_input = document.querySelector("#search_input")
+
+    search_input.addEventListener("keyup", function(e){
+        var span_items = document.querySelectorAll(".table_body ul li .name")
+        var search_item = e.target.value.toLowerCase()
+
+        span_items.forEach(function(item){
+            if(item.textContent.toLowerCase().indexOf(search_item) != -1){
+                item.closest("li").style.display = "block"
+            }
+            else{
+                item.closest("li").style.display = "none"
+            }
+        })
+
+    })
+
 </script>
-
-
-
-
-
-
-
-
-
-

@@ -1,74 +1,100 @@
-<%- include ("partials/navEmployer.ejs")-%>
-<body style="background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);">
-<section>
-    <!--        finding id employer-->
-    <% var myObject = []%>
+<!DOCTYPE html>
 
-    <%var idEmployer = 'null', flag = 0%>
-    <% for(var i=0;i<employerData.length && flag == 0;i++) {%>
-        <% if(user.email == employerData[i].email){ %>
-            <% idEmployer = employerData[i]._id%>
-            <% flag = 1%>
-        <% } %>
-    <% } %>
-    <% for(var i=0; i<transactionData.length;i++) { %>
-        <% if(String(transactionData[i].idEmployer) == String(idEmployer)) { %>
-            <% for(var j=0; j<contractorData.length; j++) { %>
-                <% if(String(transactionData[i].idContractor) == String(contractorData[j]._id)) { %>
-                    <% var contractor = contractorData[j].email%>
-
-                    <% var jobType = transactionData[i].jobType%>
-
-                    <% var dateTransaction = (transactionData[i].date).toLocaleDateString()%>
-
-                    <% var rank = transactionData[i].rank%>
-
-                    <% var currentFee = ((transactionData[i].endHourShift - transactionData[i].startHourShift)/60) * transactionData[i].hourlyRate%>
-
-                    <%if(String(currentFee) == 'NaN') { %>
-                        <% currentFee = 'shift was not reported yet'%>
-                    <% } %>
-
-                    <% myObject.push({'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee})%>
-                <% } %>
-            <% } %>
-        <% } %>
-    <% } %>
-
+<head>
+    <%- include ("partials/navEmployer.ejs")-%>
+    <meta charset="UTF-8">
     <link rel = "stylesheet"  type = "text/css"  href = "../css/workingHistoryEmployer.css" />
-    <!--for demo wrap-->
-    <h1>Working History</h1>
-    <div class="tbl-header">
-        <table cellpadding="0" cellspacing="0" border="0">
+
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="row">
+    <div class="container">
+
+        <div class="wrapper">
+            <div class="header">
+                <div class="title">
+                    Work History
+                </div>
+            </div>
+        </div>
+
+        <table class="table responsive" id="sort">
             <thead>
             <tr>
-                <th>Contractor</th>
-                <th>Job type</th>
-                <th>Date</th>
-                <th>Rank</th>
-                <th>Current fee</th>
+                <th scope="col">Contractor</th>
+                <th scope="col">JobType</th>
+                <th scope="col">Date</th>
+                <th scope="col">Rank</th>
+                <th scope="col">Fee</th>
             </tr>
             </thead>
-        </table>
-    </div>
-    <div class="tbl-content">
-        <table cellpadding="0" cellspacing="0" border="0">
             <tbody>
-            <% myObject.forEach(function(data){ %>
-                <tr>
-                    <td><%= data.Worker%></td>
-                    <td><%= data.JobType %></td>
-                    <td><%= data.Date %></td>
-                    <td><%= data.Rank %></td>
-                    <td><%= data.CurrentFee %></td>
-                </tr>
+
+            <% data.forEach(function(data){ %>
+                <%if(String(data.idEmployer) == String(user._id)) { %>
+                    <tr>
+                        <td data-table-header="worker"><%= data.Worker %></td>
+                        <td data-table-header="job type"><%= data.JobType %></td>
+                        <td data-table-header="date"><%= data.Date %></td>
+
+                        <%if(data.Rank==0){%>
+
+<!--                            <td><a href="/homepageEmployer" target="_blank">link text</a></td>-->
+                            <td><a
+                                   onclick="window.open('/rateContractorInEmployer/'+String(<%= JSON.stringify(data.id)%>),'Rate','width=500,height=500,left=500,top=700');return false;">Rank me!</a>
+                            </td>
+
+                        <%} else { %>
+                            <td data-table-header="rank"><%= data.Rank %></td>
+                        <% } %>
+                        <td data-table-header="current fee"><%= data.CurrentFee%></td>
+                    </tr>
+                <%}%>
             <% } )%>
+
             </tbody>
         </table>
     </div>
-</section>
-</body>
-<%- include ("partials/footer.ejs")-%>
 </div>
 
 
+<div class="wrapper">
+    <div class="header">
+        <div class="title2">
+            For watching all non rated contractores please search 'Rank me!' in the search box      <span class="	glyphicon glyphicon-search"></span>
+        </div>
+    </div>
+</div>
+<script src="../js/workHistoryEmployer.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js'></script>
+<script  src="function.js"></script>
+
+</body>
+<%- include ("partials/footer.ejs")-%>
+</html>
+
+<script>
+    $(document).ready(function() {
+        $("#sort").DataTable({
+            columnDefs : [
+                { type : 'date', targets : [3] }
+            ],
+        });
+    });
+</script>

@@ -1,92 +1,96 @@
-h1{
-    font-size: 30px;
-    color: white;
-    text-transform: uppercase;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 15px;
-}
-table{
-    /*background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);*/
-    width:100%;
-    table-layout: fixed;
-}
-.tbl-header{
-    background-color: black;
-}
-.tbl-content{
-    background-color: white;
-    height:300px;
-    overflow-x:auto;
-    margin-top: 0px;
-    border: #F50057;
-}
-th{
-    padding: 20px 15px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 13px;
-    color: #FFFFFF;
-    text-transform: none;
-    border: 1px solid white;
-}
-td{
-    padding: 15px;
-    text-align: left;
-    vertical-align:middle;
-    font-weight: 300;
-    font-size: 12px;
-    color: black;
-    border: 1px solid black;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-/* demo styles */
+tr:nth-of-type(odd) {
+    background: #f4f4f4;
+}
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-body{
+tr:nth-of-type(even) {
+    background: #fff;
+}
+
+th {
     background: black;
-    background: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-}
-section{
-    margin: 50px;
+    color: #ffffff;
+    font-weight: 300;
 }
 
-
-/* follow me template */
-.made-with-love {
-    margin-top: 40px;
+td,
+th {
     padding: 10px;
-    clear: left;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+td:nth-of-type(1) {
+    font-weight: 500 !important;
+}
+
+td {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 300;
+    line-height: 20px;
+}
+
+span {
+    font-style: italic
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    table.responsive,
+    .responsive thead,
+    .responsive tbody,
+    .responsive th,
+    .responsive td,
+    .responsive tr {
+        display: block !important;
+    }
+
+    .responsive thead tr {
+        position: absolute !important;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .responsive tr {
+        border: 1px solid #ccc;
+    }
+
+    .responsive td {
+        border: none;
+        border-bottom: 1px solid #eee !important;
+        position: relative !important;
+        padding-left: 25% !important;
+    }
+
+    .responsive td:before {
+        position: absolute !important;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap !important;
+        font-weight: 500 !important;
+    }
+
+
+    .responsive td:before {
+        content: attr(data-table-header) !important;
+    }
+}
+
+.wrapper .title {
+    padding: 10px 0;
     text-align: center;
-    font-size: 10px;
-    font-family: arial;
+    font-weight: 700;
+    font-size: 32px;
     color: black;
 }
-.made-with-love i {
-    font-style: normal;
-    color: #F50057;
-    font-size: 14px;
-    position: relative;
-    top: 2px;
-}
-.made-with-love a {
-    color: #fff;
-    text-decoration: none;
-}
-.made-with-love a:hover {
-    text-decoration: underline;
-}
 
-
-/* for custom scrollbar for webkit browser*/
-
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: #F50057;
+body {
+    background: #eaeaea;
 }

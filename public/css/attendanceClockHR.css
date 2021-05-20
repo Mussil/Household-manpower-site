@@ -1,104 +1,226 @@
-head{
-    background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);
+/*!*@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap");*!*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Montserrat", sans-serif;
 }
-h1{
-    font-size: 30px;
-    color: white;
-    text-transform: uppercase;
-    font-weight: 300;
+
+body {
+    background: #eaeaea;
+}
+
+.wrapper .header {
+    /*background: #29a5d8;*/
+}
+
+.wrapper .title {
+    padding: 10px 0;
     text-align: center;
-    margin-bottom: 15px;
-}
-table{
-    /*background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);*/
-    width:100%;
-    table-layout: fixed;
-}
-
-/*///////*/
-.tbl-header{
-    background-color: black;
-}
-/*///////*/
-
-.tbl-content{
-    background-color: white;
-    height:300px;
-    overflow-x:auto;
-    margin-top: 0px;
-    border: #F50057;
-}
-/*///////*/
-th{
-    padding: 20px 15px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 13px;
-    color: #FFFFFF;
-    text-transform: none;
-    border: 1px solid white;
-}
-td{
-    padding: 15px;
-    text-align: left;
-    vertical-align:middle;
-    font-weight: 300;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 32px;
     color: black;
-    border: 1px solid black;
-}
-/*///////*/
-
-/* demo styles */
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-body{
-    background: black;
-    background: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-}
-section{
-    margin: 50px;
 }
 
+.wrapper .search_box {
+    max-width: 1000px;
+    background: none;
+    margin: 0 auto;
+    padding: 10px 0;
+    border-radius: 5px;
+    color: black;
+}
 
-/* follow me template */
-.made-with-love {
-    margin-top: 40px;
+.wrapper .search_box input {
+    border: 0;
+    border-bottom: black;
+    width: 50%;
+    outline: black;
     padding: 10px;
-    clear: left;
-    text-align: center;
-    font-size: 10px;
-    font-family: arial;
+    background: transparent;
+    color: black;
+    font-size: 16px;
+}
+
+::placeholder {
     color: black;
 }
-.made-with-love i {
-    font-style: normal;
-    color: #F50057;
-    font-size: 14px;
-    position: relative;
-    top: 2px;
-}
-.made-with-love a {
-    color: #fff;
-    text-decoration: none;
-}
-.made-with-love a:hover {
-    text-decoration: underline;
+
+.wrapper .search_box input:focus {
+    border-bottom: 2px solid #fff;
 }
 
+.table_wrap {
+    width: 90%;
+    margin: 50px auto 0;
+}
 
-/* for custom scrollbar for webkit browser*/
+.table_wrap ul li .item {
+    display: flex;
+    background: #fff;
+    padding: 15px 0;
+    height: 50px;
+}
 
-::-webkit-scrollbar {
-    width: 6px;
+/*.table_wrap ul li .item .name*/
+/*.table_wrap ul li .item .phone{*/
+/*    !*width: 100%;*!*/
+/*    padding:15px;*/
+/*    text-align: left;*/
+/*    font-weight: 600;*/
+/*    font-size: 13px;*/
+/*    color: #FFFFFF;*/
+/*}*/
+.table_wrap ul li .item .name{
+    width:20%;
+    padding: 0 15px;
+    /*border: 1px solid black;*/
+    /*font-size: 10px;*/
 }
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+.table_wrap ul li .item .shift{
+    width: 20%;
+    padding: 0 15px;
+    text-align: center;
 }
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: #F50057;
+
+.table_wrap ul li .item .date{
+    width: 10%;
+    padding: 0 15px;
 }
+
+.table_wrap ul li .item .issue span,
+.table_wrap ul li .item .name span {
+    width: 90%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table_header ul li .item {
+    border-bottom: 2px solid #eaeaea;
+    font-weight: 600;
+}
+
+.table_body {
+    height: 300px;
+    overflow: auto;
+}
+
+.table_body ul li .item {
+    border-bottom: 1px solid #efefef;
+}
+
+.table_body ul li .item .status span {
+    padding: 5px 20px;
+    border-radius: 25px;
+    max-width: 115px;
+    display: inline-block;
+}
+
+/*head{*/
+/*    background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);*/
+/*}*/
+/*h1{*/
+/*    font-size: 30px;*/
+/*    color: black;*/
+/*    text-transform: uppercase;*/
+/*    font-weight: 300;*/
+/*    text-align: center;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+/*table{*/
+/*    !*background-image: url(https://jcdesnoyers.ca/wp-content/uploads/2017/11/Liquidite%CC%81-entreprise-1.jpg);*!*/
+/*    width:100%;*/
+/*    table-layout: fixed;*/
+/*}*/
+
+/*.tbl-header{*/
+/*    background-color: black;*/
+/*}*/
+
+
+/*.tbl-content{*/
+/*    background-color: white;*/
+/*    height:300px;*/
+/*    overflow-x:auto;*/
+/*    margin-top: 0px;*/
+/*    border: #F50057;*/
+/*}*/
+
+/*th{*/
+/*    padding: 20px 15px;*/
+/*    text-align: left;*/
+/*    font-weight: 600;*/
+/*    font-size: 13px;*/
+/*    color: #FFFFFF;*/
+/*    text-transform: none;*/
+/*    border: 1px solid white;*/
+/*}*/
+/*td{*/
+/*    padding: 15px;*/
+/*    text-align: left;*/
+/*    vertical-align:middle;*/
+/*    font-weight: 300;*/
+/*    font-size: 12px;*/
+/*    color: black;*/
+/*    border: 1px solid black;*/
+/*}*/
+
+
+/*!* demo styles *!*/
+
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);*/
+/*body{*/
+/*    background: black;*/
+/*    background: #FFFFFF;*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*}*/
+/*section{*/
+/*    margin: 50px;*/
+/*}*/
+
+
+/*!* follow me template *!*/
+/*.made-with-love {*/
+/*    margin-top: 40px;*/
+/*    padding: 10px;*/
+/*    clear: left;*/
+/*    text-align: center;*/
+/*    font-size: 10px;*/
+/*    font-family: arial;*/
+/*    color: black;*/
+/*}*/
+/*.made-with-love i {*/
+/*    font-style: normal;*/
+/*    color: #F50057;*/
+/*    font-size: 14px;*/
+/*    position: relative;*/
+/*    top: 2px;*/
+/*}*/
+/*.made-with-love a {*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.made-with-love a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
+
+/*!* for custom scrollbar for webkit browser*!*/
+
+/*::-webkit-scrollbar {*/
+/*    width: 6px;*/
+/*}*/
+/*::-webkit-scrollbar-track {*/
+/*    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+/*}*/
+/*::-webkit-scrollbar-thumb {*/
+/*    -webkit-box-shadow: #F50057;*/
+/*}*/
 
 form.container {
     border-radius: 5px;
@@ -135,4 +257,5 @@ input[type=submit] {
     cursor: pointer;
 }
 .btn-outline-primary{color: black;border-color: black}
+
 

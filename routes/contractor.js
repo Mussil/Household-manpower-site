@@ -34,6 +34,8 @@ router.post('/shiftReportHoursContractor', contractorController.shiftReportHours
 
 
 
+
+
 router.route('/workOrdersContractor')
     .get(requireConAuth, contractorController.workOrdersContractorGet)
 router.route('/detailsOfTransaction/:id')
