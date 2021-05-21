@@ -15,12 +15,10 @@ router.route('/workHistoryEmployer')
 router.route('/profileEmployer')
    .get(requireEmpAuth,EmployerController.profileEmployerGet)
 
-router.delete('/profileEmployer', EmployerController.profileEmployerDelete)
+router.route('/profileEmployer')
+    .post(requireEmpAuth, EmployerController.profileEmployerPost)
 
-router.route('/profileEmployerEdit')
-    .get(requireEmpAuth, EmployerController.profileEmployerEditGet)
-
-
+// router.delete('/profileEmployer', EmployerController.profileEmployerDelete)
 
 ////////////////////////////////////////////////////
 

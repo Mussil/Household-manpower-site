@@ -79,17 +79,6 @@ userSchema.statics.checkEmail = async function(email) {
     throw Error('incorrect email')
 }
 
-//for signup check if he register
-// userSchema.statics.checkExistEmail = async function(email) {
-//
-//     if (await this.findOne({email})) {
-//         throw Error('This email already exist')
-//     }
-//     else return ''
-// }
-
-
-
 const User = mongoose.model('userEmployer', userSchema)
 module.exports = User
 

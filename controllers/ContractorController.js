@@ -2,8 +2,40 @@ const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const jwt = require('jsonwebtoken')
 const UserEmployer=require('../models/UsersEmployer')
-let nodemailer = require('nodemailer')
+const addressModel = require('../models/Address')
+const Languages = require('../models/languageUser')
+const JobsType = require('../models/JobType')
+const bcrypt=require('bcrypt')
 
+
+const handleErrors = (err) => {
+    console.log(err.message)
+    let errors = { email: '', password: ''}
+
+    // incorrect email
+    if (err.message === 'incorrect email') {
+        errors.email = 'That email is not incorrect'
+    }
+
+    // incorrect password
+    if (err.message === 'incorrect password') {
+        errors.password = 'That password is incorrect'
+    }
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'That email is already registered'
+        //return errors
+    }
+
+    // validation errors
+    // if (err.message.includes('user validation failed')) {
+    //     Object.values(err.errors).forEach(({ properties }) => {
+    //         errors[properties.path] = properties.message
+    //     })
+    // }
+
+    return errors
+}
 
 // controller actions
 module.exports.homepageContractorGet=(req,res)=>{
@@ -53,7 +85,7 @@ module.exports.workHistoryContractorGet=async (req,res)=>{
                 'rank': rank
             })
         }
-        }
+    }
     res.render('workHistoryContractor', {data: myObject})
 }
 
@@ -124,6 +156,7 @@ module.exports.salaryDetailsContractorGet= async (req,res)=>{
 
 module.exports.salaryDetailsContractorPost=(req,res)=> {
     const { start,end } = req.body
+    console.log('heredsdsd')
     let  start1 = new Date(start)
     start1.setHours(0,0,0,0)
 
@@ -155,6 +188,7 @@ module.exports.salaryDetailsContractorPost=(req,res)=> {
                 }
                 else {
                     res.status(400).json({err: 'There is no record of shifts for these dates'})
+                    console.log('ds')
                 }
                 // eslint-disable-next-line no-unused-vars
             }).catch(result=>{
@@ -170,40 +204,77 @@ module.exports.profileContractorGet=(req,res)=>{
 
 }
 
-module.exports.profileContractorDelete = (req,res)=>{
+module.exports.profileContractorPost = async (req, res) => {
+
+    var {email,password, firstName, lastName, phoneNumber, city, street, houseNumber,arrLang,education,smoker,experience,hourlyRate,aboutMe,arrTypeJob,changePassword} = req.body
 
     const token = req.cookies.jwt
-    if (token) {
-        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
-            if (err) {
-                console.log(err)
-            } else {
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        } else {
 
-                Transaction.deleteMany({idEmployer:decodedToken.id})
-                    .then(result => {
-                        console.log(`Deleted ${result.deletedCount} transaction(s).`)
-                        UsersContractor.findByIdAndDelete(decodedToken.id)
-                            // eslint-disable-next-line no-unused-vars
-                            .then(result => {
-                                console.log('found')
-                                res.json({ redirect: '/logout' })
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            })
+            try{
+                const address = new addressModel({city, street, houseNumber})
+                if(changePassword === 1){
+                    const salt=await bcrypt.genSalt()
+                    password=await bcrypt.hash(password, salt)
+                }
+                var jobTypes = []
+                for (var i = 0; i < arrTypeJob.length; i++) {
+                    jobTypes.push(await JobsType.create({value: arrTypeJob[i]}))
+                }
 
-                    })
-                    .catch(err => console.error(`Delete failed with error: ${err}`))
-
-
+                var languages = []
+                for (i = 0; i < arrLang.length; ++i) {
+                    languages.push(await Languages.create({value: arrLang[i]}))
+                }
+                const user = await UsersContractor.findOneAndUpdate({_id: decodedToken.id}, {$set:
+                        {email:email,password: password, firstName: firstName,lastName: lastName,phoneNumber: phoneNumber,address: address,
+                            languages:languages,education:education,smoker:smoker,experience: experience,hourlyRate:hourlyRate,
+                            aboutMe: aboutMe,jobTypes: jobTypes}})
+                   if(user) {
+                       res.status(200).json({user: decodedToken.id})
+                   }
             }
-        })
-    }
+            catch (err){
+                const errors = handleErrors(err)
+                res.status(400).json({errors})
+            }
+        }
+    })
 }
 
-module.exports.profileContractorEditGet=(req,res)=>{
-    res.render('profileContractorEdit')
-}
+// module.exports.profileContractorDelete = (req,res)=>{
+//
+//     const token = req.cookies.jwt
+//     if (token) {
+//         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+//             if (err) {
+//                 console.log(err)
+//             } else {
+//
+//                 Transaction.deleteMany({idContractor:decodedToken.id})
+//                     .then(result => {
+//                         console.log(`Deleted ${result.deletedCount} transaction(s).`)
+//                         UsersContractor.findByIdAndDelete(decodedToken.id)
+//                             // eslint-disable-next-line no-unused-vars
+//                             .then(result => {
+//                                 console.log('found')
+//                                 res.json({ redirect: '/logout' })
+//                             })
+//                             .catch(err => {
+//                                 console.log(err)
+//                             })
+//
+//                     })
+//                     .catch(err => console.error(`Delete failed with error: ${err}`))
+//
+//
+//             }
+//         })
+//     }
+// }
 
 module.exports.leavePeriodContractorGet=(req,res)=>{
     res.render('leavePeriodContractor')
@@ -234,17 +305,18 @@ module.exports.shiftReportContractorPost=(req,res)=> {
             if (err) {
                 console.log(err.message)
             } else {
-
+                // console.log(decodedToken)
+                console.log('try')
                 //check for transaction in the start date and in the contractor-user id
                 await Transaction.findOne({
                     idContractor: decodedToken.id ,
-                   // date:start2
+                    // date:start2
                     date: {
                         $gte: start1, $lte: end }
                 }).then(result=>{
                     if(result){
                         console.log('found transaction')
-                       console.log(result)
+                        console.log(result)
                         if(result.isShifted){
                             res.status(400).json({msgError:'You have already declared a shift for this date'})
 
@@ -259,12 +331,12 @@ module.exports.shiftReportContractorPost=(req,res)=> {
                     }
 
                 })
-}
-
-
             }
 
-        )}
+
+        }
+
+    )}
 
 module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים
@@ -274,9 +346,6 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
         .then(async result => {
             if (result.isShifted) {
                 res.status(400).json({msgError: 'You have already entered a shift for this date'})
-            }
-            else if (result.approval!=0) {
-                res.status(400).json({msgError: 'You have not confirmed the transaction for this date'})
             }
             else{
 
@@ -339,147 +408,4 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
         })
     }
 
-}
-
-
-
-
-module.exports.workOrdersContractorGet= async (req,res)=>{
-
-    const transaction = await Transaction.find({})
-    const afterFilter =[]
-    for(var i=0;i< transaction.length;++i){
-        if(!transaction[i].$isEmpty('approval')){
-            // console.log(transaction[i])
-            // console.log(transaction[i].idEmployer)
-            const employer= await UserEmployer.findById(transaction[i].idEmployer)
-                    // console.log(employer)
-                    if(employer){
-                        // console.log(transaction[i])
-                        if( transaction[i].approval==0) { //before approval
-                            afterFilter.push(transaction[i])
-                        }
-                    }
-
-
-
-
-        }
-
-    }
-
-
-    res.render('workOrdersContractor',{data:afterFilter})
-}
-
-module.exports.detailsOfTransactionGet =  async (req,res)=>{
-    const idTransaction=req.params.id
-
-
-   await Transaction.findById(idTransaction)
-        .then(async transcationResult=>{
-            await UserEmployer.findById(transcationResult.idEmployer)
-                .then(userEmployerResult=>{
-
-                    var jobType = String(transcationResult.jobType)
-
-                    var email = userEmployerResult.email
-                    var firstName=userEmployerResult.firstName
-                    var lastName=userEmployerResult.lastName
-                    var date = transcationResult.date
-                    var startHour = convertNumToHour(transcationResult.startHourRec)
-                    var endHour = convertNumToHour(transcationResult.endHourRec)
-                    // var idEmployer=transcationResult._id
-                    var myObject={ jobType,firstName,lastName, email, date ,startHour,endHour,idTransaction}
-                    // console.log(myObject)
-                    res.render('detailsOfTransaction',myObject)
-
-                })
-    })
-
-}
-
-
-module.exports.detailsOfTransactionPost= async (req,res)=>{
-    var isAccepted=req.body.isAccepted
-    var idTransaction=req.body.idTransaction
-
-    var email
-    var date
-    var jobType
-    var firstName
-    var lastName
-    await Transaction.findById(idTransaction).then(async trans=>{{
-        date=trans.date
-        jobType=trans.jobType
-        await UserEmployer.findById(trans.idEmployer).then(async emp=>{
-            console.log(emp)
-            email=emp.email
-        })
-        await UsersContractor.findById(trans.idContractor).then(cont=>{
-            console.log(cont)
-            firstName=cont.firstName
-            lastName=cont.lastName
-        })
-    }})
-    var str
-    var isapprove
-
-    if(isAccepted==1){
-        str='The transaction is approved'
-        isapprove='approved'
-    }
-    else if (isAccepted==2){
-        str='The transaction is denied'
-        isapprove='denied'
-    }
-
-    var info='The transaction on: '+date.getDate()+' '+date.getMonth()+' '+date.getFullYear()+'of '+jobType+
-        '\n'+isapprove+'\n'+
-        'by '+firstName+' '+lastName
-    console.log(info)
-    console.log(email)
-
-    Transaction.findByIdAndUpdate(idTransaction, { approval: isAccepted },
-        // eslint-disable-next-line no-unused-vars
-        function (err, docs) {
-            if (err) {
-                res.status(400).json({msg: 'an error occurred Try again'})
-            } else {
-                res.status(200).json({ msg: str })
-                sendEmail(email,info)
-
-
-            }
-        })
-
-
-}
-
-
-
-function sendEmail(email,msg){
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'hssce2021@gmail.com',
-            pass: 'lamasce?'
-        }
-    })
-
-    let mailOptions = {
-        from: 'hssce2021@gmail.com',
-        to: email,
-        subject: 'password reset',
-        text: msg
-    }
-
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            console.log(error)
-        } else {
-            console.log('Email sent: ' + info.response)
-        }
-    })
 }

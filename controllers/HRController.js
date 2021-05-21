@@ -47,7 +47,6 @@ module.exports.homepageHRGet=(req,res)=>{
     res.render('homepageHR')
 }
 
-
 module.exports.attendanceclockHRGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
     const userContractorResult = await UsersContractor.find({})
@@ -82,21 +81,21 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
     await Transaction.findById(id)
         // eslint-disable-next-line no-unused-vars
         .then(async result => {
-                await Transaction.updateOne({_id: id},
-                    {
-                        startHourShift: startMin,
-                        endHourShift: endMin,
-                        isShifted: true
-                    },).then(updatedRows => {
-                    console.log(updatedRows)
-                   // res.redirect('/attendanceClockHR')
-                     res.status(201).json({msg: 'The shift was changed successfully'})
+            await Transaction.updateOne({_id: id},
+                {
+                    startHourShift: startMin,
+                    endHourShift: endMin,
+                    isShifted: true
+                },).then(updatedRows => {
+                console.log(updatedRows)
+                // res.redirect('/attendanceClockHR')
+                res.status(201).json({msg: 'The shift was changed successfully'})
 
-                }).catch(err => {
-                    res.status(400).json({msgError: 'an error occurred Try again'})
-                    console.log(err)
+            }).catch(err => {
+                res.status(400).json({msgError: 'an error occurred Try again'})
+                console.log(err)
 
-                })
+            })
 
         }).catch(err => {
             console.log(err)
@@ -104,7 +103,6 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
 
 
 }
-
 
 module.exports.attendanceclockHRDelete= (req,res)=>{
     const id =req.params.id
@@ -147,8 +145,6 @@ module.exports.addAContractorHRGet=(req,res)=>{
     res.render('addAContractorHR')
 }
 
-
-
 ///////////////\\\\\\\\\\\\\\\\\\\\\\
 module.exports.monitorHiringHRGet=async (req, res) =>{
     const transcationResult = await Transaction.find({})
@@ -156,6 +152,7 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
     const userContractorResult = await UsersContractor.find({})
 
     const myObject = []
+
 
     for(var i=0;i<transcationResult.length;i++){
         for(var j = 0; j<userContractorResult.length;j++){
@@ -179,7 +176,7 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
             var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
             if(String(currentFee) == 'NaN'){
                 currentFee = 'shift was not reported yet'
-             }
+            }
             myObject.push({'worker':worker, 'jobType': jobType, 'employer' :employer, 'date': dateTransaction , 'currentFee':currentFee})
         }
     }
@@ -232,12 +229,6 @@ module.exports.transactionPost= async (req,res)=>{
 
 }
 
-
-
-
-
-
-
 module.exports.addAContractorHRPost =async (req,res)=> {
 
     try {
@@ -266,6 +257,8 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             arrTypeJob
         } = req.body
 
+
+
         var jobTypes = []
         for (var i = 0; i < arrTypeJob.length; i++) {
             jobTypes.push(await JobsType.create({value: arrTypeJob[i]}))
@@ -283,23 +276,20 @@ module.exports.addAContractorHRPost =async (req,res)=> {
         //     email, password, firstName, lastName, phoneNumber, address, bank,
         //     gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
         // })
-        var myData=
-            {
-                     email, password, firstName, lastName, phoneNumber, address, bank,
-                    gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes
-                }
 
+
+        const myData = {email, password, firstName, lastName, phoneNumber, address, bank,gender, languages, education, smoker, experience, hourlyRate, picture, form101, birthday, aboutMe, jobTypes}
 
         const user = await UsersContractor.create(myData)
-        res.status(201).json({user })
+        res.status(200).json({user})
 
         // await myData.save(function (err,doc){
-       //     if(err)
-       //         console.log(err.message)
-       //      else{
-       //          res.status(200).json({doc})
-       //     }
-       //  })
+        //     if(err)
+        //         console.log(err.message)
+        //      else{
+        //          res.status(200).json({doc})
+        //     }
+        //  })
 
         // console.log(myData + 'mydata')
         //הדפסה לעובד קבלן שעובד טוב

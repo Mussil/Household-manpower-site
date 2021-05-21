@@ -20,10 +20,10 @@ router.post('/salaryDetailsContractor', contractorController.salaryDetailsContra
 router.route('/profileContractor')
     .get(requireConAuth,contractorController.profileContractorGet)
 
-router.delete('/profileContractor', contractorController.profileContractorDelete)
+router.route('/profileContractor')
+    .post(requireConAuth, contractorController.profileContractorPost)
 
-router.route('/profileContractorEdit')
-    .get(requireConAuth, contractorController.profileContractorEditGet)
+// router.delete('/profileContractor', contractorController.profileContractorDelete)
 
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
@@ -34,11 +34,11 @@ router.post('/shiftReportHoursContractor', contractorController.shiftReportHours
 
 
 
-router.route('/workOrdersContractor')
-    .get(requireConAuth, contractorController.workOrdersContractorGet)
-router.route('/detailsOfTransaction/:id')
-    .get(requireConAuth, contractorController.detailsOfTransactionGet)
-router.post('/detailsOfTransaction', contractorController.detailsOfTransactionPost)
+// router.route('/workOrdersContractor')
+//     .get(requireConAuth, contractorController.workOrdersContractorGet)
+// router.route('/detailsOfTransaction/:id')
+//     .get(requireConAuth, contractorController.detailsOfTransactionGet)
+// router.post('/detailsOfTransaction', contractorController.detailsOfTransactionPost)
 
 
 
