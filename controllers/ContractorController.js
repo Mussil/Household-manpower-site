@@ -2,8 +2,41 @@ const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const jwt = require('jsonwebtoken')
 const UserEmployer=require('../models/UsersEmployer')
+const addressModel = require('../models/Address')
+const Languages = require('../models/languageUser')
+const JobsType = require('../models/JobType')
+const bcrypt=require('bcrypt')
 let nodemailer = require('nodemailer')
 
+
+const handleErrors = (err) => {
+    console.log(err.message)
+    let errors = { email: '', password: ''}
+
+    // incorrect email
+    if (err.message === 'incorrect email') {
+        errors.email = 'That email is not incorrect'
+    }
+
+    // incorrect password
+    if (err.message === 'incorrect password') {
+        errors.password = 'That password is incorrect'
+    }
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'That email is already registered'
+        //return errors
+    }
+
+    // validation errors
+    // if (err.message.includes('user validation failed')) {
+    //     Object.values(err.errors).forEach(({ properties }) => {
+    //         errors[properties.path] = properties.message
+    //     })
+    // }
+
+    return errors
+}
 
 // controller actions
 module.exports.homepageContractorGet=(req,res)=>{
@@ -172,40 +205,77 @@ module.exports.profileContractorGet=(req,res)=>{
 
 }
 
-module.exports.profileContractorDelete = (req,res)=>{
+module.exports.profileContractorPost = async (req, res) => {
+
+    var {email,password, firstName, lastName, phoneNumber, city, street, houseNumber,arrLang,education,smoker,experience,hourlyRate,aboutMe,arrTypeJob,changePassword} = req.body
 
     const token = req.cookies.jwt
-    if (token) {
-        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
-            if (err) {
-                console.log(err)
-            } else {
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        } else {
 
-                Transaction.deleteMany({idEmployer:decodedToken.id})
-                    .then(result => {
-                        console.log(`Deleted ${result.deletedCount} transaction(s).`)
-                        UsersContractor.findByIdAndDelete(decodedToken.id)
-                            // eslint-disable-next-line no-unused-vars
-                            .then(result => {
-                                console.log('found')
-                                res.json({ redirect: '/logout' })
-                            })
-                            .catch(err => {
-                                console.log(err)
-                            })
+            try{
+                const address = new addressModel({city, street, houseNumber})
+                if(changePassword === 1){
+                    const salt=await bcrypt.genSalt()
+                    password=await bcrypt.hash(password, salt)
+                }
+                var jobTypes = []
+                for (var i = 0; i < arrTypeJob.length; i++) {
+                    jobTypes.push(await JobsType.create({value: arrTypeJob[i]}))
+                }
 
-                    })
-                    .catch(err => console.error(`Delete failed with error: ${err}`))
-
-
+                var languages = []
+                for (i = 0; i < arrLang.length; ++i) {
+                    languages.push(await Languages.create({value: arrLang[i]}))
+                }
+                const user = await UsersContractor.findOneAndUpdate({_id: decodedToken.id}, {$set:
+                        {email:email,password: password, firstName: firstName,lastName: lastName,phoneNumber: phoneNumber,address: address,
+                            languages:languages,education:education,smoker:smoker,experience: experience,hourlyRate:hourlyRate,
+                            aboutMe: aboutMe,jobTypes: jobTypes}})
+                   if(user) {
+                       res.status(200).json({user: decodedToken.id})
+                   }
             }
-        })
-    }
+            catch (err){
+                const errors = handleErrors(err)
+                res.status(400).json({errors})
+            }
+        }
+    })
 }
 
-module.exports.profileContractorEditGet=(req,res)=>{
-    res.render('profileContractorEdit')
-}
+// module.exports.profileContractorDelete = (req,res)=>{
+//
+//     const token = req.cookies.jwt
+//     if (token) {
+//         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+//             if (err) {
+//                 console.log(err)
+//             } else {
+//
+//                 Transaction.deleteMany({idContractor:decodedToken.id})
+//                     .then(result => {
+//                         console.log(`Deleted ${result.deletedCount} transaction(s).`)
+//                         UsersContractor.findByIdAndDelete(decodedToken.id)
+//                             // eslint-disable-next-line no-unused-vars
+//                             .then(result => {
+//                                 console.log('found')
+//                                 res.json({ redirect: '/logout' })
+//                             })
+//                             .catch(err => {
+//                                 console.log(err)
+//                             })
+//
+//                     })
+//                     .catch(err => console.error(`Delete failed with error: ${err}`))
+//
+//
+//             }
+//         })
+//     }
+// }
 
 module.exports.leavePeriodContractorGet=(req,res)=>{
     res.render('leavePeriodContractor')
@@ -261,12 +331,12 @@ module.exports.shiftReportContractorPost=(req,res)=> {
                     }
 
                 })
-}
-
-
             }
 
-        )}
+
+        }
+
+    )}
 
 module.exports.shiftReportHoursContractorPost= async (req,res)=> {
 //יכניס את השעות לבסיס נתונים

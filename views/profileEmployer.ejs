@@ -1,10 +1,14 @@
-<%- include ("partials/navEmployer.ejs")-%>
-
-<script src="../js/profileEmployer.js"></script>
-
-<html>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Employer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <%- include ("partials/navEmployer.ejs")-%>
+</head>
 <body>
+
 <div class="container">
     <form id="form">
         <div class="row">
@@ -14,30 +18,71 @@
                         <div class="col-sm-6 col-md-4">
                         </div>
                         <div class="col-sm-6 col-md-8">
+
                             <h3>
-                                <%=user.firstName%>  <%=user.lastName%> </h3>
-                            <p>
-                                <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>
-                                <br />
-                                <br />
-                                <i class="glyphicon glyphicon-envelope"></i>  <%=user.email%>
-                                <br />
-                                <br />
-                                <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>
+                                <%=user.firstName%>   <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('firstNameDiv').style.display = 'block'"></button>
+                            </h3>
 
-                                <br />
-                                <br />
-
-                            </p>
-
-                            <div class="btn-group">
-
-                                <button type="button" name="Edit" id="Edit" onclick="" class="glyphicon glyphicon-pencil">Edit</button>
-
-                                <button type="button" onclick="myDeleteFunction()" class="btn btn-outline-primary">Remove Account</button>
-
-
+                            <div id="firstNameDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="firstName" name="firstName" class="col-sm-4 col-md-3" placeholder="<%= user.firstName %>" title="John" pattern="[a-zA-Z]{3,}"><br/>
                             </div>
+
+
+                            <h3>
+                                <%=user.lastName%>   <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('lastNameDiv').style.display = 'block'"></button>
+                            </h3>
+
+                            <div id="lastNameDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="lastName" name="lastName" class="col-sm-4 col-md-3" placeholder="<%=user.lastName%>" title="Doe" pattern="[a-zA-Z]{3,}"><p><br></p>
+                            </div>
+
+                                <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('AddrssDiv').style.display = 'block'"></button>
+
+                            <div id="AddrssDiv"  style="display:none;" class="input-group" >
+                                    <label>City</label>
+                                    <select id="city">
+                                    </select> <br/>
+
+                                <label>Street</label>
+                                  <br/><input type="text" id="street" name="street" class="col-sm-4 col-md-3" placeholder="<%=user.address.street%>" title="Herzl" pattern="[a-zA-Z]+"><br/>
+                               <br/>
+                                <label>House Number</label>
+                                  <br/><input type="text" id="houseNumber" name="houseNumber" class="col-sm-4 col-md-3" placeholder="<%=user.address.houseNumber%>" title="12" pattern="[0-9]+"><br/>
+                                <br/>
+                            </div>
+                               <p></p> <i class="glyphicon glyphicon-envelope"></i> <%=user.email%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('emailDiv').style.display = 'block'"></button>
+
+                            <div id="emailDiv"  style="display:none;" class="input-group" >
+                               <p></p><input type="email" id="email" name="email" class="col-sm-4 col-md-3" placeholder="<%=user.email%>" title="exmp1@gmail.com">
+                                <p><br/></p><div class="email error" style="color: red"></div>
+                            </div>
+                            <p></p>
+                                <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('phoneNumberDiv').style.display = 'block'"></button>
+
+                            <div id="phoneNumberDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="phoneNumber" name="phoneNumber" class="col-sm-4 col-md-3" placeholder="<%=user.phoneNumber%>" title="0501234567" pattern="[0-9]{9,10}">
+                            </div>
+
+                            <br />
+                            <br />
+
+                            <label>You want to change your password?</label> <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('passwordDiv').style.display = 'block'"></button>
+                            <div id="passwordDiv"  style="display:none;" class="input-group" >
+                                <input type="password" id="password" name="password" class="col-sm-4 col-md-3" placeholder="Password" autocomplete="new-password" title="Exmp123!" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}'>
+                                <br/>
+                               <br/> <input type="password" id="confirmationPassword" name="confirmationPassword" class="col-sm-4 col-md-3" title="Exmp123!" placeholder="confirmation password">
+                                <div class="password error" style="color: red"></div>
+                                <p></p>
+                            </div>
+                                <br />
+
+                            <div id="btn">
+                                <button type="submit" onclick="get('<%= user.email%>','<%= user.password%>','<%= user.firstName%>','<%= user.lastName%>','<%=user.phoneNumber%>', '<%=user.address.city%>', '<%=user.address.street%>', '<%=user.address.houseNumber%>')"   id="submit" class="glyphicon glyphicon-save">Save changes</button>
+<!--                                <button type="button" onclick="myDeleteFunction()" class="glyphicon glyphicon-trash">Remove Account</button>-->
+                            </div>
+
+                            <div class="update succ" style="color: deeppink"></div>
+                            <div class="update fail" style="color: red"></div>
                         </div>
                     </div>
                 </div>
@@ -47,6 +92,98 @@
 </div>
 
 </body>
-
+<script src="../js/profileEmployer.js"></script>
 </html>
+
 <%- include ("partials/footer.ejs")-%>
+
+
+<script>
+
+    const citiesArray =['eilat',
+        'jerusalem',
+        'nazareth' ,
+        'haifa',
+        'zikhron ya’akov ',
+        'arad',
+        'netanya',
+        'nahariya',
+        'kfar tavor',
+        'hebron',
+        'kinneret moshava',
+        'holon',
+        'bat shlomo',
+        'bnei brak' ,
+        'the negev desert ',
+        'the lowlands',
+        'abu snan',
+        'julis',
+        'maghar',
+        'samia',
+        'ein al-assad',
+        'isfiya',
+        'keysarya' ,
+        'beer sheva',
+        'sde boker',
+        'yad moredechai',
+        'rosh-pina' ,
+        'kiryat shmona',
+        'kiryat malachi',
+        'ein gedi',
+        'ein-hod' ,
+        ' kfar nakhum',
+        ' hazor haglilit',
+        'metula' ,
+        'harduf',
+        'ashdod',
+        'kfar kama',
+        'abu gosh' ,
+        'jezreel valley',
+        ' the judean desert',
+        'sea of galilee',
+        'beit jann',
+        'sajur',
+        'rameh',
+        'daliyat el-carmel',
+        'the golan heights',
+        'tiberias',
+        'mitspe ramon',
+        'akko',
+        'katzerin',
+        'nahalal',
+        'kfar yasif',
+        'hanita',
+        'maalot tarshiha',
+        'bat yam',
+        'the hula valley' ,
+        'hevel habsor',
+        'the arava',
+        'the galilee',
+        'gush dan',
+        'the nitzana region',
+        'yanuh',
+        'yarka',
+        'kisra',
+        'hurfeish',
+        'shefa-amr',
+        'the dead sea',
+        'tel aviv jaffa',
+        'tsefat' ,
+        'tel-hai ',
+        'ramla',
+        'hertzeliya' ,
+        'gush halav',
+        'ashkelon' ,
+        'beit shean' ,
+        'cana' ,
+        'jatt',
+        'rehaniya',
+        'degania']
+    function selectOne() {
+        var select = document.getElementById('city')
+        for (var i=citiesArray.length-1; i>=0; i--) {
+            var x= citiesArray[i].charAt(0).toUpperCase() + citiesArray[i].slice(1);
+            select.options[select.options.length] = new Option(x, citiesArray[i])  }
+    }
+    selectOne()
+</script>

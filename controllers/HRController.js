@@ -47,7 +47,6 @@ module.exports.homepageHRGet=(req,res)=>{
     res.render('homepageHR')
 }
 
-
 module.exports.attendanceclockHRGet=async (req,res)=>{
 
     const transcationResult = await Transaction.find({})
@@ -104,9 +103,6 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
                     console.log(err)
 
                 })
-            // console.log('aaa')
-
-
 
         }).catch(err => {
             console.log(err)
@@ -278,12 +274,6 @@ module.exports.transactionPost= async (req,res)=>{
 
 }
 
-
-
-
-
-
-
 module.exports.addAContractorHRPost =async (req,res)=> {
 
     try {
@@ -311,6 +301,8 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             aboutMe,
             arrTypeJob
         } = req.body
+
+
 
         var jobTypes = []
         for (var i = 0; i < arrTypeJob.length; i++) {
