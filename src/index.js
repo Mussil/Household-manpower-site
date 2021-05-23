@@ -79,3 +79,4 @@ app.use(ContractorRoutes)
 app.get('*', (req, res) => {
     res.render('404')
 })
+

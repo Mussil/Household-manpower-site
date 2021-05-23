@@ -19,7 +19,10 @@
         <% data.forEach(tran => { %>
         <a class="single" href="/detailsOfTransaction/<%= tran._id %>">
             <h3 class="title">type of job: <%= tran.jobType %> </h3>
-            <p class="snippet"><%= tran.date.getDate()  %> of <%= monthNames[tran.date.getMonth()]  %> <%= tran.date.getFullYear()  %> </p>
+            <%var dt=new Date(tran.date);          dt.setDate( dt.getDate() - 1 ); %>
+            <p class="snippet"><%= dt.getDate()  %> of <%= monthNames[dt.getMonth()]  %> <%= dt.getFullYear()  %> </p>
+
+
         </a>
         <% }) %>
     <% } else { %>

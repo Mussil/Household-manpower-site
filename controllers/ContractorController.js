@@ -283,18 +283,19 @@ module.exports.leavePeriodContractorGet=(req,res)=>{
 
 module.exports.shiftReportContractorPost=(req,res)=> {
 
-    //צריכה לבדוק תקינות של התאריך של המשמרת
-    //להוסיף לבסיס נתונים
-    //במידה ויש עסקה לתאריך זה
-    //במידה ואין משמרת כבר בתאריך זה
+
 
 
     const { start } = req.body
 
     let start1 = new Date(start)
-    start1.setHours(0,0,0,0)
+    start1.setDate( start1.getDate() +1 )
 
-    let end = new Date(start)
+    start1.setHours(0,0,0,0)
+    console.log(start)
+    console.log(start1)
+
+    let end = new Date(start1)
     end.setHours(23,59,59,999)
 
     const token = req.cookies.jwt
@@ -347,7 +348,7 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
             if (result.isShifted) {
                 res.status(400).json({msgError: 'You have already entered a shift for this date'})
             }
-            else if (result.approval!=0) {
+            else if (result.approval!=1) {
                 res.status(400).json({msgError: 'You have not confirmed the transaction for this date'})
             }
             else{
@@ -357,8 +358,9 @@ module.exports.shiftReportHoursContractorPost= async (req,res)=> {
                         startHourShift: startMin,
                         endHourShift: endMin,
                         isShifted: true
+                        // eslint-disable-next-line no-unused-vars
                     },).then(updatedRows => {
-                    console.log(updatedRows)
+                    //console.log(updatedRows)
                     res.status(201).json({msg: 'The shift was added successfully'})
                 }).catch(err => {
                     res.status(400).json({msgError: 'an error occurred Try again'})

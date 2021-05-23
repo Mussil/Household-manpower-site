@@ -147,7 +147,7 @@ const Transaction=require('./Transaction')
 
 userSchema.statics.calcAvg = async function(idCont) {
     const transToCalc = await Transaction.find({idContractor : idCont})
-    console.log("in calcAvg")
+    console.log('in calcAvg')
     // console.log(transToCalc[0])
     var sum=0, num=0
     for (var i=0; i < transToCalc.length ; ++i){
@@ -163,6 +163,7 @@ userSchema.statics.calcAvg = async function(idCont) {
     await this.updateOne({_id: idCont},
         {
             rating:avg
+            // eslint-disable-next-line no-unused-vars
         },).then(updatedRows => {
         // console.log(updatedRows)
     }).catch(err => {
