@@ -49,7 +49,8 @@ form.addEventListener('submit', async (e) => {
 
                     window.opener = self;
                     // window.close();
-                    setTimeout("window.close()",5000)
+                    setTimeout("window.close()",3000)
+
                 }
             } catch (err) {
                 console.log(err)

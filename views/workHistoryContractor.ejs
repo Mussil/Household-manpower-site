@@ -43,7 +43,7 @@
             <% data.forEach(function(data){ %>
                 <%if(String(data.contractor) == String(user.email)) { %>
                     <tr>
-                            <td data-table-header="Date"><%= data.date.toLocaleDateString() %></td>
+                            <td data-table-header="Date"><%= data.date.toLocaleDateString('en-GB') %></td>
                             <td data-table-header="Shift start time"><%= data.startHourShift %></td>
                             <td data-table-header="Shift end time"><%= data.startHourShift %></td>
                             <td data-table-header="Salary"><%= data.salary %></td>

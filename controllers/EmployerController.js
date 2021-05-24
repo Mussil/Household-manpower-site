@@ -67,7 +67,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
 
                     var jobType = transcationResult[i].jobType
 
-                    var dateTransaction = (transcationResult[i].date).toLocaleDateString()
+                    var dateTransaction = (transcationResult[i].date).toLocaleDateString('en-GB')
 
                     var rank = transcationResult[i].rank
 
