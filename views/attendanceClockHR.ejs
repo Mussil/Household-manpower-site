@@ -68,7 +68,8 @@
                                         <td><%= data[i].contractor%></td>
                                     </div>
                                     <div class="date">
-                                        <td><%= data[i].date.toLocaleDateString('en-GB')%></td>
+                                        <%var dt=new Date(data[i].date);          dt.setDate( dt.getDate() - 1 ); %>
+                                        <td><%= dt.toLocaleDateString('en-GB') %></td>
                                     </div>
                                     <div class="shift">
                                         <td><%= data[i].startHourRec %></td>

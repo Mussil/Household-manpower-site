@@ -64,7 +64,8 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
 
                     var jobType = transcationResult[i].jobType
 
-                    var dateTransaction = (transcationResult[i].date).toLocaleDateString('en-GB')
+                    //var dateTransaction = (transcationResult[i].date).toLocaleDateString('en-GB')
+                    var dateTransaction = (transcationResult[i].date)
 
                     var rank = transcationResult[i].rank
 
@@ -76,7 +77,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
                         currentFee = 'shift was not reported yet'
                     }
 
-                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
+                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
                 }
 
             }
@@ -332,7 +333,6 @@ module.exports.rateContractorPost= async (req,res)=>{
 
     })
     const cont=await Transaction.findById(idTransaction)
-    console.log("cont")
     console.log(cont)
     UsersContractor.calcAvg(cont.idContractor)
 

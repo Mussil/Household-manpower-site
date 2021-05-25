@@ -43,12 +43,13 @@
             <% data.forEach(function(data){ %>
                 <%if(String(data.contractor) == String(user.email)) { %>
                     <tr>
-                            <td data-table-header="Date"><%= data.date.toLocaleDateString('en-GB') %></td>
-                            <td data-table-header="Shift start time"><%= data.startHourShift %></td>
-                            <td data-table-header="Shift end time"><%= data.startHourShift %></td>
-                            <td data-table-header="Salary"><%= data.salary %></td>
-                            <td data-table-header="Employer"><%= data.employer%></td>
-                            <td data-table-header="JobType"><%= data.jobType%></td>
+                        <%var dt=new Date(data.date);          dt.setDate( dt.getDate() - 1 ); %>
+                        <td data-table-header="Date"><%= dt.toLocaleDateString('en-GB') %></td>
+                        <td data-table-header="Shift start time"><%= data.startHourShift %></td>
+                        <td data-table-header="Shift end time"><%= data.startHourShift %></td>
+                        <td data-table-header="Salary"><%= data.salary %></td>
+                        <td data-table-header="Employer"><%= data.employer%></td>
+                        <td data-table-header="JobType"><%= data.jobType%></td>
                         <%if(data.rank==0) { %>
                              <td>Not rated yet</td>
                         <%} else if(data.rank==1){ %>

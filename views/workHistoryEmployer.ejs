@@ -47,7 +47,8 @@
                     <tr>
                         <td data-table-header="worker"><%= data.Worker %></td>
                         <td data-table-header="job type"><%= data.JobType %></td>
-                        <td data-table-header="date"><%= data.Date %></td>
+                        <%var dt=new Date(data.date);          dt.setDate( dt.getDate() - 1 ); %>
+                        <td data-table-header="date"><%= dt.toLocaleDateString('en-GB') %></td>
 
                         <%if(data.Rank==0){%>
 
