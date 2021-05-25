@@ -64,11 +64,11 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
 
                     var jobType = transcationResult[i].jobType
 
-                    var dateTransaction = (transcationResult[i].date).toLocaleDateString()
+                    var dateTransaction = (transcationResult[i].date).toLocaleDateString('en-GB')
 
                     var rank = transcationResult[i].rank
 
-                    var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
+                    var currentFee = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate)
 
                     var idEmployer = transcationResult[i].idEmployer
 
@@ -83,6 +83,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
         }
     }
 
+    // console.log(req)
     // console.log(myObject)
     res.render('workHistoryEmployer', {data: myObject})
 }

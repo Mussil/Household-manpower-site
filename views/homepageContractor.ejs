@@ -27,12 +27,21 @@
 <div class="container">
     <h2><a href="workOrdersContractor">Check your unapproved transactions </a></h2>
 
-    <hr>
-    <h2><span class="glyphicon glyphicon-star-empty"></span>    Stars number : <%=user.rating %></h2>
+    <%if(user.rating==0) { %>
+            <center><font size="50px" color="#f0ffff">★★★★★</font></center>
+    <%} else if(user.rating==1){ %>
+                <center><font size="50px" color="#ffd700">★</font><font size="50px" color="#f0ffff">★★★★</font></center>
+    <% } else if(user.rating==2) { %>
+                <center><font size="50px" color="#ffd700">★★</font><font size="50px" color="#f0ffff">★★★</font></center>
+    <% } else if(user.rating==3) { %>
+                <center><font size="50px" color="#ffd700">★★★</font><font size="50px" color="#f0ffff">★★</font></center>
+    <% } else if(user.rating==4) { %>
+                <center><font size="50px" color="#ffd700">★★★★</font><font size="50px" color="#f0ffff">★</font></center>
+    <% } else if(user.rating==5) { %>
+                <center><font size="50px" color="#ffd700">★★★★★</font></center>
+    <% } %>
 
-
-    <hr>
-    <h2>Shift report</h2>
+    <h3>Shift report</h3>
     <input type="text" name="daterange"  />
     <div class="date messages error"></div>
     <hr>

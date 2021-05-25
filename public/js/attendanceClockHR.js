@@ -79,9 +79,9 @@ function myEditFunction(g) {
                         swal({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Updating mail was sent to the contractor',
+                            title: 'Updating mail was sent to the contractor\n\n# Shift start time: '+startTime+'\n\n# Shift end time: '+endTime,
                             showConfirmButton: false,
-                            timer: 1500
+                            timer: 5000
                         })
 
                     }
@@ -99,6 +99,21 @@ function myEditFunction(g) {
 
 
 }
+
+
+// function sendMailToCont() {
+//
+//     // let wrap = document.createElement('div');
+//     // // wrap.setAttribute('class', 'text-muted');
+//     // wrap.innerHTML = '<h1>333333333333</h1><button onclick="reply(\'sad\')" type="button" value="sad" class="btn feel"><i class="fa fa-frown-o fa-3x"></i></button><button onclick="reply(\'neutral\')" type="button" value="neutral" class="btn feel"><i class="fa fa-meh-o fa-3x"></i></button><button onclick="reply(\'happy\')" type="button" value="happy" class="btn feel"><i class="fa fa-smile-o fa-3x"></i></button><hr>'
+//
+//
+// }
+
+
+
+
+
 
 // eslint-disable-next-line no-unused-vars
 function myDeleteFunction(g) {
