@@ -17,6 +17,7 @@
 </head>
 
 <body>
+<!--<button class="button" onclick="reloadCurrentPage()"><span>Refresh page</span></button>-->
 
 <div class="row">
     <div class="container">
@@ -51,9 +52,10 @@
                         <%if(data.Rank==0){%>
 
 <!--                            <td><a href="/homepageEmployer" target="_blank">link text</a></td>-->
-                            <td><a
-                                   onclick="window.open('/rateContractorInEmployer/'+String(<%= JSON.stringify(data.id)%>),'Rate','width=500,height=500,left=500,top=700');return false;">Rank me!</a>
+                            <td>
+                                <a href=<%=String("/rateContractorInEmployer/"+String(JSON.stringify(data.id)))%>>Rank me!</a></li>
                             </td>
+
 
                         <%} else if(data.Rank==1){ %>
                             <td id="1"><font color="#ffd700">★</font></td>
@@ -95,6 +97,7 @@
 <script  src="function.js"></script>
 
 </body>
+
 <%- include ("partials/footer.ejs")-%>
 </html>
 
@@ -104,9 +107,13 @@
             // columnDefs : [
             //     { type : 'date', targets : [3] }
             // ],
-            'columnDefs': [{ 'orderable': false, 'targets': 3 }], // hide sort icon on header of first column
-            // 'aaSorting': [[0, 'asc']] // start to sort data in second column
+            'columnDefs': [{ 'orderable': false, 'targets': 3 }], // hide sort icon on header of third column
         });
     });
+
+    // function reloadCurrentPage()
+    // {
+    //     window.location.href = "http://127.0.0.1:3000/workHistoryEmployer";
+    // }
 
 </script>

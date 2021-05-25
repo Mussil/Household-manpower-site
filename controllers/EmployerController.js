@@ -86,6 +86,7 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
         }
     }
 
+    // console.log(req)
     // console.log(myObject)
     res.render('workHistoryEmployer', {data: myObject})
 }

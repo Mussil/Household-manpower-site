@@ -23,8 +23,14 @@ form.addEventListener('submit', async (e) => {
         return;
     }
     var str = window.location.href
-    const idTransaction = str.split('/')[4]
-    console.log(idTransaction)
+
+    var idTransaction = str.split('/')[4]
+
+    console.log(idTransaction.slice(3, idTransaction.length-3))
+    idTransaction = idTransaction.slice(3, idTransaction.length-3)
+
+    console.log('id',idTransaction)
+
     const recommend = form.recommend.value
     console.log(recommend)
     try {
@@ -35,22 +41,24 @@ form.addEventListener('submit', async (e) => {
                 })
                 const data = await res.json()
                 if (data) {
-                    if(selectedValue==1) {
-                        swal("Sorry to hear that..terrible ha..");
-                    } else if(selectedValue==2) {
-                        swal("Oh boy, was it so bad ?!? ");
-                    }else if(selectedValue==3) {
-                        swal("Ok :) Fair enough ");
-                    }else if(selectedValue==4) {
-                        swal("Wonderfull, that's great to hear");
-                    }else if(selectedValue==5) {
-                        swal("Wow!!! thanks, great!!!");
-                    }
+                    // if(selectedValue==1) {
+                    //     swal("Sorry to hear ");
+                    // } else if(selectedValue==2) {
+                    //     swal("Oh boy, was it so bad ?!? ");
+                    // }else if(selectedValue==3) {
+                    //     swal("Ok :) Fair enough ");
+                    // }else if(selectedValue==4) {
+                    //     swal("Wonderfull, that's great to hear");
+                    // }else {
+                    //     swal("Wow!!! thanks, great!!!");
+                    // }
 
                     window.opener = self;
-                    // window.close();
-                    setTimeout("window.close()",3000)
 
+                    // setTimeout("window.close()",3000)
+
+                    // console.log('you are soppesed to see update page!!!')
+                    window.location.href = "http://127.0.0.1:3000/workHistoryEmployer";
                 }
             } catch (err) {
                 console.log(err)
