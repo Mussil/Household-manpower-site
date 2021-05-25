@@ -162,8 +162,6 @@
             if(data.user){
                 sucNew.textContent = 'A new contractor worker:'+data.user.email+' is added to the system an email on its way to him.'
                 form.reset()
-
-                //res.send('<h3>YOU ARE ADD A NEW EMPLOYER TO THE SYSTEM</h3>')
             }
 
         }

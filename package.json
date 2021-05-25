@@ -42,10 +42,8 @@
     "node-mandrill": "^1.0.1",
     "nodemailer": "^6.5.0",
     "password-validator": "^5.1.1",
-    "table-filter-sort": "^1.0.0",
-
     "sweetalert2": "^10.16.7",
-
+    "table-filter-sort": "^1.0.0",
     "validator": "^13.5.2"
   },
   "devDependencies": {

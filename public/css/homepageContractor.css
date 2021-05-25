@@ -15,9 +15,20 @@ h2{
 }
 h3{
     color: black;
-    text-align: left;
+    text-align: center;
     text-transform:none;
-    font-size: 15px;
+    font-size: 30px;
+    font-family: Garamond ;
+    font-weight: bold;
+
+}
+h4{
+    color: deeppink;
+    text-align: center;
+    text-transform:none;
+    font-size: 20px;
+    font-family: Garamond ;
+    font-weight: bold;
 }
 .container {
     border-radius: 5px;
@@ -25,3 +36,27 @@ h3{
     padding: 20px;
 }
 
+.fa_custom{
+    color: #ff0099;
+    position: fixed;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    line-height: 0%;
+    border: none;
+    right: 250px;
+    top: 530px;
+
+}
+
+.fa_right{
+    color: #ff0099;
+    position: fixed;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    line-height: 0%;
+    border: none;
+}

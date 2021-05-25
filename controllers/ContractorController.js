@@ -40,7 +40,26 @@ const handleErrors = (err) => {
 
 // controller actions
 module.exports.homepageContractorGet=(req,res)=>{
-    res.render('homepageContractor')
+
+    const token = req.cookies.jwt
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        }
+        else{
+            var arrRecommendation = []
+
+            Transaction.find({idContractor: decodedToken.id})
+                .then(user=>{
+                    for(var i=0;i<user.length;++i){
+                        if(user[i].recommendation != '')
+                            arrRecommendation.push(user[i].recommendation)
+                    }
+                    res.render('homepageContractor',{rec:arrRecommendation })
+                })
+                .catch(err=>{ console.log(err)})
+        }
+    })
 }
 
 module.exports.workHistoryContractorGet=async (req,res)=>{
@@ -201,8 +220,8 @@ module.exports.salaryDetailsContractorPost=(req,res)=> {
 }
 
 module.exports.profileContractorGet=(req,res)=>{
-    res.render('profileContractor')
 
+    res.render('profileContractor')
 }
 
 module.exports.profileContractorPost = async (req, res) => {
@@ -415,9 +434,6 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
 
 }
 
-
-
-
 module.exports.workOrdersContractorGet= async (req,res)=>{
 
     const transaction = await Transaction.find({})
@@ -472,7 +488,6 @@ module.exports.detailsOfTransactionGet =  async (req,res)=>{
     })
 
 }
-
 
 module.exports.detailsOfTransactionPost= async (req,res)=>{
     var isAccepted=req.body.isAccepted
@@ -529,7 +544,6 @@ module.exports.detailsOfTransactionPost= async (req,res)=>{
 
 
 }
-
 
 function sendEmail(email,msg){
     let transporter = nodemailer.createTransport({

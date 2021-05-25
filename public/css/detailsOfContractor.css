@@ -2,6 +2,7 @@
     padding-left: 10px;
     color:#66afe9;
 }
+
 .details.content{
     display: block;
     margin: 40px 0px;
@@ -14,4 +15,36 @@
 }
 .Recruitment.error{
     color: #de4427;
+}
+
+.recommendation{
+    height:200px;
+    width:400px;
+    overflow:auto;
+    border:1px solid;
+    padding:2%;
+    position: fixed;
+    left: 1000px;
+    bottom: 200px;
+    box-shadow: 5px 10px #66afe9;
+
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

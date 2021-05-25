@@ -46,7 +46,6 @@ module.exports.rateContractorInEmployerGet= (req,res)=>{
     res.render('rateContractorInEmployer')
 }
 
-
 module.exports.workHistoryEmployerGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
     // const userEmployerResult = await UserEmployer.find({})
@@ -176,18 +175,28 @@ module.exports.viewEmployeesGet=async (req,res)=>{
 }
 
 module.exports.detailsOfContractorGet=async (req,res)=>{
-    // const typeCon=req.params.typeOfJob
     const parm=req.params.id
     const attr = parm.split('+')
-    // const idCon=req.params.id
     const typeCon=attr[0]
     const idCon=attr[1]
+    var arrRecommendation = []
 
-    console.log('here')
-    // console.log(typeCon)
+
+    Transaction.find({idContractor: idCon})
+        .then(user=>{
+            for(var i=0;i<user.length;++i){
+                if(user[i].recommendation != '')
+                    arrRecommendation.push(user[i].recommendation)
+            }
+            console.log(arrRecommendation[0])
+            console.log(arrRecommendation[1])
+
+        }).catch(err=>{
+            console.log(err)
+    })
     UsersContractor.findById(idCon)
         .then(result => {
-            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon })
+            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon,rec:arrRecommendation })
         })
         .catch(err => {
             console.log(err)
@@ -311,7 +320,6 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
 
 }
 
-
 module.exports.rateContractorPost= async (req,res)=>{
 
     const {idTransaction, rate,recommend} = req.body
@@ -331,7 +339,7 @@ module.exports.rateContractorPost= async (req,res)=>{
 
     })
     const cont=await Transaction.findById(idTransaction)
-    console.log("cont")
+    console.log('cont')
     console.log(cont)
     UsersContractor.calcAvg(cont.idContractor)
 

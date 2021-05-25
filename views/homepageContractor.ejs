@@ -10,7 +10,9 @@
 
     <link rel = "stylesheet"  type = "text/css"  href = "../css/homepageContractor.css" />
     <script src="../js/shiftReportContractor.js"></script>
-
+    <script src="../js/homepageContractor.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -52,14 +54,38 @@
         <input type="submit" value="Submit form">
     </div>
 </form>
-
 <hr>
 <form class="container">
-    <h2><span class="glyphicon glyphicon-star-check"></span>here goes the recommendation</h2>
+    <h4>My recommendations:</h4>
+    <br/>
+    <button class="fa fa-chevron-left fa_right" onclick="changeText('pre')"></button>
+    <h3></h3>
+    <button class="fa fa-chevron-right fa_custom" onclick="changeText('nxt')"></button>
+<br/>
+    <br/>
 </form>
 
 <%- include ("partials/footer.ejs")-%>
 
 <script>
     document.getElementById('hoursForm').style.display = 'none'
+
+    const arrRec = <%- JSON.stringify(rec)%>
+    var point = 0;
+    function changeText(txt){
+        if(txt === 'pre'){
+            $('h3').html(arrRec[(arrRec.length)%(point-1)]);
+        }
+        if(txt === 'nxt'){
+            $('h3').html(arrRec[(arrRec.length)%(point+1)]);
+        }
+        else{
+            point = ((Math.floor(Math.random()*10))%(arrRec.length))
+            $('h3').html(arrRec[point]);
+            setTimeout(changeText, 3000)
+        }
+    }
+
+    changeText();
 </script>
+

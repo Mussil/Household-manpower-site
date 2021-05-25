@@ -18,9 +18,6 @@ const handleErrors = (err) => {
         errors.email = 'This email already exist'
     }
     // incorrect password
-    if (err.message === 'incorrect password') {
-        errors.password = 'That password is incorrect'
-    }
 
 
     // if(err.message === 'incorrect city'){

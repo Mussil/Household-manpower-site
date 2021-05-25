@@ -14,9 +14,14 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
 
 
     <title>contractor details</title>
@@ -30,7 +35,31 @@
 <div class="details content">
     <h2><%= result.firstName %> <%=result.lastName %></h2>
     <h3><%= result.email %></h3>
-
+    <p></p>
+    <% for(var i=0;i<result.rating;++i){%>
+        <span class="fa fa-star checked"></span>
+    <% } %>
+    <% for(var i=0;i<(5-result.rating);++i){%>
+        <span class="fa fa-star" style="color: wheat"></span>
+    <% } %>
+    <br/>
+    <p></p>
+<div class="recommendation" id="recommendation">
+    <% if(rec.length<=0) {%>
+       <% 'recommendation'.style.display='none' %>
+        <% } %>
+    <% if(rec.length>0) {%>
+        <p><strong>What I was recommended <i class="fa fa-heart"></i></strong></p>
+<br/>
+        <% for(var i=0;i< rec.length;++i){%>
+            <i class="fa fa-smile-o"></i> <i><%- rec[i] %></i>
+            <p></p>
+        <% } %>
+    <% } %>
+        <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+        <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+</div>
+    <br/>
     <div class="content">
         <p><%= result.aboutMe %></p>
         <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
@@ -91,4 +120,5 @@
     var typeOfJob = <%- JSON.stringify(typeOfJob) %>
         console.log(typeOfJob)
     getDetails(contractorId,typeOfJob)
+
 </script>
