@@ -17,6 +17,7 @@
 </head>
 
 <body>
+<!--<button class="button" onclick="reloadCurrentPage()"><span>Refresh page</span></button>-->
 
 <div class="row">
     <div class="container">
@@ -46,18 +47,29 @@
                     <tr>
                         <td data-table-header="worker"><%= data.Worker %></td>
                         <td data-table-header="job type"><%= data.JobType %></td>
-                        <td data-table-header="date"><%= data.Date %></td>
+                        <%var dt=new Date(data.date);          dt.setDate( dt.getDate() - 1 ); %>
+                        <td data-table-header="date"><%= dt.toLocaleDateString('en-GB') %></td>
 
                         <%if(data.Rank==0){%>
 
 <!--                            <td><a href="/homepageEmployer" target="_blank">link text</a></td>-->
-                            <td><a
-                                   onclick="window.open('/rateContractorInEmployer/'+String(<%= JSON.stringify(data.id)%>),'Rate','width=500,height=500,left=500,top=700');return false;">Rank me!</a>
+                            <td>
+                                <a href=<%=String("/rateContractorInEmployer/"+String(JSON.stringify(data.id)))%>>Rank me!</a></li>
                             </td>
 
-                        <%} else { %>
-                            <td data-table-header="rank"><%= data.Rank %></td>
+
+                        <%} else if(data.Rank==1){ %>
+                            <td id="1"><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==2) { %>
+                            <td id="2"><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==3) { %>
+                            <td id="3"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==4) { %>
+                            <td id="4"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
+                        <% } else if(data.Rank==5) { %>
+                            <td id="5"><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font><font color="#ffd700">★</font></td>
                         <% } %>
+
                         <td data-table-header="current fee"><%= data.CurrentFee%></td>
                     </tr>
                 <%}%>
@@ -86,15 +98,23 @@
 <script  src="function.js"></script>
 
 </body>
+
 <%- include ("partials/footer.ejs")-%>
 </html>
 
 <script>
     $(document).ready(function() {
         $("#sort").DataTable({
-            columnDefs : [
-                { type : 'date', targets : [3] }
-            ],
+            // columnDefs : [
+            //     { type : 'date', targets : [3] }
+            // ],
+            'columnDefs': [{ 'orderable': false, 'targets': 3 }], // hide sort icon on header of third column
         });
     });
+
+    // function reloadCurrentPage()
+    // {
+    //     window.location.href = "http://127.0.0.1:3000/workHistoryEmployer";
+    // }
+
 </script>

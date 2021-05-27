@@ -47,7 +47,6 @@ module.exports.homepageHRGet=(req,res)=>{
     res.render('homepageHR')
 }
 
-
 module.exports.attendanceclockHRGet=async (req,res)=>{
 
     const transcationResult = await Transaction.find({})
@@ -104,9 +103,6 @@ module.exports.attendanceclockHRPost= async (req,res)=>{
                     console.log(err)
 
                 })
-            // console.log('aaa')
-
-
 
         }).catch(err => {
             console.log(err)
@@ -154,6 +150,11 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
         .catch(err => {
             console.log(err)
         })
+
+    const cont= Transaction.findById(id)
+    console.log("cont")
+    console.log(cont)
+    UsersContractor.calcAvg(cont.idContractor)
 }
 
 
@@ -214,7 +215,7 @@ module.exports.monitorHiringHRGet=async (req, res) =>{
             }
             if (String(employer) != String(undefined)) {
                 var dateTransaction = transcationResult[i].date
-                var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate
+                var currentFee = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift) / 60) * transcationResult[i].hourlyRate)
                 if (String(currentFee) == 'NaN') {
                     currentFee = 'shift was not reported yet'
                 }
@@ -278,12 +279,6 @@ module.exports.transactionPost= async (req,res)=>{
 
 }
 
-
-
-
-
-
-
 module.exports.addAContractorHRPost =async (req,res)=> {
 
     try {
@@ -311,6 +306,8 @@ module.exports.addAContractorHRPost =async (req,res)=> {
             aboutMe,
             arrTypeJob
         } = req.body
+
+
 
         var jobTypes = []
         for (var i = 0; i < arrTypeJob.length; i++) {

@@ -121,3 +121,18 @@
 .error-rating{
     color: #de4427;
 }
+
+.someclass {
+    width: 200px;
+    /*width: 10vw;*/
+}
+
+input[type=submit] {
+    background-color: gold;
+    border: none;
+    text-decoration: none;
+    color: white;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    cursor: pointer;
+}

@@ -2,43 +2,40 @@
 const UsersContractor=require('../models/UsersContractor')
 const Transaction=require('../models/Transaction')
 const UserEmployer = require('../models/UsersEmployer')
-// const addressModel = require('../models/Address')
+const addressModel = require('../models/Address')
 const jwt = require('jsonwebtoken')
+const bcrypt=require('bcrypt')
 
-//
-// const handleErrors = (err) => {
-//     console.log(err.message)
-//     let errors = { email: '', password: '' ,firstName: '', lastName: '',phoneNumber: '',city:''}
-//
-//
-//     // incorrect email
-//     if (err.message === 'incorrect email') {
-//         errors.email = 'That email is not incorrect'
-//     }
-//
-//     // incorrect password
-//     if (err.message === 'incorrect password') {
-//         errors.password = 'That password is incorrect'
-//     }
-//
-//     if(err.message === 'incorrect firstName'){
-//         errors.firstName = 'That first is incorrect'
-//     }
-//     // duplicate email error
-//     if (err.code === 11000) {
-//         errors.email = 'that email is already registered'
-//         return errors
-//     }
-//
-//     // validation errors
-//     if (err.message.includes('user validation failed')) {
-//         Object.values(err.errors).forEach(({ properties }) => {
-//             errors[properties.path] = properties.message
-//         })
-//     }
-//
-//     return errors
-// }
+
+const handleErrors = (err) => {
+    console.log(err.message)
+    let errors = { email: '', password: ''}
+
+    // incorrect email
+    if (err.message === 'incorrect email') {
+        errors.email = 'That email is not incorrect'
+    }
+
+    // incorrect password
+    if (err.message === 'incorrect password') {
+        errors.password = 'That password is incorrect'
+    }
+
+    // duplicate email error
+    if (err.code === 11000) {
+        errors.email = 'that email is already registered'
+        //return errors
+    }
+
+    // validation errors
+    if (err.message.includes('user validation failed')) {
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message
+        })
+    }
+
+    return errors
+}
 
 
 module.exports.homepageEmployerGet= (req,res)=>{
@@ -67,11 +64,12 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
 
                     var jobType = transcationResult[i].jobType
 
-                    var dateTransaction = (transcationResult[i].date).toLocaleDateString()
+                    //var dateTransaction = (transcationResult[i].date).toLocaleDateString('en-GB')
+                    var dateTransaction = (transcationResult[i].date)
 
                     var rank = transcationResult[i].rank
 
-                    var currentFee = ((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate
+                    var currentFee = Math.round(((transcationResult[i].endHourShift - transcationResult[i].startHourShift)/60) * transcationResult[i].hourlyRate)
 
                     var idEmployer = transcationResult[i].idEmployer
 
@@ -79,13 +77,14 @@ module.exports.workHistoryEmployerGet=async (req,res)=>{
                         currentFee = 'shift was not reported yet'
                     }
 
-                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'Date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
+                    myObject.push({'id': id, 'Worker':contractor, 'JobType': jobType, 'date': dateTransaction , 'Rank':rank,  'CurrentFee':currentFee, 'idEmployer': idEmployer})
                 }
 
             }
         }
     }
 
+    // console.log(req)
     // console.log(myObject)
     res.render('workHistoryEmployer', {data: myObject})
 }
@@ -94,40 +93,64 @@ module.exports.profileEmployerGet=(req,res)=>{
     res.render('profileEmployer')
 }
 
-module.exports.profileEmployerEditGet=(req,res)=>{
-    res.render('profileEmployerEdit')
-}
+module.exports.profileEmployerPost = async (req, res) => {
 
-module.exports.profileEmployerDelete=(req,res)=>{
-        console.log('here in server delete')
-        const token = req.cookies.jwt
-        if (token) {
-            jwt.verify(token, 'sce secret', async (err, decodedToken) => {
-                if (err) {
-                    console.log(err)
-                } else {
+    var {email,password, firstName, lastName, phoneNumber, city, street, houseNumber,changePassword} = req.body
 
-                    Transaction.deleteMany({idContracotr:decodedToken.id})
-                        .then(result => {
-                            console.log(`Deleted ${result.deletedCount} transaction(s).`)
-                            UserEmployer.findByIdAndDelete(decodedToken.id)
-                                // eslint-disable-next-line no-unused-vars
-                                .then(result => {
-                                    console.log('found')
-                                    res.json({ redirect: '/logout' })
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                })
-
-                        })
-                        .catch(err => console.error(`Delete failed with error: ${err}`))
-
-
+    const token = req.cookies.jwt
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        } else {
+            try {
+                const address = new addressModel({city, street, houseNumber})
+                if(changePassword === 1){
+                    const salt=await bcrypt.genSalt()
+                    password=await bcrypt.hash(password, salt)
                 }
-            })
+                await UserEmployer.findOneAndUpdate({_id: decodedToken.id}, {$set: {email, password, firstName, lastName, phoneNumber,address }})
+                    .then(user=>{
+                        res.status(200).json({user: user._id })
+                    })
+            }
+            catch (err){
+                const errors = handleErrors(err)
+                res.status(400).json({errors})
+            }
         }
+    })
 }
+
+// module.exports.profileEmployerDelete=(req,res)=>{
+//     console.log('here in server delete')
+//     const token = req.cookies.jwt
+//     if (token) {
+//         jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+//             if (err) {
+//                 console.log(err)
+//             } else {
+//
+//                 Transaction.deleteMany({idEmployer:decodedToken.id})
+//                     .then(result => {
+//                         console.log(`Deleted ${result.deletedCount} transaction(s).`+ decodedToken.id)
+//                         UserEmployer.findByIdAndDelete(decodedToken.id)
+//                             // eslint-disable-next-line no-unused-vars
+//                             .then(result => {
+//                                 console.log('found')
+//                                 res.json({ redirect: '/logout' })
+//                             })
+//                             .catch(err => {
+//                                 console.log(err)
+//                             })
+//
+//                     })
+//                     .catch(err => console.error(`Delete failed with error: ${err}`))
+//
+//
+//             }
+//         })
+//     }
+// }
 
 module.exports.viewEmployeesGet=async (req,res)=>{
 
@@ -154,7 +177,6 @@ module.exports.viewEmployeesGet=async (req,res)=>{
     res.render('viewEmployeesEmployer',{data: afterFilter, typeOfJob})
 }
 
-
 module.exports.detailsOfContractorGet=async (req,res)=>{
     // const typeCon=req.params.typeOfJob
     const parm=req.params.id
@@ -175,7 +197,6 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
         })
 
 }
-
 
 module.exports.detailsOfContractorPost= (req,res)=> {
 
@@ -226,22 +247,22 @@ module.exports.detailsOfContractorPost= (req,res)=> {
                             }
                         }
                     } // the contractor worker could be hired
-                        //need to check if he already has a job for this date
+                    //need to check if he already has a job for this date
 
-                        console.log('fd')
-                        Transaction.findOne({
-                            idContractor: contractorId,
-                            date: start1
-                                // {
-                                // $gte: start1, $lte: end }
-                        }).then(result => {
-                            console.log(result)
-                            if (result) { //already hired
-                                res.status(400).json({msgError: 'This contractor worker could not be recruited for the date you selected'})
-                            } else {//can hire
-                                res.status(201).json({contractorId,start1,employerId})
-                            }
-                        })
+                    console.log('fd')
+                    Transaction.findOne({
+                        idContractor: contractorId,
+                        date: start1
+                        // {
+                        // $gte: start1, $lte: end }
+                    }).then(result => {
+                        console.log(result)
+                        if (result) { //already hired
+                            res.status(400).json({msgError: 'This contractor worker could not be recruited for the date you selected'})
+                        } else {//can hire
+                            res.status(201).json({contractorId,start1,employerId})
+                        }
+                    })
 
 
                 })
@@ -256,33 +277,33 @@ module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
     const {contractorId,startDate,employerId, startMin, endMin,typeCon} = req.body
     UsersContractor.findById(contractorId)
         .then(async user=>{
-        if(!user.$isEmpty('hourlyRate')) {
-            var sal = user.hourlyRate
-            console.log(sal)
+            if(!user.$isEmpty('hourlyRate')) {
+                var sal = user.hourlyRate
+                console.log(sal)
 
 
-            const newTrans = {
-                idContractor: contractorId,
-                idEmployer: employerId,
-                date: startDate,
-                jobType:typeCon,
-                hourlyRate: sal,
-                startHourRec: startMin,
-                endHourRec: endMin
+                const newTrans = {
+                    idContractor: contractorId,
+                    idEmployer: employerId,
+                    date: startDate,
+                    jobType:typeCon,
+                    hourlyRate: sal,
+                    startHourRec: startMin,
+                    endHourRec: endMin
+                }
+                // console.log(newTrans)
+                try {
+                    const tran = await Transaction.create(newTrans)
+                    console.log(tran)
+                    res.status(201).json({data: tran, msg: 'Recruitment was performed,\n wait till the contractor worker will approve it'})
+                } catch (err) {
+                    res.status(400).json({msgError: 'An error occurred'})
+                }
             }
-            // console.log(newTrans)
-            try {
-                const tran = await Transaction.create(newTrans)
-                console.log(tran)
-                res.status(201).json({data: tran, msg: 'Recruitment was performed,\n wait till the contractor worker will approve it'})
-            } catch (err) {
+            else{
                 res.status(400).json({msgError: 'An error occurred'})
-            }
-        }
-        else{
-            res.status(400).json({msgError: 'An error occurred'})
 
-        }
+            }
 
         }).catch(()=>{
         res.status(400).json({msgError: 'An error occurred'})
@@ -312,7 +333,6 @@ module.exports.rateContractorPost= async (req,res)=>{
 
     })
     const cont=await Transaction.findById(idTransaction)
-    console.log("cont")
     console.log(cont)
     UsersContractor.calcAvg(cont.idContractor)
 

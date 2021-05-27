@@ -18,6 +18,11 @@ $(function() {
         console.log('New date selected: ' + start.format('YYYY-MM-DD') )
         document.getElementById('hoursForm').style.display = 'none'
 
+
+        const hourMessageSuc = document.querySelector('.hour.message.suc')
+
+        hourMessageSuc.textContent = ''
+
         const dateMessage = document.querySelector('.date.messages.error')
         dateMessage.textContent=''
         if(start<new Date()){

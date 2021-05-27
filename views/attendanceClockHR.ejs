@@ -12,14 +12,20 @@
                 Attendance Clock
             </div>
 
+
+
             <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
             <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
             <script src="../js/attendanceClockHR.js"></script>
             <link rel = "stylesheet"  type = "text/css"  href = "../css/attendanceClockHR.css" />
+
 
             <div class="search_box">
                 <input type="text" id="search_input" placeholder="Press here to fliter table using contractor mail..." >
             </div>
+
+
         </div>
 
         <div class="table_wrap">
@@ -62,7 +68,8 @@
                                         <td><%= data[i].contractor%></td>
                                     </div>
                                     <div class="date">
-                                        <td><%= data[i].date.toLocaleDateString()%></td>
+                                        <%var dt=new Date(data[i].date);          dt.setDate( dt.getDate() - 1 ); %>
+                                        <td><%= dt.toLocaleDateString('en-GB') %></td>
                                     </div>
                                     <div class="shift">
                                         <td><%= data[i].startHourRec %></td>
@@ -87,14 +94,23 @@
                 </ul>
             </div>
             <div class="table_footer"></div>
+
         </div>
 
     </div>
+
+
 </section>
 
         <br>
         <form id="hoursForm" class="container">
-            <h2>Updating Hours</h2><br>
+            <div class="wrapper">
+                <div class="header">
+                    <div class="title">
+                        Updating Hours
+                    </div>
+                </div>
+            </div>
 
             <label>Start report time</label><br>
             <input type="time" id="startTime" name="startTime"  min="00:00" max="23:59" required>
@@ -113,6 +129,7 @@
 <!--            -->
 <!--        </form>-->
 </body>
+
 <%- include ("partials/footer.ejs")-%>
 </html>
 
@@ -140,5 +157,7 @@
         })
 
     })
+
+
 
 </script>

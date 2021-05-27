@@ -1,9 +1,20 @@
-<%- include ("partials/navContractor.ejs")-%>
-
-
-<html>
-<!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Contractor</title>
+    <%- include ("partials/navContractor.ejs")-%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+</head>
 <body>
+
 <div class="container">
     <form id="form">
         <div class="row">
@@ -13,67 +24,173 @@
                         <div class="col-sm-6 col-md-4">
                         </div>
                         <div class="col-sm-6 col-md-8">
-                            <h3>
-                                <%=user.firstName%>  <%=user.lastName%> </h3>
-                            <p>
-                                <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>
+
+
+                           <h3><%=user.firstName%><button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('firstNameDiv').style.display = 'block'"></button></h3>
+                            <div id="firstNameDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="firstName" name="firstName" class="col-sm-4 col-md-3" placeholder="<%= user.firstName %>" title="John" pattern="[a-zA-Z]{3,}"><br/>
+                            </div>
+
+
+                            <h3><%=user.lastName%>   <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('lastNameDiv').style.display = 'block'"></button></h3>
+                            <div id="lastNameDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="lastName" name="lastName" class="col-sm-4 col-md-3" placeholder="<%=user.lastName%>" title="Doe" pattern="[a-zA-Z]{3,}"><p><br></p>
+                            </div>
+
+                            <% for(var i=0;i<user.rating;++i){%>
+                                <span class="fa fa-star checked"></span>
+                            <% } %>
+                            <% for(var i=0;i<(5-user.rating);++i){%>
+                                <span class="fa fa-star" style="color: wheat"></span>
+                            <% } %>
+
+                            <p></p>
+
+                            <i class="glyphicon glyphicon-map-marker"></i> <%=user.address.city%>, <%=user.address.street%> <%=user.address.houseNumber%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('AddrssDiv').style.display = 'block'"></button>
+                            <div id="AddrssDiv"  style="display:none;" class="input-group" >
+                                <label>City</label>
+                                <select id="city">
+                                </select> <br/>
+                                <label>Street</label>
+                                <br/><input type="text" id="street" name="street" class="col-sm-4 col-md-3" placeholder="<%=user.address.street%>" title="Herzl" pattern="[a-zA-Z]+"><br/>
+                                <br/>
+                                <label>House Number</label>
+                                <br/><input type="text" id="houseNumber" name="houseNumber" class="col-sm-4 col-md-3" placeholder="<%=user.address.houseNumber%>" title="12" pattern="[0-9]+"><br/>
+                                <br/>
+                            </div>
+
+                            <p></p>
+
+                            <i class="glyphicon glyphicon-envelope"></i> <%=user.email%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('emailDiv').style.display = 'block'"></button>
+                            <div id="emailDiv"  style="display:none;" class="input-group" >
+                              <p></p><input type="email" id="email" name="email" class="col-sm-4 col-md-3" placeholder="<%=user.email%>" title="exmp1@gmail.com">
+                                <p><br/></p> <div class="email error" style="color: red"></div>
+                            </div>
+
+                            <p></p>
+
+                            <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>  <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('phoneNumberDiv').style.display = 'block'"></button>
+                            <div id="phoneNumberDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="phoneNumber" name="phoneNumber" class="col-sm-4 col-md-3" placeholder="<%=user.phoneNumber%>" title="0501234567" pattern="[0-9]{9,10}">
+                            </div>
+
                                 <br />
                                 <br />
-                                <i class="glyphicon glyphicon-envelope"></i>  <%=user.email%>
+                                <i class="glyphicon glyphicon-gift"></i> <%= user.birthday.getDate() %>.<%= user.birthday.getUTCMonth() %>.<%= user.birthday.getFullYear() %>
                                 <br />
                                 <br />
-                                <i class=" glyphicon glyphicon-earphone"> </i> <%=user.phoneNumber%>
-                                <br />
-                                <br />
-                                <i class="glyphicon glyphicon-gift"></i> <%= user.birthday %>
-                                <br />
-                                <br />
-                                <i class="glyphicon glyphicon-education"></i> <%=user.education%>
-                                <br />
-                                <br />
+                                <i class="glyphicon glyphicon-education"></i> <%=user.education%>   <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('eduDiv').style.display = 'block'"></button>
+                            <div id="eduDiv"  style="display:none;" class="input-group" >
+
+                            <div>
+                                <select class="form-group" name="education" id="education">
+                                    <option value="Elementary">Elementary</option>
+                                    <option value="High school">high school</option>
+                                    <option value="Higher">higher</option>
+                                </select>
+                            </div>
+                            </div>
+                               <p></p>
                                 <i class="glyphicon glyphicon-check"></i> <%=user.experience%>
                                 <br />
                                 <br />
-                                <i class="glyphicon glyphicon-euro"></i> <%=user.hourlyRate%>
+
+                            <i class="glyphicon glyphicon-euro"></i> <%=user.hourlyRate%>
+                            <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('hourDiv').style.display = 'block'"></button>
+                            <div id="hourDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="hourlyRate" name="hourlyRate" class="col-sm-4 col-md-3" placeholder="<%=user.hourlyRate%>">
+                                <p><br/></p><div class="Hourly rate error" style="color: red"></div>
+                            </div>
+
                                 <br />
                                 <br />
-                                <i class="glyphicon glyphicon-lock"></i> <%=user.jobs%>
+
+                                <i class="glyphicon glyphicon-lock"></i>
                                 <% for(var i=0;i<user.jobTypes.length;++i){%>
-
-                                     <%=user.jobTypes[i].value %>
+                                     <%=user.jobTypes[i].value %>,
                                 <% } %>
-                                <br />
-                                <br />
+                                <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('jobTypeDiv').style.display = 'block'"></button>
+                                <div id="jobTypeDiv"  style="display:none;" class="input-group" >
+                                    <p></p>
+                                        <div id = "jobTypes" name="jobTypes">
+                                            <label id ="babysitting"><input type="checkbox" id ="Babysitting" name="test" value="babysitting">babysitting</label>
+                                            <label id="ironing"><input type="checkbox" id="Ironing" name="ironing" value="ironing">ironing</label>
+                                            <label id="cleaning"><input type="checkbox" id="Cleaning" name="cleaning" value="cleaning"> cleaning</label>
+                                            <label id="gardening"><input type="checkbox" id="Gardening" name="gardening" value="gardening"> gardening</label>
+                                            <label id="cooking"><input type="checkbox" id="Cooking" name="cooking" value="cooking"> cooking</label>
+                                            <label id="pet care"><input type="checkbox" id="Pet care" name="pet care" value="pet care"> pet care</label>
+                                        </div>
+                                </div>
+
+                                <p></p>
+
                                 <i class="glyphicon glyphicon-user"></i> <%=user.gender%>
-                                <br />
-                                <br />
-                                <i class="glyphicon glyphicon-font"></i>
+                            <p></p>
 
-                                <% for(var i=0;i<user.languages.length;++i){%>
 
-                                    <%=user.languages[i].value %>
-                               <% } %>
-                                <br />
-                                <br />
-                                <i class="glyphicon glyphicon-fire"></i> <%=user.smoker%>
-                                <br />
-                                <br />
+                            <i class="glyphicon glyphicon-font"></i>
+                            <% for(var i=0;i<user.languages.length;++i){%>
+                                <%=user.languages[i].value %>,
+                            <% } %>
+                            <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('langDiv').style.display = 'block'"></button>
+                            <div id="langDiv" style="display:none;" class="input-group" >
+                                <p></p>
+                                <div id = "languages" name="languages">
+                                    <label id ="hebrew"><input type="checkbox" id ="Hebrew" name="hebrew" value="Hebrew"> Hebrew</label>
+                                    <label id="english"><input type="checkbox" id="English" name="english" value="English"> English</label>
+                                    <label id="arabic"><input type="checkbox" id="Arabic" name="arabic" value="arabic"> Arabic</label>
+                                    <label id="russian"><input type="checkbox" id="Russian" name="russian" value="russian"> Russian</label>
+                                    <label id="amharic"><input type="checkbox" id="Amharic" name="amharic" value="amharic"> Amharic</label>
+                                    <label id="chinese"><input type="checkbox" id="Chinese" name="chinese" value="chinese"> Chinese</label>
+                                    <label id ="portuguese"><input type="checkbox" id ="Portuguese" name="portuguese" value="portuguese"> Portuguese</label>
+                                    <label id="french"><input type="checkbox" id="French" name="french" value="french"> French</label>
+                                    <label id="romanian"><input type="checkbox" id="Romanian" name="romanian" value="romanian"> Romanian</label>
+                                    <label id="polish"><input type="checkbox" id="Polish" name="polish" value="polish"> Polish</label>
+                                    <label id="spanish"><input type="checkbox" id="Spanish" name="spanish" value="spanish"> Spanish</label>
+                                </div>
+                            </div>
+
+                            <p></p>
+                                <i class="glyphicon glyphicon-fire"></i> <%=user.smoker%>   <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('smokeDiv').style.display = 'block'"></button>
+                            <div id="smokeDiv"  style="display:none;" class="input-group" >
+                            <div>
+                                <select class="form-group" name="smoker" id="smoker">
+                                    <option value="smoker">smoker</option>
+                                    <option value="non smoker">non smoker</option>
+                                    <option value="not at work">not at work</option>
+                                </select>
+                            </div>
+                            </div>
+                            <p></p>
                                 <i class="glyphicon glyphicon-folder-close"></i>    <%=user.bank.bankName%> , <%=user.bank.branch%>, <%=user.bank.accountNumber%>
                                 <br />
                                 <br />
-                                <i class="glyphicon glyphicon-thumbs-up"></i> <%=user.aboutMe%>
-                                <br />
-                                <br />
 
-                            </p>
+                            <i class="glyphicon glyphicon-thumbs-up"></i> <%=user.aboutMe%>
+                            <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('aboutDiv').style.display = 'block'"></button>
+                            <div id="aboutDiv"  style="display:none;" class="input-group" >
+                                <input type="text" id="aboutMe" name="aboutMe" class="row-cols-sm-4" style="width: 250px;height: 100px" placeholder="<%= user.aboutMe %>" pattern="[a-zA-Z]{0,100}" title="limited 100 char"><br/>
+                            </div>
+
+
+                        <br><br>
+
+
+                            <label>You want to change your password?</label> <button type="button" class="glyphicon glyphicon-pencil" onclick="document.getElementById('passwordDiv').style.display = 'block'"></button>
+                            <div id="passwordDiv"  style="display:none;" class="input-group" >
+                                <input type="password" id="password" name="password" class="col-sm-4 col-md-3" placeholder="Password" autocomplete="new-password" title="Exmp123!" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}'>
+                                <br/>
+                                <br/> <input type="password" id="confirmationPassword" name="confirmationPassword" class="col-sm-4 col-md-3" title="Exmp123!" placeholder="confirmation password">
+                               <p><br/></p> <div class="password error" style="color: red"></div>
+                            </div>
+                            <p><br/></p>
 
                             <div class="btn-group">
-
-                                <button type="button" name="Edit" id="Edit" onclick="" class="glyphicon glyphicon-pencil">Edit</button>
-                                <button type="button" onclick="myDeleteFunction()" class="glyphicon glyphicon-trash">Remove Account</button>
-
-
+                                <button type="submit" id="submit" class="glyphicon glyphicon-save">Save changes</button>
+<!--                                <button type="button" onclick="myDeleteFunction()" class="glyphicon glyphicon-trash">Remove Account</button>-->
                             </div>
+                            <div class="update succ" style="color: deeppink"></div>
+                            <div class="update fail" style="color: red"></div>
                         </div>
                     </div>
                 </div>
@@ -87,3 +204,97 @@
 
 </html>
 <%- include ("partials/footer.ejs")-%>
+
+<script>
+
+    const citiesArray =['eilat',
+        'jerusalem',
+        'nazareth' ,
+        'haifa',
+        'zikhron ya’akov ',
+        'arad',
+        'netanya',
+        'nahariya',
+        'kfar tavor',
+        'hebron',
+        'kinneret moshava',
+        'holon',
+        'bat shlomo',
+        'bnei brak' ,
+        'the negev desert ',
+        'the lowlands',
+        'abu snan',
+        'julis',
+        'maghar',
+        'samia',
+        'ein al-assad',
+        'isfiya',
+        'keysarya' ,
+        'beer sheva',
+        'sde boker',
+        'yad moredechai',
+        'rosh-pina' ,
+        'kiryat shmona',
+        'kiryat malachi',
+        'ein gedi',
+        'ein-hod' ,
+        ' kfar nakhum',
+        ' hazor haglilit',
+        'metula' ,
+        'harduf',
+        'ashdod',
+        'kfar kama',
+        'abu gosh' ,
+        'jezreel valley',
+        ' the judean desert',
+        'sea of galilee',
+        'beit jann',
+        'sajur',
+        'rameh',
+        'daliyat el-carmel',
+        'the golan heights',
+        'tiberias',
+        'mitspe ramon',
+        'akko',
+        'katzerin',
+        'nahalal',
+        'kfar yasif',
+        'hanita',
+        'maalot tarshiha',
+        'bat yam',
+        'the hula valley' ,
+        'hevel habsor',
+        'the arava',
+        'the galilee',
+        'gush dan',
+        'the nitzana region',
+        'yanuh',
+        'yarka',
+        'kisra',
+        'hurfeish',
+        'shefa-amr',
+        'the dead sea',
+        'tel aviv jaffa',
+        'tsefat' ,
+        'tel-hai ',
+        'ramla',
+        'hertzeliya' ,
+        'gush halav',
+        'ashkelon' ,
+        'beit shean' ,
+        'cana' ,
+        'jatt',
+        'rehaniya',
+        'degania']
+    function selectOne() {
+        var select = document.getElementById('city')
+        for (var i=citiesArray.length-1; i>=0; i--) {
+            var x= citiesArray[i].charAt(0).toUpperCase() + citiesArray[i].slice(1);
+            select.options[select.options.length] = new Option(x, citiesArray[i])  }
+    }
+    selectOne()
+
+   var dataHere = <%- JSON.stringify(user) %>
+       sendData(dataHere)
+</script>
+
