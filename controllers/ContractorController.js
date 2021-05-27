@@ -420,30 +420,25 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
 
 module.exports.workOrdersContractorGet= async (req,res)=>{
 
-    const transaction = await Transaction.find({})
-    const afterFilter =[]
-    for(var i=0;i< transaction.length;++i){
-        if(!transaction[i].$isEmpty('approval')){
-            // console.log(transaction[i])
-            // console.log(transaction[i].idEmployer)
-            const employer= await UserEmployer.findById(transaction[i].idEmployer)
-                    // console.log(employer)
-                    if(employer){
-                        // console.log(transaction[i])
-                        if( transaction[i].approval==0) { //before approval
-                            afterFilter.push(transaction[i])
-                        }
-                    }
 
+    var afterFilter=[]
+    const token = req.cookies.jwt
+    if (token) {
+        jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+            if (err) {
+                console.log(err)
+                res.status(400).json({err})
+                //next()
+            } else {
+                afterFilter= await Transaction.find({idContractor: decodedToken.id, approval:0})
+                console.log(afterFilter)
+                res.render('workOrdersContractor',{data:afterFilter})
 
-
-
-        }
-
+            }
+        })
     }
 
 
-    res.render('workOrdersContractor',{data:afterFilter})
 }
 
 module.exports.detailsOfTransactionGet =  async (req,res)=>{
