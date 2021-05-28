@@ -43,8 +43,95 @@ const handleErrors = (err) => {
     return errors
 }
 
-module.exports.homepageHRGet=(req,res)=>{
-    res.render('homepageHR')
+module.exports.homepageHRGet=async (req,res)=>{
+    const experienceContractorResult = await UsersContractor.find({})
+var countOfContractors = experienceContractorResult.length
+    const maleContractorResult = await UsersContractor.find({gender:'male'})
+    const femaleContractorResult = await UsersContractor.find({gender:'female'})
+    var male1= maleContractorResult.length
+    var female1= femaleContractorResult.length
+    //
+    console.log( male1*100)
+    console.log(male1*100/countOfContractors)
+    var male= male1*100/countOfContractors
+    var female= female1*100/countOfContractors
+
+    const gender = {'male':male , 'female':female}
+
+
+
+
+    var maxx5=0,maxx15=0,maxx30=0,maxx1=0
+
+    for(var i=0;i< experienceContractorResult.length;++i){
+        if(experienceContractorResult[i].experience>=0 && experienceContractorResult[i].experience<=5)
+            ++maxx5
+        else if(experienceContractorResult[i].experience>=6 && experienceContractorResult[i].experience<=15)
+            ++maxx15
+        else if(experienceContractorResult[i].experience>=16 && experienceContractorResult[i].experience<=30)
+            ++maxx30
+        else
+            ++maxx1
+
+    }
+
+    var max5= maxx5*100/countOfContractors
+    var max15= maxx15*100/countOfContractors
+    var max30= maxx30*100/countOfContractors
+    var max1= maxx1*100/countOfContractors
+    const dictexperience = {'max5':max5 , 'max15':max15,'max30':max30 , 'max1':max1}
+
+    var babyy=0,ironn=0,cleann1=0, gardenn=0,cookk=0,pett=0
+
+
+    for(var i=0;i< experienceContractorResult.length;++i){
+        const arrayjob= experienceContractorResult[i].jobTypes
+
+        for(var j=0; j< arrayjob.length ;++j){
+
+            if (arrayjob[j].value == 'babysitting')
+                ++babyy
+            else if (arrayjob[j].value=='ironing')
+                ++ironn
+            else if (arrayjob[j].value=='cleaning')
+                ++cleann1
+            else if (arrayjob[j].value=='cooking')
+                ++cookk
+            else if (arrayjob[j].value=='gardening')
+                ++gardenn
+            else
+                ++pett
+        }
+
+
+
+    }
+    var baby= babyy*100/countOfContractors
+    var iron= ironn*100/countOfContractors
+    var clean1= cleann1*100/countOfContractors
+    var garden= gardenn*100/countOfContractors
+    var cook= cookk*100/countOfContractors
+    var pet= pett*100/countOfContractors
+
+    const dictjob = {'baby':baby,'iron':iron,'clean1':clean1,'cook':cook,'garden':garden,'pet':pet}
+
+
+
+    const eleContractorResult = await UsersContractor.find({education:'elementary'})
+    const highContractorResult = await UsersContractor.find({education:'high school'})
+    const higherContractorResult = await UsersContractor.find({education:'higher'})
+    var elementaa= eleContractorResult.length
+    var highh= highContractorResult.length
+    var higherr= higherContractorResult.length
+
+    var elementa= elementaa*100/countOfContractors
+    var high= highh*100/countOfContractors
+    var higher= higherr*100/countOfContractors
+
+    const diceducation = {'elementary':elementa , 'highSchool':high,'higher':higher}
+
+
+    res.render('homepageHR',{ gender,dictexperience,dictjob,diceducation })
 }
 
 
@@ -233,11 +320,6 @@ module.exports.transactionPost= async (req,res)=>{
 }
 
 
-
-
-
-
-
 module.exports.addAContractorHRPost =async (req,res)=> {
 
     try {
@@ -336,4 +418,3 @@ module.exports.addAContractorHRPost =async (req,res)=> {
         res.status(400).json({errors})
     }
 }
-

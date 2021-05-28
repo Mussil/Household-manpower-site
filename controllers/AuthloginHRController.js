@@ -1,4 +1,4 @@
-
+var nodemailer = require('nodemailer')
 const UsersHR=require('../models/UsersHR')
 const jwt = require('jsonwebtoken')
 
@@ -48,6 +48,45 @@ const createToken = (id) => {
 // controller actions
 module.exports.loginHRGet=(req,res)=>{
     res.render('loginHR')
+}
+module.exports.TermsGet=(req,res)=>{
+    res.render('Terms')
+}
+module.exports.bugReportGet=(req,res)=> {
+    res.render('bugReport')
+}
+
+module.exports.bugReportPost=(req,res)=> {
+    const { email,name,bug } = req.body
+    console.log(req.body.email + req.body.name)
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'hssce2021@gmail.com',
+            pass: 'lamasce?'
+        }
+    })
+
+    var mailOptions = {
+        from: 'hssce2021@gmail.com',
+        to: req.body.email,
+        subject: 'Bug Report',
+        html: '<h2>Bug report received by user: </h2>' +req.body.name +
+            '<h3>welcome</h3>'
+            +req.body.bug
+    }
+    console.log("qwr")
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Email sent: ' + info.response)
+        }
+    })
+
+console.log("sha")
+    // res.render('bugReport')
+
 }
 
 
