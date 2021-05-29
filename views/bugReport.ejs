@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--    <link rel = "stylesheet"  type = "text/css"  href = "../css/Terms.css" />-->
+
+</head>
+
+
+
+
+<body>
+<meta charset="UTF-8">
+    <title>Bug Report</title>
+
+
+
+<h1>Bug Report</h1>
+<form class="container">
+    <form id="form" method="get">
+    <label email="email">Enter your email:</label><br>
+    <input type="email" id="email" name="email" placeholder="Your email..."><br>
+    <div class="email error"></div>
+
+    <label email="name">Enter your name:</label><br>
+    <input type="text" id="name" name="name" placeholder="Your name..." pattern="[a-zA-z]+"><br>
+
+    <label email="bug">Please explain briefly what is not working:</label><br>
+    <input type="text" id="bug" name="bug" placeholder="explain" ><br>
+    <div class="bug error"></div>
+    <button type="submit" value="Submit" >send</button>
+</form>
+</form>
+</body>
+
+<%- include ("partials/footer.ejs")-%>
+</html>
+
+<script src="../js/bugReport.js"></script>
+
+
+<!--onclick="bugReportGet()"-->
+
