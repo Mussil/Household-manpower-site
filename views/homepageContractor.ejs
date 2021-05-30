@@ -29,11 +29,20 @@
 <div class="container">
     <h2><a href="workOrdersContractor">Check your unapproved transactions </a></h2>
 
-    <hr>
-    <h2><span class="glyphicon glyphicon-star-empty"></span>    Stars number : <%=user.rating %></h2>
+    <%if(user.rating==0) { %>
+            <center><font size="50px" color="#f0ffff">★★★★★</font></center>
+    <%} else if(user.rating==1){ %>
+                <center><font size="50px" color="#ffd700">★</font><font size="50px" color="#f0ffff">★★★★</font></center>
+    <% } else if(user.rating==2) { %>
+                <center><font size="50px" color="#ffd700">★★</font><font size="50px" color="#f0ffff">★★★</font></center>
+    <% } else if(user.rating==3) { %>
+                <center><font size="50px" color="#ffd700">★★★</font><font size="50px" color="#f0ffff">★★</font></center>
+    <% } else if(user.rating==4) { %>
+                <center><font size="50px" color="#ffd700">★★★★</font><font size="50px" color="#f0ffff">★</font></center>
+    <% } else if(user.rating==5) { %>
+                <center><font size="50px" color="#ffd700">★★★★★</font></center>
+    <% } %>
 
-
-    <hr>
     <h2>Shift report</h2>
     <input type="text" name="daterange"  />
     <div class="date messages error"></div>
@@ -57,10 +66,14 @@
 <hr>
 <form class="container">
     <h4>My recommendations:</h4>
-    <br/>
-    <button class="fa fa-chevron-left fa_right" onclick="changeText('pre')"></button>
-    <h3></h3>
-    <button class="fa fa-chevron-right fa_custom" onclick="changeText('nxt')"></button>
+    <%if(rec.length > 0) {%>
+        <button class="fa fa-chevron-left fa_right" onclick="changeText('pre')"></button>
+        <h3></h3>
+        <button class="fa fa-chevron-right fa_custom" onclick="changeText('nxt')"></button>
+    <% } %>
+    <% if(rec.length <=0) {%>
+        <h3>I have no recommendations yet</h3>
+    <% } %>
 <br/>
     <br/>
 </form>
@@ -71,21 +84,31 @@
     document.getElementById('hoursForm').style.display = 'none'
 
     const arrRec = <%- JSON.stringify(rec)%>
+        console.log(arrRec)
     var point = 0;
     function changeText(txt){
-        if(txt === 'pre'){
-            $('h3').html(arrRec[(arrRec.length)%(point-1)]);
+        if(txt === 'pre') {
+            point = point - 1
+            if(point < 0){
+                point = arrRec.length
+            }
+            $('h3').html(arrRec[(Math.abs(point)) % (arrRec.length)]);
         }
+
         if(txt === 'nxt'){
-            $('h3').html(arrRec[(arrRec.length)%(point+1)]);
+            $('h3').html(arrRec[(point+1) % (arrRec.length)]);
         }
         else{
-            point = ((Math.floor(Math.random()*10))%(arrRec.length))
+            point = ((Math.floor(Math.random()*10)) % (arrRec.length))
             $('h3').html(arrRec[point]);
-            setTimeout(changeText, 3000)
+            setTimeout(changeText, 5000)
         }
     }
 
-    changeText();
+    if( arrRec.length > 0) {
+        console.log(arrRec.toString())
+        changeText();
+    }
+
 </script>
 

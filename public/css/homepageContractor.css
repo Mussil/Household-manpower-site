@@ -46,7 +46,7 @@ h4{
     line-height: 0%;
     border: none;
     right: 250px;
-    top: 530px;
+    top: 520px;
 
 }
 
@@ -57,6 +57,7 @@ h4{
     display: inline-block;
     vertical-align: middle;
     width: 0;
+    top: 520px;
     line-height: 0%;
     border: none;
 }

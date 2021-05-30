@@ -174,13 +174,14 @@ module.exports.viewEmployeesGet=async (req,res)=>{
     res.render('viewEmployeesEmployer',{data: afterFilter, typeOfJob})
 }
 
+
 module.exports.detailsOfContractorGet=async (req,res)=>{
+
     const parm=req.params.id
     const attr = parm.split('+')
     const typeCon=attr[0]
     const idCon=attr[1]
     var arrRecommendation = []
-
 
     Transaction.find({idContractor: idCon})
         .then(user=>{
@@ -188,15 +189,13 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
                 if(user[i].recommendation != '')
                     arrRecommendation.push(user[i].recommendation)
             }
-            console.log(arrRecommendation[0])
-            console.log(arrRecommendation[1])
 
         }).catch(err=>{
             console.log(err)
     })
     UsersContractor.findById(idCon)
         .then(result => {
-            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon,rec:arrRecommendation })
+            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon, rec: arrRecommendation })
         })
         .catch(err => {
             console.log(err)

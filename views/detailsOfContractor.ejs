@@ -14,7 +14,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!--    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -23,92 +23,90 @@
         }
     </style>
 
-
     <title>contractor details</title>
 </head>
 <body>
 
-
-<!--//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..
-//s בשביל העיצוב צריך לפתוח קובץ סיסס חדש-->
-
-<div class="details content">
-    <h2><%= result.firstName %> <%=result.lastName %></h2>
-    <h3><%= result.email %></h3>
-    <p></p>
-    <% for(var i=0;i<result.rating;++i){%>
-        <span class="fa fa-star checked"></span>
-    <% } %>
-    <% for(var i=0;i<(5-result.rating);++i){%>
-        <span class="fa fa-star" style="color: wheat"></span>
-    <% } %>
-    <br/>
-    <p></p>
-<div class="recommendation" id="recommendation">
-    <% if(rec.length<=0) {%>
-       <% 'recommendation'.style.display='none' %>
-        <% } %>
-    <% if(rec.length>0) {%>
-        <p><strong>What I was recommended <i class="fa fa-heart"></i></strong></p>
-<br/>
-        <% for(var i=0;i< rec.length;++i){%>
-            <i class="fa fa-smile-o"></i> <i><%- rec[i] %></i>
+<div id="container">
+    <div id="left" class="col">
+        <div class="details content">
+            <h2><%= result.firstName %> <%=result.lastName %></h2>
+            <h2><%= result.email %></h2>
             <p></p>
-        <% } %>
-    <% } %>
-        <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-        <p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-</div>
-    <br/>
-    <div class="content">
-        <p><%= result.aboutMe %></p>
-        <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
-        <p><%= result.gender %></p>
-        <p>Hourly rate: <%= result.hourlyRate %></p>
+            <% for(var i=0;i<result.rating;++i){%>
+                <span class="fa fa-star checked"></span>
+            <% } %>
+            <% for(var i=0;i<(5-result.rating);++i){%>
+                <span class="fa fa-star" style="color: wheat"></span>
+            <% } %>
+            <br/>
+            <p></p>
 
-        <% for(var i=0; i<result.languages.length;i++){%>
-            <%= result.languages[i].value %>
-        <% } %>
+            <br/>
+            <div class="content">
+                <p><%= result.aboutMe %></p>
+                <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
+                <p><%= result.gender %></p>
+                <p>Hourly rate: <%= result.hourlyRate %></p>
 
-        <p>education: <%= result.education %></p>
-        <p><%= result.smoker %></p>
-        <p><%= result.experience%></p>
-        <p>phone number <%= result.phoneNumber %></p>
+                <% for(var i=0; i<result.languages.length;i++){%>
+                    <%= result.languages[i].value %>
+                <% } %>
 
-        <% for(var i=0; i<result.jobTypes.length;i++){%>
-            • <%= result.jobTypes[i].value %>
-        <% } %>
-    </div>
+                <p>education: <%= result.education %></p>
+                <p><%= result.smoker %></p>
+                <p><%= result.experience%></p>
+                <p>phone number <%= result.phoneNumber %></p>
 
-</div>
-<hr>
-<div class="Recruitment">
-    <h2>Recruitment</h2>
-    <input type="text" name="daterange"  />
-    <div class="date messages error"></div>
-    <hr>
+                <p style="text-decoration: underline">Other jobs I work for:</p>
+                <% for(var i=0; i<result.jobTypes.length;i++){%>
+                    • <%= result.jobTypes[i].value %>
+                    <br/>
+                <% } %>
+            </div>
 
-    <form id="hoursForm" >
-        <label>please fill the hours</label>
-        <input type="time" id="startTime" name="startTime"
-               min="00:00" max="23:59" required>
-
-        <input type="time" id="endTime" name="endTime"
-               min="00:00" max="23:59" required>
-
-
-        <div>
-            <input type="submit" value="Submit form">
         </div>
-    </form>
-    <div class="hour message error"></div>
-    <div class="hour message suc"></div>
-    <hr>
+    </div>
+    <div id="center" class="col">
+        <div class="Recruitment">
+            <h2>Recruitment</h2>
+            <input type="text" name="daterange" />
+            <div class="date messages error"></div>
+            <hr>
+
+            <form id="hoursForm" >
+                <label>please fill the hours</label>
+                <input type="time" id="startTime" name="startTime"
+                       min="00:00" max="23:59" required>
+
+                <input type="time" id="endTime" name="endTime"
+                       min="00:00" max="23:59" required>
 
 
+                <div>
+                    <input type="submit" value="Submit form">
+                </div>
+            </form>
+            <div class="hour message error"></div>
+            <div class="hour message suc"></div>
+            <hr>
+        </div>
+
+    </div>
+    <div id="right" class="col">
+        <form class="container">
+            <h4>My recommendations:</h4>
+            <%if(rec.length > 0) {%>
+                <h3></h3>
+            <% } %>
+            <% if(rec.length <=0) {%>
+                <h3>I have no recommendations yet</h3>
+            <% } %>
+        </form>
+    </div>
 </div>
-<%- include("./partials/footer.ejs") %>
 
+<%- include("./partials/footer.ejs") %>
 
 </body>
 </html>
@@ -120,5 +118,18 @@
     var typeOfJob = <%- JSON.stringify(typeOfJob) %>
         console.log(typeOfJob)
     getDetails(contractorId,typeOfJob)
+
+    const arrRec = <%- JSON.stringify(rec)%>
+    console.log(arrRec)
+    var point = 0;
+
+    function changeText(){
+        point = ((Math.floor(Math.random()*10)) % (arrRec.length))
+        $('h3').html(arrRec[point]);
+        setTimeout(changeText, 4000)
+    }
+    if( arrRec.length > 0) {
+        changeText();
+    }
 
 </script>

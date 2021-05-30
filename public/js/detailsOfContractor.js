@@ -2,9 +2,9 @@ var contractorId=0
 var typeCon=''
 
 // eslint-disable-next-line no-unused-vars
-function getDetails(myVar,typeOfJob){
-    contractorId=myVar
-    typeCon=typeOfJob
+async function getDetails(myVar,typeOfJob) {
+    contractorId = myVar
+    typeCon = typeOfJob
 }
 
 $(function() {
@@ -17,7 +17,6 @@ $(function() {
     }, async function(start) {
         console.log('New date selected: ' + start.format('YYYY-MM-DD') )
         document.getElementById('hoursForm').style.display = 'none'
-
 
         const hourMessageSuc = document.querySelector('.hour.message.suc')
 

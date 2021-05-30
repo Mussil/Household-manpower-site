@@ -1,3 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+#container {
+    margin: 10px;
+    padding: 10px;
+    height: 100px;
+}
+.col {
+    float: left;
+    width: 33.33333333%;
+    padding: 20px;
+}
+#left {
+    text-align: left;
+}
+#center {
+    text-align: center;
+    padding: 80px;
+}
+#right {
+    text-align: right;
+    padding: 80px;
+
+}
+
+h3{
+    color: black;
+    text-align: center;
+    text-transform:none;
+    font-size: 25px;
+    font-family: Garamond ;
+    font-weight: bold;
+
+}
+h4{
+    color: deeppink;
+    text-align: center;
+    text-transform:none;
+    font-size: 20px;
+    font-family: Garamond ;
+    font-weight: bold;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: aliceblue;
+    padding: 10px;
+    bottom: 350px;
+    float: top;
+    height: 500px;
+    width: 400px;
+}
+
 .details h2{
     padding-left: 10px;
     color:#66afe9;
@@ -17,34 +71,3 @@
     color: #de4427;
 }
 
-.recommendation{
-    height:200px;
-    width:400px;
-    overflow:auto;
-    border:1px solid;
-    padding:2%;
-    position: fixed;
-    left: 1000px;
-    bottom: 200px;
-    box-shadow: 5px 10px #66afe9;
-
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
