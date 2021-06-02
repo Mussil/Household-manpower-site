@@ -13,9 +13,8 @@ form.addEventListener('submit', async (e) => {
     const name = form.name.value
     const bug = form.bug.value
 
-    console.log("jsbug")
-    console.log(emailError.textContent)
-    //
+
+
     try {
         const res = await fetch('/bugReport', {
             method: 'POST',
@@ -29,6 +28,8 @@ form.addEventListener('submit', async (e) => {
             }
             if(data.user) { //successful
                 emailError.textContent = 'email sent successfully'
+
+
 
             }
         }
