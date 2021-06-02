@@ -57,7 +57,7 @@ module.exports.bugReportGet=(req,res)=> {
 }
 
 module.exports.bugReportPost=(req,res)=> {
-    const { email,name,bug } = req.body
+    // const { email,name,bug } = req.body
     console.log(req.body.email + req.body.name)
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -67,24 +67,27 @@ module.exports.bugReportPost=(req,res)=> {
         }
     })
 
+    // var sendMsg='<h3>welcome</h3>'+'<h2>Bug report received by user: </h2>' +req.body.name +'<h2>The message:</h2'>
+    //     +req.body.bug
+    var sendMsg='Bug report received by user:' +req.body.name +' The message: ' +req.body.bug
     var mailOptions = {
         from: 'hssce2021@gmail.com',
-        to: req.body.email,
+        to: req.body.email ,
+        cc:'hssce2021@gmail.com',
         subject: 'Bug Report',
-        html: '<h2>Bug report received by user: </h2>' +req.body.name +
-            '<h3>welcome</h3>'
-            +req.body.bug
+        text: sendMsg
     }
-    console.log("qwr")
+
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error)
         } else {
             console.log('Email sent: ' + info.response)
+            res.status(200).json({ msg: 'email has been sent, thank you' })
+
         }
     })
 
-console.log("sha")
     // res.render('bugReport')
 
 }

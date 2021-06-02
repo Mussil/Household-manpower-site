@@ -32,7 +32,7 @@ $(function() {
                 datesAdded.textContent = 'try again'
             }
             if(data.user) { //successful
-                datesAdded.textContent = 'dates has been added successfully'
+                datesAdded.textContent = 'Dates has been added successfully'
             }
         }
         catch (err) {

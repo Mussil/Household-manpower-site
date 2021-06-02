@@ -1,0 +1,41 @@
+input[type=email]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group{
+    font-size: 15px;
+}
+
+form.container {
+    border-radius: 5px;
+    background: linear-gradient(to right, #ee5a6f, #f29263);
+    padding: 20px;
+    margin: 0 auto;
+    width:600px;
+    text-align: center;
+}
+
+h3{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 30px;
+}
+
+.error{
+    color: black;
+}

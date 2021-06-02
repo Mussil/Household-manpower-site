@@ -1,51 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--    <link rel = "stylesheet"  type = "text/css"  href = "../css/Terms.css" />-->
-
+    <title>Bug Report</title>
+    <link rel="stylesheet" href="../css/bugReport.css">
 </head>
-
-
-
 
 <body>
 <meta charset="UTF-8">
-    <title>Bug Report</title>
 
-
-
-<h1>Bug Report</h1>
 <form class="container">
     <form id="form" method="get">
+        <h3>BUG REPORT</h3>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+        <br/>
 
-<!--    <label email="email">Enter your email:</label><br>-->
-<!--    <input type="email" id="email" name="email" placeholder="Your email..."><br>-->
-    <div class="form-group">
-        <label >Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Email" required>
-    </div>
-    <div class="email error"></div>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="name" class="form-control" placeholder="First Name" pattern="[a-zA-z]{3,}" required>
+        </div>
+        <div class="name error"></div>
+        <br/>
 
-    <div class="form-group">
-         <label >First Name</label>
-         <input type="text" name="name" class="form-control" placeholder="First Name" pattern="[a-zA-z]{3,}" required>
-    </div>
-    <div class="name error"></div>
-<!--    <label email="name">Enter your name:</label><br>-->
-<!--    <input type="text" id="name" name="name" placeholder="Your name..." pattern="[a-zA-z]+"><br>-->
+        <div class="form-group">
+            <label >Please explain briefly what is not working:</label>
 
-<!--    <label email="bug">Please explain briefly what is not working:</label><br>-->
-<!--    <input type="text" id="bug" name="bug" placeholder="explain" ><br>-->
-<!--    <div class="bug error"></div>-->
+            <input type="text" name="bug" class="form-control" placeholder="explain" style="height:100px; font-size:14pt;" required>
+        </div>
+        <div class="bug error"></div>
+        <button type="submit" value="Submit">send</button>
+        <div class="email error"></div>
 
-    <div class="form-group">
-        <label >Please explain briefly what is not working:</label>
-
-        <input type="text" name="bug" class="form-control" placeholder="explain" style="height:100px; font-size:14pt;" required>
-    </div>
-    <div class="bug error"></div>
-    <button type="submit" value="Submit" >send</button>
-</form>
+    </form>
 </form>
 </body>
 
@@ -54,6 +42,4 @@
 
 <script src="../js/bugReport.js"></script>
 
-
-<!--onclick="bugReportGet()"-->
 

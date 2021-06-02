@@ -26,8 +26,8 @@ form.addEventListener('submit', async (e) => {
             if (data.errors) {
                 emailError.textContent = data.errors.email
             }
-            if(data.user) { //successful
-                emailError.textContent = 'email sent successfully'
+            if(data.msg) { //successful
+                emailError.textContent = data.msg
 
 
 

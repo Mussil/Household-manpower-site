@@ -2,37 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel = "stylesheet"  type = "text/css"  href = "../css/addAContractorHR.css" />
     <title>Add a contractor</title>
     <%- include ("partials/navHR.ejs")-%>
 
 </head>
 <body>
 
+<div class="title">
+    Add A Contractor
+</div>
+
 <div class="main">
-    <div class="col-md-6 col-sm-12">
+<!--    <div class="col-md-6 col-sm-12">-->
         <form  id="form" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label >Email</label>
-                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                <input type="email" name="email" class="form-control" placeholder="Email" title="exmp1@gmail.com" required>
             </div>
             <div class="email error "></div>
             <div class="form-group">
                 <label >Password</label>
-                <input type="password" name="password" class="form-control" placeholder="Password"  title="Must include uppercase capital letters, numbers and characters" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' >
+                <input type="password" name="password" class="form-control" placeholder="Password"  title="Exmp123!" pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}' >
 
             </div>
 
             <div class="form-group">
                 <label >First Name</label>
-                <input type="text" name="firstName" class="form-control" placeholder="First Name" pattern="[a-zA-z]{3,}" >
+                <input type="text" name="firstName" class="form-control" placeholder="First Name" title="John" pattern="[a-zA-z]{3,}" >
             </div>
             <div class="form-group">
                 <label >Last Name</label>
-                <input type="text" name="lastName" class="form-control" placeholder="Last Name" pattern="[a-zA-z]{3,}" >
+                <input type="text" name="lastName" class="form-control" placeholder="Last Name" title="Doe" pattern="[a-zA-z]{3,}" >
             </div>
             <div class="form-group">
                 <label >Phone Number</label>
-                <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" pattern="[0-9]{9,10}">
+                <input type="tel" name="phoneNumber" class="form-control" placeholder="Phone Number" title="0501234567" pattern="[0-9]{9,10}">
             </div>
 
             <div class="form-group">
@@ -42,23 +47,23 @@
             <div class="city error"></div>
             <div class="form-group">
                 <label >Street</label>
-                <input type="text" name="street" class="form-control" placeholder="Street"  pattern="[A-Za-z]+" >
+                <input type="text" title="Herzl" name="street" class="form-control" placeholder="Street"  pattern="[A-Za-z]+" >
             </div>
 
             <div class="form-group">
                 <label >House Number</label>
-                <input type="text" name="houseNumber" class="form-control" placeholder="House Number" pattern="[0-9]+" >
+                <input type="text" name="houseNumber" title="12" class="form-control" placeholder="House Number" pattern="[0-9]+" >
             </div>
             <div class="house error"></div>
             <div class="form-group">
                 <label >Hourly rate</label>
-                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate"  pattern="[0-9]{17,500}" >
+                <input type="number" name="hourlyRate" class="form-control" placeholder="hourly rate" title="29" pattern="[0-9]{17,500}" >
             </div>
             <div class="Hourly rate error "></div>
 
             <div class="form-group">
                 <label >Years of experience</label>
-                <input type="number" name="experience" class="form-control" placeholder="Years of experience" pattern="[0-9]+"  >
+                <input type="number" name="experience" class="form-control" title="12" placeholder="Years of experience" pattern="[0-9]+"  >
             </div>
 
             <div>
@@ -148,27 +153,27 @@
             <!-- Bank-->
             <div class="form-group">
                 <label >Bank Name</label>
-                <input type="text" name="bankName" class="form-control" placeholder="Name of bank" pattern="[a-zA-z]+" >
+                <input type="text" name="bankName" class="form-control" placeholder="Name of bank" title="leumi" pattern="[a-zA-z]+" >
             </div>
 
             <div class="form-group">
                 <label >Bank account Number</label>
-                <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" pattern="[0-9]{6,7}" >
+                <input type="text" name="accountNumber" class="form-control" placeholder="Bank account tax" title="123456" pattern="[0-9]{6,7}" >
             </div>
             <div class="form-group">
                 <label >Bank Branch</label>
-                <input type="text" name="branch" class="form-control" placeholder="Branch bank tax" pattern="[0-9]+" >
+                <input type="text" name="branch" class="form-control" placeholder="Branch bank tax" title="123" pattern="[0-9]+" >
             </div>
             <!-- About me-->
             <div class="form-group">
                 <label >About Me:</label>
-                <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself"  >
+                <input type="text" name="aboutMe" class="form-control" placeholder="Tell about yourself" title="limited 100 char" pattern="{1,100}" >
             </div>
             <br><br>
             <button type="submit" id="submit" class="btn btn-black">Add Contractor</button>
         </form>
         <div>  <h2 class= "suc new" > </h2> </div>
-    </div>
+<!--    </div>-->
 </div>
 </body>
 

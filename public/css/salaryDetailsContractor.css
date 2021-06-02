@@ -1,5 +1,14 @@
 .salary.range.error{
+    font-size: 20px;
     color:red;
+}
+#date{
+    text-align: center;
+}
+#sal{
+    text-align: center;
+    color: #9FE472;
+    font-size: 30px;
 }
 h1{
     color: black;
@@ -14,8 +23,13 @@ h1{
 body{
     /*background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);*/
 }
+.salary.range{
+    color: #9FE472;
+    font-size: 30px;
+}
 
 form.container {
+    text-align: center;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
@@ -23,8 +37,7 @@ form.container {
 
 h2 {
     color: black;
-    /*font-family: verdana;*/
     font-size: 15px;
-    text-align: left;
-    text-transform:none;
+    text-align: center;
+    text-transform: none;
 }

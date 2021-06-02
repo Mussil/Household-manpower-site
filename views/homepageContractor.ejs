@@ -27,8 +27,12 @@
 
 <h1> Home page contractor</h1>
 <div class="container">
-    <h2><a href="workOrdersContractor">Check your unapproved transactions </a></h2>
+    <!--    <button type="button" class="btn btn-warning" onclick="myFonc()">Check your unapproved transactions </button>-->
+    <!--    <h2><a href="workOrdersContractor">Check your unapproved transactions </a></h2>-->
+    </br><center><a class="btn btn-warning" href="workOrdersContractor" role="button">Check your unapproved transactions </a></center>
+    <!--    <button onclick="window.location.href='workOrdersContractor'" class="button_slide slide_down" justify-content="center" margin-right="20px">Check your unapproved transactions</button>-->
 
+    <h2>My rating: </h2>
     <%if(user.rating==0) { %>
         <center><font size="50px" color="#f0ffff">★★★★★</font></center>
     <%} else if(user.rating==1){ %>
@@ -40,13 +44,13 @@
     <% } else if(user.rating==4) { %>
         <center><font size="50px" color="#ffd700">★★★★</font><font size="50px" color="#f0ffff">★</font></center>
     <% } else if(user.rating==5) { %>
-        <center><font size="50px" color="#ffd700">★★★★★</font></center>
-    <% } %>
+    <center><font size="50px" color="#ffd700">★★★★★</font></center>
+        <% } %>
 
-    <h2>Shift report</h2>
-    <input type="text" name="daterange"  />
-    <div class="date messages error"></div>
-    <hr>
+        <h2>Shift report</h2>
+        <center><input type="text" name="daterange"  /></center>
+        <center><div class="date messages error"></div></center>
+        <hr>
 </div>
 
 <form id="hoursForm" class="container">
@@ -111,4 +115,5 @@
         console.log(arrRec.toString())
         changeText();
     }
+
 </script>

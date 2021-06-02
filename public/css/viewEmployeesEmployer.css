@@ -16,14 +16,14 @@
 @import url(https://fonts.googleapis.com/css?family=Advent+Pro:300);
 
 body{
-    background: #d5d5d5; /* Old browsers */
-    background: -moz-linear-gradient(top,  #d5d5d5 0%, #f3f3f3 80%, #feffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5d5d5), color-stop(80%,#f3f3f3), color-stop(100%,#feffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* W3C */
-    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#feffff',GradientType=0 ); !* IE6-9 *!*/
+    /*background: #d5d5d5; !* Old browsers *!*/
+    /*background: -moz-linear-gradient(top,  #d5d5d5 0%, #f3f3f3 80%, #feffff 100%); !* FF3.6+ *!*/
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5d5d5), color-stop(80%,#f3f3f3), color-stop(100%,#feffff)); !* Chrome,Safari4+ *!*/
+    /*background: -webkit-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* Chrome10+,Safari5.1+ *!*/
+    /*background: -o-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* Opera 11.10+ *!*/
+    /*background: -ms-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* IE10+ *!*/
+    /*background: linear-gradient(to bottom,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* W3C *!*/
+    /*!*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#feffff',GradientType=0 ); !* IE6-9 *!*!*/
 
 }
 
@@ -116,7 +116,7 @@ input[type="range"]::-webkit-slider-thumb:before {
     top: -2px;
     left: 0px;
     border-radius: 2px;
-    color: #5a5a5a;
+    color: #fdfdfd;
     text-shadow: 0 1px 0 white;
     height: 22px;
     width: 32px;
@@ -132,7 +132,7 @@ input[type="range"]::-webkit-slider-runnable-track:before {
     position: absolute;
     height: 38px;
     width: 283px;
-    background: #e8e8e8;
+    background: #fcfcfc;
     background: -moz-linear-gradient(top, #dfdfdf 0%, #d8d8d8 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dfdfdf), color-stop(100%,#d8d8d8));
     background: -webkit-linear-gradient(top, #dfdfdf 0%,#d8d8d8 100%);
@@ -156,7 +156,7 @@ input[type="range"]::-webkit-slider-runnable-track:after {
 input[type=range]:before {
     content: "";
     position: absolute;
-    background: rgb(190, 190, 190);
+    background: rgb(248, 248, 248);
     box-shadow:0 1px 0 rgb(235, 235, 235);
     width: 283px;
     left: 0;
@@ -263,4 +263,9 @@ input[type=range]:after {
 
 #top:hover {
     background-color: #555; /* Add a dark-grey background on hover */
+}
+
+
+.dropdown.pull-left{
+    font-size: 30px;
 }

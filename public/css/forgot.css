@@ -2,6 +2,7 @@ body{
     /*background-image: url(https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80);*/
     /*background-image: url(https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500)*/
     /*background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSceIUcMjaQ4ov71mTKQP7TQQyAAkTFDD3OoCnScKzuR5CU22CfErf0K_WPuYKafEbEpxg&usqp=CAU)*/
+    background: #e7dede;
 }
 form.container {
     border-radius: 5px;

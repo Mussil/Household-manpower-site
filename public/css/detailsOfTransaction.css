@@ -1,24 +1,29 @@
+.bo{
+    font-weight: bold;
+    color: black;
+}
 
-/*body{*/
-/*    text-align: center;*/
-/*}*/
 .order{
-    /*text-align: center;*/
-    /*position: center;*/
-    /*padding-left: 450px;*/
-    padding: 20px;
+    position: relative;
+    width: 900px;
+    text-align: center;
+/*/position: center;/*/
+/*/padding-left: 450px;/*/
+/*/padding: 20px;/*/
+margin: auto;
 
-    margin: 0 auto;
-    width:500px;
-    border-width: 300px;
     text-align: center;
 }
 .details{
-    background: #f2f2f2;
-    width: 400px;
+    font-size: 20px;
+    height: 400px;
+    text-align: center;
     border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 70px;
 }
 #acceptButton{
+    margin-top: 40px;
     background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
     background: linear-gradient(to top, #ee5a6f, #f29263);
 }
@@ -27,6 +32,7 @@
 }
 
 #declineButton{
+    margin-top: 40px;
     background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
     background: linear-gradient(to top, #ee5a6f, #f29263);
 }
