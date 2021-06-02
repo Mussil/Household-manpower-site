@@ -10,13 +10,22 @@
     <link rel = "stylesheet"  type = "text/css"  href = "../css/detailsOfContractor.css" />
     <script src="../js/detailsOfContractor.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
 
 
     <title>contractor details</title>
@@ -26,36 +35,50 @@
 
 <!--//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..
 //s בשביל העיצוב צריך לפתוח קובץ סיסס חדש-->
+<div class="row-1">
+    <div class="col-1">
+    <div class="details content">
 
-<div class="details content">
+
     <h2><%= result.firstName %> <%=result.lastName %></h2>
-    <h3><%= result.email %></h3>
+    <h2><%= result.email %></h2>
+    <p></p>
+    <% for(var i=0;i<result.rating;++i){%>
+        <span class="fa fa-star checked"></span>
+    <% } %>
+    <% for(var i=0;i<(5-result.rating);++i){%>
+        <span class="fa fa-star" style="color: wheat"></span>
+    <% } %>
+    <br/>
+    <p></p>
 
+    <br/>
     <div class="content">
-        <p><%= result.aboutMe %></p>
-        <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
-        <p><%= result.gender %></p>
-        <p>Hourly rate: <%= result.hourlyRate %></p>
+        <p><i class="glyphicon glyphicon-thumbs-up"> </i> <%= result.aboutMe %></p>
+        <p><i class="glyphicon glyphicon-map-marker"> </i> <%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>
+        <p><i class="glyphicon glyphicon-user"> </i> <%= result.gender %></p>
+        <p><i class="glyphicon glyphicon-euro"> </i> Hourly rate: <%= result.hourlyRate %></p>
 
+        <i class="glyphicon glyphicon-pencil"> </i>
         <% for(var i=0; i<result.languages.length;i++){%>
             <%= result.languages[i].value %>
         <% } %>
-
-        <p>education: <%= result.education %></p>
-        <p><%= result.smoker %></p>
-        <p><%= result.experience%></p>
-        <p>phone number <%= result.phoneNumber %></p>
-
+        <p><i class="glyphicon glyphicon-education"> </i> education: <%= result.education %></p>
+        <p><i class="glyphicon glyphicon-fire"> </i> <%= result.smoker %></p>
+        <p><i class="glyphicon glyphicon-check"></i> experience: <%= result.experience%></p>
+        <p><i class=" glyphicon glyphicon-earphone"> </i> phone number <%= result.phoneNumber %></p>
+        <i class="glyphicon glyphicon-lock"></i>
         <% for(var i=0; i<result.jobTypes.length;i++){%>
             • <%= result.jobTypes[i].value %>
         <% } %>
     </div>
-
+    </div>
 </div>
-<hr>
-<div class="Recruitment">
+<!--<hr>-->
+    <div class="col-2">
+    <div class="Recruitment">
     <h2>Recruitment</h2>
-    <input type="text" name="daterange"  />
+    <input type="text" name="daterange" />
     <div class="date messages error"></div>
     <hr>
 
@@ -75,8 +98,19 @@
     <div class="hour message error"></div>
     <div class="hour message suc"></div>
     <hr>
-
-
+</div>
+        </div>
+</div>
+<div class="row-2">
+    <form class="container">
+        <h4>My recommendations:</h4>
+        <br/>
+        <button class="fa fa-chevron-left fa_right" onclick="changeText('pre')"></button>
+        <h3></h3>
+        <button class="fa fa-chevron-right fa_custom" onclick="changeText('nxt')"></button>
+        <br/>
+        <br/>
+    </form>
 </div>
 <%- include("./partials/footer.ejs") %>
 
@@ -91,4 +125,143 @@
     var typeOfJob = <%- JSON.stringify(typeOfJob) %>
         console.log(typeOfJob)
     getDetails(contractorId,typeOfJob)
+    const arrRec = <%- JSON.stringify(rec)%>
+    var point = 0;
+    function changeText(txt){
+        if(txt === 'pre'){
+            $('h3').html(arrRec[(arrRec.length)%(point-1)]);
+        }
+        if(txt === 'nxt'){
+            $('h3').html(arrRec[(arrRec.length)%(point+1)]);
+        }
+        else{
+            point = ((Math.floor(Math.random()*10))%(arrRec.length))
+            $('h3').html(arrRec[point]);
+            setTimeout(changeText, 3000)
+        }
+    }
+
+    changeText();
+
 </script>
+<!--<html lang="en">-->
+<!--<head>-->
+
+<!--    &lt;!&ndash; Required meta tags &ndash;&gt;-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+
+<!--    <link rel = "stylesheet"  type = "text/css"  href = "../css/detailsOfContractor.css" />-->
+<!--    <script src="../js/detailsOfContractor.js"></script>-->
+
+<!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>-->
+<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />&ndash;&gt;-->
+
+
+
+<!--    <title>contractor details</title>-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--&lt;!&ndash;//d צריך לעצב את העמוד- לשים את השדות לפי הדרישות- פה סתם שמתי שדות לדוגמא כולל תמונה וכדומה..-->
+<!--//s בשביל העיצוב צריך לפתוח קובץ סיסס חדש&ndash;&gt;-->
+
+<!--<div class="details content">-->
+<!--    <h2><%= result.firstName %> <%=result.lastName %></h2>-->
+<!--    <h3><%= result.email %></h3>-->
+
+<!--    <div class="content">-->
+<!--        <p><%= result.aboutMe %></p>-->
+<!--        <p><%= result.address.city%>, <%=result.address.street%>, <%=result.address.houseNumber%></p>-->
+<!--        <p><%= result.gender %></p>-->
+<!--        <p>Hourly rate: <%= result.hourlyRate %></p>-->
+
+<!--        <% for(var i=0; i<result.languages.length;i++){%>-->
+<!--            <%= result.languages[i].value %>-->
+<!--        <% } %>-->
+
+<!--        <p>education: <%= result.education %></p>-->
+<!--        <p><%= result.smoker %></p>-->
+<!--        <p><%= result.experience%></p>-->
+<!--        <p>phone number <%= result.phoneNumber %></p>-->
+
+<!--        <% for(var i=0; i<result.jobTypes.length;i++){%>-->
+<!--            • <%= result.jobTypes[i].value %>-->
+<!--        <% } %>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--<hr>-->
+<!--<div class="Recruitment">-->
+<!--    <h2>Recruitment</h2>-->
+<!--    <input type="text" name="daterange"  />-->
+<!--    <div class="date messages error"></div>-->
+<!--    <hr>-->
+
+<!--    <form id="hoursForm" >-->
+<!--        <label>please fill the hours</label>-->
+<!--        <input type="time" id="startTime" name="startTime"-->
+<!--               min="00:00" max="23:59" required>-->
+
+<!--        <input type="time" id="endTime" name="endTime"-->
+<!--               min="00:00" max="23:59" required>-->
+
+
+<!--        <div>-->
+<!--            <input type="submit" value="Submit form">-->
+<!--        </div>-->
+<!--    </form>-->
+<!--    <div class="hour message error"></div>-->
+<!--    <div class="hour message suc"></div>-->
+<!--    <hr>-->
+
+
+<!--</div>-->
+
+<!--<%- include("./partials/footer.ejs") %>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+<!--<script>-->
+<!--    document.getElementById('hoursForm').style.display = 'none'-->
+<!--    var contractorId = <%- JSON.stringify(result._id) %>-->
+<!--        console.log(contractorId)-->
+<!--    var typeOfJob = <%- JSON.stringify(typeOfJob) %>-->
+<!--        console.log(typeOfJob)-->
+<!--    getDetails(contractorId,typeOfJob)-->
+<!--</script>-->
+
+<!--<script>-->
+<!--    document.getElementById('hoursForm').style.display = 'none'-->
+
+<!--    const arrRec = <%- JSON.stringify(rec)%>-->
+<!--    var point = 0;-->
+<!--    function changeText(txt){-->
+<!--        if(txt === 'pre'){-->
+<!--            $('h3').html(arrRec[(arrRec.length)%(point-1)]);-->
+<!--        }-->
+<!--        if(txt === 'nxt'){-->
+<!--            $('h3').html(arrRec[(arrRec.length)%(point+1)]);-->
+<!--        }-->
+<!--        else{-->
+<!--            point = ((Math.floor(Math.random()*10))%(arrRec.length))-->
+<!--            $('h3').html(arrRec[point]);-->
+<!--            setTimeout(changeText, 3000)-->
+<!--        }-->
+<!--    }-->
+
+<!--    changeText();-->
+<!--</script>-->

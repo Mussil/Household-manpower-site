@@ -43,6 +43,8 @@ const handleErrors = (err) => {
     return errors
 }
 
+
+
 module.exports.homepageHRGet=(req,res)=>{
     res.render('homepageHR')
 }
@@ -152,7 +154,7 @@ module.exports.attendanceclockHRDelete= (req,res)=>{
         })
 
     const cont= Transaction.findById(id)
-    console.log("cont")
+    // console.log("cont")
     console.log(cont)
     UsersContractor.calcAvg(cont.idContractor)
 }

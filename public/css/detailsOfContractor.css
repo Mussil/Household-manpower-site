@@ -1,7 +1,139 @@
+/*.details h2 {*/
+/*    padding-left: 10px;*/
+/*    color: #66afe9;*/
+/*}*/
+/*.details.content{*/
+/*    display: block;*/
+/*    margin: 40px 0px;*/
+/*    padding-left: 40px;*/
+/*    width: 750px;*/
+/*}*/
+/*.Recruitment{*/
+/*    display: block;*/
+/*    margin: 40px 0px;*/
+/*    padding-left: 40px;*/
+/*}*/
+/*.Recruitment.error{*/
+/*    color: #de4427;*/
+/*}*/
+
+
+
+
+/*h4{*/
+/*    color: deeppink;*/
+/*    text-align: center;*/
+/*    text-transform:none;*/
+/*    font-size: 20px;*/
+/*    font-family: Garamond ;*/
+/*    font-weight: bold;*/
+/*}*/
+/*.fa_custom{*/
+/*    color: #ff0099;*/
+/*    position: fixed;*/
+/*    font-size: 30px;*/
+/*    display: inline-block;*/
+/*    vertical-align: middle;*/
+/*    width: 0;*/
+/*    line-height: 0%;*/
+/*    border: none;*/
+/*    right: 250px;*/
+/*    top: 530px;*/
+
+/*}*/
+
+/*.fa_right{*/
+/*    color: #ff0099;*/
+/*    position: fixed;*/
+/*    font-size: 30px;*/
+/*    display: inline-block;*/
+/*    vertical-align: middle;*/
+/*    width: 0;*/
+/*    line-height: 0%;*/
+/*    border: none;*/
+/*}*/
+
+
+.col-1{
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+.col-2{
+    position: relative;
+    float: right;
+    width: 50%;
+    padding: 100px 200px;
+    height: 300px; /* Should be removed. Only for demonstration */
+}
+.row-1{
+    display: table;
+}
+.row-2{
+    position: relative;
+    top: 300px;
+}
+/* Clear floats after the columns */
+/*.row:after {*/
+/*    content: "";*/
+/*    display: table;*/
+/*    clear: both;*/
+/*}*/
+h3{
+    color: black;
+    text-align: center;
+    text-transform:none;
+    font-size: 30px;
+    font-family: Garamond ;
+    font-weight: bold;
+
+}
+h4{
+    color: deeppink;
+    text-align: center;
+    text-transform:none;
+    font-size: 20px;
+    font-family: Garamond ;
+    font-weight: bold;
+}
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.fa_custom{
+    color: #ff0099;
+    position: fixed;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    line-height: 0%;
+    border: none;
+    right: 250px;
+    top: 530px;
+
+}
+
+.fa_right{
+    color: #ff0099;
+    /*position: fixed;*/
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    top: 530px;
+    left: 250px;
+    line-height: 0%;
+    border: none;
+}
 .details h2{
     padding-left: 10px;
     color:#66afe9;
 }
+
 .details.content{
     display: block;
     margin: 40px 0px;
@@ -14,4 +146,36 @@
 }
 .Recruitment.error{
     color: #de4427;
+}
+
+.recommendation{
+    height:200px;
+    width:400px;
+    overflow:auto;
+    border:1px solid;
+    padding:2%;
+    position: fixed;
+    left: 1000px;
+    bottom: 200px;
+    box-shadow: 5px 10px #66afe9;
+
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

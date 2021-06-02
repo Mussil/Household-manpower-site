@@ -16,7 +16,7 @@
 
 <%const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]%>
-
+<div class="order">
 <div class ="details">
     <p><%=firstName%> <%=lastName%> wants to hire you</p>
     <%var dt=new Date(date);          dt.setDate( dt.getDate() - 1 ); %>
@@ -28,6 +28,7 @@
     <input type="button"  id="acceptButton" value="accept" onclick="myAccept()" class="btn btn-outline-primary"/>
     <input type="button"  id="declineButton" value="decline" onclick="myDecline()" class="btn btn-outline-primary"/>
     <div class="msg"></div>
+</div>
 </div>
 <%- include("./partials/footer.ejs") %>
 

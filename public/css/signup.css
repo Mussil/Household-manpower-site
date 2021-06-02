@@ -1,7 +1,6 @@
-body {
+body{
     font-family: "Lato", sans-serif;
 }
-
 
 
 .main-head{
@@ -10,9 +9,25 @@ body {
 
 }
 
+#imag{
+    position: relative;
+    animation-name: example;
+    animation-duration: 4s;
+    animation-delay: -2s;
+}
+
+@keyframes example {
+    0%   { left:0px; top:0px;}
+    25%  { left:200px; top:0px;}
+    50%  { left:200px; top:200px;}
+    75%  { left:0px; top:200px;}
+    100% { left:0px; top:0px;}
+}
 .sidenav {
     height: 100%;
-    background-color: #000;
+    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+    background: linear-gradient(to right, #ee5a6f, #f29263);
+    /*background-color: #000;*/
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -56,7 +71,7 @@ body {
     }
 
     .login-form{
-        margin-top: 30%;
+        margin-top: 20%;
     }
 
     .register-form{
@@ -79,3 +94,86 @@ body {
     background-color: #000 !important;
     color: #fff;
 }
+
+
+/*body {*/
+/*    font-family: "Lato", sans-serif;*/
+/*}*/
+
+
+
+/*.main-head{*/
+/*    height: 50px;*/
+/*    background: #FFF;*/
+
+/*}*/
+
+/*.sidenav {*/
+/*    height: 100%;*/
+/*    background-color: #000;*/
+/*    overflow-x: hidden;*/
+/*    padding-top: 20px;*/
+/*}*/
+
+
+/*.main {*/
+/*    padding: 0px 10px;*/
+/*}*/
+
+/*.error{*/
+/*    color: #ff0099;*/
+/*    margin: 10px 2px;*/
+/*    font-size: 0.8em;*/
+/*    font-weight: bold;*/
+/*}*/
+/*@media screen and (max-height: 450px) {*/
+/*    .sidenav {padding-top: 15px;}*/
+/*}*/
+
+/*@media screen and (max-width: 450px) {*/
+/*    .login-form{*/
+/*        margin-top: 10%;*/
+/*    }*/
+
+/*    .register-form{*/
+/*        margin-top: 10%;*/
+/*    }*/
+/*}*/
+
+/*@media screen and (min-width: 768px){*/
+/*    .main{*/
+/*        margin-left: 40%;*/
+/*    }*/
+
+/*    .sidenav{*/
+/*        width: 40%;*/
+/*        position: fixed;*/
+/*        z-index: 1;*/
+/*        top: 0;*/
+/*        left: 0;*/
+/*    }*/
+
+/*    .login-form{*/
+/*        margin-top: 30%;*/
+/*    }*/
+
+/*    .register-form{*/
+/*        margin-top: 20%;*/
+/*    }*/
+/*}*/
+
+
+/*.login-main-text{*/
+/*    margin-top: 20%;*/
+/*    padding: 60px;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.login-main-text h2{*/
+/*    font-weight: 300;*/
+/*}*/
+
+/*.btn-black{*/
+/*    background-color: #000 !important;*/
+/*    color: #fff;*/
+/*}*/

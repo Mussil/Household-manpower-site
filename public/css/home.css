@@ -7,6 +7,7 @@ p{
     color:#6c6c6f;
     font-size:1em;
 }
+
 h1,h2,h3,h4,h5,h6{color:#323233;text-transform:uppercase;}
 .navbar-brand  span{
     color: #fed136;
@@ -48,11 +49,28 @@ nav{-webkit-transition: padding-top .3s,padding-bottom .3s;
     padding-bottom: 0;
     background-color: #212529;
 }
+.vid{
+    object-fit: cover;
+    text-align: center;
+    /*overflow: hidden;*/
+    /*width: 100%;*/
+    height: 30rem;
+
+    /*position: relative;*/
+    padding-top: 86px;
+    /*left: 0;*/
+    /*bottom: 10px;*/
+    /*top: 87px;*/
+    /*right: 0;*/
+}
+
 .banner{
     /*background-image:url('https://files.geektime.co.il/wp-content/uploads/2020/04/star-wars-backgrounds-14-1587223450.jpg');*/
-    background-image:url('https://image.freepik.com/free-photo/manpower-human-resource-planning_101984-10.jpg');
+    /*background-image:url('https://image.freepik.com/free-photo/manpower-human-resource-planning_101984-10.jpg');*/
+
     text-align: center;
     color: #fff;
+
 
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -63,15 +81,18 @@ nav{-webkit-transition: padding-top .3s,padding-bottom .3s;
     background-size: cover;
 }
 .banner-text{
-    padding:200px 0 150px 0;
+    /*padding:200px 0 150px 0;*/
+
 }
 .banner-heading{
     font-family: 'Lobster', cursive;
     font-size: 75px;
     font-weight: 700;
     line-height: 100px;
+
     margin-bottom: 30px;
-    color:#fff;
+    margin-top: 5px;
+    color:darkblue;
 }
 .banner-sub-heading{
     font-family: 'Libre Baskerville', serif;
@@ -79,7 +100,7 @@ nav{-webkit-transition: padding-top .3s,padding-bottom .3s;
     font-weight: 300;
     line-height: 30px;
     margin-bottom: 50px;
-    color: yellow;
+    color: darkblue;
 }
 
 .btn-banner{
