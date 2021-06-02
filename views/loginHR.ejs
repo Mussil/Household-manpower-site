@@ -1,59 +1,72 @@
-
 <html>
-    <head>
-        <title>Login</title>
-        <link rel = "stylesheet"
-              type = "text/css"
-              href = "../css/login.css" />
+<head>
+    <title>Login</title>
+    <link rel = "stylesheet"
+          type = "text/css"
+          href = "../css/login.css" />
 
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--        Robot check-->
+    <!--        <script src="https://www.google.com/recaptcha/api.js"></script>-->
 
-<!--        Robot check-->
-<!--        <script src="https://www.google.com/recaptcha/api.js"></script>-->
+</head>
 
-    </head>
+<body>
 
-    <body>
-
-    <div class="sidenav">
-        <div class="login-main-text">
-            <h2>Login<br>Human Resources</h2>
-            <p>Connect with the user you received from the company.</p>
-        </div>
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Login<br>Human Resources</h2>
+        <p>Connect with the user you received from the company.</p>
     </div>
+</div>
 
 
-    <div class="main">
-        <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-                <form action="/loginHR">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form action="/loginHR">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="email error"></div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Password " required>
+                    <div class="password error"></div>
+                </div>
+
+                <div class="form-group">
+                    <div id="captcha" class="captcha" ><script>createCaptcha()</script></div>
+                    <div class="restart">
+                        <a href="#" onclick="createCaptcha()">Check me out for text view/change:) </a>
                     </div>
-                    <div class="email error"></div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Password " required>
-                        <div class="password error"></div>
-                    </div>
-<!--                    <div class="g-recaptcha" data-sitekey="6Lctr7gaAAAAAIVxAUexa0r8OG9jrkUswVNiAgJ1"></div>-->
-                    <button type="submit" class="btn btn-black">login</button>
 
-<!--                    Robot check-->
-<!--                    <button type="submit" class="btn btn-black g-recaptcha" data-sitekey="6Lctr7gaAAAAAIVxAUexa0r8OG9jrkUswVNiAgJ1"-->
-<!--                            data-callback='onSubmit'-->
-<!--                            data-action='submit'>login</button>-->
+                    <div class="input">
+                        <input type="text" name="reCaptcha"  id="reCaptcha" class="form-control" placeholder="Type The Captcha" required>
+                    </div>
+
+                    <div id="errCaptcha" class="errmsg"></div>
+                </div>
+
+                <!--                    <div class="g-recaptcha" data-sitekey="6Lctr7gaAAAAAIVxAUexa0r8OG9jrkUswVNiAgJ1"></div>-->
+                <button type="submit" class="btn btn-black">login</button>
+
+                <!--                    Robot check-->
+                <!--                    <button type="submit" class="btn btn-black g-recaptcha" data-sitekey="6Lctr7gaAAAAAIVxAUexa0r8OG9jrkUswVNiAgJ1"-->
+                <!--                            data-callback='onSubmit'-->
+                <!--                            data-action='submit'>login</button>-->
 
             </form>
         </div>
     </div>
-    </div>
-    </body>
+</div>
+</body>
 
-    <script src="../js/loginHR.js"></script>
+<script src="../js/loginHR.js"></script>
 
 
 
@@ -61,4 +74,13 @@
 
 </html>
 
-
+<script>
+    // Disable paste to input field
+    jQuery('#reCaptcha').bind("paste",function(e) {
+        e.preventDefault();
+    });
+    //  Disable copy from captcha field
+    jQuery('#captcha').bind("copy",function(e) {
+        e.preventDefault();
+    });
+</script>

@@ -14,7 +14,7 @@ form.addEventListener('submit', async (e) => {
     const password = form.password.value
 
     try {
-       const res = await fetch('/loginContractor', {
+        const res = await fetch('/loginContractor', {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: {'Content-Type': 'application/json'}
@@ -26,13 +26,45 @@ form.addEventListener('submit', async (e) => {
             passwordError.textContent = data.errors.password
         }
         if (data.user) { //successful
-            location.assign('/homepageContractor')
+            const errCaptcha = document.getElementById("errCaptcha");
+            const reCaptcha = document.getElementById("reCaptcha");
+            recaptcha = reCaptcha.value;
+            let validateCaptcha = 0;
+            for (var z = 0; z < 6; z++) {
+                if (recaptcha.charAt(z) != captcha[z]) {
+                    validateCaptcha++;
+                }
+            }
+            if (recaptcha == "") {
+                errCaptcha.innerHTML = "Re-Captcha must be filled";
+            } else if (validateCaptcha > 0 || recaptcha.length > 6) {
+                errCaptcha.innerHTML = "Wrong captcha";
+                return
+            } else {
+                errCaptcha.innerHTML = "Done";
+                location.assign('/homepageContractor')
+            }
         }
     }
     catch (err) {
         console.log(err)
     }
 })
+
+let captcha = new Array();
+
+function createCaptcha() {
+    const activeCaptcha = document.getElementById("captcha");
+    for (q = 0; q < 6; q++) {
+        if (q % 2 == 0) {
+            captcha[q] = String.fromCharCode(Math.floor(Math.random() * 26 + 65));
+        } else {
+            captcha[q] = Math.floor(Math.random() * 10 + 0);
+        }
+    }
+    theCaptcha = captcha.join("");
+    activeCaptcha.innerHTML = `${theCaptcha}`;
+}
 
 
 const submit = document.getElementById('forgot')
