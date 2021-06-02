@@ -1,4 +1,58 @@
-
 <%- include ("partials/navHR.ejs")-%>
-<h1> home page HR</h1>
+<!DOCTYPE html>
+<html >
+<head>
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<!--    <link rel = "stylesheet"  type = "text/css"  href = "../css/homepageHR.css" />-->
+
+
+    <title>Home page HR</title>
+</head>
+
+
+<div class="main">
+
+    <h1> home page HR</h1>
+
+    <div  class= "gender" >
+    <div id="gender" style="height: 200px; width: 30%; left: 150px;"></div>
+    </div>
+
+    <div  class= "education" >
+    <div id="education" style="height: 150px; width: 50%;padding-top: 20px;"></div>
+    </div>
+    <div  class= "experience" >
+        <div id="experience" style="height: 200px; width: 50%;"></div>
+    </div>
+    <div  class= "jobs" >
+        <div id="jobs" style="height: 200px; width: 100%;padding-left: 5%"></div>
+    </div>
+
+    <!--<div id="chartContainer" style="height: 300px; width: 100%;"></div>-->
+
+
+
+</div>
+
+</html>
 <%- include ("partials/footer.ejs")-%>
+
+
+
+
+<script src="../js/statistic.js"></script>
+
+<script>
+
+    var gender1 = <%- JSON.stringify(gender) %>
+
+    var experience1 = <%- JSON.stringify(dictexperience) %>
+
+    var job1 = <%- JSON.stringify(dictjob) %>
+
+    var educ = <%- JSON.stringify(diceducation) %>
+
+    getDetails(gender1,experience1,job1,educ)
+</script>
+

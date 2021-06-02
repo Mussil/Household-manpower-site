@@ -35,5 +35,9 @@ router.post('/forgotContractor',Contractor.forgotContractorPost)
 //logout
 router.get('/logout',HR.logoutGet)
 
+//footer
+router.get('/Terms',HR.TermsGet)
 
+router.post('/bugReport',HR.bugReportPost)
+router.get('/bugReport',HR.bugReportGet)
 module.exports=router

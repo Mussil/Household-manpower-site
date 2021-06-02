@@ -35,6 +35,20 @@
                     <input type="password" name="password" class="form-control" placeholder="Password" required></input>
                     <div class="password error"></div>
                 </div>
+
+                <div class="form-group">
+                    <div id="captcha" class="captcha"><script>createCaptcha()</script></div>
+                    <div class="restart">
+                        <a href="#" onclick="createCaptcha()">Check me out for text view/change:) </a>
+                    </div>
+
+                    <div class="input">
+                        <input type="text" name="reCaptcha"  id="reCaptcha" class="form-control" placeholder="Type The Captcha" required>
+                    </div>
+
+                    <div id="errCaptcha" class="errmsg"></div>
+                </div>
+
                 <button type="submit" class="btn btn-black">login</button>
                 <a href="/signupEmployer"  class="btn btn-secondary">Do not have an account?</a>
                 <a href="/forgotEmployer"  class="btn btn-third">forgot your password?</a>
