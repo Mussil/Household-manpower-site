@@ -1,7 +1,19 @@
-body{padding-top:30px;
+
+body{
+    /*padding-top:30px;*/
 }
 
-.glyphicon {  margin-bottom: 70px;margin-right: 70px;}
+button{
+    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+    background: linear-gradient(to right, #ee5a6f, #f29263);
+    border-radius: 20px;
+}
+button:hover{
+    background: linear-gradient(to top, #ee5a6f, #f29263);
+}
+.glyphicon {
+    /*margin-bottom: 70px;margin-right: 70px;*/
+}
 
 big{
     display: block;

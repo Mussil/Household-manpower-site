@@ -433,8 +433,6 @@ module.exports.leavePeriodContractorPost=(req,res)=>{
 }
 
 
-
-
 module.exports.workOrdersContractorGet= async (req,res)=>{
 
 
@@ -457,6 +455,34 @@ module.exports.workOrdersContractorGet= async (req,res)=>{
 
 
 }
+
+// module.exports.workOrdersContractorGet= async (req,res)=>{
+//
+//     const transaction = await Transaction.find({})
+//     const afterFilter =[]
+//     for(var i=0;i< transaction.length;++i){
+//         if(!transaction[i].$isEmpty('approval')){
+//             // console.log(transaction[i])
+//             // console.log(transaction[i].idEmployer)
+//             const employer= await UserEmployer.findById(transaction[i].idEmployer)
+//                     // console.log(employer)
+//                     if(employer){
+//                         // console.log(transaction[i])
+//                         if( transaction[i].approval==0) { //before approval
+//                             afterFilter.push(transaction[i])
+//                         }
+//                     }
+//
+//
+//
+//
+//         }
+//
+//     }
+//
+//
+//     res.render('workOrdersContractor',{data:afterFilter})
+// }
 
 module.exports.detailsOfTransactionGet =  async (req,res)=>{
     const idTransaction=req.params.id

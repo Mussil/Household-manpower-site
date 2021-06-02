@@ -186,7 +186,6 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
     const idCon=attr[1]
     var arrRecommendation = []
 
-
     Transaction.find({idContractor: idCon})
         .then(user=>{
             for(var i=0;i<user.length;++i){

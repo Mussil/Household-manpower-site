@@ -42,54 +42,52 @@
 //
 // }
 
-function ask() {
-    let wrap = document.createElement('div');
-    // wrap.setAttribute('class', 'text-muted');
-    wrap.innerHTML = '<h1>333333333333</h1><button onclick="reply(\'sad\')" type="button" value="sad" class="btn feel"><i class="fa fa-frown-o fa-3x"></i></button><button onclick="reply(\'neutral\')" type="button" value="neutral" class="btn feel"><i class="fa fa-meh-o fa-3x"></i></button><button onclick="reply(\'happy\')" type="button" value="happy" class="btn feel"><i class="fa fa-smile-o fa-3x"></i></button><hr>'
+// eslint-disable-next-line no-unused-vars
+// function ask() {
+//     let wrap = document.createElement('div')
+//     // wrap.setAttribute('class', 'text-muted');
+//     wrap.innerHTML = '<h1>333333333333</h1><button onclick="reply(\'sad\')" type="button" value="sad" class="btn feel"><i class="fa fa-frown-o fa-3x"></i></button><button onclick="reply(\'neutral\')" type="button" value="neutral" class="btn feel"><i class="fa fa-meh-o fa-3x"></i></button><button onclick="reply(\'happy\')" type="button" value="happy" class="btn feel"><i class="fa fa-smile-o fa-3x"></i></button><hr>'
+//
+//     swal({
+//         title: "",
+//         text: "How do you like the new features?",
+//         icon: "info",
+//         className: '',
+//         closeOnClickOutside: false,
+//         // content: {
+//         //     element: wrap
+//         // },
+//         content: wrap,
+//
+//         buttons: {
+//             confirm: {
+//                 text: "Close",
+//                 value: '',
+//                 visible: true,
+//                 className: "btn btn-default",
+//                 closeModal: true,
+//             }
+//         },
+//     }).then((value) => {
+//         if (value === 'sad') {
+//             swal("Sorry!", {
+//                 icon: "error",
+//                 buttons: false
+//             });
+//         } else if (value === 'neutral') {
+//             swal("Okay!", {
+//                 icon: "warning",
+//                 buttons: false
+//             });
+//         } else if (value === 'happy') {
+//             swal("Hooray!", {
+//                 icon: "success",
+//                 buttons: false
+//             });
+//         }
+//     });
+// }
 
-    swal({
-        title: "",
-        text: "How do you like the new features?",
-        icon: "info",
-        className: '',
-        closeOnClickOutside: false,
-        // content: {
-        //     element: wrap
-        // },
-        content: wrap,
-
-        buttons: {
-            confirm: {
-                text: "Close",
-                value: '',
-                visible: true,
-                className: "btn btn-default",
-                closeModal: true,
-            }
-        },
-    }).then((value) => {
-        if (value === 'sad') {
-            swal("Sorry!", {
-                icon: "error",
-                buttons: false
-            });
-        } else if (value === 'neutral') {
-            swal("Okay!", {
-                icon: "warning",
-                buttons: false
-            });
-        } else if (value === 'happy') {
-            swal("Hooray!", {
-                icon: "success",
-                buttons: false
-            });
-        }
-    });
-}
-
-function reply(feel){
-    swal.setActionValue(feel);
-}
-
-
-
+// function reply(feel){
+//     swal.setActionValue(feel);
+// }

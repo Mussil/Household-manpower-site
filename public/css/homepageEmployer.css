@@ -1,5 +1,17 @@
+/*.body{
+    background-image: url('https://cdn.shopify.com/s/files/1/0802/1067/products/196_large.jpg?v=1547377970');
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}*/
+
 .homepage{
-    padding-left: 50px;
+    /*padding-left: 50px;*/
+    text-align: center;
 }
 
 h1{
@@ -7,13 +19,40 @@ h1{
     text-align: center;
     text-transform:none;
     font-size: 50px;
+    /*background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));*/
+    /*background: linear-gradient(to right, #ee5a6f, #f29263);*/
+    border-radius: 25px;
+    /*color: black;*/
+    /*text-align: center;*/
+    /*text-transform:none;*/
+    /*font-size: 50px;*/
+}
+
+.contractors{
+    text-align: center;
+    font-size: 30px;
+}
+.buttons{
+    text-align: center;
+}
+.btn{
+    margin-right: 30px;
+    border-radius: 12px;
+    background: -webkit-gradient(linear, top top, bottom top, from(#f29263), to(#ee5a6f));
+    background: linear-gradient(to bottom, #ee5a6f, #f29263);
+}
+.btn:hover{
+    background: linear-gradient(to top, #ee5a6f, #f29263);
+}
+.buttons > .btn:not(:last-child) {
+    margin-right: 20px;
 }
 
 h2{
     color: black;
     text-align: center;
     text-transform:none;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 h3{

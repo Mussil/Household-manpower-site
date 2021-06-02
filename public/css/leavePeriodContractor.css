@@ -1,7 +1,7 @@
 body {
     /*background-color: #6c6c6f;*/
     /*background-image: url(https://images.unsplash.com/photo-1517999144091-3d9dca6d1e43?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMHN0b25lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80);*/
-    background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);
+    /*background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);*/
 }
 
 h1{
@@ -20,7 +20,9 @@ h2 {
 }
 form.container {
     border-radius: 5px;
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
+    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+    background: linear-gradient(to right, #ee5a6f, #f29263);
     padding: 20px;
 
     margin: 0 auto;

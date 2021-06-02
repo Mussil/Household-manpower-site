@@ -2,7 +2,7 @@
     color:red;
 }
 h1{
-    color: #FFFFFF;
+    color: black;
     text-transform: none;
     font-weight: 300;
     text-align: center;
@@ -12,7 +12,7 @@ h1{
 }
 
 body{
-    background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);
+    /*background-image: url(https://wallpapercave.com/wp/wp7560270.jpg);*/
 }
 
 form.container {
