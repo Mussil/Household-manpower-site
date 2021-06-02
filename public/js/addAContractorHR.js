@@ -163,6 +163,7 @@
                 var msg='A new contractor worker: '+data.user.email+' is added to the system an email on its way to him/her.'
                 // sucNew.textContent = msg
                 form.reset()
+                // eslint-disable-next-line no-undef
                 swal(msg)
 
                 //res.send('<h3>YOU ARE ADD A NEW EMPLOYER TO THE SYSTEM</h3>')
