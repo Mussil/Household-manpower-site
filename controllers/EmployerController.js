@@ -184,18 +184,32 @@ module.exports.detailsOfContractorGet=async (req,res)=>{
     // const idCon=req.params.id
     const typeCon=attr[0]
     const idCon=attr[1]
+    var arrRecommendation = []
 
-    console.log('here')
-    // console.log(typeCon)
+
+    Transaction.find({idContractor: idCon})
+        .then(user=>{
+            for(var i=0;i<user.length;++i){
+                if(user[i].recommendation != '')
+                    arrRecommendation.push(user[i].recommendation)
+            }
+            console.log(arrRecommendation[0])
+            console.log(arrRecommendation[1])
+
+            // console.log('here')
+            // console.log(typeCon)
+        }).catch(err=>{
+        console.log(err)
+    })
     UsersContractor.findById(idCon)
         .then(result => {
-            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon })
+            // res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon })
+            res.render('detailsOfContractor',  {result: result,typeOfJob:typeCon,rec:arrRecommendation })
         })
         .catch(err => {
             console.log(err)
             res.render('404')
         })
-
 }
 
 module.exports.detailsOfContractorPost= (req,res)=> {

@@ -40,8 +40,25 @@ const handleErrors = (err) => {
 
 // controller actions
 module.exports.homepageContractorGet=(req,res)=>{
-    res.render('homepageContractor')
-}
+    const token = req.cookies.jwt
+    jwt.verify(token, 'sce secret', async (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+        }
+        else{
+            var arrRecommendation = []
+
+            Transaction.find({idContractor: decodedToken.id})
+                .then(user=>{
+                    for(var i=0;i<user.length;++i){
+                        if(user[i].recommendation != '')
+                            arrRecommendation.push(user[i].recommendation)
+                    }
+                    res.render('homepageContractor',{rec:arrRecommendation })
+                })
+                .catch(err=>{ console.log(err)})
+        }
+    })}
 
 module.exports.workHistoryContractorGet=async (req,res)=>{
     const transcationResult = await Transaction.find({})
