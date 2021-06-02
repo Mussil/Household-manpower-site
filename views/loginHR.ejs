@@ -9,7 +9,7 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!--        Robot check-->
 <!--        <script src="https://www.google.com/recaptcha/api.js"></script>-->
 
@@ -39,6 +39,20 @@
                         <input type="password" name="password" class="form-control" placeholder="Password " required>
                         <div class="password error"></div>
                     </div>
+
+                    <div class="form-group">
+                            <div id="captcha" class="captcha"><script>createCaptcha()</script></div>
+                            <div class="restart">
+                                <a href="#" onclick="createCaptcha()">Check me out for text view/change:) </a>
+                            </div>
+
+                            <div class="input">
+                                <input type="text" name="reCaptcha"  id="reCaptcha" class="form-control" placeholder="Type The Captcha" required>
+                            </div>
+
+                            <div id="errCaptcha" class="errmsg"></div>
+                        </div>
+
 <!--                    <div class="g-recaptcha" data-sitekey="6Lctr7gaAAAAAIVxAUexa0r8OG9jrkUswVNiAgJ1"></div>-->
                     <button type="submit" class="btn btn-black">login</button>
 
