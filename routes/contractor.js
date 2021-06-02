@@ -20,10 +20,10 @@ router.post('/salaryDetailsContractor', contractorController.salaryDetailsContra
 router.route('/profileContractor')
     .get(requireConAuth,contractorController.profileContractorGet)
 
-router.delete('/profileContractor', contractorController.profileContractorDelete)
+router.route('/profileContractor')
+    .post(requireConAuth, contractorController.profileContractorPost)
 
-router.route('/profileContractorEdit')
-    .get(requireConAuth, contractorController.profileContractorEditGet)
+// router.delete('/profileContractor', contractorController.profileContractorDelete)
 
 router.route('/leavePeriodContractor')
     .get(requireConAuth, contractorController.leavePeriodContractorGet)
@@ -31,5 +31,16 @@ router.route('/leavePeriodContractor')
 router.post('/leavePeriodContractor', contractorController.leavePeriodContractorPost)
 router.post('/shiftReportContractor', contractorController.shiftReportContractorPost)
 router.post('/shiftReportHoursContractor', contractorController.shiftReportHoursContractorPost)
+
+
+
+router.route('/workOrdersContractor')
+    .get(requireConAuth, contractorController.workOrdersContractorGet)
+router.route('/detailsOfTransaction/:id')
+    .get(requireConAuth, contractorController.detailsOfTransactionGet)
+router.post('/detailsOfTransaction', contractorController.detailsOfTransactionPost)
+
+
+
 
 module.exports=router

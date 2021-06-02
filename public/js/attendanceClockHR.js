@@ -9,8 +9,10 @@ function getDetails(dataHere){
 function myEditFunction(g) {
 
     console.log('edit')
+    console.log('trying to edit ', g)
     // console.log(data[g].transactionId)
-     const id = data[g].transactionId
+    const id = data[g].transactionId
+    console.log('id :', id)
     //
     // for (var i=0;i<data.length;i++){
     //     var first = document.getElementById(g).getElementsByClassName('hour-shift')[0]
@@ -19,9 +21,10 @@ function myEditFunction(g) {
     //     second.style.background = "white"
     // }
 
-    var first = document.getElementById(g).getElementsByClassName('hour-shift')[0]
+    console.log(document.getElementById(g))
+    var first = document.getElementById(g).getElementsByClassName('shift hour-shift')[0]
     first.style.background = '#f3f3f3 url(\'img_tree.png\') no-repeat right top'
-    var second = document.getElementById(g).getElementsByClassName('hour-shift')[1]
+    var second = document.getElementById(g).getElementsByClassName('shift hour-shift')[1]
     second.style.background = '#f3f3f3 url(\'img_tree.png\') no-repeat right top'
 
     document.getElementById('hoursForm').style.display = 'block'
@@ -71,6 +74,16 @@ function myEditFunction(g) {
                         second.textContent=endTime
 
                         document.getElementById('hoursForm').style.display = 'none'
+
+                        // swal("Awesome!, Changes updated successfully!\n Updating mail was sent to the contractor")
+                        swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Updating mail was sent to the contractor\n\n# Shift start time: '+startTime+'\n\n# Shift end time: '+endTime,
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
+
                     }
 
                 } catch (err) {
@@ -87,27 +100,62 @@ function myEditFunction(g) {
 
 }
 
+
+// function sendMailToCont() {
+//
+//     // let wrap = document.createElement('div');
+//     // // wrap.setAttribute('class', 'text-muted');
+//     // wrap.innerHTML = '<h1>333333333333</h1><button onclick="reply(\'sad\')" type="button" value="sad" class="btn feel"><i class="fa fa-frown-o fa-3x"></i></button><button onclick="reply(\'neutral\')" type="button" value="neutral" class="btn feel"><i class="fa fa-meh-o fa-3x"></i></button><button onclick="reply(\'happy\')" type="button" value="happy" class="btn feel"><i class="fa fa-smile-o fa-3x"></i></button><hr>'
+//
+//
+// }
+
+
+
+
+
+
 // eslint-disable-next-line no-unused-vars
 function myDeleteFunction(g) {
 
     // document.getElementById("demo").innerHTML = "You are asking to delete a record # " + String(g)
     // alert('You chose to delete this record. There is no way back! Sorry ')
 
-    let toDelete = confirm('Are you sure you want to delete this record ?!?\nWatch out! There is no way back once you clicked OK.\nAt your own risk :)')
-    //
-    if(!toDelete){return} // true if OK is pressed
+    swal({
+            title: "Are you sure?",
+            text: "You will not be able to recover this record!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel please!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm) {
+            if (isConfirm) {
+                swal("Deleted!", "Your record has been deleted.", "success");
+                const id = data[g].transactionId
 
-    const id = data[g].transactionId
+                ////////////////////////////////////////to add a qouestion if user want to delete !!!!!!!!
 
-    ////////////////////////////////////////to add a qouestion if user want to delete !!!!!!!!
+                const endpoint = '/attendanceClockHR/'+id
+                fetch(endpoint, {
+                    method: 'DELETE',
+                })
+                    .then(response => response.json())
+                    .then(data => window.location.href = data.redirect)
+                    .catch(err => console.log(err))
+            } else {
+                swal("Cancelled", "Your record is safe :)", "error");
+                return;
+            }
+        }
+    );
 
-    const endpoint = '/attendanceClockHR/'+id
-    fetch(endpoint, {
-        method: 'DELETE',
-    })
-        .then(response => response.json())
-        .then(data => window.location.href = data.redirect)
-        .catch(err => console.log(err))
+    // let toDelete = confirm('Are you sure you want to delete this record ?!?\nWatch out! There is no way back once you clicked OK.\nAt your own risk :)')
+    // //
+    // if(!toDelete){return} // true if OK is pressed
 
 
 }

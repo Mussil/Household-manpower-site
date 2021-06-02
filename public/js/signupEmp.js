@@ -16,7 +16,7 @@
         // get values
         const email = form.email.value
         const password = form.password.value
-        const conPass = form.configurePassword.value
+        const conPass = form.confirmationPassword.value
         const firstName = form.firstName.value
         const lastName = form.lastName.value
         const phoneNumber = form.phoneNumber.value

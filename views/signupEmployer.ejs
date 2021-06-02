@@ -1,10 +1,9 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+ <meta charset="UTF-8">
  <title>SignUp Employer</title>
- <link rel = "stylesheet"
-       type = "text/css"
-       href = "../css/signup.css" />
+ <link rel = "stylesheet" type = "text/css" href="../css/signup">
 </head>
 
 <body>
@@ -33,8 +32,8 @@
     </div>
     <div class="form-group">
      <label>Confirm password</label>
-     <input type="password" name="configurePassword" class="form-control" title="Exmp123!" placeholder="Configure password" required>
-     <div class="configurePassword error"></div>
+     <input type="password" name="confirmationPassword" class="form-control" title="Exmp123!" placeholder="confirmation password" required>
+     <div class="confirmationPassword error"></div>
     </div>
     <div class="form-group">
      <label>First Name</label>
@@ -171,5 +170,5 @@
    var x= citiesArray[i].charAt(0).toUpperCase() + citiesArray[i].slice(1);
    select.options[select.options.length] = new Option(x, citiesArray[i])  }
  }
-selectOne()
+ selectOne()
 </script>

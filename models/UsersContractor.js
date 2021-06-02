@@ -133,6 +133,7 @@ userSchema.statics.login = async function(email, password) {
     throw Error('incorrect email')
 }
 
+
 // static method to check email
 userSchema.statics.checkEmail = async function(email) {
     const user = await this.findOne({email})
@@ -140,6 +141,36 @@ userSchema.statics.checkEmail = async function(email) {
             return user
     }
     throw Error('incorrect email')
+}
+
+const Transaction=require('./Transaction')
+
+userSchema.statics.calcAvg = async function(idCont) {
+    const transToCalc = await Transaction.find({idContractor : idCont})
+    console.log('in calcAvg')
+    // console.log(transToCalc[0])
+    var sum=0, num=0
+    for (var i=0; i < transToCalc.length ; ++i){
+        if(transToCalc[i].rank!=0){
+            num++
+            sum=sum+transToCalc[i].rank
+        }
+    }
+
+    console.log(num, sum, sum/num)
+    const avg=Math.round(sum/num)
+    console.log(avg)
+    await this.updateOne({_id: idCont},
+        {
+            rating:avg
+            // eslint-disable-next-line no-unused-vars
+        },).then(updatedRows => {
+        // console.log(updatedRows)
+    }).catch(err => {
+        console.log(err)
+    })
+
+
 }
 
 const User = mongoose.model('userContractor', userSchema)

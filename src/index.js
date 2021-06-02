@@ -37,6 +37,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true , useUnifiedTopology: true})
         }))
     .catch((err)=>console.log(err))
 
+mongoose.set('useFindAndModify', false)
 
 
 //routes
@@ -78,3 +79,4 @@ app.use(ContractorRoutes)
 app.get('*', (req, res) => {
     res.render('404')
 })
+

@@ -18,6 +18,11 @@ $(function() {
         console.log('New date selected: ' + start.format('YYYY-MM-DD') )
         document.getElementById('hoursForm').style.display = 'none'
 
+
+        const hourMessageSuc = document.querySelector('.hour.message.suc')
+
+        hourMessageSuc.textContent = ''
+
         const dateMessage = document.querySelector('.date.messages.error')
         dateMessage.textContent=''
         if(start<new Date()){
@@ -95,6 +100,8 @@ function afterHours(contractorId,startDate,employerId){
                 if (data.msg) {
                     hourMessageSuc.textContent = data.msg
                 }
+                document.getElementById('hoursForm').style.display = 'none'
+
 
             } catch (err) {
                 console.log(err)

@@ -25,9 +25,10 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.0-beta3",
-    "bootstrap-sweetalert": "^1.0.1",
     "cookie-parser": "^1.4.5",
-    "dotenv": "^8.6.0",
+    "datatables.net": "^1.10.24",
+    "datatables.net-dt": "^1.10.24",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
@@ -41,6 +42,8 @@
     "node-mandrill": "^1.0.1",
     "nodemailer": "^6.6.1",
     "password-validator": "^5.1.1",
+    "table-filter-sort": "^1.0.0",
+    "sweetalert2": "^10.16.7",
     "validator": "^13.5.2"
   },
   "devDependencies": {
