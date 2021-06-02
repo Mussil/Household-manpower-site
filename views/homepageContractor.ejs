@@ -64,7 +64,7 @@
     </div>
 </form>
 <hr>
-<form class="container">
+<div class="container" id="recommendations">
     <h4>My recommendations:</h4>
     <%if(rec.length > 0) {%>
         <button class="fa fa-chevron-left fa_right" onclick="changeText('pre')"></button>
@@ -76,8 +76,11 @@
     <% } %>
     <br/>
     <br/>
-</form>
+</div>
+<p></p>
+</br>
 
+</body>
 <%- include ("partials/footer.ejs")-%>
 
 <script>
@@ -95,12 +98,14 @@
         }
         if(txt === 'nxt'){
             $('h3').html(arrRec[(point+1) % (arrRec.length)]);
+
         }
         else{
             point = ((Math.floor(Math.random()*10)) % (arrRec.length))
             $('h3').html(arrRec[point]);
-            setTimeout(changeText, 5000)
         }
+        setTimeout(changeText, 5000)
+
     }
     if( arrRec.length > 0) {
         console.log(arrRec.toString())

@@ -82,7 +82,7 @@ module.exports.homepageHRGet=async (req,res)=> {
     var babyy = 0, ironn = 0, cleann1 = 0, gardenn = 0, cookk = 0, pett = 0
 
 
-    for ( i = 0; i < experienceContractorResult.length; ++i) {
+    for (i = 0; i < experienceContractorResult.length; ++i) {
         const arrayjob = experienceContractorResult[i].jobTypes
 
         for (var j = 0; j < arrayjob.length; ++j) {
@@ -133,7 +133,7 @@ module.exports.homepageHRGet=async (req,res)=> {
     module.exports.homepageHRGet = (req, res) => {
         res.render('homepageHR')
     }
-
+}
     module.exports.attendanceclockHRGet = async (req, res) => {
 
         const transcationResult = await Transaction.find({})
@@ -480,9 +480,10 @@ module.exports.homepageHRGet=async (req,res)=> {
                 }
             })
 
+
+
         } catch (e) {
             const errors = handleErrors(e)
             res.status(400).json({errors})
         }
     }
-}

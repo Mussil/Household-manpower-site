@@ -83,13 +83,11 @@ async function myDecline() {
                 type: 'success'
             }, function() {
                 console.log('fd')
-                 window.location.href = '../workOrdersContractor'
+                window.location.href = '../workOrdersContractor'
             })
 
         })
 
 
 
-    }
-
-
+}

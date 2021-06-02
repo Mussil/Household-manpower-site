@@ -1,19 +1,3 @@
-.col-1{
-    float: left;
-    width: 50%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
-}
-.col-2{
-    float: right;
-    width: 20%;
-    padding-top: 100px;
-    margin-right: 100px;
-    height: 300px; /* Should be removed. Only for demonstration */
-}
-.row-1{
-    display: table;
-}
 .contractor h2{
     padding-left: 50px;
 }
@@ -32,14 +16,13 @@
 @import url(https://fonts.googleapis.com/css?family=Advent+Pro:300);
 
 body{
-    background: white;
-    /*background: #d5d5d5; !* Old browsers *!*/
-    /*background: -moz-linear-gradient(top,  #d5d5d5 0%, #f3f3f3 80%, #feffff 100%); !* FF3.6+ *!*/
-    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5d5d5), color-stop(80%,#f3f3f3), color-stop(100%,#feffff)); !* Chrome,Safari4+ *!*/
-    /*background: -webkit-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* Chrome10+,Safari5.1+ *!*/
-    /*background: -o-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* Opera 11.10+ *!*/
-    /*background: -ms-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* IE10+ *!*/
-    /*background: linear-gradient(to bottom, #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); !* W3C *!*/
+    background: #d5d5d5; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d5d5d5 0%, #f3f3f3 80%, #feffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5d5d5), color-stop(80%,#f3f3f3), color-stop(100%,#feffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* W3C */
     /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#feffff',GradientType=0 ); !* IE6-9 *!*/
 
 }
@@ -50,15 +33,15 @@ label[for=range] {
     /*position: absolute;*/
     top: 50%;
     left: 50%;
-    margin-left: 20px;
-    /*margin-top: 10px;*/
+    margin-left: +200px;
+    margin-top: -32px;
     height: 49px;
     padding-top: 6px;
     width: 350px;
-    padding-left: 0px;
+    padding-left: 13px;
     -webkit-transform: skew(-62deg);
     overflow: hidden;
-    /*padding-bottom: 10px;*/
+    padding-bottom: 10px;
 }
 label[for=range]:after {
     content: "";
@@ -210,26 +193,19 @@ input[type=range]:after {
     270px 1px 0 rgb(235, 235, 235);
 }
 
-.dropdown{
-    background: pink; background-size: 20%; border-radius: 5px;
-}
-#dropdown-sortmode{
-    text-decoration: none;
-    margin: 0px 0px;
-}
 .budget {
-    position: relative;
-    top: 50%;
-    left:0;
-    margin-top: -100px;
-    text-align: center;
-    width: 100%;
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left:0;*/
+    /*margin-top: -100px;*/
+    /*text-align: center;*/
+    /*width: 100%;*/
     font-size: 1.5em;
     font-family: 'Advent Pro', sans-serif;
     color: rgb(58, 58, 58);
 }
 .output {
-    position: relative;
+    /*position: absolute;*/
     /*bottom: 50%;*/
     /*left: 0;*/
     /*margin-left: +200px;*/
@@ -243,10 +219,10 @@ input[type=range]:after {
 }
 
 .select_budget{
-    position: relative;
+    /*position: absolute;*/
     /*bottom: 50%;*/
     /*left: 0;*/
-    /*margin-left: +600px;*/
+    margin-left: +600px;
 
     /*margin-bottom: -100px;*/
     /*text-align: center;*/

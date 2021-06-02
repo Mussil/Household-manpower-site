@@ -11,94 +11,90 @@
 <body>
 <%- include ("partials/navEmployer.ejs")-%>
 
-<div class="row-1">
-    <div class="col-2">
-        <form class="filter">
-            <label >Language filter:</label>
-            <div id = "languages" name="languages">
-                <label ><input type="checkbox" id ="hebrew" name="hebrew" value="hebrew"> Hebrew</label>
-                <label ><input type="checkbox" id="english" name="english" value="english"> English</label>
-                <label ><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
-                <label ><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
-                <label ><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
-                <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
-                <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
-                <label><input type="checkbox" id="french" name="french" value="french"> French</label>
-                <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
-                <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
-                <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
+
+
+<form class="filter">
+    <label >Language filter:</label>
+    <div id = "languages" name="languages">
+        <label ><input type="checkbox" id ="hebrew" name="hebrew" value="hebrew"> Hebrew</label>
+        <label ><input type="checkbox" id="english" name="english" value="english"> English</label>
+        <label ><input type="checkbox" id="arabic" name="arabic" value="arabic"> Arabic</label>
+        <label ><input type="checkbox" id="russian" name="russian" value="russian"> Russian</label>
+        <label ><input type="checkbox" id="amharic" name="amharic" value="amharic"> Amharic</label>
+        <label><input type="checkbox" id="chinese" name="chinese" value="chinese"> Chinese</label>
+        <label><input type="checkbox" id ="portuguese" name="portuguese" value="portuguese"> Portuguese</label>
+        <label><input type="checkbox" id="french" name="french" value="french"> French</label>
+        <label><input type="checkbox" id="romanian" name="romanian" value="romanian"> Romanian</label>
+        <label><input type="checkbox" id="polish" name="polish" value="polish"> Polish</label>
+        <label><input type="checkbox" id="spanish" name="spanish" value="spanish"> Spanish</label>
         <!--        <button type="submit"> filter by language</button>-->
-            </div>
-        <!--</form>-->
-        <!--     style="margin-top: -15px; margin-left: 0px;" -->
-        <label style="margin-top: -10px; margin-left: -9px;" class="budget">What is your maximum budget per hour?</label>
-        <label for="range">
-            <input type="range" name="range" id="range" min="17" max="500" step="1" value="30"/>
-        </label>
-        <!--<button type="button" onclick="filterBudget()" class=""><output id="budget"for="range" class="output" value=""></output>select budget</button>-->
-        <output id="budget"for="range" class="output" value=""></output>
-        <!--<form class="city">-->
-            <label >Cities filter:</label>
-            <select id="city"></select>
-        <!--    <button type="submit"> filter by city</button>-->
-            <div>
-            <button type="submit" id="submit_form" class="glyphicon glyphicon-filter" >Filter all</button>
-            <button type="button" onclick="myClear()" class="glyphicon glyphicon-remove-sign">Clear</button>
-            </div>
-            <!--onclick="myFilter()"-->
-        </form>
-
-
-        <form class="search">
-            <label for="site-search">Search by name:</label>
-            <input type="search" id="site_search" name="con_name"
-                   aria-label="Search through site content">
-
-            <button type="submit">Search</button>
-        </form>
-
-
-        <div class="dropdown pull-right">
-            <a class="dropdown-toggle text-muted" data-toggle="dropdown" href="#" id="dropdown-sortmode" title="Sort">
-                <span class="glyphicon glyphicon-sort"></span>&nbsp;Sort
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-sortmode">
-              </li>
-                <li role="menuitem"><a onclick="sortbyFirstName('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> First name (A-Z)</a></li>
-                <li role="menuitem"><a onclick="sortbyFirstName('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> First name (Z-A)</a></li>
-                <li role="menuitem"><a onclick="sortbyEmail('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> Email (A-Z) </a></li>
-                <li role="menuitem"><a onclick="sortbyEmail('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Email (Z-A) </a></li>
-                <li role="menuitem"><a onclick="sortbyHourlyRate('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Hourly rate (17-500) </a></li>
-                <li role="menuitem"><a onclick="sortbyHourlyRate('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Hourly rate (500-17) </a></li>
-                <li role="menuitem"><a onclick="sortbyRank('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Rank (1-5) </a></li>
-                <li role="menuitem"><a onclick="sortbyRank('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Rank (5-1) </a></li>
-
-            </ul>
-        </div>
     </div>
-    <div class="col-1">
-        <div class="contractor content">
-        <h2>contractor who are: <%=typeOfJob%></h2>
-
-        <% if (data.length > 0) { %>
-            <% data.forEach(con => { %>
-                <div class="specific" id=<%= con._id %> >
-                    <a class="single"  href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
-                        <h3 class="title"><%= con.firstName %> <%=con.lastName %></h3>
-                        <p class="snippet"><%= con.aboutMe.slice(0, 200) %></p>
-                    </a></div>
-            <% }) %>
-        <% } else { %>
-            <p>There are no contractors workers to display...</p>
-        <% } %>
-
+    <!--</form>-->
+    <p class="budget">What is your maximum budget per hour?</p>
+    <label for="range">
+        <input type="range" name="range" id="range" min="17" max="500" step="1" value="30"/>
+    </label>
+    <!--<button type="button" onclick="filterBudget()" class=""><output id="budget"for="range" class="output" value=""></output>select budget</button>-->
+    <output id="budget"for="range" class="output" value=""></output>
+    <!--<form class="city">-->
+    <label >Cities filter:</label>
+    <select id="city"></select>
+    <!--    <button type="submit"> filter by city</button>-->
     </div>
+    <div>
+        <button type="submit" id="submit_form" class="glyphicon glyphicon-filter" >Filter all</button>
+        <button type="button" onclick="myClear()" class="glyphicon glyphicon-remove-sign">Clear</button>
     </div>
+    <!--onclick="myFilter()"-->
+</form>
+
+
+<form class="search">
+    <label for="site-search">Search by name:</label>
+    <input type="search" id="site_search" name="con_name"
+           aria-label="Search through site content">
+
+    <button type="submit">Search</button>
+</form>
+
+
+<div class="dropdown pull-right">
+    <a class="dropdown-toggle text-muted" data-toggle="dropdown" href="#" id="dropdown-sortmode" title="Sort">
+        <small><span class="glyphicon glyphicon-sort"></span>&nbsp;Sort</small>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-sortmode">
+        </li>
+        <li role="menuitem"><a onclick="sortbyFirstName('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> First name (A-Z)</a></li>
+        <li role="menuitem"><a onclick="sortbyFirstName('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> First name (Z-A)</a></li>
+        <li role="menuitem"><a onclick="sortbyEmail('asc')"><span class="glyphicon glyphicon-sort-by-alphabet"></span> Email (A-Z) </a></li>
+        <li role="menuitem"><a onclick="sortbyEmail('desc')"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span> Email (Z-A) </a></li>
+        <li role="menuitem"><a onclick="sortbyHourlyRate('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Hourly rate (17-500) </a></li>
+        <li role="menuitem"><a onclick="sortbyHourlyRate('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Hourly rate (500-17) </a></li>
+        <li role="menuitem"><a onclick="sortbyRank('asc')"><span class="glyphicon glyphicon-sort-by-order"></span> Rank (1-5) </a></li>
+        <li role="menuitem"><a onclick="sortbyRank('desc')"><span class="glyphicon glyphicon-sort-by-order-alt"></span> Rank (5-1) </a></li>
+
+    </ul>
 </div>
 
 
 
 
+<div class="contractor content">
+    <h2>contractor who are: <%=typeOfJob%></h2>
+
+    <% if (data.length > 0) { %>
+        <% data.forEach(con => { %>
+            <div class="specific" id=<%= con._id %> >
+                <a class="single"  href="/detailsOfContractor/<%=typeOfJob%>+<%= con._id %>">
+                    <h3 class="title"><%= con.firstName %> <%=con.lastName %></h3>
+                    <p class="snippet"><%= con.aboutMe.slice(0, 200) %></p>
+                </a></div>
+        <% }) %>
+    <% } else { %>
+        <p>There are no contractors workers to display...</p>
+    <% } %>
+
+</div>
 <!--<a href="#top">Back to top</a>-->
 <button onclick="topFunction()" id="top" title="Go to top">Top</button>
 
@@ -116,5 +112,4 @@
     var dataHere = <%- JSON.stringify(data) %>
         getDetails(dataHere)
     myClear()
-
 </script>

@@ -76,4 +76,13 @@
 
 </html>
 
-
+<script>
+    // Disable paste to input field
+    jQuery('#reCaptcha').bind("paste",function(e) {
+        e.preventDefault();
+    });
+    //  Disable copy from captcha field
+    jQuery('#captcha').bind("copy",function(e) {
+        e.preventDefault();
+    });
+</script>
