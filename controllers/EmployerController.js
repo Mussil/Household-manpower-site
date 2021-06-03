@@ -257,6 +257,7 @@ module.exports.detailsOfContractorPost= (req,res)=> {
                             // if (leaveDatesCon[j].getTime()<=end.getTime() && leaveDatesCon[j].getTime()>=start1.getTime()  ){ // the date is leave dates
                             if (leaveDatesCon[j].getTime() == start1.getTime()) {
                                 res.status(400).json({msgError: 'This contractor worker could not be recruited for the date you selected'})
+                                return
                             }
                         }
                     } // the contractor worker could be hired
@@ -272,10 +273,11 @@ module.exports.detailsOfContractorPost= (req,res)=> {
                         console.log(result)
                         if (result) { //already hired
                             res.status(400).json({msgError: 'This contractor worker could not be recruited for the date you selected'})
+                            return
                         } else {//can hire
                             res.status(201).json({contractorId,start1,employerId})
                         }
-                    })
+                    }).catch(err=>console.log(err))
 
 
                 })
