@@ -289,6 +289,7 @@ module.exports.detailsOfContractorPost= (req,res)=> {
 
 module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
 //יכניס את השעות לבסיס נתונים
+    console.log(startDate)
     const {contractorId,startDate,employerId, startMin, endMin,typeCon} = req.body
     UsersContractor.findById(contractorId)
         .then(async user=>{
