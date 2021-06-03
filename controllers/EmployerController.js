@@ -229,8 +229,8 @@ module.exports.detailsOfContractorPost= (req,res)=> {
     let end = new Date(start)
     end.setHours(23,59,59,999)
 
-    // console.log(start1)
-    // console.log(end)
+    console.log(start1)
+    console.log(end)
 
 
 
