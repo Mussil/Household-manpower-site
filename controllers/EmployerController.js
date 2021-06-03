@@ -289,8 +289,8 @@ module.exports.detailsOfContractorPost= (req,res)=> {
 
 module.exports.detailsOfContractorHoursPost=async  (req,res)=> {
 //יכניס את השעות לבסיס נתונים
-    console.log(startDate)
     const {contractorId,startDate,employerId, startMin, endMin,typeCon} = req.body
+    console.log(startDate)
     UsersContractor.findById(contractorId)
         .then(async user=>{
             if(!user.$isEmpty('hourlyRate')) {
