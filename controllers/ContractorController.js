@@ -559,7 +559,7 @@ module.exports.detailsOfTransactionPost= async (req,res)=>{
                 res.status(400).json({msg: 'an error occurred Try again'})
             } else {
                 res.status(200).json({ msg: str })
-                sendEmail(email,info)
+                sendEmail(email,isapprove,info)
 
 
             }
@@ -569,7 +569,7 @@ module.exports.detailsOfTransactionPost= async (req,res)=>{
 }
 
 
-function sendEmail(email,msg){
+function sendEmail(email,subject, msg){
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -581,7 +581,7 @@ function sendEmail(email,msg){
     let mailOptions = {
         from: 'hssce2021@gmail.com',
         to: email,
-        subject: 'password reset',
+        subject: subject,
         text: msg
     }
 

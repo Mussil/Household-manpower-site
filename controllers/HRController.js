@@ -188,7 +188,7 @@ module.exports.homepageHRGet=async (req,res)=> {
                     console.log(result.idContractor)
                     await UsersContractor.findById(result.idContractor).then(con => {
                         console.log(con.email)
-                        sendEmail(con.email, 'Hi there!' + con.email + '\nWe updated your shift to ' + convertNumToHour(startMin) + ' to ' + convertNumToHour(endMin) + 'in date: ' + result.date.toLocaleDateString())
+                        sendEmail(con.email,'Shift updated', 'Hi there!' + con.email + '\nWe updated your shift to ' + convertNumToHour(startMin) + ' to ' + convertNumToHour(endMin) + 'in date: ' + result.date.toLocaleDateString())
                     })
 
                     res.status(201).json({msg: 'The shift was changed successfully'})
@@ -206,7 +206,7 @@ module.exports.homepageHRGet=async (req,res)=> {
 
     }
 
-    function sendEmail(email, msg) {
+    function sendEmail(email,subject, msg) {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -218,7 +218,7 @@ module.exports.homepageHRGet=async (req,res)=> {
         let mailOptions = {
             from: 'hssce2021@gmail.com',
             to: email,
-            subject: 'password reset',
+            subject: subject,
             text: msg
         }
 
