@@ -338,7 +338,11 @@ module.exports.shiftReportContractorPost=(req,res)=> {
                         if(result.isShifted){
                             res.status(400).json({msgError:'You have already declared a shift for this date'})
 
-                        }else {
+                        }
+                        else if (result.approval!=1) {
+                            res.status(400).json({msgError: 'You have not confirmed the transaction for this date'})
+                        }
+                    else {
                             res.status(201).json({result})
                         }
                     }else{//error-no transaction for the id and date
