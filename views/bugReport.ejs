@@ -27,7 +27,7 @@
         <div class="form-group">
             <label >Please explain briefly what is not working:</label>
 
-            <input type="text" name="bug" class="form-control" placeholder="explain" style="height:100px; font-size:14pt;" required>
+            <input type="text" name="bug" class="form-control" placeholder="explain" style="height:100px; font-size:14pt;" title="less then 20 letters" pattern=".{20,9}" required>
         </div>
         <div class="bug error"></div>
         <button type="submit" value="Submit">send</button>
