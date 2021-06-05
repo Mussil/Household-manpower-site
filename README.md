@@ -1,7 +1,8 @@
 # Household manpower
  
- #Table of Contents 
-
+#Table of Contents 
+ * [Introduction](#Introduction)
+ * [Languages](#Languages)
  
 # Introduction
  Human resources company is a company who hires contractor workers and offers the services of those workers to other employers according to the demands.
