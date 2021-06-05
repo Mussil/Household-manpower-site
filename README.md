@@ -1,5 +1,7 @@
-# Project2
-
+# Household manpower
+ 
+ Human resources company is a company who hires contractor workers and offers the services of those workers to other employers according to the demands.
+ 
 # Introduction
 Our package has a login and registration page for the company, and the customer details are kept within the database, which is Mongodb.
 # 💻 Technologies 
