@@ -258,7 +258,7 @@ form.addEventListener('submit', async (e) => {
         if (data.user) { //successful
             console.log(data.user)
             succUpdate.textContent = 'Everything is saved successfully!'
-            // location.assign('/profileContractor')
+            location.assign('/profileContractor')
         }
     } catch (err) {
         console.log(err)
