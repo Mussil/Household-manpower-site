@@ -14,66 +14,66 @@ function getDetails(gender,dictexperience,job,educ){
 
 window.onload = function() {
 
-    var chart = new CanvasJS.Chart("gender", {
+    var chart = new CanvasJS.Chart('gender', {
     animationEnabled: true,
     title: {
-    text: "Gender"
+    text: 'Gender'
 },
     data: [{
-        type: "column",
+        type: 'column',
         // showInLegend: true,
         // legendMarkerColor: "grey",
     dataPoints: [
-        {y: genderfilter.male, label: "male"},
-        {y: genderfilter.female, label: "female"}
+        {y: genderfilter.male, label: 'male'},
+        {y: genderfilter.female, label: 'female'}
 
     ]
 }]
 })
 
 
-    var cha = new CanvasJS.Chart("experience", {
+    var cha = new CanvasJS.Chart('experience', {
 
 
         animationEnabled: true,
         title: {
-            text: "experience"
+            text: 'experience'
         },
         data: [{
-            type: "pie",
+            type: 'pie',
             startAngle: 240,
-            yValueFormatString: "##0.00\"%\"",
-            indexLabel: "{label} {y}",
+            yValueFormatString: '##0.00"%"',
+            indexLabel: '{label} {y}',
             dataPoints: [
-                {y: experiencefilter.max5, label: "up to five years"},
-                {y: experiencefilter.max15, label: "6-15 years"},
-                {y: experiencefilter.max30, label: "16-30 years"},
-                {y: experiencefilter.max1, label: "Over 31 years"}
+                {y: experiencefilter.max5, label: 'down to five years'},
+                {y: experiencefilter.max15, label: '6-15 years'},
+                {y: experiencefilter.max30, label: '16-30 years'},
+                {y: experiencefilter.max1, label: 'Over 31 years'}
 
             ]
         }]
     })
 
 
-    var chjobs = new CanvasJS.Chart("jobs", {
+    var chjobs = new CanvasJS.Chart('jobs', {
         animationEnabled: true,
         title: {
-            text: "jobs"
+            text: 'jobs'
         },
         data: [{
-            type: "doughnut",
+            type: 'doughnut',
             startAngle: 60,
             //innerRadius: 60,
             indexLabelFontSize: 17,
-            indexLabel: "{label} - #percent%",
-            toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+            indexLabel: '{label} - #percent%',
+            toolTipContent: '<b>{label}:</b> {y} (#percent%)',
             dataPoints: [
-                {y: jobfilter.baby, label: "babysitting"},
-                {y: jobfilter.iron, label: "ironing"},
-                {y: jobfilter.clean1, label: "cleaning"},
-                {y: jobfilter.cook, label: "cooking"},
-                {y: jobfilter.garden, label: "gardening"},
-                {y: jobfilter.pet, label: "pet care"}
+                {y: jobfilter.baby, label: 'babysitting'},
+                {y: jobfilter.iron, label: 'ironing'},
+                {y: jobfilter.clean1, label: 'cleaning'},
+                {y: jobfilter.cook, label: 'cooking'},
+                {y: jobfilter.garden, label: 'gardening'},
+                {y: jobfilter.pet, label: 'pet care'}
 
 
             ]
@@ -81,18 +81,18 @@ window.onload = function() {
     })
 
 
-    var cheducation = new CanvasJS.Chart("education", {
+    var cheducation = new CanvasJS.Chart('education', {
         animationEnabled: true,
         title: {
-            text: "education"
+            text: 'education'
         },
         data: [{
-            type: "bar",
-            indexLabel: "{y}",
+            type: 'bar',
+            indexLabel: '{y}',
             dataPoints: [
-                {y: educationfilter.elementary, label: "elementary"},
-                {y: educationfilter.highSchool, label: "high school"},
-                {y: educationfilter.higher, label: "higher"}
+                {y: educationfilter.elementary, label: 'elementary'},
+                {y: educationfilter.highSchool, label: 'high school'},
+                {y: educationfilter.higher, label: 'higher'}
             ]
         }]
     })
