@@ -8,6 +8,11 @@
  
 # Introduction
  Human resources company is a company who hires contractor workers and offers the services of those workers to other employers according to the demands.
+ You can view the site at the link: https://projectsce2021.herokuapp.com/
+ Human resources account details for demonstration purposes:
+ Email: tair@gmail.com
+ Password: tair999
+ 
 # 💻 Technologies 
 
 #### Languages: <br />
