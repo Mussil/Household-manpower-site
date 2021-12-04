@@ -41,7 +41,7 @@ All installations and directories are downloaded automatically <br />
 Bluma Daitz <br />
 Dvora Mizrahi <br />
 Ruth Bracha Cohen <br />
-Chaya Levin <br />
+Mussi Levin <br />
 Shaked Levi <br />
 Tair Shriki <br />
 
