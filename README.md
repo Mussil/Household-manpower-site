@@ -23,9 +23,10 @@
   * WebStorm version: 2020.3.2 <br />
 #### External tools:  <br />
   * Node js
-  * Circleci
+  * circleCI - creating a process of integration Continues
+  * Heroku - for server setup
  #### Libraries: <br /> 
-  * mongodb <br /> 
+  * mongoose <br /> 
   * ejs <br /> 
   * express <br /> 
   
